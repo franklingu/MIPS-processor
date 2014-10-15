@@ -89,8 +89,8 @@ component RegFile is
 			ReadData1_Reg 	: out STD_LOGIC_VECTOR (31 downto 0);
 			ReadData2_Reg 	: out STD_LOGIC_VECTOR (31 downto 0);				
 			WriteAddr_Reg	: in  STD_LOGIC_VECTOR (4 downto 0); 
-			WriteData_Reg 	: in STD_LOGIC_VECTOR (31 downto 0);
-			RegWrite 		: in STD_LOGIC; 
+			WriteData_Reg 	: in  STD_LOGIC_VECTOR (31 downto 0);
+			RegWrite 		: in  STD_LOGIC; 
 			CLK 				: in  STD_LOGIC);
 end component;
 
@@ -207,6 +207,17 @@ RegFile1			: RegFile port map
 -- Processor logic
 ----------------------------------------------------------------
 --<Rest of the logic goes here>
+process(CLK)
+begin
+	if CLK'event and CLK = '1' then
+		-- for ControlUnit
+		opcode <= Instr(31 downto 26);
+		-- for ALU
+		ALU_Control <= ALUOp & Instr(31 downto 26);
+		ALU_InA <= "00000000000000000000000000" & Instr(25 downto 21);
+		ALU_InB <= "00000000000000000000000000" & Instr(20 downto 16);
+	end if;
+end process;
 
 end arch_MIPS;
 

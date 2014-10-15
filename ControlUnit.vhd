@@ -26,7 +26,7 @@ entity ControlUnit is
 				Jump	 		: out  STD_LOGIC;	
 				MemRead 		: out  STD_LOGIC;	
 				MemtoReg 	: out  STD_LOGIC;	
-				InstrtoReg	: out STD_LOGIC;
+				InstrtoReg	: out  STD_LOGIC;
 				MemWrite		: out  STD_LOGIC;	
 				ALUSrc 		: out  STD_LOGIC;	
 				SignExtend 	: out  STD_LOGIC;
