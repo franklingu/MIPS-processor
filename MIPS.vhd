@@ -199,8 +199,8 @@ RegFile1			: RegFile port map
 						ReadData2_Reg 	=>  ReadData2_Reg,
 						WriteAddr_Reg 	=>  WriteAddr_Reg,
 						WriteData_Reg 	=>  WriteData_Reg,
-						RegWrite 		=> RegWrite,
-						CLK 				=> CLK				
+						RegWrite 		=>  RegWrite,
+						CLK 				=>  CLK				
 						);
 
 ----------------------------------------------------------------
@@ -208,14 +208,41 @@ RegFile1			: RegFile port map
 ----------------------------------------------------------------
 --<Rest of the logic goes here>
 process(CLK)
+variable pc_increment	: STD_LOGIC_VECTOR(31 downto 0) := x"00000000";
 begin
 	if CLK'event and CLK = '1' then
 		-- for ControlUnit
 		opcode <= Instr(31 downto 26);
+		-- for Reg
+		ReadAddr1_Reg <= "00000000000000000000000000" & Instr(25 downto 21);
+		ReadAddr2_Reg <= "00000000000000000000000000" & Instr(20 downto 16);
+		if RegDst = '1' then
+			WriteAddr_Reg <= Instr(15 downto 11);
+		else
+			WriteAddr_Reg <= Instr(20 downto 16);
+		end if;
+		if MemtoReg = '1' then
+			WriteData_Reg <= Data_In;
+		else
+			WriteData_Reg <= ALU_Out;
+		end if;
 		-- for ALU
 		ALU_Control <= ALUOp & Instr(31 downto 26);
-		ALU_InA <= "00000000000000000000000000" & Instr(25 downto 21);
-		ALU_InB <= "00000000000000000000000000" & Instr(20 downto 16);
+		ALU_InA <= ReadData1_Reg;
+		if ALUSrc = '1' then
+			ALU_InB <= (15 downto 0 => Instr(15 downto 0), others => (Instr(15) and SignExtend));
+		else
+			ALU_InB <= ReadData2_Reg;
+		end if;
+		-- for PC
+		pc_increment := PC_out + 4;
+		if Jump = '1' then
+			PC_in <= pc_increment(31 downto 28) & Instr(25 downto 0) & "00";
+		elsif Branch = '1' and ALU_zero = '1' then
+			PC_in <= pc_increment + (17 downto 2 => Instr(15 downto 0), 31 downto 18 => (Instr(15) and SignExtend), others => '0' );
+		else
+			PC_in <= pc_increment;
+		end if;
 	end if;
 end process;
 
