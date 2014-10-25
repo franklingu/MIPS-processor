@@ -31,14 +31,100 @@ entity ControlUnit is
 				ALUSrc 		: out  STD_LOGIC;	
 				SignExtend 	: out  STD_LOGIC;
 				RegWrite		: out  STD_LOGIC;	
-				RegDst		: out  STD_LOGIC);
+				RegDst		: out  STD_LOGIC);  -- 0 for Rt, 1 for Rd
 end ControlUnit;
 
 
 architecture arch_ControlUnit of ControlUnit is  
 begin   
-
---<implement control unit here>
-
+process(opcode)
+begin
+case opcode is
+when "101011" => -- sw
+	ALUOp <= "00";
+	Branch <= '0';
+	Jump <= '0';
+	MemRead <= '0';
+	MemWrite <= '1';
+	MemtoReg <= '0';
+	InstrtoReg <= '0';
+	ALUSrc <= '1';
+	SignExtend <= '1';
+	RegWrite <= '0';
+	RegDst <= '0';
+when "100011" => -- lw
+	ALUOp <= "00";
+	Branch <= '0';
+	Jump <= '0';
+	MemRead <= '1';
+	MemWrite <= '0';
+	MemtoReg <= '1';
+	InstrtoReg <= '0';
+	ALUSrc <= '1';
+	SignExtend <= '1';
+	RegWrite <= '1';
+	RegDst <= '0';
+when "000100" => -- beq
+	ALUOp <= "01";
+	Branch <= '1';
+	Jump <= '0';
+	MemRead <= '0';
+	MemWrite <= '0';
+	MemtoReg <= '0';
+	InstrtoReg <= '0';
+	ALUSrc <= '0';
+	SignExtend <= '1';
+	RegWrite <= '0';
+	RegDst <= '0';
+when "100000" | "100010" | "100100" | "100101" | "100111" | "100110" | "101010" => -- add, sub, and, or ,nor, xor, slt
+	ALUOp <= "10";
+	Branch <= '0';
+	Jump <= '0';
+	MemRead <= '0';
+	MemWrite <= '0';
+	MemtoReg <= '0';
+	InstrtoReg <= '0';
+	ALUSrc <= '0';
+	SignExtend <= '0';
+	RegWrite <= '1';
+	RegDst <= '1';
+when "000010" => -- jump
+	ALUOp <= "00";
+	Branch <= '0';
+	Jump <= '1';
+	MemRead <= '0';
+	MemWrite <= '0';
+	MemtoReg <= '0';
+	InstrtoReg <= '0';
+	ALUSrc <= '0';
+	SignExtend <= '0';
+	RegWrite <= '0';
+	RegDst <= '0';
+when "001101" => -- ori
+	ALUOp <= "10";
+	Branch <= '0';
+	Jump <= '0';
+	MemRead <= '0';
+	MemWrite <= '0';
+	MemtoReg <= '0';
+	InstrtoReg <= '0';
+	ALUSrc <= '1';
+	SignExtend <= '0';
+	RegWrite <= '1';
+	RegDst <= '0';
+when "001111" => --lui
+	ALUOp <= "00";
+	Branch <= '0';
+	Jump <= '0';
+	MemRead <= '0';
+	MemWrite <= '0';
+	MemtoReg <= '0';
+	InstrtoReg <= '1';
+	ALUSrc <= '1';
+	SignExtend <= '0';
+	RegWrite <= '1';
+	RegDst <= '0';
+end case;
+end process;
 end arch_ControlUnit;
 
