@@ -1,0 +1,6 @@
+vhdl work "RegFile.vhd"
+vhdl work "PC.vhd"
+vhdl work "ControlUnit.vhd"
+vhdl work "ALU.vhd"
+vhdl work "MIPS.vhd"
+vhdl work "TOP.vhd"

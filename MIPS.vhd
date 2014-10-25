@@ -209,6 +209,7 @@ RegFile1			: RegFile port map
 --<Rest of the logic goes here>
 process(CLK)
 variable pc_increment	: STD_LOGIC_VECTOR(31 downto 0) := x"00000000";
+variable pc_temp	: STD_LOGIC_VECTOR(31 downto 0) := x"00000000";
 begin
 	if CLK'event and CLK = '1' then
 		-- for ControlUnit
@@ -230,7 +231,8 @@ begin
 		ALU_Control <= ALUOp & Instr(31 downto 26);
 		ALU_InA <= ReadData1_Reg;
 		if ALUSrc = '1' then
-			ALU_InB <= (15 downto 0 => Instr(15 downto 0), others => (Instr(15) and SignExtend));
+			ALU_InB(15 downto 0) <= Instr(15 downto 0);
+			ALU_InB(31 downto 16) <= (others => (Instr(15) and SignExtend));
 		else
 			ALU_InB <= ReadData2_Reg;
 		end if;
@@ -239,7 +241,10 @@ begin
 		if Jump = '1' then
 			PC_in <= pc_increment(31 downto 28) & Instr(25 downto 0) & "00";
 		elsif Branch = '1' and ALU_zero = '1' then
-			PC_in <= pc_increment + (17 downto 2 => Instr(15 downto 0), 31 downto 18 => (Instr(15) and SignExtend), others => '0' );
+			pc_temp(17 downto 2) := Instr(15 downto 0);
+			pc_temp(31 downto 18) := (others => (Instr(15) and SignExtend));
+			pc_temp(1 downto 0) := "00";
+			PC_in <= pc_increment + pc_temp;
 		else
 			PC_in <= pc_increment;
 		end if;
