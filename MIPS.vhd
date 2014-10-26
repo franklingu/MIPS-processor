@@ -170,7 +170,7 @@ ALU1 				: ALU port map
 						);
 						
 ----------------------------------------------------------------
--- PC port map
+-- ControlUnit port map
 ----------------------------------------------------------------
 ControlUnit1 	: ControlUnit port map
 						(
@@ -215,8 +215,8 @@ begin
 		-- for ControlUnit
 		opcode <= Instr(31 downto 26);
 		-- for Reg
-		ReadAddr1_Reg <= "00000000000000000000000000" & Instr(25 downto 21);
-		ReadAddr2_Reg <= "00000000000000000000000000" & Instr(20 downto 16);
+		ReadAddr1_Reg <= Instr(25 downto 21);
+		ReadAddr2_Reg <= Instr(20 downto 16);
 		if RegDst = '1' then
 			WriteAddr_Reg <= Instr(15 downto 11);
 		else
@@ -237,6 +237,7 @@ begin
 			ALU_InB <= ReadData2_Reg;
 		end if;
 		-- for PC
+		Addr_Instr <= PC_out;
 		pc_increment := PC_out + 4;
 		if Jump = '1' then
 			PC_in <= pc_increment(31 downto 28) & Instr(25 downto 0) & "00";

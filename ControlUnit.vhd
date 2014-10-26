@@ -124,6 +124,7 @@ begin
 		SignExtend <= '0';
 		RegWrite <= '1';
 		RegDst <= '0';
+	when others =>
 	end case;
 end process;
 end arch_ControlUnit;
