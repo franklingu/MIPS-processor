@@ -76,7 +76,7 @@ begin
 		SignExtend <= '1';
 		RegWrite <= '0';
 		RegDst <= '0';
-	when "100000" | "100010" | "100100" | "100101" | "100111" | "100110" | "101010" => -- add, sub, and, or ,nor, xor, slt
+	when "000000" => -- add, sub, and, or ,nor, xor, slt
 		ALUOp <= "10";
 		Branch <= '0';
 		Jump <= '0';
@@ -101,7 +101,7 @@ begin
 		RegWrite <= '0';
 		RegDst <= '0';
 	when "001101" => -- ori
-		ALUOp <= "10";
+		ALUOp <= "11";
 		Branch <= '0';
 		Jump <= '0';
 		MemRead <= '0';

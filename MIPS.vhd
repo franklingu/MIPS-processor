@@ -97,8 +97,10 @@ end component;
 ----------------------------------------------------------------
 -- PC Signals
 ----------------------------------------------------------------
-	signal	PC_in 		:  STD_LOGIC_VECTOR (31 downto 0);
-	signal	PC_out 		:  STD_LOGIC_VECTOR (31 downto 0);
+	signal	PC_in 		:  STD_LOGIC_VECTOR 	(31 downto 0);
+	signal	PC_out 		:  STD_LOGIC_VECTOR 	(31 downto 0);
+	signal 	PC_increment: 	STD_LOGIC_VECTOR	(31 downto 0) := x"00000000";
+	signal PC_temp			: 	STD_LOGIC_VECTOR	(31 downto 0) := x"00000000";
 
 ----------------------------------------------------------------
 -- ALU Signals
@@ -206,54 +208,42 @@ RegFile1			: RegFile port map
 ----------------------------------------------------------------
 -- Processor logic
 ----------------------------------------------------------------
---<Rest of the logic goes here>
-process(CLK)
-variable pc_increment	: STD_LOGIC_VECTOR(31 downto 0) := x"00000000";
-variable pc_temp	: STD_LOGIC_VECTOR(31 downto 0) := x"00000000";
-begin
-	if CLK'event and CLK = '1' then
-		-- for ControlUnit
-		opcode <= Instr(31 downto 26);
-		-- for Reg
-		ReadAddr1_Reg <= Instr(25 downto 21);
-		ReadAddr2_Reg <= Instr(20 downto 16);
-		if RegDst = '1' then
-			WriteAddr_Reg <= Instr(15 downto 11);
-		else
-			WriteAddr_Reg <= Instr(20 downto 16);
-		end if;
-		if MemtoReg = '1' then
-			WriteData_Reg <= Data_In;
-		else
-			WriteData_Reg <= ALU_Out;
-		end if;
-		-- for ALU
-		ALU_Control <= ALUOp & Instr(31 downto 26);
-		ALU_InA <= ReadData1_Reg;
-		if ALUSrc = '1' then
-			ALU_InB(15 downto 0) <= Instr(15 downto 0);
-			ALU_InB(31 downto 16) <= (others => (Instr(15) and SignExtend));
-		else
-			ALU_InB <= ReadData2_Reg;
-		end if;
-		-- for Mem
-		Addr_Data <= ALU_out;
-		Data_Out <= ReadData2_Reg;
-		-- for PC
-		Addr_Instr <= PC_out;
-		pc_increment := PC_out + 4;
-		if Jump = '1' then
-			PC_in <= pc_increment(31 downto 28) & Instr(25 downto 0) & "00";
-		elsif Branch = '1' and ALU_zero = '1' then
-			pc_temp(17 downto 2) := Instr(15 downto 0);
-			pc_temp(31 downto 18) := (others => (Instr(15) and SignExtend));
-			pc_temp(1 downto 0) := "00";
-			PC_in <= pc_increment + pc_temp;
-		else
-			PC_in <= pc_increment;
-		end if;
-	end if;
-end process;
+
+-- for ControlUnit
+opcode <= Instr(31 downto 26);
+
+-- for Reg
+ReadAddr1_Reg <= Instr(25 downto 21);
+ReadAddr2_Reg <= Instr(20 downto 16);
+WriteAddr_Reg <= Instr(15 downto 11) when RegDst = '1' else Instr(20 downto 16);
+
+-- multiplexer to choose data-in for reg write
+WriteData_Reg <= Data_In when MemtoReg = '1' else 
+					  Instr(15 downto 0) & "0000000000000000" when InstrToReg = '1' else
+					  ALU_Out;
+
+-- for ALU
+ALU_Control <= ALUOp & Instr(5 downto 0);
+ALU_InA <= ReadData1_Reg;
+
+-- multiplexer for choice of input 2 into ALU
+ALU_InB(15 downto 0) <= Instr(15 downto 0) when ALUSrc = '1' else ReadData2_Reg(15 downto 0);
+ALU_InB(31 downto 16) <= (others => (Instr(15) and SignExtend)) when ALUSrc = '1' else ReadData2_Reg(31 downto 16);
+
+-- for Mem
+Addr_Data <= ALU_out;
+Data_Out <= ReadData2_Reg;
+
+-- for PC
+Addr_Instr <= PC_out;
+pc_increment <= PC_out + 4;
+pc_temp(17 downto 2) <= Instr(15 downto 0);
+pc_temp(31 downto 18) <= (others => (Instr(15) and SignExtend));
+pc_temp(1 downto 0) <= "00";
+
+PC_in <= PC_increment(31 downto 28) & Instr(25 downto 0) & "00" when Jump = '1' else
+			PC_temp + PC_increment when Branch = '1' and ALU_zero = '1' else
+			PC_increment;
 
 end arch_MIPS;
 
