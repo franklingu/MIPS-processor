@@ -25,7 +25,9 @@ entity ALU is
 				ALU_InB 		: in  STD_LOGIC_VECTOR (31 downto 0);
 				ALU_Out 		: out STD_LOGIC_VECTOR (31 downto 0);
 				ALU_Control	: in  STD_LOGIC_VECTOR (7 downto 0);
-				ALU_zero		: out STD_LOGIC);
+				ALU_zero		: out STD_LOGIC;
+				ALU_overflow: out STD_LOGIC;
+				ALU_busy		: out STD_LOGIC);
 end ALU;
 
 
@@ -51,24 +53,44 @@ case ALU_Control(7 downto 6) is
 when "00" => -- lw, sw
 	ALU_Out <= AplusB;
 when "01" => -- beq
-	if AminusB = x"00000000" then
-		ALU_zero <= '1';
-	end if;
+	case ALU_Control(5 downto 0) is
+	when "000001" => -- bgez
+	-- when "000001" => -- bgezal
+	when "000100" => -- beq
+		if AminusB = x"00000000" then
+			ALU_zero <= '1';
+		end if;
+	when others =>
+		null;
+	end case;
 when "10" =>
 	case ALU_Control(5 downto 0) is
-	when "100000"=> --add
+	when "100000" => --add
 		ALU_Out <= AplusB;
-	when "100010"=> --sub
+	when "001000" => --addi
+		null;
+	when "100010" => --sub
 		ALU_Out <= AminusB;
-	when "100100"=> --and
+	when "100100" => --and
 		ALU_Out <= ALU_InA and ALU_InB;
-	when "100101"=> --or
+	when "100101" => --or
 		ALU_Out <= AorB;
-	when "100111"=> --nor
+	when "100111" => --nor
 		ALU_Out <= not(AorB);
-	when "101010"=> --slt
-		ALU_Out(0) <= AminusB(31) xor suboverflow; 
-	when others =>	null;
+	when "101010" => --slt
+		ALU_Out(0) <= AminusB(31) xor suboverflow;
+	when "101011" => --sltu
+		-- to be done
+	when "011000" => -- mult
+	when "011001" => -- multu
+	when "010000" => -- mfhi
+	when "010010" => -- mflo
+	when "000000" => -- sll
+	when "000100" => -- sllv
+	when "000011" => -- sra
+	when "000010" => -- srl
+	when others =>	
+		null;
 	end case;
 when "11" => -- ori
 	ALU_Out <= AorB;
