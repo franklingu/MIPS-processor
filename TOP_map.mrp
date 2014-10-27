@@ -10,7 +10,7 @@ Target Device  : xc7a100t
 Target Package : csg324
 Target Speed   : -1
 Mapper Version : artix7 -- $Revision: 1.55 $
-Mapped Date    : Mon Oct 27 13:04:52 2014
+Mapped Date    : Mon Oct 27 13:26:48 2014
 
 Design Summary
 --------------
@@ -100,8 +100,8 @@ Specific Feature Utilization:
 
 Average Fanout of Non-Clock Nets:                5.62
 
-Peak Memory Usage:  811 MB
-Total REAL time to MAP completion:  42 secs 
+Peak Memory Usage:  812 MB
+Total REAL time to MAP completion:  41 secs 
 Total CPU time to MAP completion:   41 secs 
 
 Table of Contents

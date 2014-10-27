@@ -41,7 +41,7 @@ architecture arch_RegFile of RegFile is
 SUBTYPE Word is STD_LOGIC_VECTOR(31 downto 0);  -- basic registers
 TYPE RegStorage is ARRAY(0 to 31) OF Word;  -- all 32 registers
 
-signal registers : RegStorage := (others => x"00000000");  -- actual register signals
+signal registers : RegStorage := (9 => x"00010000", others => x"00000000");  -- actual register signals
 
 begin
 

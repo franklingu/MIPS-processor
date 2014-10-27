@@ -1,7 +1,7 @@
 Release 14.7 par P.20131013 (nt64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-JUNCHAO-SAMSUNG::  Mon Oct 27 13:05:38 2014
+JUNCHAO-SAMSUNG::  Mon Oct 27 13:27:32 2014
 
 par -w -intstyle ise -ol high -mt off TOP_map.ncd TOP.ncd TOP.pcf 
 
