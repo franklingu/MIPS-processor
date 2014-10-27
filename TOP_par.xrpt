@@ -5,7 +5,7 @@
     The structure and the elements are likely to change over the next few releases.
     This means code written to parse this file will need to be revisited each subsequent release.-->
 
-  <application stringID="par" timeStamp="Mon Oct 27 13:27:51 2014">
+  <application stringID="par" timeStamp="Mon Oct 27 20:35:45 2014">
     <section stringID="User_Env">
       <table stringID="User_EnvVar">
         <column stringID="variable"/>
@@ -84,8 +84,8 @@
             <item label="Resource" stringID="RESOURCE" value="BUFGCTRL_X0Y0"/>
             <item label="Locked" stringID="LOCKED" value="No"/>
             <item dataType="float" label="Fanout" stringID="FANOUT" value="54.000000"/>
-            <item dataType="float" label="Net Skew(ns)" stringID="NET_SKEW" value="0.034000"/>
-            <item dataType="float" label="Max Delay(ns)" stringID="MAX_DELAY" value="1.729000"/>
+            <item dataType="float" label="Net Skew(ns)" stringID="NET_SKEW" value="0.113000"/>
+            <item dataType="float" label="Max Delay(ns)" stringID="MAX_DELAY" value="1.723000"/>
           </row>
           <row stringID="row" value="2">
             <item label="Clock Net" stringID="CLOCK_NET" value="CLK_undiv_BUFGP"/>
@@ -93,8 +93,8 @@
             <item label="Resource" stringID="RESOURCE" value="BUFGCTRL_X0Y31"/>
             <item label="Locked" stringID="LOCKED" value="No"/>
             <item dataType="float" label="Fanout" stringID="FANOUT" value="8.000000"/>
-            <item dataType="float" label="Net Skew(ns)" stringID="NET_SKEW" value="0.009000"/>
-            <item dataType="float" label="Max Delay(ns)" stringID="MAX_DELAY" value="1.624000"/>
+            <item dataType="float" label="Net Skew(ns)" stringID="NET_SKEW" value="0.007000"/>
+            <item dataType="float" label="Max Delay(ns)" stringID="MAX_DELAY" value="1.625000"/>
           </row>
         </table>
       </section>
@@ -2352,7 +2352,7 @@
     </task>
   </application>
 
-  <application stringID="Par" timeStamp="Mon Oct 27 13:27:52 2014">
+  <application stringID="Par" timeStamp="Mon Oct 27 20:35:46 2014">
     <section stringID="User_Env">
       <table stringID="User_EnvVar">
         <column stringID="variable"/>
@@ -2404,9 +2404,9 @@
           <item dataType="int" stringID="PAR_NUM_SLICE_LATCHTHRU" value="0"/>
           <item dataType="int" stringID="PAR_NUM_SLICE_LATCHLOGIC" value="0"/>
         </item>
-        <item AVAILABLE="63400" dataType="int" label="Number of Slice LUTS" stringID="PAR_SLICE_LUTS" value="782">
+        <item AVAILABLE="63400" dataType="int" label="Number of Slice LUTS" stringID="PAR_SLICE_LUTS" value="786">
           <item dataType="int" stringID="PAR_NUM_LOGIC_O5ONLY" value="76"/>
-          <item dataType="int" stringID="PAR_NUM_LOGIC_O6ONLY" value="515"/>
+          <item dataType="int" stringID="PAR_NUM_LOGIC_O6ONLY" value="519"/>
           <item dataType="int" stringID="PAR_NUM_LOGIC_O5ANDO6" value="16"/>
           <item dataType="int" stringID="PAR_NUM_ROM_O5ONLY" value="0"/>
           <item dataType="int" stringID="PAR_NUM_ROM_O6ONLY" value="0"/>
@@ -2427,12 +2427,12 @@
           <item dataType="int" stringID="PAR_NUM_LUT_RT_DRIVES_CARRY4" value="3"/>
           <item dataType="int" stringID="PAR_NUM_LUT_RT_DRIVES_OTHERS" value="0"/>
         </item>
-        <item AVAILABLE="15850" dataType="int" stringID="PAR_OCCUPIED_SLICES" value="225">
-          <item AVAILABLE="11100" dataType="int" stringID="PAR_NUM_SLICEL" value="182"/>
+        <item AVAILABLE="15850" dataType="int" stringID="PAR_OCCUPIED_SLICES" value="256">
+          <item AVAILABLE="11100" dataType="int" stringID="PAR_NUM_SLICEL" value="213"/>
           <item AVAILABLE="4750" dataType="int" stringID="PAR_NUM_SLICEM" value="43"/>
         </item>
-        <item dataType="int" stringID="PAR_OCCUPIED_LUT_AND_FF" value="782">
-          <item dataType="int" stringID="PAR_OCCUPIED_LUT_ONLY" value="717"/>
+        <item dataType="int" stringID="PAR_OCCUPIED_LUT_AND_FF" value="786">
+          <item dataType="int" stringID="PAR_OCCUPIED_LUT_ONLY" value="721"/>
           <item dataType="int" stringID="PAR_OCCUPIED_FF_ONLY" value="0"/>
           <item dataType="int" stringID="PAR_OCCUPIED_FF_AND_LUT" value="65"/>
         </item>
