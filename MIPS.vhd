@@ -236,6 +236,9 @@ begin
 		else
 			ALU_InB <= ReadData2_Reg;
 		end if;
+		-- for Mem
+		Addr_Data <= ALU_out;
+		Data_Out <= ReadData2_Reg;
 		-- for PC
 		Addr_Instr <= PC_out;
 		pc_increment := PC_out + 4;

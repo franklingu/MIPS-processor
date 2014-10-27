@@ -125,6 +125,17 @@ begin
 		RegWrite <= '1';
 		RegDst <= '0';
 	when others =>
+		ALUOp <= "00";
+		Branch <= '0';
+		Jump <= '0';
+		MemRead <= '0';
+		MemWrite <= '0';
+		MemtoReg <= '0';
+		InstrtoReg <= '0';
+		ALUSrc <= '0';
+		SignExtend <= '0';
+		RegWrite <= '0';
+		RegDst <= '0';
 	end case;
 end process;
 end arch_ControlUnit;

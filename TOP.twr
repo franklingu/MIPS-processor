@@ -31,17 +31,167 @@ For more information, see Period Analysis in the Timing Closure User Guide (UG61
 
  377 paths analyzed, 88 endpoints analyzed, 0 failing endpoints
  0 timing errors detected. (0 setup errors, 0 hold errors, 0 component switching limit errors)
- Minimum period is   2.694ns.
+ Minimum period is   2.930ns.
 --------------------------------------------------------------------------------
 
-Paths for end point CLK_DIV_PROCESS.clk_counter_25 (SLICE_X52Y82.CIN), 24 paths
+Paths for end point CLK (SLICE_X65Y86.CIN), 24 paths
 --------------------------------------------------------------------------------
-Slack (setup path):     7.306ns (requirement - (data path - clock path skew + uncertainty))
+Slack (setup path):     7.070ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               CLK_DIV_PROCESS.clk_counter_1 (FF)
+  Destination:          CLK (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      2.861ns (Levels of Logic = 7)
+  Clock Path Skew:      -0.034ns (0.783 - 0.817)
+  Source Clock:         CLK_undiv_BUFGP rising at 0.000ns
+  Destination Clock:    CLK_undiv_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: CLK_DIV_PROCESS.clk_counter_1 to CLK
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X62Y80.BQ      Tcko                  0.518   CLK_DIV_PROCESS.clk_counter<3>
+                                                       CLK_DIV_PROCESS.clk_counter_1
+    SLICE_X65Y80.B1      net (fanout=2)        0.827   CLK_DIV_PROCESS.clk_counter<1>
+    SLICE_X65Y80.COUT    Topcyb                0.674   MIPS1/PC1/PC_out<31>
+                                                       CLK_DIV_PROCESS.clk_counter<1>_rt
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<3>
+    SLICE_X65Y81.CIN     net (fanout=1)        0.000   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<3>
+    SLICE_X65Y81.COUT    Tbyp                  0.114   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<7>
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<7>
+    SLICE_X65Y82.CIN     net (fanout=1)        0.000   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<7>
+    SLICE_X65Y82.COUT    Tbyp                  0.114   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<11>
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<11>
+    SLICE_X65Y83.CIN     net (fanout=1)        0.000   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<11>
+    SLICE_X65Y83.COUT    Tbyp                  0.114   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<15>
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<15>
+    SLICE_X65Y84.CIN     net (fanout=1)        0.000   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<15>
+    SLICE_X65Y84.COUT    Tbyp                  0.114   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<19>
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<19>
+    SLICE_X65Y85.CIN     net (fanout=1)        0.000   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<19>
+    SLICE_X65Y85.COUT    Tbyp                  0.114   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<23>
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<23>
+    SLICE_X65Y86.CIN     net (fanout=1)        0.000   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<23>
+    SLICE_X65Y86.CLK     Tcinck                0.272   CLK
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_xor<25>
+                                                       CLK
+    -------------------------------------------------  ---------------------------
+    Total                                      2.861ns (2.034ns logic, 0.827ns route)
+                                                       (71.1% logic, 28.9% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     7.097ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               CLK_DIV_PROCESS.clk_counter_0 (FF)
+  Destination:          CLK (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      2.834ns (Levels of Logic = 7)
+  Clock Path Skew:      -0.034ns (0.783 - 0.817)
+  Source Clock:         CLK_undiv_BUFGP rising at 0.000ns
+  Destination Clock:    CLK_undiv_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: CLK_DIV_PROCESS.clk_counter_0 to CLK
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X62Y80.AQ      Tcko                  0.518   CLK_DIV_PROCESS.clk_counter<3>
+                                                       CLK_DIV_PROCESS.clk_counter_0
+    SLICE_X65Y80.A2      net (fanout=2)        0.818   CLK_DIV_PROCESS.clk_counter<0>
+    SLICE_X65Y80.COUT    Topcya                0.656   MIPS1/PC1/PC_out<31>
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_lut<0>_INV_0
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<3>
+    SLICE_X65Y81.CIN     net (fanout=1)        0.000   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<3>
+    SLICE_X65Y81.COUT    Tbyp                  0.114   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<7>
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<7>
+    SLICE_X65Y82.CIN     net (fanout=1)        0.000   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<7>
+    SLICE_X65Y82.COUT    Tbyp                  0.114   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<11>
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<11>
+    SLICE_X65Y83.CIN     net (fanout=1)        0.000   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<11>
+    SLICE_X65Y83.COUT    Tbyp                  0.114   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<15>
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<15>
+    SLICE_X65Y84.CIN     net (fanout=1)        0.000   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<15>
+    SLICE_X65Y84.COUT    Tbyp                  0.114   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<19>
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<19>
+    SLICE_X65Y85.CIN     net (fanout=1)        0.000   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<19>
+    SLICE_X65Y85.COUT    Tbyp                  0.114   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<23>
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<23>
+    SLICE_X65Y86.CIN     net (fanout=1)        0.000   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<23>
+    SLICE_X65Y86.CLK     Tcinck                0.272   CLK
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_xor<25>
+                                                       CLK
+    -------------------------------------------------  ---------------------------
+    Total                                      2.834ns (2.016ns logic, 0.818ns route)
+                                                       (71.1% logic, 28.9% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     7.183ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               CLK_DIV_PROCESS.clk_counter_5 (FF)
+  Destination:          CLK (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      2.747ns (Levels of Logic = 6)
+  Clock Path Skew:      -0.035ns (0.783 - 0.818)
+  Source Clock:         CLK_undiv_BUFGP rising at 0.000ns
+  Destination Clock:    CLK_undiv_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: CLK_DIV_PROCESS.clk_counter_5 to CLK
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X62Y81.BQ      Tcko                  0.518   CLK_DIV_PROCESS.clk_counter<7>
+                                                       CLK_DIV_PROCESS.clk_counter_5
+    SLICE_X65Y81.B1      net (fanout=2)        0.827   CLK_DIV_PROCESS.clk_counter<5>
+    SLICE_X65Y81.COUT    Topcyb                0.674   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<7>
+                                                       CLK_DIV_PROCESS.clk_counter<5>_rt
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<7>
+    SLICE_X65Y82.CIN     net (fanout=1)        0.000   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<7>
+    SLICE_X65Y82.COUT    Tbyp                  0.114   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<11>
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<11>
+    SLICE_X65Y83.CIN     net (fanout=1)        0.000   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<11>
+    SLICE_X65Y83.COUT    Tbyp                  0.114   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<15>
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<15>
+    SLICE_X65Y84.CIN     net (fanout=1)        0.000   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<15>
+    SLICE_X65Y84.COUT    Tbyp                  0.114   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<19>
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<19>
+    SLICE_X65Y85.CIN     net (fanout=1)        0.000   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<19>
+    SLICE_X65Y85.COUT    Tbyp                  0.114   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<23>
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<23>
+    SLICE_X65Y86.CIN     net (fanout=1)        0.000   Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_cy<23>
+    SLICE_X65Y86.CLK     Tcinck                0.272   CLK
+                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_xor<25>
+                                                       CLK
+    -------------------------------------------------  ---------------------------
+    Total                                      2.747ns (1.920ns logic, 0.827ns route)
+                                                       (69.9% logic, 30.1% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point CLK_DIV_PROCESS.clk_counter_25 (SLICE_X62Y86.CIN), 24 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     7.308ns (requirement - (data path - clock path skew + uncertainty))
   Source:               CLK_DIV_PROCESS.clk_counter_1 (FF)
   Destination:          CLK_DIV_PROCESS.clk_counter_25 (FF)
   Requirement:          10.000ns
-  Data Path Delay:      2.644ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.015ns (0.162 - 0.177)
+  Data Path Delay:      2.639ns (Levels of Logic = 7)
+  Clock Path Skew:      -0.018ns (0.165 - 0.183)
   Source Clock:         CLK_undiv_BUFGP rising at 0.000ns
   Destination Clock:    CLK_undiv_BUFGP rising at 10.000ns
   Clock Uncertainty:    0.035ns
@@ -56,42 +206,42 @@ Slack (setup path):     7.306ns (requirement - (data path - clock path skew + un
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X52Y76.BQ      Tcko                  0.456   CLK_DIV_PROCESS.clk_counter<3>
+    SLICE_X62Y80.BQ      Tcko                  0.518   CLK_DIV_PROCESS.clk_counter<3>
                                                        CLK_DIV_PROCESS.clk_counter_1
-    SLICE_X52Y76.B2      net (fanout=2)        0.672   CLK_DIV_PROCESS.clk_counter<1>
-    SLICE_X52Y76.COUT    Topcyb                0.674   CLK_DIV_PROCESS.clk_counter<3>
+    SLICE_X62Y80.B2      net (fanout=2)        0.665   CLK_DIV_PROCESS.clk_counter<1>
+    SLICE_X62Y80.COUT    Topcyb                0.657   CLK_DIV_PROCESS.clk_counter<3>
                                                        CLK_DIV_PROCESS.clk_counter<1>_rt.1
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<3>
-    SLICE_X52Y77.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<3>
-    SLICE_X52Y77.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<7>
+    SLICE_X62Y81.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<3>
+    SLICE_X62Y81.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<7>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
-    SLICE_X52Y78.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
-    SLICE_X52Y78.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<11>
+    SLICE_X62Y82.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
+    SLICE_X62Y82.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<11>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
-    SLICE_X52Y79.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
-    SLICE_X52Y79.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<15>
+    SLICE_X62Y83.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
+    SLICE_X62Y83.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<15>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
-    SLICE_X52Y80.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
-    SLICE_X52Y80.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<19>
+    SLICE_X62Y84.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
+    SLICE_X62Y84.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<19>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
-    SLICE_X52Y81.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
-    SLICE_X52Y81.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<23>
+    SLICE_X62Y85.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
+    SLICE_X62Y85.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<23>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
-    SLICE_X52Y82.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
-    SLICE_X52Y82.CLK     Tcinck                0.272   CLK_DIV_PROCESS.clk_counter<25>
+    SLICE_X62Y86.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
+    SLICE_X62Y86.CLK     Tcinck                0.214   CLK_DIV_PROCESS.clk_counter<25>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_xor<25>
                                                        CLK_DIV_PROCESS.clk_counter_25
     -------------------------------------------------  ---------------------------
-    Total                                      2.644ns (1.972ns logic, 0.672ns route)
-                                                       (74.6% logic, 25.4% route)
+    Total                                      2.639ns (1.974ns logic, 0.665ns route)
+                                                       (74.8% logic, 25.2% route)
 
 --------------------------------------------------------------------------------
-Slack (setup path):     7.419ns (requirement - (data path - clock path skew + uncertainty))
+Slack (setup path):     7.424ns (requirement - (data path - clock path skew + uncertainty))
   Source:               CLK_DIV_PROCESS.clk_counter_5 (FF)
   Destination:          CLK_DIV_PROCESS.clk_counter_25 (FF)
   Requirement:          10.000ns
-  Data Path Delay:      2.530ns (Levels of Logic = 6)
-  Clock Path Skew:      -0.016ns (0.162 - 0.178)
+  Data Path Delay:      2.522ns (Levels of Logic = 6)
+  Clock Path Skew:      -0.019ns (0.165 - 0.184)
   Source Clock:         CLK_undiv_BUFGP rising at 0.000ns
   Destination Clock:    CLK_undiv_BUFGP rising at 10.000ns
   Clock Uncertainty:    0.035ns
@@ -106,39 +256,39 @@ Slack (setup path):     7.419ns (requirement - (data path - clock path skew + un
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X52Y77.BQ      Tcko                  0.456   CLK_DIV_PROCESS.clk_counter<7>
+    SLICE_X62Y81.BQ      Tcko                  0.518   CLK_DIV_PROCESS.clk_counter<7>
                                                        CLK_DIV_PROCESS.clk_counter_5
-    SLICE_X52Y77.B2      net (fanout=2)        0.672   CLK_DIV_PROCESS.clk_counter<5>
-    SLICE_X52Y77.COUT    Topcyb                0.674   CLK_DIV_PROCESS.clk_counter<7>
+    SLICE_X62Y81.B2      net (fanout=2)        0.665   CLK_DIV_PROCESS.clk_counter<5>
+    SLICE_X62Y81.COUT    Topcyb                0.657   CLK_DIV_PROCESS.clk_counter<7>
                                                        CLK_DIV_PROCESS.clk_counter<5>_rt.1
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
-    SLICE_X52Y78.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
-    SLICE_X52Y78.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<11>
+    SLICE_X62Y82.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
+    SLICE_X62Y82.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<11>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
-    SLICE_X52Y79.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
-    SLICE_X52Y79.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<15>
+    SLICE_X62Y83.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
+    SLICE_X62Y83.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<15>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
-    SLICE_X52Y80.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
-    SLICE_X52Y80.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<19>
+    SLICE_X62Y84.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
+    SLICE_X62Y84.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<19>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
-    SLICE_X52Y81.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
-    SLICE_X52Y81.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<23>
+    SLICE_X62Y85.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
+    SLICE_X62Y85.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<23>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
-    SLICE_X52Y82.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
-    SLICE_X52Y82.CLK     Tcinck                0.272   CLK_DIV_PROCESS.clk_counter<25>
+    SLICE_X62Y86.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
+    SLICE_X62Y86.CLK     Tcinck                0.214   CLK_DIV_PROCESS.clk_counter<25>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_xor<25>
                                                        CLK_DIV_PROCESS.clk_counter_25
     -------------------------------------------------  ---------------------------
-    Total                                      2.530ns (1.858ns logic, 0.672ns route)
-                                                       (73.4% logic, 26.6% route)
+    Total                                      2.522ns (1.857ns logic, 0.665ns route)
+                                                       (73.6% logic, 26.4% route)
 
 --------------------------------------------------------------------------------
-Slack (setup path):     7.453ns (requirement - (data path - clock path skew + uncertainty))
+Slack (setup path):     7.459ns (requirement - (data path - clock path skew + uncertainty))
   Source:               CLK_DIV_PROCESS.clk_counter_2 (FF)
   Destination:          CLK_DIV_PROCESS.clk_counter_25 (FF)
   Requirement:          10.000ns
-  Data Path Delay:      2.497ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.015ns (0.162 - 0.177)
+  Data Path Delay:      2.488ns (Levels of Logic = 7)
+  Clock Path Skew:      -0.018ns (0.165 - 0.183)
   Source Clock:         CLK_undiv_BUFGP rising at 0.000ns
   Destination Clock:    CLK_undiv_BUFGP rising at 10.000ns
   Clock Uncertainty:    0.035ns
@@ -153,45 +303,45 @@ Slack (setup path):     7.453ns (requirement - (data path - clock path skew + un
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X52Y76.CQ      Tcko                  0.456   CLK_DIV_PROCESS.clk_counter<3>
+    SLICE_X62Y80.CQ      Tcko                  0.518   CLK_DIV_PROCESS.clk_counter<3>
                                                        CLK_DIV_PROCESS.clk_counter_2
-    SLICE_X52Y76.C2      net (fanout=2)        0.677   CLK_DIV_PROCESS.clk_counter<2>
-    SLICE_X52Y76.COUT    Topcyc                0.522   CLK_DIV_PROCESS.clk_counter<3>
+    SLICE_X62Y80.C2      net (fanout=2)        0.667   CLK_DIV_PROCESS.clk_counter<2>
+    SLICE_X62Y80.COUT    Topcyc                0.504   CLK_DIV_PROCESS.clk_counter<3>
                                                        CLK_DIV_PROCESS.clk_counter<2>_rt.1
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<3>
-    SLICE_X52Y77.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<3>
-    SLICE_X52Y77.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<7>
+    SLICE_X62Y81.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<3>
+    SLICE_X62Y81.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<7>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
-    SLICE_X52Y78.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
-    SLICE_X52Y78.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<11>
+    SLICE_X62Y82.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
+    SLICE_X62Y82.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<11>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
-    SLICE_X52Y79.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
-    SLICE_X52Y79.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<15>
+    SLICE_X62Y83.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
+    SLICE_X62Y83.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<15>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
-    SLICE_X52Y80.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
-    SLICE_X52Y80.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<19>
+    SLICE_X62Y84.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
+    SLICE_X62Y84.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<19>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
-    SLICE_X52Y81.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
-    SLICE_X52Y81.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<23>
+    SLICE_X62Y85.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
+    SLICE_X62Y85.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<23>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
-    SLICE_X52Y82.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
-    SLICE_X52Y82.CLK     Tcinck                0.272   CLK_DIV_PROCESS.clk_counter<25>
+    SLICE_X62Y86.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
+    SLICE_X62Y86.CLK     Tcinck                0.214   CLK_DIV_PROCESS.clk_counter<25>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_xor<25>
                                                        CLK_DIV_PROCESS.clk_counter_25
     -------------------------------------------------  ---------------------------
-    Total                                      2.497ns (1.820ns logic, 0.677ns route)
-                                                       (72.9% logic, 27.1% route)
+    Total                                      2.488ns (1.821ns logic, 0.667ns route)
+                                                       (73.2% logic, 26.8% route)
 
 --------------------------------------------------------------------------------
 
-Paths for end point CLK_DIV_PROCESS.clk_counter_24 (SLICE_X52Y82.CIN), 24 paths
+Paths for end point CLK_DIV_PROCESS.clk_counter_24 (SLICE_X62Y86.CIN), 24 paths
 --------------------------------------------------------------------------------
-Slack (setup path):     7.417ns (requirement - (data path - clock path skew + uncertainty))
+Slack (setup path):     7.413ns (requirement - (data path - clock path skew + uncertainty))
   Source:               CLK_DIV_PROCESS.clk_counter_1 (FF)
   Destination:          CLK_DIV_PROCESS.clk_counter_24 (FF)
   Requirement:          10.000ns
-  Data Path Delay:      2.533ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.015ns (0.162 - 0.177)
+  Data Path Delay:      2.534ns (Levels of Logic = 7)
+  Clock Path Skew:      -0.018ns (0.165 - 0.183)
   Source Clock:         CLK_undiv_BUFGP rising at 0.000ns
   Destination Clock:    CLK_undiv_BUFGP rising at 10.000ns
   Clock Uncertainty:    0.035ns
@@ -206,42 +356,42 @@ Slack (setup path):     7.417ns (requirement - (data path - clock path skew + un
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X52Y76.BQ      Tcko                  0.456   CLK_DIV_PROCESS.clk_counter<3>
+    SLICE_X62Y80.BQ      Tcko                  0.518   CLK_DIV_PROCESS.clk_counter<3>
                                                        CLK_DIV_PROCESS.clk_counter_1
-    SLICE_X52Y76.B2      net (fanout=2)        0.672   CLK_DIV_PROCESS.clk_counter<1>
-    SLICE_X52Y76.COUT    Topcyb                0.674   CLK_DIV_PROCESS.clk_counter<3>
+    SLICE_X62Y80.B2      net (fanout=2)        0.665   CLK_DIV_PROCESS.clk_counter<1>
+    SLICE_X62Y80.COUT    Topcyb                0.657   CLK_DIV_PROCESS.clk_counter<3>
                                                        CLK_DIV_PROCESS.clk_counter<1>_rt.1
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<3>
-    SLICE_X52Y77.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<3>
-    SLICE_X52Y77.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<7>
+    SLICE_X62Y81.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<3>
+    SLICE_X62Y81.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<7>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
-    SLICE_X52Y78.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
-    SLICE_X52Y78.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<11>
+    SLICE_X62Y82.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
+    SLICE_X62Y82.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<11>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
-    SLICE_X52Y79.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
-    SLICE_X52Y79.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<15>
+    SLICE_X62Y83.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
+    SLICE_X62Y83.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<15>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
-    SLICE_X52Y80.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
-    SLICE_X52Y80.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<19>
+    SLICE_X62Y84.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
+    SLICE_X62Y84.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<19>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
-    SLICE_X52Y81.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
-    SLICE_X52Y81.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<23>
+    SLICE_X62Y85.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
+    SLICE_X62Y85.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<23>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
-    SLICE_X52Y82.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
-    SLICE_X52Y82.CLK     Tcinck                0.161   CLK_DIV_PROCESS.clk_counter<25>
+    SLICE_X62Y86.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
+    SLICE_X62Y86.CLK     Tcinck                0.109   CLK_DIV_PROCESS.clk_counter<25>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_xor<25>
                                                        CLK_DIV_PROCESS.clk_counter_24
     -------------------------------------------------  ---------------------------
-    Total                                      2.533ns (1.861ns logic, 0.672ns route)
-                                                       (73.5% logic, 26.5% route)
+    Total                                      2.534ns (1.869ns logic, 0.665ns route)
+                                                       (73.8% logic, 26.2% route)
 
 --------------------------------------------------------------------------------
-Slack (setup path):     7.530ns (requirement - (data path - clock path skew + uncertainty))
+Slack (setup path):     7.529ns (requirement - (data path - clock path skew + uncertainty))
   Source:               CLK_DIV_PROCESS.clk_counter_5 (FF)
   Destination:          CLK_DIV_PROCESS.clk_counter_24 (FF)
   Requirement:          10.000ns
-  Data Path Delay:      2.419ns (Levels of Logic = 6)
-  Clock Path Skew:      -0.016ns (0.162 - 0.178)
+  Data Path Delay:      2.417ns (Levels of Logic = 6)
+  Clock Path Skew:      -0.019ns (0.165 - 0.184)
   Source Clock:         CLK_undiv_BUFGP rising at 0.000ns
   Destination Clock:    CLK_undiv_BUFGP rising at 10.000ns
   Clock Uncertainty:    0.035ns
@@ -256,39 +406,39 @@ Slack (setup path):     7.530ns (requirement - (data path - clock path skew + un
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X52Y77.BQ      Tcko                  0.456   CLK_DIV_PROCESS.clk_counter<7>
+    SLICE_X62Y81.BQ      Tcko                  0.518   CLK_DIV_PROCESS.clk_counter<7>
                                                        CLK_DIV_PROCESS.clk_counter_5
-    SLICE_X52Y77.B2      net (fanout=2)        0.672   CLK_DIV_PROCESS.clk_counter<5>
-    SLICE_X52Y77.COUT    Topcyb                0.674   CLK_DIV_PROCESS.clk_counter<7>
+    SLICE_X62Y81.B2      net (fanout=2)        0.665   CLK_DIV_PROCESS.clk_counter<5>
+    SLICE_X62Y81.COUT    Topcyb                0.657   CLK_DIV_PROCESS.clk_counter<7>
                                                        CLK_DIV_PROCESS.clk_counter<5>_rt.1
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
-    SLICE_X52Y78.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
-    SLICE_X52Y78.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<11>
+    SLICE_X62Y82.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
+    SLICE_X62Y82.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<11>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
-    SLICE_X52Y79.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
-    SLICE_X52Y79.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<15>
+    SLICE_X62Y83.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
+    SLICE_X62Y83.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<15>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
-    SLICE_X52Y80.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
-    SLICE_X52Y80.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<19>
+    SLICE_X62Y84.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
+    SLICE_X62Y84.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<19>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
-    SLICE_X52Y81.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
-    SLICE_X52Y81.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<23>
+    SLICE_X62Y85.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
+    SLICE_X62Y85.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<23>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
-    SLICE_X52Y82.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
-    SLICE_X52Y82.CLK     Tcinck                0.161   CLK_DIV_PROCESS.clk_counter<25>
+    SLICE_X62Y86.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
+    SLICE_X62Y86.CLK     Tcinck                0.109   CLK_DIV_PROCESS.clk_counter<25>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_xor<25>
                                                        CLK_DIV_PROCESS.clk_counter_24
     -------------------------------------------------  ---------------------------
-    Total                                      2.419ns (1.747ns logic, 0.672ns route)
-                                                       (72.2% logic, 27.8% route)
+    Total                                      2.417ns (1.752ns logic, 0.665ns route)
+                                                       (72.5% logic, 27.5% route)
 
 --------------------------------------------------------------------------------
 Slack (setup path):     7.564ns (requirement - (data path - clock path skew + uncertainty))
   Source:               CLK_DIV_PROCESS.clk_counter_2 (FF)
   Destination:          CLK_DIV_PROCESS.clk_counter_24 (FF)
   Requirement:          10.000ns
-  Data Path Delay:      2.386ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.015ns (0.162 - 0.177)
+  Data Path Delay:      2.383ns (Levels of Logic = 7)
+  Clock Path Skew:      -0.018ns (0.165 - 0.183)
   Source Clock:         CLK_undiv_BUFGP rising at 0.000ns
   Destination Clock:    CLK_undiv_BUFGP rising at 10.000ns
   Clock Uncertainty:    0.035ns
@@ -303,246 +453,47 @@ Slack (setup path):     7.564ns (requirement - (data path - clock path skew + un
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X52Y76.CQ      Tcko                  0.456   CLK_DIV_PROCESS.clk_counter<3>
+    SLICE_X62Y80.CQ      Tcko                  0.518   CLK_DIV_PROCESS.clk_counter<3>
                                                        CLK_DIV_PROCESS.clk_counter_2
-    SLICE_X52Y76.C2      net (fanout=2)        0.677   CLK_DIV_PROCESS.clk_counter<2>
-    SLICE_X52Y76.COUT    Topcyc                0.522   CLK_DIV_PROCESS.clk_counter<3>
+    SLICE_X62Y80.C2      net (fanout=2)        0.667   CLK_DIV_PROCESS.clk_counter<2>
+    SLICE_X62Y80.COUT    Topcyc                0.504   CLK_DIV_PROCESS.clk_counter<3>
                                                        CLK_DIV_PROCESS.clk_counter<2>_rt.1
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<3>
-    SLICE_X52Y77.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<3>
-    SLICE_X52Y77.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<7>
+    SLICE_X62Y81.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<3>
+    SLICE_X62Y81.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<7>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
-    SLICE_X52Y78.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
-    SLICE_X52Y78.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<11>
+    SLICE_X62Y82.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
+    SLICE_X62Y82.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<11>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
-    SLICE_X52Y79.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
-    SLICE_X52Y79.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<15>
+    SLICE_X62Y83.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
+    SLICE_X62Y83.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<15>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
-    SLICE_X52Y80.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
-    SLICE_X52Y80.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<19>
+    SLICE_X62Y84.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
+    SLICE_X62Y84.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<19>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
-    SLICE_X52Y81.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
-    SLICE_X52Y81.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<23>
+    SLICE_X62Y85.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
+    SLICE_X62Y85.COUT    Tbyp                  0.117   CLK_DIV_PROCESS.clk_counter<23>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
-    SLICE_X52Y82.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
-    SLICE_X52Y82.CLK     Tcinck                0.161   CLK_DIV_PROCESS.clk_counter<25>
+    SLICE_X62Y86.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
+    SLICE_X62Y86.CLK     Tcinck                0.109   CLK_DIV_PROCESS.clk_counter<25>
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_xor<25>
                                                        CLK_DIV_PROCESS.clk_counter_24
     -------------------------------------------------  ---------------------------
-    Total                                      2.386ns (1.709ns logic, 0.677ns route)
-                                                       (71.6% logic, 28.4% route)
-
---------------------------------------------------------------------------------
-
-Paths for end point CLK_DIV_PROCESS.clk_counter_21 (SLICE_X52Y81.CIN), 20 paths
---------------------------------------------------------------------------------
-Slack (setup path):     7.418ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               CLK_DIV_PROCESS.clk_counter_1 (FF)
-  Destination:          CLK_DIV_PROCESS.clk_counter_21 (FF)
-  Requirement:          10.000ns
-  Data Path Delay:      2.530ns (Levels of Logic = 6)
-  Clock Path Skew:      -0.017ns (0.160 - 0.177)
-  Source Clock:         CLK_undiv_BUFGP rising at 0.000ns
-  Destination Clock:    CLK_undiv_BUFGP rising at 10.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: CLK_DIV_PROCESS.clk_counter_1 to CLK_DIV_PROCESS.clk_counter_21
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X52Y76.BQ      Tcko                  0.456   CLK_DIV_PROCESS.clk_counter<3>
-                                                       CLK_DIV_PROCESS.clk_counter_1
-    SLICE_X52Y76.B2      net (fanout=2)        0.672   CLK_DIV_PROCESS.clk_counter<1>
-    SLICE_X52Y76.COUT    Topcyb                0.674   CLK_DIV_PROCESS.clk_counter<3>
-                                                       CLK_DIV_PROCESS.clk_counter<1>_rt.1
-                                                       Mcount_CLK_DIV_PROCESS.clk_counter_cy<3>
-    SLICE_X52Y77.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<3>
-    SLICE_X52Y77.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<7>
-                                                       Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
-    SLICE_X52Y78.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
-    SLICE_X52Y78.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<11>
-                                                       Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
-    SLICE_X52Y79.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
-    SLICE_X52Y79.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<15>
-                                                       Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
-    SLICE_X52Y80.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
-    SLICE_X52Y80.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<19>
-                                                       Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
-    SLICE_X52Y81.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
-    SLICE_X52Y81.CLK     Tcinck                0.272   CLK_DIV_PROCESS.clk_counter<23>
-                                                       Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
-                                                       CLK_DIV_PROCESS.clk_counter_21
-    -------------------------------------------------  ---------------------------
-    Total                                      2.530ns (1.858ns logic, 0.672ns route)
-                                                       (73.4% logic, 26.6% route)
-
---------------------------------------------------------------------------------
-Slack (setup path):     7.531ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               CLK_DIV_PROCESS.clk_counter_5 (FF)
-  Destination:          CLK_DIV_PROCESS.clk_counter_21 (FF)
-  Requirement:          10.000ns
-  Data Path Delay:      2.416ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.018ns (0.160 - 0.178)
-  Source Clock:         CLK_undiv_BUFGP rising at 0.000ns
-  Destination Clock:    CLK_undiv_BUFGP rising at 10.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: CLK_DIV_PROCESS.clk_counter_5 to CLK_DIV_PROCESS.clk_counter_21
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X52Y77.BQ      Tcko                  0.456   CLK_DIV_PROCESS.clk_counter<7>
-                                                       CLK_DIV_PROCESS.clk_counter_5
-    SLICE_X52Y77.B2      net (fanout=2)        0.672   CLK_DIV_PROCESS.clk_counter<5>
-    SLICE_X52Y77.COUT    Topcyb                0.674   CLK_DIV_PROCESS.clk_counter<7>
-                                                       CLK_DIV_PROCESS.clk_counter<5>_rt.1
-                                                       Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
-    SLICE_X52Y78.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
-    SLICE_X52Y78.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<11>
-                                                       Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
-    SLICE_X52Y79.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
-    SLICE_X52Y79.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<15>
-                                                       Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
-    SLICE_X52Y80.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
-    SLICE_X52Y80.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<19>
-                                                       Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
-    SLICE_X52Y81.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
-    SLICE_X52Y81.CLK     Tcinck                0.272   CLK_DIV_PROCESS.clk_counter<23>
-                                                       Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
-                                                       CLK_DIV_PROCESS.clk_counter_21
-    -------------------------------------------------  ---------------------------
-    Total                                      2.416ns (1.744ns logic, 0.672ns route)
-                                                       (72.2% logic, 27.8% route)
-
---------------------------------------------------------------------------------
-Slack (setup path):     7.565ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               CLK_DIV_PROCESS.clk_counter_2 (FF)
-  Destination:          CLK_DIV_PROCESS.clk_counter_21 (FF)
-  Requirement:          10.000ns
-  Data Path Delay:      2.383ns (Levels of Logic = 6)
-  Clock Path Skew:      -0.017ns (0.160 - 0.177)
-  Source Clock:         CLK_undiv_BUFGP rising at 0.000ns
-  Destination Clock:    CLK_undiv_BUFGP rising at 10.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: CLK_DIV_PROCESS.clk_counter_2 to CLK_DIV_PROCESS.clk_counter_21
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X52Y76.CQ      Tcko                  0.456   CLK_DIV_PROCESS.clk_counter<3>
-                                                       CLK_DIV_PROCESS.clk_counter_2
-    SLICE_X52Y76.C2      net (fanout=2)        0.677   CLK_DIV_PROCESS.clk_counter<2>
-    SLICE_X52Y76.COUT    Topcyc                0.522   CLK_DIV_PROCESS.clk_counter<3>
-                                                       CLK_DIV_PROCESS.clk_counter<2>_rt.1
-                                                       Mcount_CLK_DIV_PROCESS.clk_counter_cy<3>
-    SLICE_X52Y77.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<3>
-    SLICE_X52Y77.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<7>
-                                                       Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
-    SLICE_X52Y78.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
-    SLICE_X52Y78.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<11>
-                                                       Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
-    SLICE_X52Y79.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
-    SLICE_X52Y79.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<15>
-                                                       Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
-    SLICE_X52Y80.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<15>
-    SLICE_X52Y80.COUT    Tbyp                  0.114   CLK_DIV_PROCESS.clk_counter<19>
-                                                       Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
-    SLICE_X52Y81.CIN     net (fanout=1)        0.000   Mcount_CLK_DIV_PROCESS.clk_counter_cy<19>
-    SLICE_X52Y81.CLK     Tcinck                0.272   CLK_DIV_PROCESS.clk_counter<23>
-                                                       Mcount_CLK_DIV_PROCESS.clk_counter_cy<23>
-                                                       CLK_DIV_PROCESS.clk_counter_21
-    -------------------------------------------------  ---------------------------
-    Total                                      2.383ns (1.706ns logic, 0.677ns route)
-                                                       (71.6% logic, 28.4% route)
+    Total                                      2.383ns (1.716ns logic, 0.667ns route)
+                                                       (72.0% logic, 28.0% route)
 
 --------------------------------------------------------------------------------
 
 Hold Paths: TS_sys_clk_pin = PERIOD TIMEGRP "sys_clk_pin" 100 MHz HIGH 50%;
 --------------------------------------------------------------------------------
 
-Paths for end point CLK (SLICE_X53Y82.A5), 1 path
+Paths for end point CLK_DIV_PROCESS.clk_counter_3 (SLICE_X62Y80.D3), 1 path
 --------------------------------------------------------------------------------
-Slack (hold path):      0.271ns (requirement - (clock path skew + uncertainty - data path))
-  Source:               CLK_DIV_PROCESS.clk_counter_24 (FF)
-  Destination:          CLK (FF)
-  Requirement:          0.000ns
-  Data Path Delay:      0.284ns (Levels of Logic = 1)
-  Clock Path Skew:      0.013ns (0.071 - 0.058)
-  Source Clock:         CLK_undiv_BUFGP rising at 10.000ns
-  Destination Clock:    CLK_undiv_BUFGP rising at 10.000ns
-  Clock Uncertainty:    0.000ns
-
-  Minimum Data Path at Fast Process Corner: CLK_DIV_PROCESS.clk_counter_24 to CLK
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X52Y82.AQ      Tcko                  0.141   CLK_DIV_PROCESS.clk_counter<25>
-                                                       CLK_DIV_PROCESS.clk_counter_24
-    SLICE_X53Y82.A5      net (fanout=2)        0.097   CLK_DIV_PROCESS.clk_counter<24>
-    SLICE_X53Y82.CLK     Tah         (-Th)    -0.046   CLK
-                                                       CLK_DIV_PROCESS.clk_counter<24>_rt
-                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_xor<25>
-                                                       CLK
-    -------------------------------------------------  ---------------------------
-    Total                                      0.284ns (0.187ns logic, 0.097ns route)
-                                                       (65.8% logic, 34.2% route)
-
---------------------------------------------------------------------------------
-
-Paths for end point CLK (SLICE_X53Y82.B4), 1 path
---------------------------------------------------------------------------------
-Slack (hold path):      0.281ns (requirement - (clock path skew + uncertainty - data path))
-  Source:               CLK_DIV_PROCESS.clk_counter_25 (FF)
-  Destination:          CLK (FF)
-  Requirement:          0.000ns
-  Data Path Delay:      0.294ns (Levels of Logic = 1)
-  Clock Path Skew:      0.013ns (0.071 - 0.058)
-  Source Clock:         CLK_undiv_BUFGP rising at 10.000ns
-  Destination Clock:    CLK_undiv_BUFGP rising at 10.000ns
-  Clock Uncertainty:    0.000ns
-
-  Minimum Data Path at Fast Process Corner: CLK_DIV_PROCESS.clk_counter_25 to CLK
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X52Y82.BQ      Tcko                  0.141   CLK_DIV_PROCESS.clk_counter<25>
-                                                       CLK_DIV_PROCESS.clk_counter_25
-    SLICE_X53Y82.B4      net (fanout=2)        0.148   CLK_DIV_PROCESS.clk_counter<25>
-    SLICE_X53Y82.CLK     Tah         (-Th)    -0.005   CLK
-                                                       CLK_DIV_PROCESS.clk_counter<25>_rt
-                                                       Madd_CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT_xor<25>
-                                                       CLK
-    -------------------------------------------------  ---------------------------
-    Total                                      0.294ns (0.146ns logic, 0.148ns route)
-                                                       (49.7% logic, 50.3% route)
-
---------------------------------------------------------------------------------
-
-Paths for end point CLK_DIV_PROCESS.clk_counter_3 (SLICE_X52Y76.D3), 1 path
---------------------------------------------------------------------------------
-Slack (hold path):      0.316ns (requirement - (clock path skew + uncertainty - data path))
+Slack (hold path):      0.288ns (requirement - (clock path skew + uncertainty - data path))
   Source:               CLK_DIV_PROCESS.clk_counter_3 (FF)
   Destination:          CLK_DIV_PROCESS.clk_counter_3 (FF)
   Requirement:          0.000ns
-  Data Path Delay:      0.316ns (Levels of Logic = 1)
+  Data Path Delay:      0.288ns (Levels of Logic = 1)
   Clock Path Skew:      0.000ns
   Source Clock:         CLK_undiv_BUFGP rising at 10.000ns
   Destination Clock:    CLK_undiv_BUFGP rising at 10.000ns
@@ -552,16 +503,74 @@ Slack (hold path):      0.316ns (requirement - (clock path skew + uncertainty - 
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X52Y76.DQ      Tcko                  0.141   CLK_DIV_PROCESS.clk_counter<3>
+    SLICE_X62Y80.DQ      Tcko                  0.164   CLK_DIV_PROCESS.clk_counter<3>
                                                        CLK_DIV_PROCESS.clk_counter_3
-    SLICE_X52Y76.D3      net (fanout=2)        0.172   CLK_DIV_PROCESS.clk_counter<3>
-    SLICE_X52Y76.CLK     Tah         (-Th)    -0.003   CLK_DIV_PROCESS.clk_counter<3>
+    SLICE_X62Y80.D3      net (fanout=2)        0.149   CLK_DIV_PROCESS.clk_counter<3>
+    SLICE_X62Y80.CLK     Tah         (-Th)     0.025   CLK_DIV_PROCESS.clk_counter<3>
                                                        CLK_DIV_PROCESS.clk_counter<3>_rt.1
                                                        Mcount_CLK_DIV_PROCESS.clk_counter_cy<3>
                                                        CLK_DIV_PROCESS.clk_counter_3
     -------------------------------------------------  ---------------------------
-    Total                                      0.316ns (0.144ns logic, 0.172ns route)
-                                                       (45.6% logic, 54.4% route)
+    Total                                      0.288ns (0.139ns logic, 0.149ns route)
+                                                       (48.3% logic, 51.7% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point CLK_DIV_PROCESS.clk_counter_7 (SLICE_X62Y81.D3), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.288ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               CLK_DIV_PROCESS.clk_counter_7 (FF)
+  Destination:          CLK_DIV_PROCESS.clk_counter_7 (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.288ns (Levels of Logic = 1)
+  Clock Path Skew:      0.000ns
+  Source Clock:         CLK_undiv_BUFGP rising at 10.000ns
+  Destination Clock:    CLK_undiv_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.000ns
+
+  Minimum Data Path at Fast Process Corner: CLK_DIV_PROCESS.clk_counter_7 to CLK_DIV_PROCESS.clk_counter_7
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X62Y81.DQ      Tcko                  0.164   CLK_DIV_PROCESS.clk_counter<7>
+                                                       CLK_DIV_PROCESS.clk_counter_7
+    SLICE_X62Y81.D3      net (fanout=2)        0.149   CLK_DIV_PROCESS.clk_counter<7>
+    SLICE_X62Y81.CLK     Tah         (-Th)     0.025   CLK_DIV_PROCESS.clk_counter<7>
+                                                       CLK_DIV_PROCESS.clk_counter<7>_rt.1
+                                                       Mcount_CLK_DIV_PROCESS.clk_counter_cy<7>
+                                                       CLK_DIV_PROCESS.clk_counter_7
+    -------------------------------------------------  ---------------------------
+    Total                                      0.288ns (0.139ns logic, 0.149ns route)
+                                                       (48.3% logic, 51.7% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point CLK_DIV_PROCESS.clk_counter_11 (SLICE_X62Y82.D3), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.288ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               CLK_DIV_PROCESS.clk_counter_11 (FF)
+  Destination:          CLK_DIV_PROCESS.clk_counter_11 (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.288ns (Levels of Logic = 1)
+  Clock Path Skew:      0.000ns
+  Source Clock:         CLK_undiv_BUFGP rising at 10.000ns
+  Destination Clock:    CLK_undiv_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.000ns
+
+  Minimum Data Path at Fast Process Corner: CLK_DIV_PROCESS.clk_counter_11 to CLK_DIV_PROCESS.clk_counter_11
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X62Y82.DQ      Tcko                  0.164   CLK_DIV_PROCESS.clk_counter<11>
+                                                       CLK_DIV_PROCESS.clk_counter_11
+    SLICE_X62Y82.D3      net (fanout=2)        0.149   CLK_DIV_PROCESS.clk_counter<11>
+    SLICE_X62Y82.CLK     Tah         (-Th)     0.025   CLK_DIV_PROCESS.clk_counter<11>
+                                                       CLK_DIV_PROCESS.clk_counter<11>_rt.1
+                                                       Mcount_CLK_DIV_PROCESS.clk_counter_cy<11>
+                                                       CLK_DIV_PROCESS.clk_counter_11
+    -------------------------------------------------  ---------------------------
+    Total                                      0.288ns (0.139ns logic, 0.149ns route)
+                                                       (48.3% logic, 51.7% route)
 
 --------------------------------------------------------------------------------
 
@@ -581,7 +590,7 @@ Slack: 9.000ns (period - (min low pulse limit / (low pulse / period)))
   Low pulse limit: 0.500ns (Tcl)
   Physical resource: CLK/CLK
   Logical resource: CLK/CK
-  Location pin: SLICE_X53Y82.CLK
+  Location pin: SLICE_X65Y86.CLK
   Clock network: CLK_undiv_BUFGP
 --------------------------------------------------------------------------------
 Slack: 9.000ns (period - (min high pulse limit / (high pulse / period)))
@@ -590,7 +599,7 @@ Slack: 9.000ns (period - (min high pulse limit / (high pulse / period)))
   High pulse limit: 0.500ns (Tch)
   Physical resource: CLK/CLK
   Logical resource: CLK/CK
-  Location pin: SLICE_X53Y82.CLK
+  Location pin: SLICE_X65Y86.CLK
   Clock network: CLK_undiv_BUFGP
 --------------------------------------------------------------------------------
 
@@ -607,7 +616,7 @@ Clock to Setup on destination clock CLK_undiv
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-CLK_undiv      |    2.694|         |         |         |
+CLK_undiv      |    2.930|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 
@@ -619,20 +628,20 @@ Timing errors: 0  Score: 0  (Setup/Max: 0, Hold: 0)
 Constraints cover 377 paths, 0 nets, and 73 connections
 
 Design statistics:
-   Minimum period:   2.694ns{1}   (Maximum frequency: 371.195MHz)
+   Minimum period:   2.930ns{1}   (Maximum frequency: 341.297MHz)
 
 
 ------------------------------------Footnotes-----------------------------------
 1)  The minimum period statistic assumes all single cycle delays.
 
-Analysis completed Sun Oct 26 21:16:14 2014 
+Analysis completed Mon Oct 27 11:00:49 2014 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 582 MB
+Peak Memory Usage: 584 MB
 
 
 
