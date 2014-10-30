@@ -69,67 +69,78 @@ ALU_lab2_mapping : ALU_lab2 generic map (width => 32) port map (Clk => CLK,
 																					 Result1 => ALU_lab2_result1,
 																					 Result2 => ALU_lab2_result2,
 																					 Status => ALU_lab2_status);
-process(ALU_Control,ALU_InA,ALU_InB)
-variable AplusB 	: STD_LOGIC_VECTOR (31 downto 0);
-variable AminusB 	: STD_LOGIC_VECTOR (31 downto 0);
-variable suboverflow: STD_LOGIC;
-variable AorB 		: STD_LOGIC_VECTOR (31 downto 0);
+
+-------------------------------------------------------------
+-- mapping to lab2 ALU
+-------------------------------------------------------------
+ALU_zero <= ALU_lab2_status(0);
+ALU_overflow <= ALU_lab2_status(1);
+ALU_busy <= ALU_lab2_status(2);
+process(ALU_Control,ALU_InA,ALU_InB,ALU_lab2_result1)
 begin
-
-AplusB := ALU_InA + ALU_InB;
-AminusB := ALU_InA - ALU_InB;
-suboverflow := ( ALU_InA(31) xor  ALU_InB(31) )  and ( ALU_InB(31) xnor AminusB(31) );
-AorB := ALU_InA or ALU_InB;
-
-ALU_Out <= (others=>'0'); -- default output
-ALU_zero <= '0'; -- default. changed only by BEQ
-
 case ALU_Control(7 downto 6) is
 when "00" => -- lw, sw
-	ALU_Out <= AplusB;
+	ALU_lab2_control <= "000010"; -- add
+	ALU_Out <= ALU_lab2_result1;
 when "01" => -- beq
 	case ALU_Control(5 downto 0) is
 	when "000001" => -- bgez
+		ALU_lab2_control <= "100000";
 	-- when "000001" => -- bgezal
 	when "000100" => -- beq
-		if AminusB = x"00000000" then
-			ALU_zero <= '1';
-		end if;
+		ALU_lab2_control <= "000110";
+		ALU_Out <= ALU_lab2_result1;
 	when others =>
-		null;
+		ALU_lab2_control <= "100000";
 	end case;
 when "10" =>
 	case ALU_Control(5 downto 0) is
-	when "100000" => --add
-		ALU_Out <= AplusB;
-	when "001000" => --addi
-		null;
-	when "100010" => --sub
-		ALU_Out <= AminusB;
 	when "100100" => --and
-		ALU_Out <= ALU_InA and ALU_InB;
+		ALU_lab2_control <= "000000";
+		ALU_Out <= ALU_lab2_result1;
 	when "100101" => --or
-		ALU_Out <= AorB;
+		ALU_lab2_control <= "000001";
+		ALU_Out <= ALU_lab2_result1;
 	when "100111" => --nor
-		ALU_Out <= not(AorB);
+		ALU_lab2_control <= "001100";
+		ALU_Out <= ALU_lab2_result1;
+	when "100000" => --add
+		ALU_lab2_control <= "000010";
+		ALU_Out <= ALU_lab2_result1;
+	when "001000" => --addi
+		ALU_lab2_control <= "000010";
+		ALU_Out <= ALU_lab2_result1;
+	when "100010" => --sub
+		ALU_lab2_control <= "000110";
+		ALU_Out <= ALU_lab2_result1;
 	when "101010" => --slt
-		ALU_Out(0) <= AminusB(31) xor suboverflow;
+		ALU_lab2_control <= "000111";
+		ALU_Out <= ALU_lab2_result1;
 	when "101011" => --sltu
-		-- to be done
+		ALU_lab2_control <= "001110";
+		ALU_Out <= ALU_lab2_result1;
+	when "000000" => -- sll
+		ALU_lab2_control <= "001001";
+		ALU_Out <= ALU_lab2_result1;
+	when "000011" => -- sra
+		ALU_lab2_control <= "001101";
+		ALU_Out <= ALU_lab2_result1;
+	when "000010" => -- srl
+		ALU_lab2_control <= "001101";
+		ALU_Out <= ALU_lab2_result1;
+	when "000100" => -- sllv
 	when "011000" => -- mult
 	when "011001" => -- multu
 	when "010000" => -- mfhi
 	when "010010" => -- mflo
-	when "000000" => -- sll
-	when "000100" => -- sllv
-	when "000011" => -- sra
-	when "000010" => -- srl
 	when others =>	
-		null;
+		ALU_lab2_control <= "100000";
 	end case;
 when "11" => -- ori
-	ALU_Out <= AorB;
-when others => null;
+	ALU_lab2_control <= "000001";
+	ALU_Out <= ALU_lab2_result1;
+when others => 
+	ALU_lab2_control <= "100000";
 end case;
 end process;
 end arch_ALU;

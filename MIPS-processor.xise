@@ -35,9 +35,6 @@
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="1"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="7"/>
     </file>
-    <file xil_pn:name="TOP.ucf" xil_pn:type="FILE_UCF">
-      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
-    </file>
     <file xil_pn:name="TopTest.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="7"/>
       <association xil_pn:name="PostMapSimulation" xil_pn:seqID="69"/>
@@ -95,6 +92,9 @@
     <file xil_pn:name="TOP.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="96"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="12"/>
+    </file>
+    <file xil_pn:name="TOP.ucf" xil_pn:type="FILE_UCF">
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
   </files>
 
@@ -423,7 +423,7 @@
   </properties>
 
   <bindings>
-    <binding xil_pn:location="/alu_lab2" xil_pn:name="TOP.ucf"/>
+    <binding xil_pn:location="/TOP" xil_pn:name="TOP.ucf"/>
   </bindings>
 
   <libraries/>

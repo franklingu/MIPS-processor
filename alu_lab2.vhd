@@ -92,7 +92,7 @@ signal Result1_multi		: STD_LOGIC_VECTOR (width-1 downto 0) := (others => '0');
 signal Result2_multi		: STD_LOGIC_VECTOR (width-1 downto 0) := (others => '0');
 signal multi_sum			: STD_LOGIC_VECTOR (width-1 downto 0) := (others => '0');
 signal Divisor				: STD_LOGIC_VECTOR (width-1 downto 0) := (others => '0');
-signal temp_sum : std_logic_vector(2*width-1 downto 0) := (others => '0');
+signal temp_sum 			: std_logic_vector (2*width-1 downto 0) := (others => '0');
 signal sign_quotient    : STD_LOGIC := '0';
 signal sign_remainder   : STD_LOGIC := '0';
 signal done		 			: STD_LOGIC := '0';
@@ -231,7 +231,7 @@ MULTI_CYCLE_PROCESS : process (Clk) -- multi-cycle operations done here
 -- assume that Operand1 and Operand 2 do not change while multi-cycle operations are being performed
 variable count : std_logic_vector(7 downto 0) := (others => '0');
 variable temp_sum_helper : std_logic_vector(2*width-1 downto 0) := (others => '0');
-variable sum_for_11				: std_logic_vector(2*width-1 downto 0) := (others => '0');
+variable sum_for_11		 : std_logic_vector(2*width-1 downto 0) := (others => '0');
 variable operand1_val : std_logic_vector(2*width-1 downto 0) := (others => '0');
 variable operand2_val : std_logic_vector(width-1 downto 0) := (others => '0');
 variable extended_result1sign : std_logic_vector(width-1 downto 0) := (others => '0');

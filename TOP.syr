@@ -153,7 +153,6 @@ Elaborating entity <MIPS> (architecture <arch_MIPS>) from library <work>.
 Elaborating entity <PC> (architecture <arch_PC>) from library <work>.
 
 Elaborating entity <ALU> (architecture <arch_ALU>) from library <work>.
-WARNING:HDLCompiler:871 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\ALU.vhd" Line 56: Using initial value "000000" for alu_lab2_control since it is never assigned
 
 Elaborating entity <alu_lab2> (architecture <arch_alu_lab2>) with generics from library <work>.
 
@@ -190,12 +189,11 @@ Elaborating entity <sran> (architecture <arch_sran>) with generics from library 
 Elaborating entity <sran> (architecture <arch_sran>) with generics from library <work>.
 
 Elaborating entity <sran> (architecture <arch_sran>) with generics from library <work>.
-INFO:HDLCompiler:679 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\ALU.vhd" Line 132. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\ALU.vhd" Line 142. Case statement is complete. others clause is never selected
 
 Elaborating entity <ControlUnit> (architecture <arch_ControlUnit>) from library <work>.
 
 Elaborating entity <RegFile> (architecture <arch_RegFile>) from library <work>.
-WARNING:Xst:2972 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\ALU.vhd" line 65. All outputs of instance <ALU_lab2_mapping> of block <alu_lab2> are unconnected in block <ALU>. Underlying logic will be removed.
 
 =========================================================================
 *                           HDL Synthesis                               *
@@ -246,30 +244,100 @@ Unit <PC> synthesized.
 
 Synthesizing Unit <ALU>.
     Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\ALU.vhd".
-INFO:Xst:3210 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\ALU.vhd" line 65: Output port <Result1> of the instance <ALU_lab2_mapping> is unconnected or connected to loadless signal.
 INFO:Xst:3210 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\ALU.vhd" line 65: Output port <Result2> of the instance <ALU_lab2_mapping> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\ALU.vhd" line 65: Output port <Status> of the instance <ALU_lab2_mapping> is unconnected or connected to loadless signal.
-WARNING:Xst:653 - Signal <ALU_overflow> is used but never assigned. This sourceless signal will be automatically connected to value GND.
-WARNING:Xst:653 - Signal <ALU_busy> is used but never assigned. This sourceless signal will be automatically connected to value GND.
-    Found 32-bit adder for signal <AplusB> created at line 79.
-    Found 32-bit subtractor for signal <AminusB> created at line 74.
-    Found 32-bit 4-to-1 multiplexer for signal <ALU_Out> created at line 87.
+    Found 1-bit 4-to-1 multiplexer for signal <ALU_Control[7]_GND_8_o_Mux_11_o> created at line 81.
+    Found 1-bit 4-to-1 multiplexer for signal <ALU_Control[7]_GND_8_o_Mux_19_o> created at line 81.
+    Found 1-bit 4-to-1 multiplexer for signal <ALU_Control[7]_GND_8_o_Mux_23_o> created at line 81.
+    Found 1-bit 4-to-1 multiplexer for signal <ALU_Control[7]_GND_8_o_Mux_27_o> created at line 81.
+    Found 1-bit 4-to-1 multiplexer for signal <ALU_Control[7]_PWR_8_o_Mux_31_o> created at line 81.
+    Found 1-bit 4-to-1 multiplexer for signal <ALU_Control[7]_PWR_41_o_Mux_38_o> created at line 81.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_lab2_control<4>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_lab2_control<3>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_lab2_control<2>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_lab2_control<1>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_lab2_control<0>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<31>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<30>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<29>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<28>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<27>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<26>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<25>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<24>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<23>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<22>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<21>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<20>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<19>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<18>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<17>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<16>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<15>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<14>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<13>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<12>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<11>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<10>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<9>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<8>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<7>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<6>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<5>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<4>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<3>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<2>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<1>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_Out<0>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ALU_lab2_control<5>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
     Summary:
-	inferred   2 Adder/Subtractor(s).
-	inferred   9 Multiplexer(s).
+	inferred  38 Latch(s).
+	inferred   8 Multiplexer(s).
 Unit <ALU> synthesized.
+
+Synthesizing Unit <alu_lab2>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\alu_lab2.vhd".
+        width = 32
+    Found 8-bit register for signal <MULTI_CYCLE_PROCESS.count>.
+    Found 32-bit register for signal <Result1_multi>.
+    Found 32-bit register for signal <Result2_multi>.
+    Found 1-bit register for signal <done>.
+    Found 64-bit register for signal <temp_sum>.
+    Found 64-bit register for signal <MULTI_CYCLE_PROCESS.operand1_val>.
+    Found 32-bit register for signal <MULTI_CYCLE_PROCESS.operand2_val>.
+    Found 1-bit register for signal <sign_quotient>.
+    Found 64-bit register for signal <MULTI_CYCLE_PROCESS.sum_for_11>.
+    Found 1-bit register for signal <sign_remainder>.
+    Found 32-bit register for signal <Divisor>.
+    Found 1-bit register for signal <state>.
+    Found 32-bit adder for signal <Operand2[31]_GND_9_o_add_27_OUT> created at line 263.
+    Found 64-bit adder for signal <GND_9_o_GND_9_o_add_28_OUT> created at line 267.
+    Found 64-bit adder for signal <temp_sum[63]_GND_9_o_add_32_OUT> created at line 273.
+    Found 64-bit adder for signal <temp_sum[63]_MULTI_CYCLE_PROCESS.operand1_val[63]_add_33_OUT> created at line 283.
+    Found 64-bit adder for signal <temp_sum[63]_MULTI_CYCLE_PROCESS.operand1_val[62]_add_34_OUT> created at line 286.
+    Found 64-bit adder for signal <temp_sum[63]_MULTI_CYCLE_PROCESS.sum_for_11[63]_add_35_OUT> created at line 289.
+    Found 32-bit adder for signal <Operand1[31]_GND_9_o_add_25_OUT> created at line 313.
+    Found 8-bit adder for signal <MULTI_CYCLE_PROCESS.count[7]_GND_9_o_add_61_OUT> created at line 322.
+    Found 32-bit adder for signal <Result2_multi[31]_GND_9_o_add_68_OUT> created at line 335.
+    Found 32-bit adder for signal <Result1_multi[31]_GND_9_o_add_69_OUT> created at line 336.
+    Summary:
+	inferred   8 Adder/Subtractor(s).
+	inferred 332 D-type flip-flop(s).
+	inferred 102 Multiplexer(s).
+Unit <alu_lab2> synthesized.
 
 Synthesizing Unit <AddSub>.
     Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\AddSub.vhd".
         width = 32
+    Found 33-bit adder for signal <n0020> created at line 47.
+    Found 33-bit adder for signal <S_wider> created at line 47.
     Summary:
-	no macro.
+	inferred   2 Adder/Subtractor(s).
 Unit <AddSub> synthesized.
 
 Synthesizing Unit <shifter>.
     Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\shifter.vhd".
     Summary:
-	no macro.
+	inferred   2 Multiplexer(s).
 Unit <shifter> synthesized.
 
 Synthesizing Unit <slln_1>.
@@ -409,27 +477,37 @@ Macro Statistics
  256x32-bit single-port RAM                            : 1
  256x32-bit single-port Read Only RAM                  : 1
  32x32-bit dual-port RAM                               : 2
-# Adders/Subtractors                                   : 5
+# Adders/Subtractors                                   : 15
  26-bit adder                                          : 1
- 32-bit adder                                          : 3
- 32-bit subtractor                                     : 1
-# Registers                                            : 11
- 1-bit register                                        : 9
+ 32-bit adder                                          : 6
+ 33-bit adder                                          : 4
+ 64-bit adder                                          : 3
+ 8-bit adder                                           : 1
+# Registers                                            : 23
+ 1-bit register                                        : 13
  26-bit register                                       : 1
- 32-bit register                                       : 1
-# Latches                                              : 11
- 1-bit latch                                           : 11
+ 32-bit register                                       : 5
+ 64-bit register                                       : 3
+ 8-bit register                                        : 1
+# Latches                                              : 49
+ 1-bit latch                                           : 49
 # Comparators                                          : 2
  32-bit comparator lessequal                           : 2
-# Multiplexers                                         : 18
- 1-bit 2-to-1 multiplexer                              : 2
- 32-bit 2-to-1 multiplexer                             : 14
- 32-bit 4-to-1 multiplexer                             : 1
+# Multiplexers                                         : 136
+ 1-bit 2-to-1 multiplexer                              : 42
+ 1-bit 4-to-1 multiplexer                              : 6
+ 3-bit 2-to-1 multiplexer                              : 5
+ 32-bit 2-to-1 multiplexer                             : 71
  5-bit 2-to-1 multiplexer                              : 1
-# Xors                                                 : 3
- 1-bit xor2                                            : 3
+ 64-bit 2-to-1 multiplexer                             : 4
+ 8-bit 2-to-1 multiplexer                              : 7
+# Xors                                                 : 13
+ 1-bit xor2                                            : 4
+ 32-bit xor2                                           : 8
+ 64-bit xor2                                           : 1
 
 =========================================================================
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
 
 =========================================================================
 *                       Advanced HDL Synthesis                          *
@@ -498,6 +576,10 @@ INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_Addr_Instr[9]_GND_5_o_wide_mux_8_OUT
     -----------------------------------------------------------------------
 Unit <TOP> synthesized (advanced).
 
+Synthesizing (advanced) Unit <alu_lab2>.
+The following registers are absorbed into accumulator <temp_sum>: 1 register on signal <temp_sum>.
+Unit <alu_lab2> synthesized (advanced).
+
 =========================================================================
 Advanced HDL Synthesis Report
 
@@ -506,29 +588,40 @@ Macro Statistics
  256x32-bit single-port distributed RAM                : 1
  256x32-bit single-port distributed Read Only RAM      : 1
  32x32-bit dual-port distributed RAM                   : 2
-# Adders/Subtractors                                   : 5
+# Adders/Subtractors                                   : 12
  26-bit adder                                          : 1
- 32-bit adder                                          : 3
- 32-bit subtractor                                     : 1
+ 32-bit adder                                          : 6
+ 33-bit adder carry in                                 : 2
+ 64-bit adder                                          : 2
+ 8-bit adder                                           : 1
 # Counters                                             : 1
  26-bit up counter                                     : 1
-# Registers                                            : 41
- Flip-Flops                                            : 41
+# Accumulators                                         : 1
+ 64-bit up accumulator                                 : 1
+# Registers                                            : 309
+ Flip-Flops                                            : 309
 # Comparators                                          : 2
  32-bit comparator lessequal                           : 2
-# Multiplexers                                         : 18
- 1-bit 2-to-1 multiplexer                              : 2
- 32-bit 2-to-1 multiplexer                             : 14
- 32-bit 4-to-1 multiplexer                             : 1
+# Multiplexers                                         : 262
+ 1-bit 2-to-1 multiplexer                              : 170
+ 1-bit 4-to-1 multiplexer                              : 6
+ 3-bit 2-to-1 multiplexer                              : 5
+ 32-bit 2-to-1 multiplexer                             : 71
  5-bit 2-to-1 multiplexer                              : 1
-# Xors                                                 : 3
- 1-bit xor2                                            : 3
+ 64-bit 2-to-1 multiplexer                             : 2
+ 8-bit 2-to-1 multiplexer                              : 7
+# Xors                                                 : 13
+ 1-bit xor2                                            : 4
+ 32-bit xor2                                           : 8
+ 64-bit xor2                                           : 1
 
 =========================================================================
 
 =========================================================================
 *                         Low Level Synthesis                           *
 =========================================================================
+WARNING:Xst:1293 - FF/Latch <ALU_lab2_control_4> has a constant value of 0 in block <ALU>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:2261 - The FF/Latch <MULTI_CYCLE_PROCESS.operand1_val_0> in Unit <alu_lab2> is equivalent to the following FF/Latch, which will be removed : <MULTI_CYCLE_PROCESS.sum_for_11_0> 
 
 Optimizing unit <PC> ...
 
@@ -538,13 +631,348 @@ Optimizing unit <MIPS> ...
 
 Optimizing unit <ALU> ...
 
+Optimizing unit <alu_lab2> ...
+
+Optimizing unit <shifter> ...
+
 Optimizing unit <ControlUnit> ...
-WARNING:Xst:1293 - FF/Latch <MIPS1/PC1/PC_out_1> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_60> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_61> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_62> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_63> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_0> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_1> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_2> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_3> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_4> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_5> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_6> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_7> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_8> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_9> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_10> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_11> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_12> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_13> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_41> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_42> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_43> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_44> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_45> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_46> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_47> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_48> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_49> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_50> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_51> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_52> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_53> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_54> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_55> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_56> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_57> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_58> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_59> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_1> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_2> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_3> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_4> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_5> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_6> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_7> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_8> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_9> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_10> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_11> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_12> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_13> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_14> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_15> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_16> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_17> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_18> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_19> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_14> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_15> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_16> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_17> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_18> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_19> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_20> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_21> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_22> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_23> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_24> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_25> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_26> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_27> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_28> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_29> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_30> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand2_val_31> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/done> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_16> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_17> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_18> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_19> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_20> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_21> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_22> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_23> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_24> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_25> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_26> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_27> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_28> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_29> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_30> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_31> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_0> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_1> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_2> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/state> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/sign_quotient> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/sign_remainder> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_0> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_1> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_2> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_3> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_4> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_5> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_6> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_7> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_8> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_9> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_10> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_11> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_12> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_13> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_14> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Divisor_15> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_22> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_23> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_24> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_25> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_26> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_27> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_28> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_29> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_30> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_31> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_32> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_33> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_34> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_35> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_36> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_37> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_38> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_39> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_40> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_3> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_4> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_5> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_6> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_7> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_8> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_9> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_10> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_11> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_12> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_13> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_14> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_15> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_16> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_17> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_18> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_19> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_20> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.operand1_val_21> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_10> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_11> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_12> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_13> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_14> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_15> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_16> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_17> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_18> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_19> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_20> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_21> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_22> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_23> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_24> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_25> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_26> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_27> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_23> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_24> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_25> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_26> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_27> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_28> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_29> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_30> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_31> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_0> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_1> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_2> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_3> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_4> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_5> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_6> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_7> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_8> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_9> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_46> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_47> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_48> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_49> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_50> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_51> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_52> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_53> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_54> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_55> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_56> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_57> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_58> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_59> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_60> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_61> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_62> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_63> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_28> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_29> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_30> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result1_multi_31> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_0> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_32> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_33> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_34> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_35> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_36> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_37> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_38> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_39> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_40> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_41> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_42> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_43> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_44> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_45> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_39> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_40> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_41> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_42> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_43> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_44> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_45> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_46> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_47> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_48> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_49> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_50> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_51> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_52> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_53> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_54> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_55> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_56> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_20> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_21> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_22> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_23> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_24> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_25> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_26> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_27> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_28> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_29> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_30> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_31> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_32> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_33> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_34> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_35> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_36> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_37> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_38> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_4> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_5> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_6> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_7> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_8> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_9> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_10> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_11> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_12> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_13> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_14> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_15> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_16> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_17> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_18> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_19> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_20> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_21> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_22> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_57> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_58> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_59> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_60> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_61> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_62> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.sum_for_11_63> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.count_0> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.count_1> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.count_2> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.count_3> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.count_4> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.count_5> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.count_6> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/MULTI_CYCLE_PROCESS.count_7> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_0> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_1> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_2> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <MIPS1/ALU1/ALU_lab2_mapping/Result2_multi_3> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <MIPS1/PC1/PC_out_0> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <MIPS1/PC1/PC_out_1> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_31> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_30> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_29> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_28> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_27> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_26> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_25> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_24> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_23> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_22> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_21> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_20> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_19> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_18> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_17> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_16> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_15> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_14> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_13> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_12> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_11> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_10> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_9> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_8> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_7> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_6> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_5> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_4> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_3> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_2> of sequential type is unconnected in block <TOP>.
+WARNING:Xst:2677 - Node <MIPS1/ALU1/ALU_lab2_mapping/temp_sum_1> of sequential type is unconnected in block <TOP>.
 
 Mapping all equations...
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 5) on block TOP, actual ratio is 0.
+Found area constraint ratio of 100 (+ 5) on block TOP, actual ratio is 1.
 
 Final Macro Processing ...
 
@@ -576,31 +1004,31 @@ Top Level Output File Name         : TOP.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 1055
+# BELS                             : 948
 #      GND                         : 1
-#      INV                         : 3
+#      INV                         : 4
 #      LUT1                        : 79
-#      LUT2                        : 19
-#      LUT3                        : 66
-#      LUT4                        : 75
-#      LUT5                        : 100
-#      LUT6                        : 359
-#      MUXCY                       : 185
-#      MUXF7                       : 16
+#      LUT2                        : 5
+#      LUT3                        : 12
+#      LUT4                        : 64
+#      LUT5                        : 131
+#      LUT6                        : 374
+#      MUXCY                       : 154
+#      MUXF7                       : 4
 #      VCC                         : 1
-#      XORCY                       : 151
-# FlipFlops/Latches                : 76
+#      XORCY                       : 119
+# FlipFlops/Latches                : 113
 #      FD                          : 27
 #      FDE                         : 8
 #      FDR                         : 29
 #      FDS                         : 1
-#      LD                          : 11
+#      LD                          : 48
 # RAMS                             : 46
 #      RAM256X1S                   : 32
 #      RAM32M                      : 10
 #      RAM32X1D                    : 4
-# Clock Buffers                    : 2
-#      BUFG                        : 1
+# Clock Buffers                    : 3
+#      BUFG                        : 2
 #      BUFGP                       : 1
 # IO Buffers                       : 33
 #      IBUF                        : 17
@@ -613,25 +1041,25 @@ Selected Device : 7a100tcsg324-1
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:              76  out of  126800     0%  
- Number of Slice LUTs:                  877  out of  63400     1%  
-    Number used as Logic:               701  out of  63400     1%  
+ Number of Slice Registers:             113  out of  126800     0%  
+ Number of Slice LUTs:                  845  out of  63400     1%  
+    Number used as Logic:               669  out of  63400     1%  
     Number used as Memory:              176  out of  19000     0%  
        Number used as RAM:              176
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:    877
-   Number with an unused Flip Flop:     801  out of    877    91%  
-   Number with an unused LUT:             0  out of    877     0%  
-   Number of fully used LUT-FF pairs:    76  out of    877     8%  
-   Number of unique control sets:         4
+ Number of LUT Flip Flop pairs used:    849
+   Number with an unused Flip Flop:     736  out of    849    86%  
+   Number with an unused LUT:             4  out of    849     0%  
+   Number of fully used LUT-FF pairs:   109  out of    849    12%  
+   Number of unique control sets:         6
 
 IO Utilization: 
  Number of IOs:                          34
  Number of bonded IOBs:                  34  out of    210    16%  
 
 Specific Feature Utilization:
- Number of BUFG/BUFGCTRLs:                2  out of     32     6%  
+ Number of BUFG/BUFGCTRLs:                3  out of     32     9%  
 
 ---------------------------
 Partition Resource Summary:
@@ -651,14 +1079,16 @@ NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
 
 Clock Information:
 ------------------
--------------------------------------------------------------+-----------------------------------+-------+
-Clock Signal                                                 | Clock buffer(FF name)             | Load  |
--------------------------------------------------------------+-----------------------------------+-------+
-CLK_undiv                                                    | BUFGP                             | 27    |
-CLK                                                          | BUFG                              | 84    |
-MIPS1/ControlUnit1/_n0090<1>(MIPS1/ControlUnit1/_n0090<1>1:O)| NONE(*)(MIPS1/ControlUnit1/RegDst)| 11    |
--------------------------------------------------------------+-----------------------------------+-------+
-(*) This 1 clock signal(s) are generated by combinatorial logic,
+-------------------------------------------------------------------------------------------------+---------------------------------------+-------+
+Clock Signal                                                                                     | Clock buffer(FF name)                 | Load  |
+-------------------------------------------------------------------------------------------------+---------------------------------------+-------+
+CLK_undiv                                                                                        | BUFGP                                 | 27    |
+CLK                                                                                              | BUFG                                  | 84    |
+MIPS1/ALU1/ALU_Control[7]_PWR_41_o_Mux_38_o(MIPS1/ALU1/Mmux_ALU_Control[7]_PWR_41_o_Mux_38_o12:O)| BUFG(*)(MIPS1/ALU1/ALU_Out_1)         | 32    |
+MIPS1/ALU1/ALU_Control[7]_PWR_30_o_Mux_16_o(MIPS1/ALU1/Mmux_ALU_Control[7]_PWR_30_o_Mux_16_o1:O) | NONE(*)(MIPS1/ALU1/ALU_lab2_control_1)| 5     |
+MIPS1/ControlUnit1/_n0090<1>(MIPS1/ControlUnit1/_n0090<1>1:O)                                    | NONE(*)(MIPS1/ControlUnit1/RegDst)    | 11    |
+-------------------------------------------------------------------------------------------------+---------------------------------------+-------+
+(*) These 3 clock signal(s) are generated by combinatorial logic,
 and XST is not able to identify which are the primary clock signals.
 Please use the CLOCK_SIGNAL constraint to specify the clock signal(s) generated by combinatorial logic.
 INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
@@ -671,8 +1101,8 @@ Timing Summary:
 ---------------
 Speed Grade: -1
 
-   Minimum period: 9.880ns (Maximum Frequency: 101.214MHz)
-   Minimum input arrival time before clock: 2.612ns
+   Minimum period: 8.361ns (Maximum Frequency: 119.598MHz)
+   Minimum input arrival time before clock: 1.819ns
    Maximum output required time after clock: 1.028ns
    Maximum combinational path delay: No path found
 
@@ -730,16 +1160,16 @@ Delay:               2.743ns (Levels of Logic = 27)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'CLK'
-  Clock period: 9.880ns (frequency: 101.214MHz)
-  Total number of paths / destination ports: 159700626 / 532
+  Clock period: 8.361ns (frequency: 119.598MHz)
+  Total number of paths / destination ports: 6631562 / 236
 -------------------------------------------------------------------------
-Delay:               9.880ns (Levels of Logic = 33)
+Delay:               8.361ns (Levels of Logic = 35)
   Source:            MIPS1/PC1/PC_out_8 (FF)
-  Destination:       Mram_DATA_MEM2 (RAM)
+  Destination:       MIPS1/PC1/PC_out_31 (FF)
   Source Clock:      CLK rising
   Destination Clock: CLK rising
 
-  Data Path: MIPS1/PC1/PC_out_8 to Mram_DATA_MEM2
+  Data Path: MIPS1/PC1/PC_out_8 to MIPS1/PC1/PC_out_31
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
@@ -747,46 +1177,48 @@ Delay:               9.880ns (Levels of Logic = 33)
      LUT3:I0->O           12   0.124   0.493  Mram_Addr_Instr[9]_GND_5_o_wide_mux_8_OUT311_SW0 (N41)
      LUT6:I5->O            1   0.124   0.421  Mram_Addr_Instr[9]_GND_5_o_wide_mux_8_OUT4711 (Addr_Instr[9]_GND_5_o_wide_mux_8_OUT<23>)
      LUT5:I4->O           18   0.124   0.511  Mmux_Instr161 (Instr<23>)
-     RAM32M:ADDRA2->DOA0    4   0.345   0.556  MIPS1/RegFile1/Mram_registers2 (MIPS1/ReadData1_Reg<0>)
-     LUT4:I2->O            1   0.124   0.000  MIPS1/ALU1/Madd_AplusB_lut<0> (MIPS1/ALU1/Madd_AplusB_lut<0>)
-     MUXCY:S->O            1   0.472   0.000  MIPS1/ALU1/Madd_AplusB_cy<0> (MIPS1/ALU1/Madd_AplusB_cy<0>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<1> (MIPS1/ALU1/Madd_AplusB_cy<1>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<2> (MIPS1/ALU1/Madd_AplusB_cy<2>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<3> (MIPS1/ALU1/Madd_AplusB_cy<3>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<4> (MIPS1/ALU1/Madd_AplusB_cy<4>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<5> (MIPS1/ALU1/Madd_AplusB_cy<5>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<6> (MIPS1/ALU1/Madd_AplusB_cy<6>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<7> (MIPS1/ALU1/Madd_AplusB_cy<7>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<8> (MIPS1/ALU1/Madd_AplusB_cy<8>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<9> (MIPS1/ALU1/Madd_AplusB_cy<9>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<10> (MIPS1/ALU1/Madd_AplusB_cy<10>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<11> (MIPS1/ALU1/Madd_AplusB_cy<11>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<12> (MIPS1/ALU1/Madd_AplusB_cy<12>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<13> (MIPS1/ALU1/Madd_AplusB_cy<13>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<14> (MIPS1/ALU1/Madd_AplusB_cy<14>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<15> (MIPS1/ALU1/Madd_AplusB_cy<15>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<16> (MIPS1/ALU1/Madd_AplusB_cy<16>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<17> (MIPS1/ALU1/Madd_AplusB_cy<17>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<18> (MIPS1/ALU1/Madd_AplusB_cy<18>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<19> (MIPS1/ALU1/Madd_AplusB_cy<19>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<20> (MIPS1/ALU1/Madd_AplusB_cy<20>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<21> (MIPS1/ALU1/Madd_AplusB_cy<21>)
-     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/Madd_AplusB_cy<22> (MIPS1/ALU1/Madd_AplusB_cy<22>)
-     XORCY:CI->O           1   0.510   0.536  MIPS1/ALU1/Madd_AplusB_xor<23> (MIPS1/ALU1/AplusB<23>)
-     LUT6:I4->O            4   0.124   0.939  MIPS1/ALU1/Mmux_ALU_Out333 (Addr_Data<23>)
-     LUT6:I1->O           18   0.124   0.533  GND_5_o_Addr_Data[31]_LessThan_1_o22 (GND_5_o_Addr_Data[31]_LessThan_1_o21)
-     LUT6:I5->O            1   0.124   0.000  MemWrite_dec_DATA_MEM_AND_58_o1_lut (MemWrite_dec_DATA_MEM_AND_58_o1_lut)
-     MUXCY:S->O           32   0.777   0.552  MemWrite_dec_DATA_MEM_AND_58_o1_cy (MemWrite_dec_DATA_MEM_AND_58_o)
-     RAM256X1S:WE              0.490          Mram_DATA_MEM2
+     RAM32M:ADDRA2->DOA0   10   0.345   0.595  MIPS1/RegFile1/Mram_registers2 (MIPS1/ReadData1_Reg<0>)
+     LUT6:I4->O            1   0.124   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_lut<0> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_lut<0>)
+     MUXCY:S->O            1   0.472   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<0> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<0>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<1> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<1>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<2> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<2>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<3> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<3>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<4> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<4>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<5> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<5>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<6> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<6>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<7> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<7>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<8> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<8>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<9> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<9>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<10> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<10>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<11> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<11>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<12> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<12>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<13> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<13>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<14> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<14>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<15> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<15>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<16> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<16>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<17> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<17>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<18> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<18>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<19> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<19>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<20> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<20>)
+     XORCY:CI->O           2   0.510   0.925  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_xor<21> (MIPS1/ALU1/ALU_lab2_mapping/SUM<21>)
+     LUT6:I1->O            1   0.124   0.000  MIPS1/ALU1/ALU_lab2_mapping/Mmux_Status1_wg_lut<1> (MIPS1/ALU1/ALU_lab2_mapping/Mmux_Status1_wg_lut<1>)
+     MUXCY:S->O            1   0.472   0.000  MIPS1/ALU1/ALU_lab2_mapping/Mmux_Status1_wg_cy<1> (MIPS1/ALU1/ALU_lab2_mapping/Mmux_Status1_wg_cy<1>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/Mmux_Status1_wg_cy<2> (MIPS1/ALU1/ALU_lab2_mapping/Mmux_Status1_wg_cy<2>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/Mmux_Status1_wg_cy<3> (MIPS1/ALU1/ALU_lab2_mapping/Mmux_Status1_wg_cy<3>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/Mmux_Status1_wg_cy<4> (MIPS1/ALU1/ALU_lab2_mapping/Mmux_Status1_wg_cy<4>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/Mmux_Status1_wg_cy<5> (MIPS1/ALU1/ALU_lab2_mapping/Mmux_Status1_wg_cy<5>)
+     MUXCY:CI->O          30   0.334   0.573  MIPS1/ALU1/ALU_lab2_mapping/Mmux_Status1_wg_cy<6> (MIPS1/ALU_zero)
+     LUT5:I4->O            1   0.124   0.000  MIPS1/Mmux_PC_in251 (MIPS1/PC_in<31>)
+     FDR:D                     0.030          MIPS1/PC1/PC_out_31
     ----------------------------------------
-    Total                      9.880ns (4.584ns logic, 5.297ns route)
-                                       (46.4% logic, 53.6% route)
+    Total                      8.361ns (4.087ns logic, 4.274ns route)
+                                       (48.9% logic, 51.1% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'CLK'
   Total number of paths / destination ports: 62 / 62
 -------------------------------------------------------------------------
-Offset:              2.612ns (Levels of Logic = 3)
+Offset:              1.819ns (Levels of Logic = 3)
   Source:            DIP<10> (PAD)
   Destination:       MIPS1/RegFile1/Mram_registers12 (RAM)
   Destination Clock: CLK rising
@@ -795,13 +1227,13 @@ Offset:              2.612ns (Levels of Logic = 3)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O             1   0.001   0.716  DIP_10_IBUF (DIP_10_IBUF)
-     LUT4:I1->O            1   0.124   0.919  MIPS1/Mmux_WriteData_Reg2_SW2 (N274)
-     LUT6:I1->O            2   0.124   0.405  MIPS1/Mmux_WriteData_Reg2 (MIPS1/WriteData_Reg<10>)
+     IBUF:I->O             1   0.001   0.421  DIP_10_IBUF (DIP_10_IBUF)
+     LUT6:I5->O            1   0.124   0.421  MIPS1/Mmux_WriteData_Reg2_SW1 (N74)
+     LUT4:I3->O            2   0.124   0.405  MIPS1/Mmux_WriteData_Reg2 (MIPS1/WriteData_Reg<10>)
      RAM32M:DIC0               0.323          MIPS1/RegFile1/Mram_registers3
     ----------------------------------------
-    Total                      2.612ns (0.572ns logic, 2.040ns route)
-                                       (21.9% logic, 78.1% route)
+    Total                      1.819ns (0.572ns logic, 1.247ns route)
+                                       (31.4% logic, 68.6% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'CLK_undiv'
@@ -847,13 +1279,15 @@ Cross Clock Domains Report:
 --------------------------
 
 Clock to Setup on destination clock CLK
-----------------------------+---------+---------+---------+---------+
-                            | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
-Source Clock                |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
-----------------------------+---------+---------+---------+---------+
-CLK                         |    9.880|         |         |         |
-MIPS1/ControlUnit1/_n0090<1>|         |    8.950|         |         |
-----------------------------+---------+---------+---------+---------+
+-------------------------------------------+---------+---------+---------+---------+
+                                           | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock                               |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+-------------------------------------------+---------+---------+---------+---------+
+CLK                                        |    8.361|         |         |         |
+MIPS1/ALU1/ALU_Control[7]_PWR_30_o_Mux_16_o|         |    6.105|         |         |
+MIPS1/ALU1/ALU_Control[7]_PWR_41_o_Mux_38_o|         |    8.045|         |         |
+MIPS1/ControlUnit1/_n0090<1>               |         |    6.408|         |         |
+-------------------------------------------+---------+---------+---------+---------+
 
 Clock to Setup on destination clock CLK_undiv
 ---------------+---------+---------+---------+---------+
@@ -862,6 +1296,25 @@ Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
 CLK_undiv      |    2.743|         |         |         |
 ---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock MIPS1/ALU1/ALU_Control[7]_PWR_30_o_Mux_16_o
+----------------------------+---------+---------+---------+---------+
+                            | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock                |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+----------------------------+---------+---------+---------+---------+
+CLK                         |         |         |    4.792|         |
+MIPS1/ControlUnit1/_n0090<1>|         |         |    2.638|         |
+----------------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock MIPS1/ALU1/ALU_Control[7]_PWR_41_o_Mux_38_o
+-------------------------------------------+---------+---------+---------+---------+
+                                           | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock                               |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+-------------------------------------------+---------+---------+---------+---------+
+CLK                                        |         |         |    9.842|         |
+MIPS1/ALU1/ALU_Control[7]_PWR_30_o_Mux_16_o|         |         |    6.382|         |
+MIPS1/ControlUnit1/_n0090<1>               |         |         |    7.221|         |
+-------------------------------------------+---------+---------+---------+---------+
 
 Clock to Setup on destination clock MIPS1/ControlUnit1/_n0090<1>
 ---------------+---------+---------+---------+---------+
@@ -874,14 +1327,14 @@ CLK            |         |         |    4.144|         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 16.00 secs
-Total CPU time to Xst completion: 15.80 secs
+Total REAL time to Xst completion: 29.00 secs
+Total CPU time to Xst completion: 28.46 secs
  
 --> 
 
-Total memory usage is 462300 kilobytes
+Total memory usage is 467036 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   17 (   0 filtered)
+Number of warnings :  383 (   0 filtered)
 Number of infos    :   10 (   0 filtered)
 
