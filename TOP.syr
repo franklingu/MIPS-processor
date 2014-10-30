@@ -214,10 +214,10 @@ Synthesizing Unit <TOP>.
     Found 26-bit register for signal <CLK_DIV_PROCESS.clk_counter>.
     Found 1-bit register for signal <CLK>.
     Found 1-bit register for signal <LED<7>>.
-    Found 26-bit adder for signal <CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT> created at line 215.
+    Found 26-bit adder for signal <CLK_DIV_PROCESS.clk_counter[25]_GND_5_o_add_12_OUT> created at line 218.
     Found 256x32-bit Read Only RAM for signal <Addr_Instr[9]_GND_5_o_wide_mux_8_OUT>
-    Found 32-bit comparator lessequal for signal <n0000> created at line 160
-    Found 32-bit comparator lessequal for signal <n0002> created at line 160
+    Found 32-bit comparator lessequal for signal <n0000> created at line 163
+    Found 32-bit comparator lessequal for signal <n0002> created at line 163
     Summary:
 	inferred   2 RAM(s).
 	inferred   1 Adder/Subtractor(s).
@@ -228,13 +228,12 @@ Unit <TOP> synthesized.
 
 Synthesizing Unit <MIPS>.
     Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\MIPS.vhd".
-INFO:Xst:3210 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\MIPS.vhd" line 170: Output port <ALU_overflow> of the instance <ALU1> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\MIPS.vhd" line 170: Output port <ALU_busy> of the instance <ALU1> is unconnected or connected to loadless signal.
-    Found 32-bit adder for signal <PC_increment> created at line 227.
-    Found 32-bit adder for signal <PC_temp[31]_PC_increment[31]_add_18_OUT> created at line 257.
+INFO:Xst:3210 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\MIPS.vhd" line 174: Output port <ALU_overflow> of the instance <ALU1> is unconnected or connected to loadless signal.
+    Found 32-bit adder for signal <PC_increment> created at line 233.
+    Found 32-bit adder for signal <PC_temp[31]_PC_increment[31]_add_18_OUT> created at line 264.
     Summary:
 	inferred   2 Adder/Subtractor(s).
-	inferred   9 Multiplexer(s).
+	inferred  10 Multiplexer(s).
 Unit <MIPS> synthesized.
 
 Synthesizing Unit <PC>.
@@ -446,11 +445,11 @@ Macro Statistics
  8-bit register                                        : 1
 # Comparators                                          : 2
  32-bit comparator lessequal                           : 2
-# Multiplexers                                         : 104
+# Multiplexers                                         : 105
  1-bit 2-to-1 multiplexer                              : 19
  2-bit 2-to-1 multiplexer                              : 5
  3-bit 2-to-1 multiplexer                              : 5
- 32-bit 2-to-1 multiplexer                             : 65
+ 32-bit 2-to-1 multiplexer                             : 66
  32-bit 4-to-1 multiplexer                             : 1
  5-bit 2-to-1 multiplexer                              : 1
  6-bit 4-to-1 multiplexer                              : 1
@@ -584,11 +583,11 @@ Macro Statistics
  Flip-Flops                                            : 340
 # Comparators                                          : 2
  32-bit comparator lessequal                           : 2
-# Multiplexers                                         : 230
+# Multiplexers                                         : 231
  1-bit 2-to-1 multiplexer                              : 147
  2-bit 2-to-1 multiplexer                              : 5
  3-bit 2-to-1 multiplexer                              : 5
- 32-bit 2-to-1 multiplexer                             : 65
+ 32-bit 2-to-1 multiplexer                             : 66
  32-bit 4-to-1 multiplexer                             : 1
  5-bit 2-to-1 multiplexer                              : 1
  6-bit 4-to-1 multiplexer                              : 1
@@ -654,17 +653,17 @@ Top Level Output File Name         : TOP.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 2364
+# BELS                             : 2394
 #      GND                         : 1
-#      INV                         : 5
+#      INV                         : 4
 #      LUT1                        : 82
-#      LUT2                        : 179
-#      LUT3                        : 294
-#      LUT4                        : 128
-#      LUT5                        : 180
-#      LUT6                        : 760
-#      MUXCY                       : 378
-#      MUXF7                       : 13
+#      LUT2                        : 199
+#      LUT3                        : 205
+#      LUT4                        : 117
+#      LUT5                        : 203
+#      LUT6                        : 850
+#      MUXCY                       : 377
+#      MUXF7                       : 12
 #      VCC                         : 1
 #      XORCY                       : 343
 # FlipFlops/Latches                : 429
@@ -692,16 +691,16 @@ Selected Device : 7a100tcsg324-1
 
 Slice Logic Utilization: 
  Number of Slice Registers:             429  out of  126800     0%  
- Number of Slice LUTs:                 1804  out of  63400     2%  
-    Number used as Logic:              1628  out of  63400     2%  
+ Number of Slice LUTs:                 1836  out of  63400     2%  
+    Number used as Logic:              1660  out of  63400     2%  
     Number used as Memory:              176  out of  19000     0%  
        Number used as RAM:              176
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:   1812
-   Number with an unused Flip Flop:    1383  out of   1812    76%  
-   Number with an unused LUT:             8  out of   1812     0%  
-   Number of fully used LUT-FF pairs:   421  out of   1812    23%  
+ Number of LUT Flip Flop pairs used:   1844
+   Number with an unused Flip Flop:    1415  out of   1844    76%  
+   Number with an unused LUT:             8  out of   1844     0%  
+   Number of fully used LUT-FF pairs:   421  out of   1844    22%  
    Number of unique control sets:        10
 
 IO Utilization: 
@@ -744,9 +743,9 @@ Timing Summary:
 ---------------
 Speed Grade: -1
 
-   Minimum period: 12.564ns (Maximum Frequency: 79.592MHz)
+   Minimum period: 12.416ns (Maximum Frequency: 80.539MHz)
    Minimum input arrival time before clock: 2.855ns
-   Maximum output required time after clock: 1.028ns
+   Maximum output required time after clock: 1.029ns
    Maximum combinational path delay: No path found
 
 Timing Details:
@@ -803,37 +802,49 @@ Delay:               2.743ns (Levels of Logic = 27)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'CLK'
-  Clock period: 12.564ns (frequency: 79.592MHz)
-  Total number of paths / destination ports: 2081119452 / 1257
+  Clock period: 12.416ns (frequency: 80.539MHz)
+  Total number of paths / destination ports: 1892208090 / 1257
 -------------------------------------------------------------------------
-Delay:               12.564ns (Levels of Logic = 13)
+Delay:               12.416ns (Levels of Logic = 25)
   Source:            MIPS1/PC1/PC_out_22 (FF)
-  Destination:       Mram_DATA_MEM2 (RAM)
+  Destination:       MIPS1/RegFile1/Mram_registers15 (RAM)
   Source Clock:      CLK rising
   Destination Clock: CLK rising
 
-  Data Path: MIPS1/PC1/PC_out_22 to Mram_DATA_MEM2
+  Data Path: MIPS1/PC1/PC_out_22 to MIPS1/RegFile1/Mram_registers15
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDS:C->Q              3   0.478   0.953  MIPS1/PC1/PC_out_22 (MIPS1/PC1/PC_out_22)
-     LUT6:I0->O           49   0.124   1.075  Addr_Instr[31]_GND_5_o_equal_8_o<31>1 (Addr_Instr[31]_GND_5_o_equal_8_o<31>)
-     LUT5:I0->O           18   0.124   1.051  Mmux_Instr251 (Instr<31>)
-     LUT6:I0->O           14   0.124   1.024  MIPS1/ControlUnit1/Mmux_ALU_Control<5>11 (MIPS1/ALU_Control<5>)
-     LUT6:I0->O           19   0.124   0.655  MIPS1/ALU1/_n0200<5>1 (MIPS1/ALU1/_n0200)
-     LUT6:I4->O          118   0.124   0.592  MIPS1/ALU1/Mmux_ALU_lab2_control34 (MIPS1/ALU1/ALU_lab2_control<2>)
-     LUT6:I5->O            1   0.124   0.716  MIPS1/ALU1/ALU_lab2_mapping/Mmux_Result1405_SW0_SW0 (N456)
-     LUT6:I3->O            1   0.124   0.421  MIPS1/ALU1/ALU_lab2_mapping/Mmux_Result1405 (MIPS1/ALU1/ALU_lab2_mapping/Mmux_Result1404)
-     LUT5:I4->O            1   0.124   0.421  MIPS1/ALU1/ALU_lab2_mapping/Mmux_Result1406 (MIPS1/ALU1/ALU_lab2_mapping/Mmux_Result1405)
-     LUT6:I5->O            2   0.124   0.427  MIPS1/ALU1/ALU_lab2_mapping/Mmux_Result1408 (MIPS1/ALU1/ALU_lab2_result1<20>)
-     LUT6:I5->O            4   0.124   0.796  MIPS1/ALU1/Mmux_ALU_Out261 (Addr_Data<20>)
-     LUT6:I2->O           18   0.124   0.648  GND_5_o_Addr_Data[31]_LessThan_1_o25_SW0 (N177)
-     LUT6:I4->O            1   0.124   0.000  MemWrite_dec_DATA_MEM_AND_59_o1_lut (MemWrite_dec_DATA_MEM_AND_59_o1_lut)
-     MUXCY:S->O           32   0.777   0.552  MemWrite_dec_DATA_MEM_AND_59_o1_cy (MemWrite_dec_DATA_MEM_AND_59_o)
-     RAM256X1S:WE              0.490          Mram_DATA_MEM2
+     FDS:C->Q              4   0.478   0.959  MIPS1/PC1/PC_out_22 (MIPS1/PC1/PC_out_22)
+     LUT6:I0->O           52   0.124   1.076  Addr_Instr[31]_GND_5_o_equal_8_o<31>1 (Addr_Instr[31]_GND_5_o_equal_8_o<31>)
+     LUT5:I0->O           17   0.124   1.025  Mmux_Instr251 (Instr<31>)
+     LUT6:I1->O           13   0.124   1.019  MIPS1/ControlUnit1/Mmux_ALU_Control<0>11 (MIPS1/ALU_Control<0>)
+     LUT6:I0->O            2   0.124   0.542  MIPS1/ALU1/Mmux_ALU_lab2_control23 (MIPS1/ALU1/Mmux_ALU_lab2_control22)
+     LUT6:I4->O          125   0.124   0.594  MIPS1/ALU1/Mmux_ALU_lab2_control34 (MIPS1/ALU1/ALU_lab2_control<2>)
+     LUT3:I2->O            1   0.124   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_lut<0> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_lut<0>)
+     MUXCY:S->O            1   0.472   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<0> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<0>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<1> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<1>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<2> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<2>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<3> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<3>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<4> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<4>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<5> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<5>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<6> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<6>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<7> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<7>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<8> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<8>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<9> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<9>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<10> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<10>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<11> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<11>)
+     MUXCY:CI->O           1   0.029   0.000  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<12> (MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_cy<12>)
+     XORCY:CI->O           2   0.510   0.427  MIPS1/ALU1/ALU_lab2_mapping/addsuber1/Madd_S_wider_Madd_xor<13> (MIPS1/ALU1/ALU_lab2_mapping/SUM<13>)
+     LUT6:I5->O            2   0.124   0.427  MIPS1/ALU1/ALU_lab2_mapping/Mmux_Result1168 (MIPS1/ALU1/ALU_lab2_result1<13>)
+     LUT6:I5->O            5   0.124   0.946  MIPS1/ALU1/Mmux_ALU_Out102 (Addr_Data<13>)
+     LUT6:I1->O            2   0.124   0.925  MemRead_dec_DIP_AND_56_o15_SW0_SW0 (N544)
+     LUT6:I1->O           32   0.124   0.574  MemRead_dec_DIP_AND_56_o2 (MemRead_dec_DIP_AND_56_o)
+     LUT6:I5->O            2   0.124   0.405  MIPS1/Mmux_WriteData_Reg83 (MIPS1/WriteData_Reg<16>)
+     RAM32M:DIC0               0.323          MIPS1/RegFile1/Mram_registers3
     ----------------------------------------
-    Total                     12.564ns (3.233ns logic, 9.331ns route)
-                                       (25.7% logic, 74.3% route)
+    Total                     12.416ns (3.498ns logic, 8.918ns route)
+                                       (28.2% logic, 71.8% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'CLK'
@@ -849,7 +860,7 @@ Offset:              2.855ns (Levels of Logic = 3)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      IBUF:I->O             1   0.001   0.939  DIP_10_IBUF (DIP_10_IBUF)
-     LUT6:I0->O            1   0.124   0.939  MIPS1/Mmux_WriteData_Reg210_SW1 (N225)
+     LUT6:I0->O            1   0.124   0.939  MIPS1/Mmux_WriteData_Reg210_SW1 (N222)
      LUT6:I0->O            2   0.124   0.405  MIPS1/Mmux_WriteData_Reg211 (MIPS1/WriteData_Reg<10>)
      RAM32M:DIC0               0.323          MIPS1/RegFile1/Mram_registers2
     ----------------------------------------
@@ -879,19 +890,19 @@ Offset:              0.877ns (Levels of Logic = 1)
 Timing constraint: Default OFFSET OUT AFTER for Clock 'CLK'
   Total number of paths / destination ports: 15 / 15
 -------------------------------------------------------------------------
-Offset:              1.028ns (Levels of Logic = 1)
-  Source:            MIPS1/PC1/PC_out_2 (FF)
-  Destination:       LED<8> (PAD)
+Offset:              1.029ns (Levels of Logic = 1)
+  Source:            MIPS1/PC1/PC_out_6 (FF)
+  Destination:       LED<12> (PAD)
   Source Clock:      CLK rising
 
-  Data Path: MIPS1/PC1/PC_out_2 to LED<8>
+  Data Path: MIPS1/PC1/PC_out_6 to LED<12>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDR:C->Q             25   0.478   0.550  MIPS1/PC1/PC_out_2 (MIPS1/PC1/PC_out_2)
-     OBUF:I->O                 0.000          LED_8_OBUF (LED<8>)
+     FDR:C->Q             28   0.478   0.551  MIPS1/PC1/PC_out_6 (MIPS1/PC1/PC_out_6)
+     OBUF:I->O                 0.000          LED_12_OBUF (LED<12>)
     ----------------------------------------
-    Total                      1.028ns (0.478ns logic, 0.550ns route)
+    Total                      1.029ns (0.478ns logic, 0.551ns route)
                                        (46.5% logic, 53.5% route)
 
 =========================================================================
@@ -904,7 +915,7 @@ Clock to Setup on destination clock CLK
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-CLK            |   12.564|         |         |         |
+CLK            |   12.416|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 Clock to Setup on destination clock CLK_undiv
@@ -918,14 +929,14 @@ CLK_undiv      |    2.743|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 41.00 secs
-Total CPU time to Xst completion: 40.60 secs
+Total REAL time to Xst completion: 42.00 secs
+Total CPU time to Xst completion: 42.22 secs
  
 --> 
 
-Total memory usage is 498076 kilobytes
+Total memory usage is 499036 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    4 (   0 filtered)
-Number of infos    :   12 (   0 filtered)
+Number of infos    :   11 (   0 filtered)
 

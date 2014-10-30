@@ -58,7 +58,9 @@ component ALU is
 			ALU_InB 		: in  STD_LOGIC_VECTOR (31 downto 0);
 			ALU_Out 		: out STD_LOGIC_VECTOR (31 downto 0);
 			ALU_Control	: in  STD_LOGIC_VECTOR (7 downto 0);
-			ALU_zero		: out STD_LOGIC);
+			ALU_zero		: out STD_LOGIC;
+			ALU_overflow: out STD_LOGIC;
+			ALU_busy		: out STD_LOGIC);
 end component;
 
 ----------------------------------------------------------------
@@ -104,7 +106,7 @@ end component;
 	signal	PC_in 		:  STD_LOGIC_VECTOR 	(31 downto 0);
 	signal	PC_out 		:  STD_LOGIC_VECTOR 	(31 downto 0);
 	signal 	PC_increment: 	STD_LOGIC_VECTOR	(31 downto 0) := x"00000000";
-	signal PC_temp			: 	STD_LOGIC_VECTOR	(31 downto 0) := x"00000000";
+	signal   PC_temp		: 	STD_LOGIC_VECTOR	(31 downto 0) := x"00000000";
 
 ----------------------------------------------------------------
 -- ALU Signals
@@ -113,7 +115,9 @@ end component;
 	signal	ALU_InB 		:  STD_LOGIC_VECTOR (31 downto 0);
 	signal	ALU_Out 		:  STD_LOGIC_VECTOR (31 downto 0);
 	signal	ALU_Control	:  STD_LOGIC_VECTOR (7 downto 0);
-	signal	ALU_zero		:  STD_LOGIC;			
+	signal	ALU_zero		:  STD_LOGIC;
+	signal   ALU_overflow:  STD_LOGIC;
+	signal   ALU_busy    :  STD_LOGIC;
 
 ----------------------------------------------------------------
 -- Control Unit Signals
@@ -174,7 +178,9 @@ ALU1 				: ALU port map
 						ALU_InB 		=> ALU_InB, 
 						ALU_Out 		=> ALU_Out, 
 						ALU_Control => ALU_Control, 
-						ALU_zero  	=> ALU_zero
+						ALU_zero  	=> ALU_zero,
+						ALU_overflow=> ALU_overflow,
+						ALU_busy		=> ALU_busy
 						);
 						
 ----------------------------------------------------------------
@@ -252,7 +258,8 @@ pc_temp(17 downto 2) <= Instr(15 downto 0);
 pc_temp(31 downto 18) <= (others => (Instr(15) and SignExtend));
 pc_temp(1 downto 0) <= "00";
 
-PC_in <= ReadData1_Reg when JumpR = '1' else
+PC_in <= PC_out when ALU_busy = '1' else
+			ReadData1_Reg when JumpR = '1' else
 			PC_increment(31 downto 28) & Instr(25 downto 0) & "00" when Jump = '1' else
 			PC_temp + PC_increment when Branch = '1' and ALU_zero = '1' else
 			PC_increment;
