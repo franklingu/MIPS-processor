@@ -176,11 +176,13 @@ case state is
 			when "00111" =>
 				if (Operand1(31) xor Operand2(31)) = '1' then
 					Result1 <= (0 => Operand1(31), others => '0');
+					Status(0) <= not(Operand1(31));
 				else
 					Result1 <= (0 => SUM(31), others => '0');
+					Status(0) <= not(SUM(31));
 				end if;
 				Result2 <= (others => 'X');
-				Status (1 downto 0) <= "XX";
+				Status(1) <= 'X';
 			-- sltu
 			when "01110" =>
 				Result1 <= (0 => not(CARRY_OUT), others => '0');

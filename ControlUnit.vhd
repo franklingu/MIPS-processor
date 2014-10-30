@@ -108,10 +108,12 @@ begin
 		if branchCode = "00001" then -- bgez		
 			ALUOp <= "01";
 			Branch <= '1';
+			SignExtend <= '1';
 			ZeroToAlu <= '1';
 		elsif branchCode = "10001" then -- bgezal
 			ALUOp <= "01";
 			Branch <= '1';
+			SignExtend <= '1';
 			ZeroToAlu <= '1';
 			RegWrite <= '1';
 			PcToReg <= '1';

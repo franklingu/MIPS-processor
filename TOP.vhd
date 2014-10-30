@@ -102,26 +102,28 @@ type MEM_256x32 is array (0 to 255) of std_logic_vector (31 downto 0); -- 256 wo
 -- Instruction Memory
 ----------------------------------------------------------------
 constant INSTR_MEM : MEM_256x32 := (
-			x"3c090000",    --  start : lui $t1, 0x0000
-			x"35290001",    --      ori $t1, 0x0001 # constant 1
-			x"01c07024",    --      and $t6, $t6, $zero
-			x"21ce0002",    --      addi $t6, $t6, 0x0002
-			x"3c081003",    --      lui $t0, 0x1003 # DIP pointer, for VHDL
-			x"8d0c0000",    --      lw  $t4, 0($t0) 
-			x"3c081002",    --      lui $t0, 0x1002 # LED pointer, for VHDL
-			x"3c0d0000",    --      lui $t5, 0x0000
-			x"35ad0001",    --      ori $t5, 0x0001 # delay counter (n). Change according to the clock
-			x"3c0a0001",    --      lui $t2, 0x0001
-			x"01405024",    --      and $t2, $t2, $zero
-			x"01ae0018",    --  loop:   mult $t5, $t6
-			x"00006812",    --      mflo $t5
-			x"014d5025",    --      or $t2, $t2, $t5
-			x"01495022",    --  delay:  sub $t2, $t2, $t1 
-			x"0149582a",    --      slt $t3, $t2, $t1
-			x"1160fffd",    --      beq $t3, $zero, delay
-			x"ad0c0000",    --      sw  $t4, 0($t0) 
-			x"01806027",    --      nor $t4, $t4, $zero
-			x"0810000b",    --      j loop # infinite loop; n*3 (delay instructions) + 5 (non-delay instructions).
+			x"3c090000",    -- start : lui $t1, 0x0000
+			x"35290001",   --     ori $t1, 0x0001 # constant 1
+			x"01c07024",    --     and $t6, $t6, $zero
+			x"21ce0002",    --     addi $t6, $t6, 0x0002
+			x"3c081003",    --     lui $t0, 0x1003 # DIP pointer, for VHDL
+			x"8d0c0000",    --     lw  $t4, 0($t0) 
+			x"3c081002",    --     lui $t0, 0x1002 # LED pointer, for VHDL
+			x"3c0d0000",    --     lui $t5, 0x0000
+			x"35ad0001",    --     ori $t5, 0x0001 # delay counter (n). Change according to the clock
+			x"3c0a0001",    --     lui $t2, 0x0001
+			x"01405024",    --     and $t2, $t2, $zero
+			x"3c0b0040",    --     lui $t3, 0x0040
+			x"356b0034",    --     ori $t3, 0x0034
+			x"01ae0018",    -- loop:   mult $t5, $t6
+			x"00006812",    --     mflo $t5
+			x"01495020",    --     add $t2, $t2, $t1
+			x"014d5025",    --     or $t2, $t2, $t5
+			x"01495022",    -- delay:  sub $t2, $t2, $t1 
+			x"0541fffe",    --     bgez $t2, delay
+			x"ad0c0000",    --     sw  $t4, 0($t0) 
+			x"01806027",    --     nor $t4, $t4, $zero
+			x"01600008",    --     jr $t3 # infinite loop; n*3 (delay instructions) + 5 (non-delay instructions).
 			others=> x"00000000");
 
 -- The Blinky program reads the DIP switches in the begining. Let the value read be VAL

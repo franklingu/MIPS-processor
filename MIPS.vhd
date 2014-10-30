@@ -261,7 +261,7 @@ pc_temp(1 downto 0) <= "00";
 PC_in <= PC_out when ALU_busy = '1' else
 			ReadData1_Reg when JumpR = '1' else
 			PC_increment(31 downto 28) & Instr(25 downto 0) & "00" when Jump = '1' else
-			PC_temp + PC_increment when Branch = '1' and ALU_zero = '1' else
+			PC_temp + PC_increment when Branch = '1' and ALU_Zero = '1' else
 			PC_increment;
 
 end arch_MIPS;

@@ -79,7 +79,7 @@ ALU_lab2_mapping : ALU_lab2 generic map (width => 32) port map (Clk => CLK,
 -------------------------------------------------------------
 -- mapping to lab2 ALU
 -------------------------------------------------------------
-ALU_zero <= ALU_lab2_status(0);
+ALU_zero <= ALU_lab2_status(0);  -- this is for branch in general, may be indication of >= 0 also
 ALU_overflow <= ALU_lab2_status(1);
 ALU_busy <= ALU_lab2_status(2);
 
@@ -103,7 +103,7 @@ when "01" => -- beq
 	case ALU_Control(5 downto 0) is
 	when "000001" => -- bgez, bgezal
 		ALU_lab2_control <= "000111";
-		ALU_Out <= (0 => (not ALU_lab2_result1(0)), others => '0');
+		ALU_Out <= ALU_lab2_result1;
 	when "000100" => -- beq
 		ALU_lab2_control <= "000110";
 		ALU_Out <= ALU_lab2_result1;
