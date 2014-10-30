@@ -1,0 +1,707 @@
+Release 14.7 - xst P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.10 secs
+ 
+--> Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.10 secs
+ 
+--> Reading design: alu_lab2.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "alu_lab2.prj"
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "alu_lab2"
+Output Format                      : NGC
+Target Device                      : xc7a100t-1-csg324
+
+---- Source Options
+Top Module Name                    : alu_lab2
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Shift Register Extraction          : YES
+ROM Style                          : Auto
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Shift Register Minimum Size        : 2
+Use DSP Block                      : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+LUT Combining                      : Auto
+Reduce Control Sets                : Auto
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 32
+Register Duplication               : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Auto
+Use Synchronous Set                : Auto
+Use Synchronous Reset              : Auto
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Power Reduction                    : NO
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+DSP48 Utilization Ratio            : 100
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Parsing VHDL file "C:\Users\junchao\Documents\GitHub\MIPS-processor\srln.vhd" into library work
+Parsing entity <srln>.
+Parsing architecture <arch_srln> of entity <srln>.
+Parsing VHDL file "C:\Users\junchao\Documents\GitHub\MIPS-processor\sran.vhd" into library work
+Parsing entity <sran>.
+Parsing architecture <arch_sran> of entity <sran>.
+Parsing VHDL file "C:\Users\junchao\Documents\GitHub\MIPS-processor\sll2.vhd" into library work
+Parsing entity <slln>.
+Parsing architecture <arch_slln> of entity <slln>.
+Parsing VHDL file "C:\Users\junchao\Documents\GitHub\MIPS-processor\shifter.vhd" into library work
+Parsing entity <shifter>.
+Parsing architecture <arch_shifter> of entity <shifter>.
+Parsing VHDL file "C:\Users\junchao\Documents\GitHub\MIPS-processor\AddSub.vhd" into library work
+Parsing entity <AddSub>.
+Parsing architecture <AddSubArch> of entity <addsub>.
+Parsing VHDL file "C:\Users\junchao\Documents\GitHub\MIPS-processor\alu_lab2.vhd" into library work
+Parsing entity <alu_lab2>.
+Parsing architecture <arch_alu_lab2> of entity <alu_lab2>.
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating entity <alu_lab2> (architecture <arch_alu_lab2>) with generics from library <work>.
+
+Elaborating entity <AddSub> (architecture <AddSubArch>) with generics from library <work>.
+
+Elaborating entity <shifter> (architecture <arch_shifter>) from library <work>.
+
+Elaborating entity <slln> (architecture <arch_slln>) with generics from library <work>.
+
+Elaborating entity <slln> (architecture <arch_slln>) with generics from library <work>.
+
+Elaborating entity <slln> (architecture <arch_slln>) with generics from library <work>.
+
+Elaborating entity <slln> (architecture <arch_slln>) with generics from library <work>.
+
+Elaborating entity <slln> (architecture <arch_slln>) with generics from library <work>.
+
+Elaborating entity <srln> (architecture <arch_srln>) with generics from library <work>.
+
+Elaborating entity <srln> (architecture <arch_srln>) with generics from library <work>.
+
+Elaborating entity <srln> (architecture <arch_srln>) with generics from library <work>.
+
+Elaborating entity <srln> (architecture <arch_srln>) with generics from library <work>.
+
+Elaborating entity <srln> (architecture <arch_srln>) with generics from library <work>.
+
+Elaborating entity <sran> (architecture <arch_sran>) with generics from library <work>.
+
+Elaborating entity <sran> (architecture <arch_sran>) with generics from library <work>.
+
+Elaborating entity <sran> (architecture <arch_sran>) with generics from library <work>.
+
+Elaborating entity <sran> (architecture <arch_sran>) with generics from library <work>.
+
+Elaborating entity <sran> (architecture <arch_sran>) with generics from library <work>.
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <alu_lab2>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\alu_lab2.vhd".
+        width = 32
+    Found 8-bit register for signal <MULTI_CYCLE_PROCESS.count>.
+    Found 32-bit register for signal <Result1_multi>.
+    Found 32-bit register for signal <Result2_multi>.
+    Found 1-bit register for signal <done>.
+    Found 64-bit register for signal <temp_sum>.
+    Found 64-bit register for signal <MULTI_CYCLE_PROCESS.operand1_val>.
+    Found 32-bit register for signal <MULTI_CYCLE_PROCESS.operand2_val>.
+    Found 1-bit register for signal <sign_quotient>.
+    Found 64-bit register for signal <MULTI_CYCLE_PROCESS.sum_for_11>.
+    Found 1-bit register for signal <sign_remainder>.
+    Found 32-bit register for signal <Divisor>.
+    Found 32-bit register for signal <Debug_multi>.
+    Found 1-bit register for signal <state>.
+    Found 32-bit adder for signal <Operand2[31]_GND_5_o_add_30_OUT> created at line 266.
+    Found 64-bit adder for signal <GND_5_o_GND_5_o_add_31_OUT> created at line 270.
+    Found 64-bit adder for signal <temp_sum[63]_GND_5_o_add_35_OUT> created at line 276.
+    Found 64-bit adder for signal <temp_sum[63]_MULTI_CYCLE_PROCESS.operand1_val[63]_add_36_OUT> created at line 286.
+    Found 64-bit adder for signal <temp_sum[63]_MULTI_CYCLE_PROCESS.operand1_val[62]_add_37_OUT> created at line 289.
+    Found 64-bit adder for signal <temp_sum[63]_MULTI_CYCLE_PROCESS.sum_for_11[63]_add_38_OUT> created at line 292.
+    Found 32-bit adder for signal <Operand1[31]_GND_5_o_add_28_OUT> created at line 316.
+    Found 8-bit adder for signal <MULTI_CYCLE_PROCESS.count[7]_GND_5_o_add_64_OUT> created at line 325.
+    Found 32-bit adder for signal <Result2_multi[31]_GND_5_o_add_71_OUT> created at line 338.
+    Found 32-bit adder for signal <Result1_multi[31]_GND_5_o_add_72_OUT> created at line 339.
+    Summary:
+	inferred   8 Adder/Subtractor(s).
+	inferred 364 D-type flip-flop(s).
+	inferred 105 Multiplexer(s).
+Unit <alu_lab2> synthesized.
+
+Synthesizing Unit <AddSub>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\AddSub.vhd".
+        width = 32
+    Found 33-bit adder for signal <n0020> created at line 47.
+    Found 33-bit adder for signal <S_wider> created at line 47.
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+Unit <AddSub> synthesized.
+
+Synthesizing Unit <shifter>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\shifter.vhd".
+    Summary:
+	inferred   2 Multiplexer(s).
+Unit <shifter> synthesized.
+
+Synthesizing Unit <slln_1>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\sll2.vhd".
+        N = 1
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <slln_1> synthesized.
+
+Synthesizing Unit <slln_2>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\sll2.vhd".
+        N = 2
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <slln_2> synthesized.
+
+Synthesizing Unit <slln_3>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\sll2.vhd".
+        N = 4
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <slln_3> synthesized.
+
+Synthesizing Unit <slln_4>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\sll2.vhd".
+        N = 8
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <slln_4> synthesized.
+
+Synthesizing Unit <slln_5>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\sll2.vhd".
+        N = 16
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <slln_5> synthesized.
+
+Synthesizing Unit <srln_1>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\srln.vhd".
+        N = 1
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <srln_1> synthesized.
+
+Synthesizing Unit <srln_2>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\srln.vhd".
+        N = 2
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <srln_2> synthesized.
+
+Synthesizing Unit <srln_3>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\srln.vhd".
+        N = 4
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <srln_3> synthesized.
+
+Synthesizing Unit <srln_4>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\srln.vhd".
+        N = 8
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <srln_4> synthesized.
+
+Synthesizing Unit <srln_5>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\srln.vhd".
+        N = 16
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <srln_5> synthesized.
+
+Synthesizing Unit <sran_1>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\sran.vhd".
+        N = 1
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <sran_1> synthesized.
+
+Synthesizing Unit <sran_2>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\sran.vhd".
+        N = 2
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <sran_2> synthesized.
+
+Synthesizing Unit <sran_3>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\sran.vhd".
+        N = 4
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <sran_3> synthesized.
+
+Synthesizing Unit <sran_4>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\sran.vhd".
+        N = 8
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <sran_4> synthesized.
+
+Synthesizing Unit <sran_5>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\sran.vhd".
+        N = 16
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <sran_5> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 12
+ 32-bit adder                                          : 4
+ 33-bit adder                                          : 4
+ 64-bit adder                                          : 3
+ 8-bit adder                                           : 1
+# Registers                                            : 13
+ 1-bit register                                        : 4
+ 32-bit register                                       : 5
+ 64-bit register                                       : 3
+ 8-bit register                                        : 1
+# Multiplexers                                         : 122
+ 1-bit 2-to-1 multiplexer                              : 40
+ 3-bit 2-to-1 multiplexer                              : 5
+ 32-bit 2-to-1 multiplexer                             : 66
+ 64-bit 2-to-1 multiplexer                             : 4
+ 8-bit 2-to-1 multiplexer                              : 7
+# Xors                                                 : 13
+ 1-bit xor2                                            : 4
+ 32-bit xor2                                           : 8
+ 64-bit xor2                                           : 1
+
+=========================================================================
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+Synthesizing (advanced) Unit <alu_lab2>.
+The following registers are absorbed into accumulator <temp_sum>: 1 register on signal <temp_sum>.
+Unit <alu_lab2> synthesized (advanced).
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 9
+ 32-bit adder                                          : 4
+ 33-bit adder carry in                                 : 2
+ 64-bit adder                                          : 2
+ 8-bit adder                                           : 1
+# Accumulators                                         : 1
+ 64-bit up accumulator                                 : 1
+# Registers                                            : 300
+ Flip-Flops                                            : 300
+# Multiplexers                                         : 248
+ 1-bit 2-to-1 multiplexer                              : 168
+ 3-bit 2-to-1 multiplexer                              : 5
+ 32-bit 2-to-1 multiplexer                             : 66
+ 64-bit 2-to-1 multiplexer                             : 2
+ 8-bit 2-to-1 multiplexer                              : 7
+# Xors                                                 : 13
+ 1-bit xor2                                            : 4
+ 32-bit xor2                                           : 8
+ 64-bit xor2                                           : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+INFO:Xst:2261 - The FF/Latch <MULTI_CYCLE_PROCESS.operand1_val_0> in Unit <alu_lab2> is equivalent to the following FF/Latch, which will be removed : <MULTI_CYCLE_PROCESS.sum_for_11_0> 
+
+Optimizing unit <alu_lab2> ...
+
+Optimizing unit <shifter> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block alu_lab2, actual ratio is 2.
+FlipFlop MULTI_CYCLE_PROCESS.count_5 has been replicated 1 time(s)
+FlipFlop sign_quotient has been replicated 2 time(s)
+FlipFlop sign_remainder has been replicated 1 time(s)
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 367
+ Flip-Flops                                            : 367
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : alu_lab2.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 1963
+#      GND                         : 1
+#      LUT1                        : 66
+#      LUT2                        : 172
+#      LUT3                        : 278
+#      LUT4                        : 85
+#      LUT5                        : 111
+#      LUT6                        : 548
+#      MUXCY                       : 346
+#      MUXF7                       : 4
+#      XORCY                       : 352
+# FlipFlops/Latches                : 367
+#      FD                          : 10
+#      FDE                         : 292
+#      FDR                         : 1
+#      FDRE                        : 64
+# Clock Buffers                    : 1
+#      BUFGP                       : 1
+# IO Buffers                       : 169
+#      IBUF                        : 70
+#      OBUF                        : 99
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 7a100tcsg324-1 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:             367  out of  126800     0%  
+ Number of Slice LUTs:                 1260  out of  63400     1%  
+    Number used as Logic:              1260  out of  63400     1%  
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:   1298
+   Number with an unused Flip Flop:     931  out of   1298    71%  
+   Number with an unused LUT:            38  out of   1298     2%  
+   Number of fully used LUT-FF pairs:   329  out of   1298    25%  
+   Number of unique control sets:         9
+
+IO Utilization: 
+ Number of IOs:                         170
+ Number of bonded IOBs:                 170  out of    210    80%  
+
+Specific Feature Utilization:
+ Number of BUFG/BUFGCTRLs:                1  out of     32     3%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+Clk                                | BUFGP                  | 367   |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -1
+
+   Minimum period: 5.117ns (Maximum Frequency: 195.417MHz)
+   Minimum input arrival time before clock: 5.481ns
+   Maximum output required time after clock: 4.690ns
+   Maximum combinational path delay: 6.493ns
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'Clk'
+  Clock period: 5.117ns (frequency: 195.417MHz)
+  Total number of paths / destination ports: 46148 / 719
+-------------------------------------------------------------------------
+Delay:               5.117ns (Levels of Logic = 35)
+  Source:            Divisor_0 (FF)
+  Destination:       Result2_multi_30 (FF)
+  Source Clock:      Clk rising
+  Destination Clock: Clk rising
+
+  Data Path: Divisor_0 to Result2_multi_30
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDE:C->Q              1   0.478   0.536  Divisor_0 (Divisor_0)
+     LUT3:I1->O            1   0.124   0.000  addsubermulti/Madd_S_wider_Madd_lut<0> (addsubermulti/Madd_S_wider_Madd_lut<0>)
+     MUXCY:S->O            1   0.472   0.000  addsubermulti/Madd_S_wider_Madd_cy<0> (addsubermulti/Madd_S_wider_Madd_cy<0>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<1> (addsubermulti/Madd_S_wider_Madd_cy<1>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<2> (addsubermulti/Madd_S_wider_Madd_cy<2>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<3> (addsubermulti/Madd_S_wider_Madd_cy<3>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<4> (addsubermulti/Madd_S_wider_Madd_cy<4>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<5> (addsubermulti/Madd_S_wider_Madd_cy<5>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<6> (addsubermulti/Madd_S_wider_Madd_cy<6>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<7> (addsubermulti/Madd_S_wider_Madd_cy<7>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<8> (addsubermulti/Madd_S_wider_Madd_cy<8>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<9> (addsubermulti/Madd_S_wider_Madd_cy<9>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<10> (addsubermulti/Madd_S_wider_Madd_cy<10>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<11> (addsubermulti/Madd_S_wider_Madd_cy<11>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<12> (addsubermulti/Madd_S_wider_Madd_cy<12>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<13> (addsubermulti/Madd_S_wider_Madd_cy<13>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<14> (addsubermulti/Madd_S_wider_Madd_cy<14>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<15> (addsubermulti/Madd_S_wider_Madd_cy<15>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<16> (addsubermulti/Madd_S_wider_Madd_cy<16>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<17> (addsubermulti/Madd_S_wider_Madd_cy<17>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<18> (addsubermulti/Madd_S_wider_Madd_cy<18>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<19> (addsubermulti/Madd_S_wider_Madd_cy<19>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<20> (addsubermulti/Madd_S_wider_Madd_cy<20>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<21> (addsubermulti/Madd_S_wider_Madd_cy<21>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<22> (addsubermulti/Madd_S_wider_Madd_cy<22>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<23> (addsubermulti/Madd_S_wider_Madd_cy<23>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<24> (addsubermulti/Madd_S_wider_Madd_cy<24>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<25> (addsubermulti/Madd_S_wider_Madd_cy<25>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<26> (addsubermulti/Madd_S_wider_Madd_cy<26>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<27> (addsubermulti/Madd_S_wider_Madd_cy<27>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<28> (addsubermulti/Madd_S_wider_Madd_cy<28>)
+     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<29> (addsubermulti/Madd_S_wider_Madd_cy<29>)
+     XORCY:CI->O           3   0.510   0.435  addsubermulti/Madd_S_wider_Madd_xor<30> (multi_sum<30>)
+     LUT4:I3->O            1   0.124   0.776  Mmux_Result2_multi[31]_Control[4]_mux_102_OUT724_SW3 (N187)
+     LUT6:I2->O            1   0.124   0.536  Mmux_Result2_multi[31]_Control[4]_mux_102_OUT724 (Mmux_Result2_multi[31]_Control[4]_mux_102_OUT723)
+     LUT6:I4->O            1   0.124   0.000  Mmux_Result2_multi[31]_Control[4]_mux_102_OUT725 (Result2_multi[31]_Control[4]_mux_102_OUT<30>)
+     FDE:D                     0.030          Result2_multi_30
+    ----------------------------------------
+    Total                      5.117ns (2.834ns logic, 2.283ns route)
+                                       (55.4% logic, 44.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'Clk'
+  Total number of paths / destination ports: 84081 / 662
+-------------------------------------------------------------------------
+Offset:              5.481ns (Levels of Logic = 8)
+  Source:            Operand2<13> (PAD)
+  Destination:       MULTI_CYCLE_PROCESS.count_6 (FF)
+  Destination Clock: Clk rising
+
+  Data Path: Operand2<13> to MULTI_CYCLE_PROCESS.count_6
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             5   0.001   0.966  Operand2_13_IBUF (Operand2_13_IBUF)
+     LUT6:I0->O            1   0.124   0.939  Operand2[31]_GND_5_o_equal_56_o<31>1 (Operand2[31]_GND_5_o_equal_56_o<31>)
+     LUT6:I0->O            5   0.124   0.448  Operand2[31]_GND_5_o_equal_56_o<31>7 (Operand2[31]_GND_5_o_equal_56_o)
+     LUT2:I1->O            1   0.124   0.919  Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_97_OUT11_SW0 (N01)
+     LUT6:I1->O            3   0.124   0.435  Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_97_OUT11 (Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_97_OUT11)
+     LUT4:I3->O            5   0.124   0.448  Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_97_OUT311 (Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_97_OUT31)
+     LUT6:I5->O            2   0.124   0.427  Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_97_OUT711 (Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_97_OUT71)
+     LUT6:I5->O            1   0.124   0.000  Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_97_OUT81 (MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_97_OUT<7>)
+     FD:D                      0.030          MULTI_CYCLE_PROCESS.count_7
+    ----------------------------------------
+    Total                      5.481ns (0.899ns logic, 4.582ns route)
+                                       (16.4% logic, 83.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'Clk'
+  Total number of paths / destination ports: 355 / 99
+-------------------------------------------------------------------------
+Offset:              4.690ns (Levels of Logic = 6)
+  Source:            state (FF)
+  Destination:       Status<0> (PAD)
+  Source Clock:      Clk rising
+
+  Data Path: state to Status<0>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q             301   0.478   0.632  state (state)
+     LUT3:I2->O            3   0.124   0.550  Mmux_Status121 (Mmux_Status12)
+     LUT5:I3->O            1   0.124   0.939  Mmux_Status11 (Mmux_Status1)
+     LUT6:I0->O            1   0.124   0.536  Mmux_Status12 (Mmux_Status13)
+     LUT6:I4->O            1   0.124   0.536  Mmux_Status14 (Mmux_Status15)
+     LUT6:I4->O            1   0.124   0.399  Mmux_Status17 (Status_0_OBUF)
+     OBUF:I->O                 0.000          Status_0_OBUF (Status<0>)
+    ----------------------------------------
+    Total                      4.690ns (1.098ns logic, 3.592ns route)
+                                       (23.4% logic, 76.6% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 7513 / 99
+-------------------------------------------------------------------------
+Delay:               6.493ns (Levels of Logic = 39)
+  Source:            Operand1<0> (PAD)
+  Destination:       Result1<0> (PAD)
+
+  Data Path: Operand1<0> to Result1<0>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            14   0.001   0.801  Operand1_0_IBUF (Operand1_0_IBUF)
+     LUT3:I0->O            1   0.124   0.000  addsuber1/Madd_S_wider_Madd_lut<0> (addsuber1/Madd_S_wider_Madd_lut<0>)
+     MUXCY:S->O            1   0.472   0.000  addsuber1/Madd_S_wider_Madd_cy<0> (addsuber1/Madd_S_wider_Madd_cy<0>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<1> (addsuber1/Madd_S_wider_Madd_cy<1>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<2> (addsuber1/Madd_S_wider_Madd_cy<2>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<3> (addsuber1/Madd_S_wider_Madd_cy<3>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<4> (addsuber1/Madd_S_wider_Madd_cy<4>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<5> (addsuber1/Madd_S_wider_Madd_cy<5>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<6> (addsuber1/Madd_S_wider_Madd_cy<6>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<7> (addsuber1/Madd_S_wider_Madd_cy<7>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<8> (addsuber1/Madd_S_wider_Madd_cy<8>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<9> (addsuber1/Madd_S_wider_Madd_cy<9>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<10> (addsuber1/Madd_S_wider_Madd_cy<10>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<11> (addsuber1/Madd_S_wider_Madd_cy<11>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<12> (addsuber1/Madd_S_wider_Madd_cy<12>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<13> (addsuber1/Madd_S_wider_Madd_cy<13>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<14> (addsuber1/Madd_S_wider_Madd_cy<14>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<15> (addsuber1/Madd_S_wider_Madd_cy<15>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<16> (addsuber1/Madd_S_wider_Madd_cy<16>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<17> (addsuber1/Madd_S_wider_Madd_cy<17>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<18> (addsuber1/Madd_S_wider_Madd_cy<18>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<19> (addsuber1/Madd_S_wider_Madd_cy<19>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<20> (addsuber1/Madd_S_wider_Madd_cy<20>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<21> (addsuber1/Madd_S_wider_Madd_cy<21>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<22> (addsuber1/Madd_S_wider_Madd_cy<22>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<23> (addsuber1/Madd_S_wider_Madd_cy<23>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<24> (addsuber1/Madd_S_wider_Madd_cy<24>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<25> (addsuber1/Madd_S_wider_Madd_cy<25>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<26> (addsuber1/Madd_S_wider_Madd_cy<26>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<27> (addsuber1/Madd_S_wider_Madd_cy<27>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<28> (addsuber1/Madd_S_wider_Madd_cy<28>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<29> (addsuber1/Madd_S_wider_Madd_cy<29>)
+     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<30> (addsuber1/Madd_S_wider_Madd_cy<30>)
+     XORCY:CI->O           4   0.510   0.736  addsuber1/Madd_S_wider_Madd_xor<31> (SUM<31>)
+     LUT3:I0->O            1   0.124   0.716  Mmux_Result144 (Mmux_Result142)
+     LUT6:I3->O            1   0.124   0.939  Mmux_Result145 (Mmux_Result143)
+     LUT6:I0->O            1   0.124   0.421  Mmux_Result1413 (Mmux_Result149)
+     LUT5:I4->O            1   0.124   0.399  Mmux_Result1414 (Result1_0_OBUF)
+     OBUF:I->O                 0.000          Result1_0_OBUF (Result1<0>)
+    ----------------------------------------
+    Total                      6.493ns (2.480ns logic, 4.012ns route)
+                                       (38.2% logic, 61.8% route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock Clk
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+Clk            |    5.117|         |         |         |
+---------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 25.00 secs
+Total CPU time to Xst completion: 25.76 secs
+ 
+--> 
+
+Total memory usage is 451996 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    0 (   0 filtered)
+Number of infos    :    2 (   0 filtered)
+
