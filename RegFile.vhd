@@ -49,7 +49,7 @@ begin
 process(CLK)
 begin
 	if CLK'event and CLK = '1' then
-		if RegWrite = '1' and not(WriteAddr_Reg = x"00000000") then
+		if RegWrite = '1' and not(WriteAddr_Reg = "00000") then
 			registers(to_integer(unsigned(WriteAddr_Reg))) <= WriteData_Reg;
 		end if;
 	end if;

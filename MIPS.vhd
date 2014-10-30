@@ -66,18 +66,21 @@ end component;
 ----------------------------------------------------------------
 component ControlUnit is
     Port ( 	
-			opcode 		: in   STD_LOGIC_VECTOR (5 downto 0);
-			ALUOp 		: out  STD_LOGIC_VECTOR (1 downto 0);
-			Branch 		: out  STD_LOGIC;
-			Jump	 		: out  STD_LOGIC;				
-			MemRead 		: out  STD_LOGIC;	
-			MemtoReg 	: out  STD_LOGIC;	
-			InstrtoReg	: out  STD_LOGIC; -- true for LUI. When true, Instr(15 downto 0)&x"0000" is written to rt
-			MemWrite		: out  STD_LOGIC;	
-			ALUSrc 		: out  STD_LOGIC;	
-			SignExtend 	: out  STD_LOGIC; -- false for ORI 
-			RegWrite		: out  STD_LOGIC;	
-			RegDst		: out  STD_LOGIC);
+				Instr	 		: in   STD_LOGIC_VECTOR (31 downto 0);
+				ALU_Control : out  STD_LOGIC_VECTOR (7 downto 0);
+				Branch 		: out  STD_LOGIC;		
+				Jump	 		: out  STD_LOGIC;	
+				JumpR	 		: out  STD_LOGIC;	
+				MemRead 		: out  STD_LOGIC;	
+				MemtoReg 	: out  STD_LOGIC;	
+				InstrtoReg	: out  STD_LOGIC;
+				PcToReg		: out  STD_LOGIC;
+				MemWrite		: out  STD_LOGIC;	
+				ALUSrc 		: out  STD_LOGIC;	
+				SignExtend 	: out  STD_LOGIC;
+				RegWrite		: out  STD_LOGIC;	
+				RegDst		: out  STD_LOGIC;
+				ZeroToAlu	: out	 STD_LOGIC);
 end component;
 
 ----------------------------------------------------------------
@@ -115,16 +118,17 @@ end component;
 ----------------------------------------------------------------
 -- Control Unit Signals
 ----------------------------------------------------------------				
- 	signal	opcode 		:  STD_LOGIC_VECTOR (5 downto 0);
-	signal	ALUOp 		:  STD_LOGIC_VECTOR (1 downto 0);
 	signal	Branch 		:  STD_LOGIC;
-	signal	Jump	 		:  STD_LOGIC;	
+	signal	Jump	 		:  STD_LOGIC;
+	signal	JumpR	 		:  STD_LOGIC;	
 	signal	MemtoReg 	:  STD_LOGIC;
-	signal 	InstrtoReg	: 	STD_LOGIC;		
+	signal 	InstrtoReg	: 	STD_LOGIC;
+	signal 	PcToReg		:	STD_LOGIC;
 	signal	ALUSrc 		:  STD_LOGIC;	
 	signal	SignExtend 	: 	STD_LOGIC;
 	signal	RegWrite		: 	STD_LOGIC;	
 	signal	RegDst		:  STD_LOGIC;
+	signal	ZeroToAlu	:	STD_LOGIC;
 
 ----------------------------------------------------------------
 -- Register File Signals
@@ -178,18 +182,21 @@ ALU1 				: ALU port map
 ----------------------------------------------------------------
 ControlUnit1 	: ControlUnit port map
 						(
-						opcode 		=> opcode, 
-						ALUOp 		=> ALUOp, 
+						Instr 		=> Instr, 
+						ALU_Control => ALU_Control,
 						Branch 		=> Branch, 
 						Jump 			=> Jump, 
+						JumpR 		=> JumpR, 
 						MemRead 		=> MemRead, 
 						MemtoReg 	=> MemtoReg, 
 						InstrtoReg 	=> InstrtoReg, 
+						PcToReg		=> PcToReg,
 						MemWrite 	=> MemWrite, 
 						ALUSrc 		=> ALUSrc, 
 						SignExtend 	=> SignExtend, 
 						RegWrite 	=> RegWrite, 
-						RegDst 		=> RegDst
+						RegDst 		=> RegDst,
+						ZeroToAlu	=> ZeroToAlu
 						);
 						
 ----------------------------------------------------------------
@@ -211,26 +218,28 @@ RegFile1			: RegFile port map
 -- Processor logic
 ----------------------------------------------------------------
 
--- for ControlUnit
-opcode <= Instr(31 downto 26);
-
 -- for Reg
 ReadAddr1_Reg <= Instr(25 downto 21);
 ReadAddr2_Reg <= Instr(20 downto 16);
 WriteAddr_Reg <= Instr(15 downto 11) when RegDst = '1' else Instr(20 downto 16);
 
 -- multiplexer to choose data-in for reg write
-WriteData_Reg <= Data_In when MemtoReg = '1' else 
-					  Instr(15 downto 0) & "0000000000000000" when InstrToReg = '1' else
-					  ALU_Out;
+WriteData_Reg <=  (PC_out + 4) when PcToReg = '1' else
+						Data_In when MemtoReg = '1' else 
+						Instr(15 downto 0) & "0000000000000000" when InstrToReg = '1' else
+						ALU_Out;
 
 -- for ALU
-ALU_Control <= ALUOp & Instr(5 downto 0);
 ALU_InA <= ReadData1_Reg;
 
 -- multiplexer for choice of input 2 into ALU
-ALU_InB(15 downto 0) <= Instr(15 downto 0) when ALUSrc = '1' else ReadData2_Reg(15 downto 0);
-ALU_InB(31 downto 16) <= (others => (Instr(15) and SignExtend)) when ALUSrc = '1' else ReadData2_Reg(31 downto 16);
+ALU_InB(15 downto 0) <= (others => '0') when ZeroToAlu = '1' else
+								Instr(15 downto 0) when ALUSrc = '1' else 
+								ReadData2_Reg(15 downto 0);
+								
+ALU_InB(31 downto 16) <= (others => '0') when ZeroToAlu = '1' else
+								(others => (Instr(15) and SignExtend)) when ALUSrc = '1' else 
+								ReadData2_Reg(31 downto 16);
 
 -- for Mem
 Addr_Data <= ALU_out;
@@ -243,7 +252,8 @@ pc_temp(17 downto 2) <= Instr(15 downto 0);
 pc_temp(31 downto 18) <= (others => (Instr(15) and SignExtend));
 pc_temp(1 downto 0) <= "00";
 
-PC_in <= PC_increment(31 downto 28) & Instr(25 downto 0) & "00" when Jump = '1' else
+PC_in <= ReadData1_Reg when JumpR = '1' else
+			PC_increment(31 downto 28) & Instr(25 downto 0) & "00" when Jump = '1' else
 			PC_temp + PC_increment when Branch = '1' and ALU_zero = '1' else
 			PC_increment;
 

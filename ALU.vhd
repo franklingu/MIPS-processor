@@ -58,6 +58,12 @@ signal ALU_lab2_result1 : STD_LOGIC_VECTOR (31 downto 0) := x"00000000";
 signal ALU_lab2_result2 : STD_LOGIC_VECTOR (31 downto 0) := x"00000000";
 signal ALU_lab2_status : STD_LOGIC_VECTOR (2 downto 0) := "000";
 
+-------------------------------------------------------------
+-- store MUL results
+-------------------------------------------------------------
+signal high_result : STD_LOGIC_VECTOR (31 downto 0) := x"00000000";
+signal low_result : STD_LOGIC_VECTOR (31 downto 0) := x"00000000";
+
 begin
 -------------------------------------------------------------
 -- port map
@@ -76,7 +82,18 @@ ALU_lab2_mapping : ALU_lab2 generic map (width => 32) port map (Clk => CLK,
 ALU_zero <= ALU_lab2_status(0);
 ALU_overflow <= ALU_lab2_status(1);
 ALU_busy <= ALU_lab2_status(2);
-process(ALU_Control,ALU_InA,ALU_InB,ALU_lab2_result1)
+
+process(CLK)
+begin
+	if CLK'event and CLK = '1' then
+		if (ALU_Control(5 downto 0) = "011000" or ALU_Control(5 downto 0) = "011001") and ALU_lab2_status(2) = '0' then
+			high_result <= ALU_lab2_result2;
+			low_result <= ALU_lab2_result1;
+		end if;
+	end if;
+end process;
+
+process(ALU_Control,ALU_InA,ALU_InB,ALU_lab2_result1,high_result,low_result)
 begin
 case ALU_Control(7 downto 6) is
 when "00" => -- lw, sw
@@ -84,14 +101,15 @@ when "00" => -- lw, sw
 	ALU_Out <= ALU_lab2_result1;
 when "01" => -- beq
 	case ALU_Control(5 downto 0) is
-	when "000001" => -- bgez
-		ALU_lab2_control <= "100000";
-	-- when "000001" => -- bgezal
+	when "000001" => -- bgez, bgezal
+		ALU_lab2_control <= "000111";
+		ALU_Out <= (0 => (not ALU_lab2_result1(0)), others => '0');
 	when "000100" => -- beq
 		ALU_lab2_control <= "000110";
 		ALU_Out <= ALU_lab2_result1;
 	when others =>
 		ALU_lab2_control <= "100000";
+		ALU_Out <= (others => '0');
 	end case;
 when "10" =>
 	case ALU_Control(5 downto 0) is
@@ -105,9 +123,6 @@ when "10" =>
 		ALU_lab2_control <= "001100";
 		ALU_Out <= ALU_lab2_result1;
 	when "100000" => --add
-		ALU_lab2_control <= "000010";
-		ALU_Out <= ALU_lab2_result1;
-	when "001000" => --addi
 		ALU_lab2_control <= "000010";
 		ALU_Out <= ALU_lab2_result1;
 	when "100010" => --sub
@@ -129,18 +144,39 @@ when "10" =>
 		ALU_lab2_control <= "001101";
 		ALU_Out <= ALU_lab2_result1;
 	when "000100" => -- sllv
+		ALU_lab2_control <= "001001";
+		ALU_Out <= ALU_lab2_result1;
 	when "011000" => -- mult
+		ALU_lab2_control <= "010000";
+		ALU_Out <= ALU_lab2_result1;
 	when "011001" => -- multu
+		ALU_lab2_control <= "010001";
+		ALU_Out <= ALU_lab2_result1;
 	when "010000" => -- mfhi
+		ALU_lab2_control <= "100000";
+		ALU_Out <= high_result;
 	when "010010" => -- mflo
+		ALU_lab2_control <= "100000";
+		ALU_Out <= low_result;
 	when others =>	
 		ALU_lab2_control <= "100000";
+		ALU_Out <= (others => '0');
 	end case;
-when "11" => -- ori
-	ALU_lab2_control <= "000001";
-	ALU_Out <= ALU_lab2_result1;
+when "11" => -- immediate
+	case ALU_Control(5 downto 0) is
+		when "001000" => -- addi
+			ALU_lab2_control <= "000010";
+			ALU_Out <= ALU_lab2_result1;
+		when "001101" => -- ori
+			ALU_lab2_control <= "000001";
+			ALU_Out <= ALU_lab2_result1;
+		when others =>
+			ALU_lab2_control <= "100000";
+			ALU_Out <= (others => '0');
+	end case;
 when others => 
 	ALU_lab2_control <= "100000";
+	ALU_Out <= (others => '0');
 end case;
 end process;
 end arch_ALU;
