@@ -33,8 +33,8 @@ Port (Clk			: in	STD_LOGIC;
 		Operand2		: in	STD_LOGIC_VECTOR (width-1 downto 0);
 		Result1		: out	STD_LOGIC_VECTOR (width-1 downto 0);
 		Result2		: out	STD_LOGIC_VECTOR (width-1 downto 0);
-		Status		: out	STD_LOGIC_VECTOR (2 downto 0); -- busy (multicycle only), overflow (add and sub), zero (sub)
-		Debug			: out	STD_LOGIC_VECTOR (width-1 downto 0));		
+		Status		: out	STD_LOGIC_VECTOR (2 downto 0) -- busy (multicycle only), overflow (add and sub), zero (sub)
+		);		
 end alu_lab2;
 
 
@@ -90,7 +90,6 @@ signal CARRY_OUT_MULTI : STD_LOGIC := '0';
 ----------------------------------------------------------------------------
 signal Result1_multi		: STD_LOGIC_VECTOR (width-1 downto 0) := (others => '0'); 
 signal Result2_multi		: STD_LOGIC_VECTOR (width-1 downto 0) := (others => '0');
-signal Debug_multi		: STD_LOGIC_VECTOR (width-1 downto 0) := (others => '0');
 signal multi_sum			: STD_LOGIC_VECTOR (width-1 downto 0) := (others => '0');
 signal Divisor				: STD_LOGIC_VECTOR (width-1 downto 0) := (others => '0');
 signal temp_sum : std_logic_vector(2*width-1 downto 0) := (others => '0');
@@ -125,7 +124,7 @@ shifter1 : shifter port map(OPERAND1,
 COMBINATIONAL_PROCESS : process (
 											Control, Operand1, Operand2, state, -- external inputs
 											SUM, SHIFTER_RESULT, CARRY_OUT, -- external results
-											Result1_multi, Result2_multi, Debug_multi, done -- from multi-cycle process(es)
+											Result1_multi, Result2_multi, done -- from multi-cycle process(es)
 											)
 begin
 
@@ -133,7 +132,6 @@ begin
 Status(2 downto 0) <= "000"; -- both statuses '0' by default 
 Result1 <= (others=>'0');
 Result2 <= (others=>'0');
-Debug <= (others=>'0');
 
 n_state <= state;
 -- </default outputs>
@@ -203,7 +201,6 @@ case state is
 		if done = '1' then
 			Result1 <= Result1_multi;
 			Result2 <= Result2_multi;
-			Debug <= Debug_multi;
 			n_state <= COMBINATIONAL;
 			Status(2) <= '0';
 		else
@@ -350,7 +347,6 @@ begin
 				if state = COMBINATIONAL then
 					Result1_multi <= Operand1;
 					Result2_multi <= Operand2;
-					Debug_multi <= Operand1(width-1 downto width/2) & Operand2(width-1 downto width/2);
 					done <= '1';
 				end if;	
 			when others=> null;
@@ -358,6 +354,5 @@ begin
 		end if;
 	end if;
 end process;
-
 
 end arch_alu_lab2;

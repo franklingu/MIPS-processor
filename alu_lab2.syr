@@ -182,22 +182,21 @@ Synthesizing Unit <alu_lab2>.
     Found 64-bit register for signal <MULTI_CYCLE_PROCESS.sum_for_11>.
     Found 1-bit register for signal <sign_remainder>.
     Found 32-bit register for signal <Divisor>.
-    Found 32-bit register for signal <Debug_multi>.
     Found 1-bit register for signal <state>.
-    Found 32-bit adder for signal <Operand2[31]_GND_5_o_add_30_OUT> created at line 266.
-    Found 64-bit adder for signal <GND_5_o_GND_5_o_add_31_OUT> created at line 270.
-    Found 64-bit adder for signal <temp_sum[63]_GND_5_o_add_35_OUT> created at line 276.
-    Found 64-bit adder for signal <temp_sum[63]_MULTI_CYCLE_PROCESS.operand1_val[63]_add_36_OUT> created at line 286.
-    Found 64-bit adder for signal <temp_sum[63]_MULTI_CYCLE_PROCESS.operand1_val[62]_add_37_OUT> created at line 289.
-    Found 64-bit adder for signal <temp_sum[63]_MULTI_CYCLE_PROCESS.sum_for_11[63]_add_38_OUT> created at line 292.
-    Found 32-bit adder for signal <Operand1[31]_GND_5_o_add_28_OUT> created at line 316.
-    Found 8-bit adder for signal <MULTI_CYCLE_PROCESS.count[7]_GND_5_o_add_64_OUT> created at line 325.
-    Found 32-bit adder for signal <Result2_multi[31]_GND_5_o_add_71_OUT> created at line 338.
-    Found 32-bit adder for signal <Result1_multi[31]_GND_5_o_add_72_OUT> created at line 339.
+    Found 32-bit adder for signal <Operand2[31]_GND_5_o_add_27_OUT> created at line 263.
+    Found 64-bit adder for signal <GND_5_o_GND_5_o_add_28_OUT> created at line 267.
+    Found 64-bit adder for signal <temp_sum[63]_GND_5_o_add_32_OUT> created at line 273.
+    Found 64-bit adder for signal <temp_sum[63]_MULTI_CYCLE_PROCESS.operand1_val[63]_add_33_OUT> created at line 283.
+    Found 64-bit adder for signal <temp_sum[63]_MULTI_CYCLE_PROCESS.operand1_val[62]_add_34_OUT> created at line 286.
+    Found 64-bit adder for signal <temp_sum[63]_MULTI_CYCLE_PROCESS.sum_for_11[63]_add_35_OUT> created at line 289.
+    Found 32-bit adder for signal <Operand1[31]_GND_5_o_add_25_OUT> created at line 313.
+    Found 8-bit adder for signal <MULTI_CYCLE_PROCESS.count[7]_GND_5_o_add_61_OUT> created at line 322.
+    Found 32-bit adder for signal <Result2_multi[31]_GND_5_o_add_68_OUT> created at line 335.
+    Found 32-bit adder for signal <Result1_multi[31]_GND_5_o_add_69_OUT> created at line 336.
     Summary:
 	inferred   8 Adder/Subtractor(s).
-	inferred 364 D-type flip-flop(s).
-	inferred 105 Multiplexer(s).
+	inferred 332 D-type flip-flop(s).
+	inferred 102 Multiplexer(s).
 Unit <alu_lab2> synthesized.
 
 Synthesizing Unit <AddSub>.
@@ -329,15 +328,15 @@ Macro Statistics
  33-bit adder                                          : 4
  64-bit adder                                          : 3
  8-bit adder                                           : 1
-# Registers                                            : 13
+# Registers                                            : 12
  1-bit register                                        : 4
- 32-bit register                                       : 5
+ 32-bit register                                       : 4
  64-bit register                                       : 3
  8-bit register                                        : 1
-# Multiplexers                                         : 122
+# Multiplexers                                         : 119
  1-bit 2-to-1 multiplexer                              : 40
  3-bit 2-to-1 multiplexer                              : 5
- 32-bit 2-to-1 multiplexer                             : 66
+ 32-bit 2-to-1 multiplexer                             : 63
  64-bit 2-to-1 multiplexer                             : 4
  8-bit 2-to-1 multiplexer                              : 7
 # Xors                                                 : 13
@@ -368,12 +367,12 @@ Macro Statistics
  8-bit adder                                           : 1
 # Accumulators                                         : 1
  64-bit up accumulator                                 : 1
-# Registers                                            : 300
- Flip-Flops                                            : 300
-# Multiplexers                                         : 248
+# Registers                                            : 268
+ Flip-Flops                                            : 268
+# Multiplexers                                         : 245
  1-bit 2-to-1 multiplexer                              : 168
  3-bit 2-to-1 multiplexer                              : 5
- 32-bit 2-to-1 multiplexer                             : 66
+ 32-bit 2-to-1 multiplexer                             : 63
  64-bit 2-to-1 multiplexer                             : 2
  8-bit 2-to-1 multiplexer                              : 7
 # Xors                                                 : 13
@@ -395,7 +394,6 @@ Optimizing unit <shifter> ...
 Mapping all equations...
 Building and optimizing final netlist ...
 Found area constraint ratio of 100 (+ 5) on block alu_lab2, actual ratio is 2.
-FlipFlop MULTI_CYCLE_PROCESS.count_5 has been replicated 1 time(s)
 FlipFlop sign_quotient has been replicated 2 time(s)
 FlipFlop sign_remainder has been replicated 1 time(s)
 
@@ -405,8 +403,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 367
- Flip-Flops                                            : 367
+# Registers                                            : 334
+ Flip-Flops                                            : 334
 
 =========================================================================
 
@@ -429,27 +427,27 @@ Top Level Output File Name         : alu_lab2.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 1963
+# BELS                             : 1960
 #      GND                         : 1
 #      LUT1                        : 66
-#      LUT2                        : 172
-#      LUT3                        : 278
-#      LUT4                        : 85
-#      LUT5                        : 111
+#      LUT2                        : 171
+#      LUT3                        : 274
+#      LUT4                        : 50
+#      LUT5                        : 146
 #      LUT6                        : 548
 #      MUXCY                       : 346
-#      MUXF7                       : 4
+#      MUXF7                       : 6
 #      XORCY                       : 352
-# FlipFlops/Latches                : 367
-#      FD                          : 10
-#      FDE                         : 292
+# FlipFlops/Latches                : 334
+#      FD                          : 9
+#      FDE                         : 260
 #      FDR                         : 1
 #      FDRE                        : 64
 # Clock Buffers                    : 1
 #      BUFGP                       : 1
-# IO Buffers                       : 169
+# IO Buffers                       : 137
 #      IBUF                        : 70
-#      OBUF                        : 99
+#      OBUF                        : 67
 
 Device utilization summary:
 ---------------------------
@@ -458,20 +456,20 @@ Selected Device : 7a100tcsg324-1
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:             367  out of  126800     0%  
- Number of Slice LUTs:                 1260  out of  63400     1%  
-    Number used as Logic:              1260  out of  63400     1%  
+ Number of Slice Registers:             334  out of  126800     0%  
+ Number of Slice LUTs:                 1255  out of  63400     1%  
+    Number used as Logic:              1255  out of  63400     1%  
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:   1298
-   Number with an unused Flip Flop:     931  out of   1298    71%  
-   Number with an unused LUT:            38  out of   1298     2%  
-   Number of fully used LUT-FF pairs:   329  out of   1298    25%  
-   Number of unique control sets:         9
+ Number of LUT Flip Flop pairs used:   1292
+   Number with an unused Flip Flop:     958  out of   1292    74%  
+   Number with an unused LUT:            37  out of   1292     2%  
+   Number of fully used LUT-FF pairs:   297  out of   1292    22%  
+   Number of unique control sets:         8
 
 IO Utilization: 
- Number of IOs:                         170
- Number of bonded IOBs:                 170  out of    210    80%  
+ Number of IOs:                         138
+ Number of bonded IOBs:                 138  out of    210    65%  
 
 Specific Feature Utilization:
  Number of BUFG/BUFGCTRLs:                1  out of     32     3%  
@@ -497,7 +495,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-Clk                                | BUFGP                  | 367   |
+Clk                                | BUFGP                  | 334   |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -508,10 +506,10 @@ Timing Summary:
 ---------------
 Speed Grade: -1
 
-   Minimum period: 5.117ns (Maximum Frequency: 195.417MHz)
+   Minimum period: 5.095ns (Maximum Frequency: 196.290MHz)
    Minimum input arrival time before clock: 5.481ns
-   Maximum output required time after clock: 4.690ns
-   Maximum combinational path delay: 6.493ns
+   Maximum output required time after clock: 5.568ns
+   Maximum combinational path delay: 6.882ns
 
 Timing Details:
 ---------------
@@ -519,63 +517,57 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'Clk'
-  Clock period: 5.117ns (frequency: 195.417MHz)
-  Total number of paths / destination ports: 46148 / 719
+  Clock period: 5.095ns (frequency: 196.290MHz)
+  Total number of paths / destination ports: 46165 / 686
 -------------------------------------------------------------------------
-Delay:               5.117ns (Levels of Logic = 35)
-  Source:            Divisor_0 (FF)
-  Destination:       Result2_multi_30 (FF)
+Delay:               5.095ns (Levels of Logic = 29)
+  Source:            sign_remainder_1 (FF)
+  Destination:       Result2_multi_23 (FF)
   Source Clock:      Clk rising
   Destination Clock: Clk rising
 
-  Data Path: Divisor_0 to Result2_multi_30
+  Data Path: sign_remainder_1 to Result2_multi_23
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDE:C->Q              1   0.478   0.536  Divisor_0 (Divisor_0)
-     LUT3:I1->O            1   0.124   0.000  addsubermulti/Madd_S_wider_Madd_lut<0> (addsubermulti/Madd_S_wider_Madd_lut<0>)
-     MUXCY:S->O            1   0.472   0.000  addsubermulti/Madd_S_wider_Madd_cy<0> (addsubermulti/Madd_S_wider_Madd_cy<0>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<1> (addsubermulti/Madd_S_wider_Madd_cy<1>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<2> (addsubermulti/Madd_S_wider_Madd_cy<2>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<3> (addsubermulti/Madd_S_wider_Madd_cy<3>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<4> (addsubermulti/Madd_S_wider_Madd_cy<4>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<5> (addsubermulti/Madd_S_wider_Madd_cy<5>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<6> (addsubermulti/Madd_S_wider_Madd_cy<6>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<7> (addsubermulti/Madd_S_wider_Madd_cy<7>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<8> (addsubermulti/Madd_S_wider_Madd_cy<8>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<9> (addsubermulti/Madd_S_wider_Madd_cy<9>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<10> (addsubermulti/Madd_S_wider_Madd_cy<10>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<11> (addsubermulti/Madd_S_wider_Madd_cy<11>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<12> (addsubermulti/Madd_S_wider_Madd_cy<12>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<13> (addsubermulti/Madd_S_wider_Madd_cy<13>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<14> (addsubermulti/Madd_S_wider_Madd_cy<14>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<15> (addsubermulti/Madd_S_wider_Madd_cy<15>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<16> (addsubermulti/Madd_S_wider_Madd_cy<16>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<17> (addsubermulti/Madd_S_wider_Madd_cy<17>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<18> (addsubermulti/Madd_S_wider_Madd_cy<18>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<19> (addsubermulti/Madd_S_wider_Madd_cy<19>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<20> (addsubermulti/Madd_S_wider_Madd_cy<20>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<21> (addsubermulti/Madd_S_wider_Madd_cy<21>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<22> (addsubermulti/Madd_S_wider_Madd_cy<22>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<23> (addsubermulti/Madd_S_wider_Madd_cy<23>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<24> (addsubermulti/Madd_S_wider_Madd_cy<24>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<25> (addsubermulti/Madd_S_wider_Madd_cy<25>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<26> (addsubermulti/Madd_S_wider_Madd_cy<26>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<27> (addsubermulti/Madd_S_wider_Madd_cy<27>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<28> (addsubermulti/Madd_S_wider_Madd_cy<28>)
-     MUXCY:CI->O           1   0.029   0.000  addsubermulti/Madd_S_wider_Madd_cy<29> (addsubermulti/Madd_S_wider_Madd_cy<29>)
-     XORCY:CI->O           3   0.510   0.435  addsubermulti/Madd_S_wider_Madd_xor<30> (multi_sum<30>)
-     LUT4:I3->O            1   0.124   0.776  Mmux_Result2_multi[31]_Control[4]_mux_102_OUT724_SW3 (N187)
-     LUT6:I2->O            1   0.124   0.536  Mmux_Result2_multi[31]_Control[4]_mux_102_OUT724 (Mmux_Result2_multi[31]_Control[4]_mux_102_OUT723)
-     LUT6:I4->O            1   0.124   0.000  Mmux_Result2_multi[31]_Control[4]_mux_102_OUT725 (Result2_multi[31]_Control[4]_mux_102_OUT<30>)
-     FDE:D                     0.030          Result2_multi_30
+     FDE:C->Q              1   0.478   0.536  sign_remainder_1 (sign_remainder_1)
+     LUT2:I0->O            1   0.124   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_lut<0> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_lut<0>)
+     MUXCY:S->O            1   0.472   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<0> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<0>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<1> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<1>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<2> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<2>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<3> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<3>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<4> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<4>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<5> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<5>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<6> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<6>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<7> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<7>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<8> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<8>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<9> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<9>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<10> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<10>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<11> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<11>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<12> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<12>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<13> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<13>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<14> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<14>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<15> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<15>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<16> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<16>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<17> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<17>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<18> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<18>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<19> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<19>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<20> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<20>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<21> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<21>)
+     MUXCY:CI->O           1   0.029   0.000  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<22> (Madd_Result2_multi[31]_GND_5_o_add_68_OUT_cy<22>)
+     XORCY:CI->O           2   0.510   0.427  Madd_Result2_multi[31]_GND_5_o_add_68_OUT_xor<23> (Result2_multi[31]_GND_5_o_add_68_OUT<23>)
+     LUT5:I4->O            1   0.124   0.536  Mmux_Result2_multi[31]_Control[4]_mux_97_OUT482_SW0 (N153)
+     LUT6:I4->O            1   0.124   0.421  Mmux_Result2_multi[31]_Control[4]_mux_97_OUT483 (Mmux_Result2_multi[31]_Control[4]_mux_97_OUT482)
+     LUT3:I2->O            1   0.124   0.421  Mmux_Result2_multi[31]_Control[4]_mux_97_OUT484 (Mmux_Result2_multi[31]_Control[4]_mux_97_OUT483)
+     LUT6:I5->O            1   0.124   0.000  Mmux_Result2_multi[31]_Control[4]_mux_97_OUT485 (Result2_multi[31]_Control[4]_mux_97_OUT<23>)
+     FDE:D                     0.030          Result2_multi_23
     ----------------------------------------
-    Total                      5.117ns (2.834ns logic, 2.283ns route)
-                                       (55.4% logic, 44.6% route)
+    Total                      5.095ns (2.753ns logic, 2.341ns route)
+                                       (54.0% logic, 46.0% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'Clk'
-  Total number of paths / destination ports: 84081 / 662
+  Total number of paths / destination ports: 83892 / 597
 -------------------------------------------------------------------------
 Offset:              5.481ns (Levels of Logic = 8)
   Source:            Operand2<13> (PAD)
@@ -587,13 +579,13 @@ Offset:              5.481ns (Levels of Logic = 8)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      IBUF:I->O             5   0.001   0.966  Operand2_13_IBUF (Operand2_13_IBUF)
-     LUT6:I0->O            1   0.124   0.939  Operand2[31]_GND_5_o_equal_56_o<31>1 (Operand2[31]_GND_5_o_equal_56_o<31>)
-     LUT6:I0->O            5   0.124   0.448  Operand2[31]_GND_5_o_equal_56_o<31>7 (Operand2[31]_GND_5_o_equal_56_o)
-     LUT2:I1->O            1   0.124   0.919  Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_97_OUT11_SW0 (N01)
-     LUT6:I1->O            3   0.124   0.435  Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_97_OUT11 (Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_97_OUT11)
-     LUT4:I3->O            5   0.124   0.448  Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_97_OUT311 (Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_97_OUT31)
-     LUT6:I5->O            2   0.124   0.427  Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_97_OUT711 (Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_97_OUT71)
-     LUT6:I5->O            1   0.124   0.000  Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_97_OUT81 (MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_97_OUT<7>)
+     LUT6:I0->O            1   0.124   0.939  Operand2[31]_GND_5_o_equal_53_o<31>1 (Operand2[31]_GND_5_o_equal_53_o<31>)
+     LUT6:I0->O            5   0.124   0.448  Operand2[31]_GND_5_o_equal_53_o<31>7 (Operand2[31]_GND_5_o_equal_53_o)
+     LUT2:I1->O            1   0.124   0.919  Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_92_OUT11_SW0 (N01)
+     LUT6:I1->O            3   0.124   0.435  Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_92_OUT11 (Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_92_OUT11)
+     LUT4:I3->O            5   0.124   0.448  Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_92_OUT311 (Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_92_OUT31)
+     LUT6:I5->O            2   0.124   0.427  Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_92_OUT711 (Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_92_OUT71)
+     LUT6:I5->O            1   0.124   0.000  Mmux_MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_92_OUT81 (MULTI_CYCLE_PROCESS.count[7]_Control[4]_mux_92_OUT<7>)
      FD:D                      0.030          MULTI_CYCLE_PROCESS.count_7
     ----------------------------------------
     Total                      5.481ns (0.899ns logic, 4.582ns route)
@@ -601,82 +593,52 @@ Offset:              5.481ns (Levels of Logic = 8)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'Clk'
-  Total number of paths / destination ports: 355 / 99
+  Total number of paths / destination ports: 211 / 67
 -------------------------------------------------------------------------
-Offset:              4.690ns (Levels of Logic = 6)
+Offset:              5.568ns (Levels of Logic = 6)
   Source:            state (FF)
-  Destination:       Status<0> (PAD)
+  Destination:       Result1<0> (PAD)
   Source Clock:      Clk rising
 
-  Data Path: state to Status<0>
+  Data Path: state to Result1<0>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FD:C->Q             301   0.478   0.632  state (state)
-     LUT3:I2->O            3   0.124   0.550  Mmux_Status121 (Mmux_Status12)
-     LUT5:I3->O            1   0.124   0.939  Mmux_Status11 (Mmux_Status1)
-     LUT6:I0->O            1   0.124   0.536  Mmux_Status12 (Mmux_Status13)
-     LUT6:I4->O            1   0.124   0.536  Mmux_Status14 (Mmux_Status15)
-     LUT6:I4->O            1   0.124   0.399  Mmux_Status17 (Status_0_OBUF)
-     OBUF:I->O                 0.000          Status_0_OBUF (Status<0>)
+     FD:C->Q             298   0.478   0.927  state (state)
+     LUT3:I0->O           13   0.124   1.019  Mmux_Result1421 (Mmux_Result142)
+     LUT6:I0->O            2   0.124   0.945  Mmux_Result141 (Mmux_Result14)
+     LUT6:I0->O            1   0.124   0.000  Mmux_Result145_F (N413)
+     MUXF7:I0->O           1   0.365   0.939  Mmux_Result145 (Mmux_Result144)
+     LUT6:I0->O            1   0.124   0.399  Mmux_Result1414 (Result1_0_OBUF)
+     OBUF:I->O                 0.000          Result1_0_OBUF (Result1<0>)
     ----------------------------------------
-    Total                      4.690ns (1.098ns logic, 3.592ns route)
-                                       (23.4% logic, 76.6% route)
+    Total                      5.568ns (1.339ns logic, 4.229ns route)
+                                       (24.0% logic, 76.0% route)
 
 =========================================================================
 Timing constraint: Default path analysis
-  Total number of paths / destination ports: 7513 / 99
+  Total number of paths / destination ports: 7244 / 67
 -------------------------------------------------------------------------
-Delay:               6.493ns (Levels of Logic = 39)
-  Source:            Operand1<0> (PAD)
-  Destination:       Result1<0> (PAD)
+Delay:               6.882ns (Levels of Logic = 9)
+  Source:            Operand2<0> (PAD)
+  Destination:       Result1<18> (PAD)
 
-  Data Path: Operand1<0> to Result1<0>
+  Data Path: Operand2<0> to Result1<18>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            14   0.001   0.801  Operand1_0_IBUF (Operand1_0_IBUF)
-     LUT3:I0->O            1   0.124   0.000  addsuber1/Madd_S_wider_Madd_lut<0> (addsuber1/Madd_S_wider_Madd_lut<0>)
-     MUXCY:S->O            1   0.472   0.000  addsuber1/Madd_S_wider_Madd_cy<0> (addsuber1/Madd_S_wider_Madd_cy<0>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<1> (addsuber1/Madd_S_wider_Madd_cy<1>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<2> (addsuber1/Madd_S_wider_Madd_cy<2>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<3> (addsuber1/Madd_S_wider_Madd_cy<3>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<4> (addsuber1/Madd_S_wider_Madd_cy<4>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<5> (addsuber1/Madd_S_wider_Madd_cy<5>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<6> (addsuber1/Madd_S_wider_Madd_cy<6>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<7> (addsuber1/Madd_S_wider_Madd_cy<7>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<8> (addsuber1/Madd_S_wider_Madd_cy<8>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<9> (addsuber1/Madd_S_wider_Madd_cy<9>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<10> (addsuber1/Madd_S_wider_Madd_cy<10>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<11> (addsuber1/Madd_S_wider_Madd_cy<11>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<12> (addsuber1/Madd_S_wider_Madd_cy<12>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<13> (addsuber1/Madd_S_wider_Madd_cy<13>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<14> (addsuber1/Madd_S_wider_Madd_cy<14>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<15> (addsuber1/Madd_S_wider_Madd_cy<15>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<16> (addsuber1/Madd_S_wider_Madd_cy<16>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<17> (addsuber1/Madd_S_wider_Madd_cy<17>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<18> (addsuber1/Madd_S_wider_Madd_cy<18>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<19> (addsuber1/Madd_S_wider_Madd_cy<19>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<20> (addsuber1/Madd_S_wider_Madd_cy<20>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<21> (addsuber1/Madd_S_wider_Madd_cy<21>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<22> (addsuber1/Madd_S_wider_Madd_cy<22>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<23> (addsuber1/Madd_S_wider_Madd_cy<23>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<24> (addsuber1/Madd_S_wider_Madd_cy<24>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<25> (addsuber1/Madd_S_wider_Madd_cy<25>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<26> (addsuber1/Madd_S_wider_Madd_cy<26>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<27> (addsuber1/Madd_S_wider_Madd_cy<27>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<28> (addsuber1/Madd_S_wider_Madd_cy<28>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<29> (addsuber1/Madd_S_wider_Madd_cy<29>)
-     MUXCY:CI->O           1   0.029   0.000  addsuber1/Madd_S_wider_Madd_cy<30> (addsuber1/Madd_S_wider_Madd_cy<30>)
-     XORCY:CI->O           4   0.510   0.736  addsuber1/Madd_S_wider_Madd_xor<31> (SUM<31>)
-     LUT3:I0->O            1   0.124   0.716  Mmux_Result144 (Mmux_Result142)
-     LUT6:I3->O            1   0.124   0.939  Mmux_Result145 (Mmux_Result143)
-     LUT6:I0->O            1   0.124   0.421  Mmux_Result1413 (Mmux_Result149)
-     LUT5:I4->O            1   0.124   0.399  Mmux_Result1414 (Result1_0_OBUF)
-     OBUF:I->O                 0.000          Result1_0_OBUF (Result1<0>)
+     IBUF:I->O            89   0.001   1.104  Operand2_0_IBUF (Operand2_0_IBUF)
+     LUT6:I0->O            3   0.124   0.550  shifter1/SHIFT_AMT<1>281 (shifter1/SHIFT_AMT<1>_mmx_out34)
+     LUT3:I1->O            2   0.124   0.427  shifter1/SHIFT_AMT<2>391 (shifter1/SHIFT_AMT<2>_mmx_out44)
+     LUT5:I4->O            1   0.124   0.919  Mmux_Result1312 (Mmux_Result1311)
+     LUT6:I1->O            1   0.124   0.919  Mmux_Result1313 (Mmux_Result1312)
+     LUT6:I1->O            1   0.124   0.919  Mmux_Result1314 (Mmux_Result1313)
+     LUT6:I1->O            1   0.124   0.776  Mmux_Result1315 (Mmux_Result1314)
+     LUT6:I2->O            1   0.124   0.399  Mmux_Result1316 (Result1_18_OBUF)
+     OBUF:I->O                 0.000          Result1_18_OBUF (Result1<18>)
     ----------------------------------------
-    Total                      6.493ns (2.480ns logic, 4.012ns route)
-                                       (38.2% logic, 61.8% route)
+    Total                      6.882ns (0.869ns logic, 6.013ns route)
+                                       (12.6% logic, 87.4% route)
 
 =========================================================================
 
@@ -688,18 +650,18 @@ Clock to Setup on destination clock Clk
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-Clk            |    5.117|         |         |         |
+Clk            |    5.095|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 25.00 secs
-Total CPU time to Xst completion: 25.76 secs
+Total REAL time to Xst completion: 26.00 secs
+Total CPU time to Xst completion: 25.93 secs
  
 --> 
 
-Total memory usage is 451996 kilobytes
+Total memory usage is 450140 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    0 (   0 filtered)

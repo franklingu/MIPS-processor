@@ -21,7 +21,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_unsigned.ALL;
 
 entity ALU is
-    Port ( 	ALU_InA 		: in  STD_LOGIC_VECTOR (31 downto 0);				
+    Port ( 	CLK			: in  STD_LOGIC;
+				ALU_InA 		: in  STD_LOGIC_VECTOR (31 downto 0);				
 				ALU_InB 		: in  STD_LOGIC_VECTOR (31 downto 0);
 				ALU_Out 		: out STD_LOGIC_VECTOR (31 downto 0);
 				ALU_Control	: in  STD_LOGIC_VECTOR (7 downto 0);
@@ -33,7 +34,41 @@ end ALU;
 
 architecture arch_ALU of ALU is
 
+-------------------------------------------------------------
+-- ALU designed in lab 2
+-------------------------------------------------------------
+component ALU_lab2 is
+generic (width : integer);
+	Port(
+		Clk			: in	STD_LOGIC;
+		Control		: in	STD_LOGIC_VECTOR (5 downto 0);
+		Operand1		: in	STD_LOGIC_VECTOR (width-1 downto 0);
+		Operand2		: in	STD_LOGIC_VECTOR (width-1 downto 0);
+		Result1		: out	STD_LOGIC_VECTOR (width-1 downto 0);
+		Result2		: out	STD_LOGIC_VECTOR (width-1 downto 0);
+		Status		: out	STD_LOGIC_VECTOR (2 downto 0) -- busy (multicycle only), overflow (add and sub), zero (sub)
+	);
+end component;
+
+-------------------------------------------------------------
+-- ALU designed in lab 2
+-------------------------------------------------------------
+signal ALU_lab2_control : STD_LOGIC_VECTOR (5 downto 0) := "000000";
+signal ALU_lab2_result1 : STD_LOGIC_VECTOR (31 downto 0) := x"00000000";
+signal ALU_lab2_result2 : STD_LOGIC_VECTOR (31 downto 0) := x"00000000";
+signal ALU_lab2_status : STD_LOGIC_VECTOR (2 downto 0) := "000";
+
 begin
+-------------------------------------------------------------
+-- port map
+-------------------------------------------------------------
+ALU_lab2_mapping : ALU_lab2 generic map (width => 32) port map (Clk => CLK,
+																					 Control => ALU_lab2_control,
+																					 Operand1 => ALU_InA,
+																					 Operand2 => ALU_InB,
+																					 Result1 => ALU_lab2_result1,
+																					 Result2 => ALU_lab2_result2,
+																					 Status => ALU_lab2_status);
 process(ALU_Control,ALU_InA,ALU_InB)
 variable AplusB 	: STD_LOGIC_VECTOR (31 downto 0);
 variable AminusB 	: STD_LOGIC_VECTOR (31 downto 0);

@@ -4,13 +4,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.12 secs
+Total CPU time to Xst completion: 0.10 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.12 secs
+Total CPU time to Xst completion: 0.10 secs
  
 --> Reading design: TOP.prj
 
@@ -105,6 +105,24 @@ Slice Utilization Ratio Delta      : 5
 =========================================================================
 *                          HDL Parsing                                  *
 =========================================================================
+Parsing VHDL file "C:\Users\junchao\Documents\GitHub\MIPS-processor\srln.vhd" into library work
+Parsing entity <srln>.
+Parsing architecture <arch_srln> of entity <srln>.
+Parsing VHDL file "C:\Users\junchao\Documents\GitHub\MIPS-processor\sran.vhd" into library work
+Parsing entity <sran>.
+Parsing architecture <arch_sran> of entity <sran>.
+Parsing VHDL file "C:\Users\junchao\Documents\GitHub\MIPS-processor\sll2.vhd" into library work
+Parsing entity <slln>.
+Parsing architecture <arch_slln> of entity <slln>.
+Parsing VHDL file "C:\Users\junchao\Documents\GitHub\MIPS-processor\shifter.vhd" into library work
+Parsing entity <shifter>.
+Parsing architecture <arch_shifter> of entity <shifter>.
+Parsing VHDL file "C:\Users\junchao\Documents\GitHub\MIPS-processor\AddSub.vhd" into library work
+Parsing entity <AddSub>.
+Parsing architecture <AddSubArch> of entity <addsub>.
+Parsing VHDL file "C:\Users\junchao\Documents\GitHub\MIPS-processor\alu_lab2.vhd" into library work
+Parsing entity <alu_lab2>.
+Parsing architecture <arch_alu_lab2> of entity <alu_lab2>.
 Parsing VHDL file "C:\Users\junchao\Documents\GitHub\MIPS-processor\RegFile.vhd" into library work
 Parsing entity <RegFile>.
 Parsing architecture <arch_RegFile> of entity <regfile>.
@@ -135,11 +153,49 @@ Elaborating entity <MIPS> (architecture <arch_MIPS>) from library <work>.
 Elaborating entity <PC> (architecture <arch_PC>) from library <work>.
 
 Elaborating entity <ALU> (architecture <arch_ALU>) from library <work>.
-INFO:HDLCompiler:679 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\ALU.vhd" Line 97. Case statement is complete. others clause is never selected
+WARNING:HDLCompiler:871 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\ALU.vhd" Line 56: Using initial value "000000" for alu_lab2_control since it is never assigned
+
+Elaborating entity <alu_lab2> (architecture <arch_alu_lab2>) with generics from library <work>.
+
+Elaborating entity <AddSub> (architecture <AddSubArch>) with generics from library <work>.
+
+Elaborating entity <shifter> (architecture <arch_shifter>) from library <work>.
+
+Elaborating entity <slln> (architecture <arch_slln>) with generics from library <work>.
+
+Elaborating entity <slln> (architecture <arch_slln>) with generics from library <work>.
+
+Elaborating entity <slln> (architecture <arch_slln>) with generics from library <work>.
+
+Elaborating entity <slln> (architecture <arch_slln>) with generics from library <work>.
+
+Elaborating entity <slln> (architecture <arch_slln>) with generics from library <work>.
+
+Elaborating entity <srln> (architecture <arch_srln>) with generics from library <work>.
+
+Elaborating entity <srln> (architecture <arch_srln>) with generics from library <work>.
+
+Elaborating entity <srln> (architecture <arch_srln>) with generics from library <work>.
+
+Elaborating entity <srln> (architecture <arch_srln>) with generics from library <work>.
+
+Elaborating entity <srln> (architecture <arch_srln>) with generics from library <work>.
+
+Elaborating entity <sran> (architecture <arch_sran>) with generics from library <work>.
+
+Elaborating entity <sran> (architecture <arch_sran>) with generics from library <work>.
+
+Elaborating entity <sran> (architecture <arch_sran>) with generics from library <work>.
+
+Elaborating entity <sran> (architecture <arch_sran>) with generics from library <work>.
+
+Elaborating entity <sran> (architecture <arch_sran>) with generics from library <work>.
+INFO:HDLCompiler:679 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\ALU.vhd" Line 132. Case statement is complete. others clause is never selected
 
 Elaborating entity <ControlUnit> (architecture <arch_ControlUnit>) from library <work>.
 
 Elaborating entity <RegFile> (architecture <arch_RegFile>) from library <work>.
+WARNING:Xst:2972 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\ALU.vhd" line 65. All outputs of instance <ALU_lab2_mapping> of block <alu_lab2> are unconnected in block <ALU>. Underlying logic will be removed.
 
 =========================================================================
 *                           HDL Synthesis                               *
@@ -172,10 +228,10 @@ Unit <TOP> synthesized.
 
 Synthesizing Unit <MIPS>.
     Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\MIPS.vhd".
-INFO:Xst:3210 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\MIPS.vhd" line 165: Output port <ALU_overflow> of the instance <ALU1> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\MIPS.vhd" line 165: Output port <ALU_busy> of the instance <ALU1> is unconnected or connected to loadless signal.
-    Found 32-bit adder for signal <PC_increment> created at line 239.
-    Found 32-bit adder for signal <PC_temp[31]_PC_increment[31]_add_16_OUT> created at line 245.
+INFO:Xst:3210 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\MIPS.vhd" line 166: Output port <ALU_overflow> of the instance <ALU1> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\MIPS.vhd" line 166: Output port <ALU_busy> of the instance <ALU1> is unconnected or connected to loadless signal.
+    Found 32-bit adder for signal <PC_increment> created at line 241.
+    Found 32-bit adder for signal <PC_temp[31]_PC_increment[31]_add_16_OUT> created at line 247.
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred   6 Multiplexer(s).
@@ -190,15 +246,136 @@ Unit <PC> synthesized.
 
 Synthesizing Unit <ALU>.
     Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\ALU.vhd".
+INFO:Xst:3210 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\ALU.vhd" line 65: Output port <Result1> of the instance <ALU_lab2_mapping> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\ALU.vhd" line 65: Output port <Result2> of the instance <ALU_lab2_mapping> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "C:\Users\junchao\Documents\GitHub\MIPS-processor\ALU.vhd" line 65: Output port <Status> of the instance <ALU_lab2_mapping> is unconnected or connected to loadless signal.
 WARNING:Xst:653 - Signal <ALU_overflow> is used but never assigned. This sourceless signal will be automatically connected to value GND.
 WARNING:Xst:653 - Signal <ALU_busy> is used but never assigned. This sourceless signal will be automatically connected to value GND.
-    Found 32-bit adder for signal <AplusB> created at line 44.
-    Found 32-bit subtractor for signal <AminusB> created at line 39.
-    Found 32-bit 4-to-1 multiplexer for signal <ALU_Out> created at line 52.
+    Found 32-bit adder for signal <AplusB> created at line 79.
+    Found 32-bit subtractor for signal <AminusB> created at line 74.
+    Found 32-bit 4-to-1 multiplexer for signal <ALU_Out> created at line 87.
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred   9 Multiplexer(s).
 Unit <ALU> synthesized.
+
+Synthesizing Unit <AddSub>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\AddSub.vhd".
+        width = 32
+    Summary:
+	no macro.
+Unit <AddSub> synthesized.
+
+Synthesizing Unit <shifter>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\shifter.vhd".
+    Summary:
+	no macro.
+Unit <shifter> synthesized.
+
+Synthesizing Unit <slln_1>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\sll2.vhd".
+        N = 1
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <slln_1> synthesized.
+
+Synthesizing Unit <slln_2>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\sll2.vhd".
+        N = 2
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <slln_2> synthesized.
+
+Synthesizing Unit <slln_3>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\sll2.vhd".
+        N = 4
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <slln_3> synthesized.
+
+Synthesizing Unit <slln_4>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\sll2.vhd".
+        N = 8
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <slln_4> synthesized.
+
+Synthesizing Unit <slln_5>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\sll2.vhd".
+        N = 16
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <slln_5> synthesized.
+
+Synthesizing Unit <srln_1>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\srln.vhd".
+        N = 1
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <srln_1> synthesized.
+
+Synthesizing Unit <srln_2>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\srln.vhd".
+        N = 2
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <srln_2> synthesized.
+
+Synthesizing Unit <srln_3>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\srln.vhd".
+        N = 4
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <srln_3> synthesized.
+
+Synthesizing Unit <srln_4>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\srln.vhd".
+        N = 8
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <srln_4> synthesized.
+
+Synthesizing Unit <srln_5>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\srln.vhd".
+        N = 16
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <srln_5> synthesized.
+
+Synthesizing Unit <sran_1>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\sran.vhd".
+        N = 1
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <sran_1> synthesized.
+
+Synthesizing Unit <sran_2>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\sran.vhd".
+        N = 2
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <sran_2> synthesized.
+
+Synthesizing Unit <sran_3>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\sran.vhd".
+        N = 4
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <sran_3> synthesized.
+
+Synthesizing Unit <sran_4>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\sran.vhd".
+        N = 8
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <sran_4> synthesized.
+
+Synthesizing Unit <sran_5>.
+    Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\sran.vhd".
+        N = 16
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <sran_5> synthesized.
 
 Synthesizing Unit <ControlUnit>.
     Related source file is "C:\Users\junchao\Documents\GitHub\MIPS-processor\ControlUnit.vhd".
@@ -359,9 +536,9 @@ Optimizing unit <TOP> ...
 
 Optimizing unit <MIPS> ...
 
-Optimizing unit <ControlUnit> ...
-
 Optimizing unit <ALU> ...
+
+Optimizing unit <ControlUnit> ...
 WARNING:Xst:1293 - FF/Latch <MIPS1/PC1/PC_out_1> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <MIPS1/PC1/PC_out_0> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
 
@@ -598,8 +775,8 @@ Delay:               9.880ns (Levels of Logic = 33)
      XORCY:CI->O           1   0.510   0.536  MIPS1/ALU1/Madd_AplusB_xor<23> (MIPS1/ALU1/AplusB<23>)
      LUT6:I4->O            4   0.124   0.939  MIPS1/ALU1/Mmux_ALU_Out333 (Addr_Data<23>)
      LUT6:I1->O           18   0.124   0.533  GND_5_o_Addr_Data[31]_LessThan_1_o22 (GND_5_o_Addr_Data[31]_LessThan_1_o21)
-     LUT6:I5->O            1   0.124   0.000  MemWrite_dec_DATA_MEM_AND_42_o1_lut (MemWrite_dec_DATA_MEM_AND_42_o1_lut)
-     MUXCY:S->O           32   0.777   0.552  MemWrite_dec_DATA_MEM_AND_42_o1_cy (MemWrite_dec_DATA_MEM_AND_42_o)
+     LUT6:I5->O            1   0.124   0.000  MemWrite_dec_DATA_MEM_AND_58_o1_lut (MemWrite_dec_DATA_MEM_AND_58_o1_lut)
+     MUXCY:S->O           32   0.777   0.552  MemWrite_dec_DATA_MEM_AND_58_o1_cy (MemWrite_dec_DATA_MEM_AND_58_o)
      RAM256X1S:WE              0.490          Mram_DATA_MEM2
     ----------------------------------------
     Total                      9.880ns (4.584ns logic, 5.297ns route)
@@ -697,14 +874,14 @@ CLK            |         |         |    4.144|         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 19.00 secs
-Total CPU time to Xst completion: 18.41 secs
+Total REAL time to Xst completion: 16.00 secs
+Total CPU time to Xst completion: 15.80 secs
  
 --> 
 
-Total memory usage is 459036 kilobytes
+Total memory usage is 462300 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   15 (   0 filtered)
-Number of infos    :    7 (   0 filtered)
+Number of warnings :   17 (   0 filtered)
+Number of infos    :   10 (   0 filtered)
 

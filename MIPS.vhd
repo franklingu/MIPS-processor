@@ -52,7 +52,8 @@ end component;
 -- ALU
 ----------------------------------------------------------------
 component ALU is
-    Port ( 	
+    Port (
+			CLK			: in  STD_LOGIC;
 			ALU_InA 		: in  STD_LOGIC_VECTOR (31 downto 0);				
 			ALU_InB 		: in  STD_LOGIC_VECTOR (31 downto 0);
 			ALU_Out 		: out STD_LOGIC_VECTOR (31 downto 0);
@@ -164,6 +165,7 @@ PC1				: PC port map
 ----------------------------------------------------------------
 ALU1 				: ALU port map
 						(
+						CLK			=> CLK,
 						ALU_InA 		=> ALU_InA, 
 						ALU_InB 		=> ALU_InB, 
 						ALU_Out 		=> ALU_Out, 
