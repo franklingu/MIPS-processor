@@ -125,8 +125,8 @@ constant INSTR_MEM : MEM_256x32 := (
 			x"00006012",   --    mflo $t4
 			x"01916022",   -- delay: sub $t4, $t4, $s1
 			x"0581fffe",   --    bgez $t4, delay
-			x"012d782a",   --    slt $t7, $t1, $t5
-			x"15e0fff8",   --    bne $t7, $zero loop
+			x"01a9782a",   --    slt $t7, $t5, $t1
+			x"11e0fff8",   --    beq $t7, $zero, loop
 			x"08100000",   --    j start
 			x"ad090000",   -- fib:   sw  $t1, 0($t0)
 			x"01405820",   --    add $t3, $t2, $zero
