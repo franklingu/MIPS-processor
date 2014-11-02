@@ -82,7 +82,8 @@ component ControlUnit is
 				SignExtend 	: out  STD_LOGIC;
 				RegWrite		: out  STD_LOGIC;	
 				RegDst		: out  STD_LOGIC;
-				ZeroToAlu	: out	 STD_LOGIC);
+				ZeroToAlu	: out	 STD_LOGIC;
+				DecodeExc	: out  STD_LOGIC);
 end component;
 
 ----------------------------------------------------------------
@@ -98,6 +99,17 @@ component RegFile is
 			WriteData_Reg 	: in  STD_LOGIC_VECTOR (31 downto 0);
 			RegWrite 		: in  STD_LOGIC; 
 			CLK 				: in  STD_LOGIC);
+end component;
+
+----------------------------------------------------------------
+-- Exception Unit
+----------------------------------------------------------------
+
+component ExceptionUnit is 
+	  Port ( 
+			 Overflow : in  STD_LOGIC;
+          DecodeExc : in  STD_LOGIC;
+          Exception : out  STD_LOGIC);
 end component;
 
 ----------------------------------------------------------------
@@ -133,6 +145,7 @@ end component;
 	signal	RegWrite		: 	STD_LOGIC;	
 	signal	RegDst		:  STD_LOGIC;
 	signal	ZeroToAlu	:	STD_LOGIC;
+	signal	DecodeExc	:  STD_LOGIC;
 
 ----------------------------------------------------------------
 -- Register File Signals
@@ -145,10 +158,10 @@ end component;
 	signal	WriteData_Reg 	:  STD_LOGIC_VECTOR (31 downto 0);
 
 ----------------------------------------------------------------
--- Other Signals
+-- Exception Signals and Constants
 ----------------------------------------------------------------
-	--<any other signals used goes here>
- 
+	constant Exception_Handler : STD_LOGIC_VECTOR (31 downto 0):= (others => '0');
+	signal Exception : STD_LOGIC := '0';
 
 ----------------------------------------------------------------	
 ----------------------------------------------------------------
@@ -202,7 +215,8 @@ ControlUnit1 	: ControlUnit port map
 						SignExtend 	=> SignExtend, 
 						RegWrite 	=> RegWrite, 
 						RegDst 		=> RegDst,
-						ZeroToAlu	=> ZeroToAlu
+						ZeroToAlu	=> ZeroToAlu,
+						DecodeExc	=> DecodeExc
 						);
 						
 ----------------------------------------------------------------
@@ -218,6 +232,16 @@ RegFile1			: RegFile port map
 						WriteData_Reg 	=>  WriteData_Reg,
 						RegWrite 		=>  RegWrite,
 						CLK 				=>  CLK				
+						);
+						
+----------------------------------------------------------------
+-- Exception Unit port map
+----------------------------------------------------------------
+ExceptionUnit1	: ExceptionUnit port map
+						( 
+						 Overflow => ALU_overflow,
+						 DecodeExc	=> DecodeExc,
+						 Exception => Exception
 						);
 
 ----------------------------------------------------------------
@@ -259,6 +283,7 @@ pc_temp(31 downto 18) <= (others => (Instr(15) and SignExtend));
 pc_temp(1 downto 0) <= "00";
 
 PC_in <= PC_out when ALU_busy = '1' else
+			Exception_Handler when Exception = '1' else
 			ReadData1_Reg when JumpR = '1' else
 			PC_increment(31 downto 28) & Instr(25 downto 0) & "00" when Jump = '1' else
 			PC_temp + PC_increment when Branch = '1' and ALU_Zero = '1' else

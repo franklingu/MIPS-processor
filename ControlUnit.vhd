@@ -34,7 +34,8 @@ entity ControlUnit is
 				SignExtend 	: out  STD_LOGIC;
 				RegWrite		: out  STD_LOGIC;	
 				RegDst		: out  STD_LOGIC;
-				ZeroToAlu	: out	 STD_LOGIC);  -- 0 for Rt, 1 for Rd
+				ZeroToAlu	: out	 STD_LOGIC;  -- 0 for Rt, 1 for Rd
+				DecodeExc	: out  STD_LOGIC);
 end ControlUnit;
 
 
@@ -67,6 +68,7 @@ begin
 	RegWrite <= '0';
 	RegDst <= '0';
 	ZeroToAlu <= '0';
+	DecodeExc <= '0';
 	
 	case opcode is
 	when "101011" => -- sw
@@ -130,7 +132,7 @@ begin
 		Jump <= '1';
 		PcToReg <= '1';		
 	when others =>
-		ALUOp <= "00";
+		DecodeExc <= '1';
 	end case;
 end process;
 end arch_ControlUnit;
