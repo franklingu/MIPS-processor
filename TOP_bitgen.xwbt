@@ -1,8 +1,0 @@
-INTSTYLE=ise
-INFILE=C:\Users\junchao\Documents\GitHub\MIPS-processor\TOP.ncd
-OUTFILE=C:\Users\junchao\Documents\GitHub\MIPS-processor\TOP.bit
-FAMILY=Artix7
-PART=xc7a100t-1csg324
-WORKINGDIR=C:\Users\junchao\Documents\GitHub\MIPS-processor
-LICENSE=WebPack
-USER_INFO=210795857_0_0_243
