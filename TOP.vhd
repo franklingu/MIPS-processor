@@ -115,7 +115,7 @@ constant INSTR_MEM : MEM_256x32 := (
 			x"354affff",  --    ori $t2, 0xffff
 			x"3c097fff",  --    lui $t1, 0x7fff
 			x"3529ffff",  --    ori $t1, 0xffff
-			x"012a5020",  --    add $t2, $t1, $t
+			x"3508ffff",  --    sw $t2, 0($t1)
 			x"3508ffff",  --    ori $t0, 0xffff
 			x"08100000",  --    j reset
 			others=> x"00000000");	
