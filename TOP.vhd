@@ -68,6 +68,7 @@ component mips is
 			Addr_Data		: out STD_LOGIC_VECTOR (31 downto 0); 	-- Address sent to data memory / memory-mapped peripherals
 			Data_In			: in STD_LOGIC_VECTOR (31 downto 0);  	-- Data read from data memory / memory-mapped peripherals
 			Data_Out			: out  STD_LOGIC_VECTOR (31 downto 0); -- Data to be written to data memory / memory-mapped peripherals 
+			MemAddrExc		: in STD_LOGIC;
 			MemRead 			: out STD_LOGIC; 	-- MemRead signal to data memory / memory-mapped peripherals 
 			MemWrite 		: out STD_LOGIC; 	-- MemWrite signal to data memory / memory-mapped peripherals 
 			RESET				: in STD_LOGIC; 	-- Reset signal for the processor. Should reset ALU and PC. Resetting general purpose registers is not essential (though it could be done).
@@ -81,8 +82,9 @@ end component mips;
 signal Addr_Instr 	: STD_LOGIC_VECTOR (31 downto 0);
 signal Instr 			: STD_LOGIC_VECTOR (31 downto 0);
 signal Data_In			: STD_LOGIC_VECTOR (31 downto 0);
-signal Addr_Data		: STD_LOGIC_VECTOR (31 downto 0);
+signal Addr_Data		: STD_LOGIC_VECTOR (31 downto 0):= x"10010000";
 signal Data_Out		: STD_LOGIC_VECTOR (31 downto 0);
+signal MemAddrExc		: STD_LOGIC;
 signal MemRead 		: STD_LOGIC; 
 signal MemWrite 		: STD_LOGIC; 
 
@@ -140,7 +142,8 @@ MIPS1 : MIPS port map (
 			Instr 			=>  Instr, 		
 			Data_In			=>  Data_In,	
 			Addr_Data		=>  Addr_Data,		
-			Data_Out			=>  Data_Out,	
+			Data_Out			=>  Data_Out,
+			MemAddrExc		=>	 MemAddrExc,
 			MemRead 			=>  MemRead,		
 			MemWrite 		=>  MemWrite,
 			RESET				=>	 RESET,
@@ -153,6 +156,8 @@ MIPS1 : MIPS port map (
 dec_DATA_MEM <= '1' 	when Addr_Data>=x"10010000" and Addr_Data<=x"100103FC" else '0'; --assuming 256 word memory
 dec_LED 		<= '1'	when Addr_Data=x"10020000" else '0';
 dec_DIP 		<= '1' 	when Addr_Data=x"10030000" else '0';
+
+MemAddrExc <= '0' when dec_DATA_MEM = '1' or (MemWrite = '0' and MemRead = '0') else '1'; --assuming 256 word memory
 
 ----------------------------------------------------------------
 -- Data memory read

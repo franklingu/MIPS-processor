@@ -30,15 +30,16 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity ExceptionUnit is
-    Port ( Overflow : in  STD_LOGIC;
+    Port ( Overflow	: in  STD_LOGIC;
            DecodeExc : in  STD_LOGIC;
+			  MemAddrExc: in  STD_LOGIC;
            Exception : out  STD_LOGIC);
 end ExceptionUnit;
 
 architecture exception_arch of ExceptionUnit is
 begin
 
-Exception <= Overflow or DecodeExc;
+Exception <= Overflow or DecodeExc or MemAddrExc;
 
 end exception_arch;
 

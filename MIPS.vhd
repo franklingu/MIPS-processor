@@ -27,6 +27,7 @@ entity MIPS is -- DO NOT modify the interface (entity)
 			Addr_Data		: out STD_LOGIC_VECTOR (31 downto 0);
 			Data_In			: in STD_LOGIC_VECTOR (31 downto 0);
 			Data_Out			: out  STD_LOGIC_VECTOR (31 downto 0);
+			MemAddrExc		: in  STD_LOGIC;
 			MemRead 			: out STD_LOGIC; 
 			MemWrite 		: out STD_LOGIC; 
 			RESET				: in STD_LOGIC;
@@ -109,6 +110,7 @@ component ExceptionUnit is
 	  Port ( 
 			 Overflow : in  STD_LOGIC;
           DecodeExc : in  STD_LOGIC;
+			 MemAddrExc : in STD_LOGIC;
           Exception : out  STD_LOGIC);
 end component;
 
@@ -160,7 +162,7 @@ end component;
 ----------------------------------------------------------------
 -- Exception Signals and Constants
 ----------------------------------------------------------------
-	constant Exception_Handler : STD_LOGIC_VECTOR (31 downto 0):= (others => '0');
+	constant Exception_Handler : STD_LOGIC_VECTOR (31 downto 0):= x"00400004";
 	signal Exception : STD_LOGIC := '0';
 
 ----------------------------------------------------------------	
@@ -241,6 +243,7 @@ ExceptionUnit1	: ExceptionUnit port map
 						( 
 						 Overflow => ALU_overflow,
 						 DecodeExc	=> DecodeExc,
+						 MemAddrExc => MemAddrExc,
 						 Exception => Exception
 						);
 
@@ -284,8 +287,8 @@ pc_temp(17 downto 2) <= Instr(15 downto 0);
 pc_temp(31 downto 18) <= (others => (Instr(15) and SignExtend));
 pc_temp(1 downto 0) <= "00";
 
-PC_in <= PC_out when ALU_busy = '1' else
-			Exception_Handler when Exception = '1' else
+PC_in <= Exception_Handler when Exception = '1' else
+			PC_out when ALU_busy = '1' else
 			ReadData1_Reg when JumpR = '1' else
 			PC_increment(31 downto 28) & Instr(25 downto 0) & "00" when Jump = '1' else
 			PC_temp + PC_increment when Branch = '1' and ALU_Zero = '1' else
