@@ -251,7 +251,9 @@ ExceptionUnit1	: ExceptionUnit port map
 -- for Reg
 ReadAddr1_Reg <= Instr(25 downto 21);
 ReadAddr2_Reg <= Instr(20 downto 16);
-WriteAddr_Reg <= Instr(15 downto 11) when RegDst = '1' else Instr(20 downto 16);
+WriteAddr_Reg <= "11111" when PcToReg = '1' else
+					  Instr(15 downto 11) when RegDst = '1' else 
+					  Instr(20 downto 16);
 
 -- multiplexer to choose data-in for reg write
 WriteData_Reg <=  (PC_out + 4) when PcToReg = '1' else
