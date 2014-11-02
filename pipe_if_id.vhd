@@ -30,11 +30,11 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity pipe_if_id is
-    Port ( Instruction : in  STD_LOGIC_VECTOR(31 downto 0);
-           Pcplus4 : in  STD_LOGIC(31 downto 0);
-           Instr_out : out  STD_LOGIC(31 downto 0);
-           Pc_out : out  STD_LOGIC(31 downto 0);
-           CLK : in  STD_LOGIC);
+    Port ( Instruction 	: in  STD_LOGIC_VECTOR(31 downto 0);
+           PcPlus4 		: in  STD_LOGIC_VECTOR(31 downto 0);
+           Out_Instr 	: out  STD_LOGIC_VECTOR(31 downto 0);
+           Out_PcPlus4 	: out  STD_LOGIC_VECTOR(31 downto 0);
+           CLK 			: in  STD_LOGIC);
 end pipe_if_id;
 
 architecture Behavioral of pipe_if_id is
@@ -43,8 +43,8 @@ begin
 process(CLK)
 begin
 	if CLK'event and CLK = '1' then
-		Instr_out <= Instruction;
-		Pc_out <= Pcplus4;
+		Out_Instr <= Instruction;
+		Out_PcPlus4 <= PcPlus4;
 	end if;
 end process;
 end Behavioral;
