@@ -55,7 +55,7 @@ architecture arch_TOP of TOP is
 -- Constants
 ----------------------------------------------------------------
 constant CLK_DIV_BITS	: integer := 25; --25 for a clock of the order of 1Hz
-constant N_LEDs			: integer := 8;
+constant N_LEDs			: integer := 12;
 constant N_DIPs			: integer := 16;
 
 ----------------------------------------------------------------
@@ -102,33 +102,38 @@ type MEM_256x32 is array (0 to 255) of std_logic_vector (31 downto 0); -- 256 wo
 -- Instruction Memory
 ----------------------------------------------------------------
 constant INSTR_MEM : MEM_256x32 := (
-			x"3c090000",    -- start : lui $t1, 0x0000
-			x"35290001",   --     ori $t1, 0x0001 # constant 1
-			x"01c07024",    --     and $t6, $t6, $zero
-			x"21ce0002",    --     addi $t6, $t6, 0x0002
-			x"3c081003",    --     lui $t0, 0x1003 # DIP pointer, for VHDL
-			x"8d0c0000",    --     lw  $t4, 0($t0) 
-			x"3c081002",    --     lui $t0, 0x1002 # LED pointer, for VHDL
-			x"3c0d0000",    --     lui $t5, 0x0000
-			x"35ad0001",    --     ori $t5, 0x0001 # delay counter (n). Change according to the clock
-			x"3c0a0001",    --     lui $t2, 0x0001
-			x"01405024",    --     and $t2, $t2, $zero
-			x"3c0b0040",    --     lui $t3, 0x0040
-			x"356b0034",    --     ori $t3, 0x0034
-			x"01ae0018",    -- loop:   mult $t5, $t6
-			x"00006812",    --     mflo $t5
-			x"01495020",    --     add $t2, $t2, $t1
-			x"014d5025",    --     or $t2, $t2, $t5
-			x"01495022",    -- delay:  sub $t2, $t2, $t1 
-			x"0541fffe",    --     bgez $t2, delay
-			x"ad0c0000",    --     sw  $t4, 0($t0) 
-			x"01806027",    --     nor $t4, $t4, $zero
-			x"01600008",    --     jr $t3 # infinite loop; n*3 (delay instructions) + 5 (non-delay instructions).
-			others=> x"00000000");
-
--- The Blinky program reads the DIP switches in the begining. Let the value read be VAL
--- It will then keep alternating between VAL(7 downto 0) , not(VAL(7 downto 0)), 
--- essentially blinking LED(7 downto 0) according to the initial pattern read from the DIP switches 	
+			x"3c081002",   -- start:     lui $t0, 0x1002
+			x"35080000",   --    ori $t0, 0x0000  #address for data memory
+			x"3c090000",   --    lui $t1, 0x0000
+			x"35290000",   --    ori $t1, 0x0000  # t1 = 0
+			x"3c0a0000",   --    lui $t2, 0x0000
+			x"354a0001",   --    ori $t2, 0x0001  # t2 = 1
+			x"3c0b0000",   --    lui $t3, 0x0000
+			x"356b0000",   --    ori $t3, 0x0000  # t3 = 0
+			x"3c0c0000",   --    lui $t4, 0x0000
+			x"358c0000",   --    ori $t4, 0x0000
+			x"3c0d0000",   --    lui $t5, 0x0000
+			x"35ad01ff",   --    ori $t5, 0x01ff  # at most "111111111"
+			x"3c0e0000",   --    lui $t6, 0x0000
+			x"35ce0000",   --    ori $t6, 0x0000
+			x"21ce0003",   --    addi $t6, $t6, 0x0003  # t6 = 3
+			x"3c110000",   --    lui $s1, 0x0000
+			x"36310001",   --    ori $s1, 0x0001
+			x"0c10001a",   -- loop:  jal fib
+			x"218c0001",   --    add $t4, $t4, 0x0001
+			x"018e0018",   --    mult $t4, $t6
+			x"00006012",   --    mflo $t4
+			x"01916022",   -- delay: sub $t4, $t4, $s1
+			x"0581fffe",   --    bgez $t4, delay
+			x"012d782a",   --    slt $t7, $t1, $t5
+			x"15e0fff8",   --    bne $t7, $zero loop
+			x"08100000",   --    j start
+			x"ad090000",   -- fib:   sw  $t1, 0($t0)
+			x"01405820",   --    add $t3, $t2, $zero
+			x"01495020",   --    add $t2, $t2, $t1
+			x"01604820",   --    add $t1, $t3, $zero
+			x"03e00008",   --        jr $31
+			others=> x"00000000");	
 
 ----------------------------------------------------------------
 -- Data Memory
@@ -183,7 +188,7 @@ Instr <= INSTR_MEM(conv_integer(Addr_Instr(9 downto 2)))
 ----------------------------------------------------------------
 -- Debug LEDs
 ----------------------------------------------------------------			
-LED(14 downto 8) <= Addr_Instr(22) & Addr_Instr(7 downto 2); -- debug showing PC
+LED(14 downto 12) <= Addr_Instr(22) & Addr_Instr(3 downto 2); -- debug showing PC
 LED(15) <= CLK; -- debug showing clock
 
 ----------------------------------------------------------------
@@ -229,30 +234,3 @@ end arch_TOP;
 -- </Wrapper architecture>
 ----------------------------------------------------------------
 ----------------------------------------------------------------	
-
-
-
-----------------------------------------------------------------
--- Blinky Program
-----------------------------------------------------------------
--- start : lui $t1, 0x0000
---     ori $t1, 0x0001 # constant 1
---     lui $t0, 0x1003 # DIP pointer, for VHDL
---     lw  $t4, 0($t0) 
---     lui $t0, 0x1002 # LED pointer, for VHDL
---     lui $t5, 0x0000
---     ori $t5, 0x0000 # delay counter (n). Change according to the clock
---     lui $t2, 0x0001
---     and $t2, $t2, $zero
--- loop:   
---     add $t5, $t5, $t1
---     or $t2, $t2, $t5
--- delay:  sub $t2, $t2, $t1 
---     slt $t3, $t2, $t1
---     beq $t3, $zero, delay
---     sw  $t4, 0($t0) 
---     nor $t4, $t4, $zero
---     j loop # infinite loop; n*3 (delay instructions) + 5 (non-delay instructions).
-
-----------------------------------------------------------------
-----------------------------------------------------------------

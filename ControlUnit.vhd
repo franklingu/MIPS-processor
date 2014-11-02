@@ -128,7 +128,8 @@ begin
 	when "000011" => -- jal
 		ALUOp <= "00";
 		Jump <= '1';
-		PcToReg <= '1';		
+		PcToReg <= '1';
+		RegWrite <= '1';
 	when others =>
 		ALUOp <= "00";
 	end case;
