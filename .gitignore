@@ -45,7 +45,9 @@ Thumbs.db
 
 #except for vhdl file and ucf, md and other necessary stuff
 !.gitignore
-!*.vhdl
+!*.vhd
 !*.ucf
 !*.md
+!*.asm
+
 
