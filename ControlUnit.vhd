@@ -119,6 +119,8 @@ begin
 			ZeroToAlu <= '1';
 			RegWrite <= '1';
 			PcToReg <= '1';
+		else
+			DecodeExc <= '1';
 		end if;
 	when "000100" => -- beq
 		ALUOp <= "01";
