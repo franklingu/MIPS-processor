@@ -29,13 +29,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity ExpectionUnit is
+entity ExceptionUnit is
     Port ( Overflow : in  STD_LOGIC;
            DecodeExc : in  STD_LOGIC;
            Exception : out  STD_LOGIC);
-end ExpectionUnit;
+end ExceptionUnit;
 
-architecture exception_arch of ExpectionUnit is
+architecture exception_arch of ExceptionUnit is
 begin
 
 Exception <= Overflow or DecodeExc;
