@@ -30,31 +30,42 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity pipe_ex_mem is
-    Port ( CLK : in  STD_LOGIC;
-           Instruction : in  STD_LOGIC_VECTOR(31 downto 0);
-           PcPlus4 : in  STD_LOGIC(31 downto 0);
-           Out_InstrLower : out  STD_LOGIC_VECTOR(15 downto 0);
-           Out_PCPlus4: out  STD_LOGIC(31 downto 0);
-           -- for MEM stage
-           Branch      : in  STD_LOGIC;
-           MemRead     : in  STD_LOGIC;
-           MemWrite    : in  STD_LOGIC;
-           AluOut   : in STD_LOGIC_VECTOR (31 downto 0);
-           AluZero  : in STD_LOGIC;
-           ReadData2_Reg  : in STD_LOGIC_VECTOR (31 downto 0);
-           Out_Branch      : out  STD_LOGIC;
-           Out_MemRead     : out  STD_LOGIC;
-           Out_MemWrite    : out  STD_LOGIC;
-           Out_AluOut  : out STD_LOGIC_VECTOR (31 downto 0);
-           Out_AluZero : out STD_LOGIC;
-           Out_ReadData2_Reg : out STD_LOGIC_VECTOR (31 downto 0);
-           -- for WB stage 
-           MemToReg    : in  STD_LOGIC;
-           PcToReg     : in  STD_LOGIC;
-           RegWrite    : in  STD_LOGIC;
-           Out_MemToReg    : out  STD_LOGIC;
-           Out_PcToReg     : out  STD_LOGIC;
-           Out_RegWrite    : out  STD_LOGIC);  
+    Port ( Branch      			: in  STD_LOGIC;
+			  ALUZero				: in  STD_LOGIC;
+           MemRead     			: in  STD_LOGIC;
+           MemWrite    			: in  STD_LOGIC;
+			  MemToReg    			: in  STD_LOGIC;
+           PcToReg     			: in  STD_LOGIC;
+			  InstrToReg  			: in  STD_LOGIC;
+			  RegDst					: in  STD_LOGIC;
+           RegWrite    			: in  STD_LOGIC;
+			  InstrRs 				: in  STD_LOGIC_VECTOR(4 downto 0);
+			  InstrRt 				: in  STD_LOGIC_VECTOR(4 downto 0);
+			  InstrRd 				: in  STD_LOGIC_VECTOR(4 downto 0);
+			  InstrLower 			: in  STD_LOGIC_VECTOR(15 downto 0);
+           PcPlus4 				: in  STD_LOGIC_VECTOR(31 downto 0);
+			  BranchPcTgt 			: in  STD_LOGIC_VECTOR(31 downto 0);
+           Alu_out   			: in  STD_LOGIC_VECTOR(31 downto 0);
+           ReadData2_Reg  		: in  STD_LOGIC_VECTOR(31 downto 0);
+			  
+           Out_Branch      	: out STD_LOGIC;
+			  Out_ALUZero			: out STD_LOGIC;
+           Out_MemRead     	: out STD_LOGIC;
+           Out_MemWrite    	: out STD_LOGIC;
+			  Out_MemToReg    	: out STD_LOGIC;
+           Out_PcToReg     	: out STD_LOGIC;
+			  Out_InstrToReg  	: out STD_LOGIC;
+			  Out_RegDst			: out STD_LOGIC;
+			  Out_RegWrite    	: out STD_LOGIC;
+			  Out_InstrRs 			: out STD_LOGIC_VECTOR(4 downto 0);
+			  Out_InstrRt 			: out STD_LOGIC_VECTOR(4 downto 0);
+			  Out_InstrRd 			: out STD_LOGIC_VECTOR(4 downto 0);
+			  Out_InstrLower 		: out STD_LOGIC_VECTOR(15 downto 0);
+           Out_PcPlus4			: out STD_LOGIC_VECTOR(31 downto 0);
+			  Out_BranchPcTgt		: out STD_LOGIC_VECTOR(31 downto 0);
+           Out_Alu_out  		: out STD_LOGIC_VECTOR(31 downto 0);
+           Out_ReadData2_Reg 	: out STD_LOGIC_VECTOR(31 downto 0);
+			  CLK : in  STD_LOGIC);  
 end pipe_ex_mem;
 
 architecture Behavioral of pipe_ex_mem is
@@ -62,19 +73,23 @@ begin
 process(CLK)
 begin
     if CLK'event and CLK = '1' then
-        Out_InstrLower <= Instruction(15 downto 0);
-        Out_PcPlus4 <= PcPlus4;
-        -- for Mem
         Out_Branch <= Branch;
+		Out_ALUZero <= ALUZero;
         Out_MemRead <= MemRead;
         Out_MemWrite <= MemWrite;
-        Out_AluOut <= AluOut;
-        Out_AluZero <= AluZero;
-        Out_ReadData2_Reg <= ReadData2_Reg;
-        -- for WB
         Out_MemToReg <= MemToReg;
         Out_PcToReg <= PcToReg;
+        Out_InstrToReg <= InstrToReg;
+        Out_RegDst <= RegDst;
         Out_RegWrite <= RegWrite;
+        Out_InstrRs <= InstrRs;
+        Out_InstrRt <= InstrRt;
+        Out_InstrRd <= InstrRd;
+        Out_InstrLower <= InstrLower;
+        Out_PcPlus4 <= PcPlus4;
+        Out_BranchPcTgt <= BranchPcTgt;
+        Out_Alu_out <= Alu_out;	
+        Out_ReadData2_Reg <= ReadData2_Reg;
     end if;
 end process;
 end Behavioral;

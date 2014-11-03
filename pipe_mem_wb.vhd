@@ -31,23 +31,30 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity pipe_mem_wb is
 	Port (	PcToReg     		: in  STD_LOGIC;
-				MemtoReg    		: in  STD_LOGIC;
-				InstrtoReg  		: in  STD_LOGIC;
+				MemToReg    		: in  STD_LOGIC;
+				InstrToReg  		: in  STD_LOGIC;
+				RegDst				: in  STD_LOGIC;
 				RegWrite    		: in  STD_LOGIC;
+				InstrRs		 		: in  STD_LOGIC_VECTOR(4 downto 0);
+				InstrRt		 		: in  STD_LOGIC_VECTOR(4 downto 0);
+				InstrRd		 		: in  STD_LOGIC_VECTOR(4 downto 0);
+				InstrLower			: in  STD_LOGIC_VECTOR(15 downto 0);
 				PcPlus4				: in  STD_LOGIC_VECTOR(31 downto 0);
 				MemReadData 		: in  STD_LOGIC_VECTOR(31 downto 0);
-				InstrLower			: in  STD_LOGIC_VECTOR(15 downto 0);
 				Alu_out				: in  STD_LOGIC_VECTOR(31 downto 0);
-				WriteAddr_Reg 		: in  STD_LOGIC_VECTOR(4 downto 0);
+				
 				Out_PcToReg 		: out STD_LOGIC;
-				Out_MemtoReg		: out STD_LOGIC;
-				Out_InstrtoReg		: out STD_LOGIC;
+				Out_MemToReg		: out STD_LOGIC;
+				Out_InstrToReg		: out STD_LOGIC;
+				Out_RegDst			: out STD_LOGIC;
 				Out_RegWrite		: out STD_LOGIC;
+				Out_InstrRs			: out STD_LOGIC_VECTOR(4 downto 0);
+				Out_InstrRt			: out STD_LOGIC_VECTOR(4 downto 0);
+				Out_InstrRd			: out STD_LOGIC_VECTOR(4 downto 0);
+				Out_InstrLower		: out STD_LOGIC_VECTOR(15 downto 0);
 				Out_PCPlus4 		: out STD_LOGIC_VECTOR(31 downto 0);
 				Out_MemReadData 	: out STD_LOGIC_VECTOR(31 downto 0);
-				Out_InstrLower		: out STD_LOGIC_VECTOR(15 downto 0);
 				Out_Alu_out			: out STD_LOGIC_VECTOR(31 downto 0);
-				Out_WriteAddr_Reg : out STD_LOGIC_VECTOR(4 downto 0);
 				CLK					: in  STD_LOGIC);
 end pipe_mem_wb;
 
@@ -57,14 +64,17 @@ process(CLK)
 begin
 	if CLK'event and CLK = '1' then
 		Out_PcToReg <= PcToReg;
-		Out_MemtoReg <= MemtoReg;
-		Out_InstrtoReg <= InstrtoReg;
+		Out_MemToReg <= MemToReg;
+		Out_InstrToReg <= InstrToReg;
+		Out_RegDst <= RegDst;
 		Out_RegWrite <= RegWrite;
 		Out_PCPlus4 <= PCPlus4;
 		Out_MemReadData <= MemReadData;
 		Out_InstrLower <= InstrLower;
 		Out_Alu_out <= Alu_out;
-		Out_WriteAddr_Reg <= WriteAddr_Reg;
+		Out_InstrRs <= InstrRs;
+		Out_InstrRt <= InstrRt;
+		Out_InstrRd <= InstrRd;
 	end if;
 end process;
 end Behavioral;

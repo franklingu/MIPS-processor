@@ -30,8 +30,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity pipe_if_id is
-    Port ( Instruction 	: in  STD_LOGIC_VECTOR(31 downto 0);
+    Port ( Instr		 	: in  STD_LOGIC_VECTOR(31 downto 0);
            PcPlus4 		: in  STD_LOGIC_VECTOR(31 downto 0);
+			  
            Out_Instr 	: out  STD_LOGIC_VECTOR(31 downto 0);
            Out_PcPlus4 	: out  STD_LOGIC_VECTOR(31 downto 0);
            CLK 			: in  STD_LOGIC);
@@ -43,7 +44,7 @@ begin
 process(CLK)
 begin
 	if CLK'event and CLK = '1' then
-		Out_Instr <= Instruction;
+		Out_Instr <= Instr;
 		Out_PcPlus4 <= PcPlus4;
 	end if;
 end process;

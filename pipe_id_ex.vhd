@@ -30,39 +30,45 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity pipe_id_ex is
-    Port ( 
-			  ALUSrc      			: in  STD_LOGIC;
-			  RegDst      			: in  STD_LOGIC;
+    Port ( ALUSrc      			: in  STD_LOGIC;
 			  ZeroToAlu   			: in  STD_LOGIC;
 			  Branch      			: in  STD_LOGIC;
 			  MemRead     			: in  STD_LOGIC;
 			  MemWrite    			: in  STD_LOGIC;
-			  MemtoReg    			: in  STD_LOGIC;
-			  InstrtoReg  			: in  STD_LOGIC;
-			  PCToReg     			: in  STD_LOGIC;
+			  MemToReg    			: in  STD_LOGIC;
+			  InstrToReg  			: in  STD_LOGIC;
+			  PcToReg     			: in  STD_LOGIC;
 			  RegWrite    			: in  STD_LOGIC;
-			  SignExtend  			: in  STD_LOGIC;
+			  RegDst      			: in  STD_LOGIC;
+			  InstrRs				: in  STD_LOGIC_VECTOR(4 downto 0);
+			  InstrRt				: in  STD_LOGIC_VECTOR(4 downto 0);
+			  InstrRd				: in  STD_LOGIC_VECTOR(4 downto 0);
 			  ALU_Control 			: in  STD_LOGIC_VECTOR(7 downto 0);
+			  InstrLower 			: in  STD_LOGIC_VECTOR(15 downto 0);
 			  ReadData1_Reg		: in  STD_LOGIC_VECTOR(31 downto 0);
            ReadData2_Reg	   : in  STD_LOGIC_VECTOR(31 downto 0);
 			  PcPlus4 				: in  STD_LOGIC_VECTOR(31 downto 0);
-			  InstrLower 			: in  STD_LOGIC_VECTOR(15 downto 0);
+			  SignExtended  		: in  STD_LOGIC_VECTOR(31 downto 0);
+			  
            Out_ALUSrc      	: out STD_LOGIC;
-           Out_RegDst      	: out STD_LOGIC;
            Out_ZeroToAlu   	: out STD_LOGIC;
            Out_Branch      	: out STD_LOGIC;
            Out_MemRead     	: out STD_LOGIC;
            Out_MemWrite    	: out STD_LOGIC;
-           Out_MemtoReg    	: out STD_LOGIC;
-           Out_InstrtoReg  	: out STD_LOGIC;
-           Out_PCToReg     	: out STD_LOGIC;
+           Out_MemToReg    	: out STD_LOGIC;
+           Out_InstrToReg  	: out STD_LOGIC;
+           Out_PcToReg     	: out STD_LOGIC;
            Out_RegWrite    	: out STD_LOGIC;
-           Out_SignExtend  	: out STD_LOGIC;
+			  Out_RegDst      	: out STD_LOGIC;
+			  Out_InstrRs			: out STD_LOGIC_VECTOR(4 downto 0);
+			  Out_InstrRt			: out STD_LOGIC_VECTOR(4 downto 0);
+			  Out_InstrRd			: out STD_LOGIC_VECTOR(4 downto 0);
 			  Out_ALU_Control 	: out STD_LOGIC_VECTOR(7 downto 0);
+			  Out_InstrLower 		: out STD_LOGIC_VECTOR(15 downto 0);
 			  Out_ReadData1_Reg  : out STD_LOGIC_VECTOR(31 downto 0);
            Out_ReadData2_Reg  : out STD_LOGIC_VECTOR(31 downto 0);
 			  Out_PcPlus4 			: out STD_LOGIC_VECTOR(31 downto 0);
-			  Out_InstrLower 		: out STD_LOGIC_VECTOR(15 downto 0);
+			  Out_SignExtended  	: out STD_LOGIC_VECTOR(31 downto 0);
 			  CLK 					: in  STD_LOGIC);  
 end pipe_id_ex;
 
@@ -72,20 +78,20 @@ process(CLK)
 begin
 	if CLK'event and CLK = '1' then
 		Out_ALUSrc <= ALUSrc;
-		Out_RegDst <= RegDst;
 		Out_ZeroToAlu <= ZeroToAlu;
 		Out_Branch <= Branch;
 		Out_MemRead <= MemRead;
 		Out_MemWrite <= MemWrite;
-		Out_MemtoReg <= MemtoReg;
-		Out_InstrtoReg <= InstrtoReg;
-		Out_PCToReg <= PCToReg;
+		Out_MemToReg <= MemtoReg;
+		Out_InstrToReg <= InstrtoReg;
+		Out_PcToReg <= PCToReg;
 		Out_RegWrite <= RegWrite;
-		Out_SignExtend <= SignExtend;
+		Out_RegDst <= RegDst;
 		Out_ALU_Control <= ALU_Control;
 		Out_ReadData1_Reg <= ReadData1_Reg;
 		Out_ReadData2_Reg <= ReadData2_Reg;
 		Out_PcPlus4 <= PcPlus4;
+		Out_SignExtended <= SignExtended;
 		Out_InstrLower <= InstrLower;
 	end if;
 end process;
