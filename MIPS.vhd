@@ -637,7 +637,7 @@ IdEx_MemToReg <= MemToReg;
 IdEx_InstrToReg <= InstrToReg;
 IdEx_PcToReg <= PcToReg;
 IdEx_RegWrite <= RegWrite;
-IdEx_RegDst <= RegDst;
+IdEx_RegDst <= RegDst; -- this signal is most likely to be consumed in stage already
 IdEx_InstrRs <= IfId_Out_Instr(25 downto 21);
 IdEx_InstrRt <= IfId_Out_Instr(20 downto 16);
 IdEx_InstrRd <= "11111" when PcToReg = '1' else
@@ -654,13 +654,34 @@ IdEx_SignExtended <= SignExtended;
 -- EX stage
 ----------------------------------------------------------------
 
+
 ----------------------------------------------------------------
 -- MEM stage
 ----------------------------------------------------------------
+Addr_Data <= ExMem_Out_Alu_out;
+Data_Out <= ExMem_Out_ReadData2_Reg;
+-- pipe
+MemWb_PcToReg <= ExMem_Out_PcToReg;
+MemWb_MemToReg <= ExMem_Out_MemToReg;
+MemWb_InstrToReg <= ExMem_Out_MemToReg;
+MemWb_RegDst <= ExMem_Out_RegDst;
+MemWb_RegWrite <= ExMem_Out_RegWrite;
+MemWb_InstrRs <= ExMem_Out_InstrRs;
+MemWb_InstrRt <= ExMem_Out_InstrRt;
+MemWb_InstrRd <= ExMem_Out_InstrRd;
+MemWb_InstrLower <= ExMem_Out_InstrLower;
+MemWb_PcPlus4 <= ExMem_Out_PcPlus4;
+MemWb_MemReadData <= Data_In;
+MemWb_Alu_out <= ExMem_Out_Alu_out;
 
 ----------------------------------------------------------------
 -- WB stage
 ----------------------------------------------------------------
+WriteAddr_Reg <= MemWb_Out_InstrRd;
+WriteData_Reg <= MemWb_Out_PCPlus4 when MemWb_Out_PcToReg = '1' else
+					  MemWb_Out_MemReadData when MemWb_Out_MemToReg = '1' else
+					  MemWb_Out_InstrLower & "0000000000000000" when MemWb_Out_InstrToReg else
+					  MemWb_Out_Alu_out;
 
 ---- for Reg
 --ReadAddr1_Reg <= Instr(25 downto 21);
