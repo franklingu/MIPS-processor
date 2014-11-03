@@ -104,17 +104,15 @@ type MEM_256x32 is array (0 to 255) of std_logic_vector (31 downto 0); -- 256 wo
 -- Instruction Memory
 ----------------------------------------------------------------
 constant INSTR_MEM : MEM_256x32 := (
-			x"08100008",  -- reset: j start
-			x"00004024",  -- exception:	and
-			x"00004824",  -- 		and $t1
-			x"3c081001",  -- 		lui $t0
-			x"3c091002",  -- 		lui $t1
-			x"8d0a0000",  -- 		lw $t2,
-			x"ad2a0000",  -- 		sw $t2,
-			x"08100007",  -- die:	j die
-			x"3c087fff",  -- start: lui $t0,
-			x"01284820",  --        add $t1,
-			x"08100008",  --        j start
+			x"08100006",  -- reset: j start
+			x"00004824",  -- exception:	and $t1, $zero, $zero
+			x"3c091002",  -- 		lui $t1, 0x1002
+			x"400a6800",  -- 		mfc0 $t2, $13
+			x"ad2a0000",  -- 		sw $t2, 0($t1)
+			x"08100005",  -- die:	j die
+			x"3c087fff",  -- start: lui $t0, 0x7fff
+			x"01284820",  --        add $t1, $t1, $t0
+			x"08100006",  --        j start
 			others=> x"00000000");	
 
 ----------------------------------------------------------------
@@ -226,28 +224,25 @@ end arch_TOP;
 ----------------------------------------------------------------
 ----------------------------------------------------------------
 -- Unknown Instruction
---x"08100008" -- reset: j start
---x"00004024" -- exception:	and $t0, $zero, $zero
---x"00004824" -- 		and $t1, $zero, $zero
---x"3c081001" -- 		lui $t0, 0x1001
---x"3c091002" -- 		lui $t1, 0x1002
---x"8d0a0000" -- 		lw $t2, 0($t0)
---x"ad2a0000" -- 		sw $t2, 0($t1)
---x"08100007" -- die:	j die
---x"3c087fff" -- start: lui $t0, 0x7fff
---x"3c090000" --        lui $t1, 0x0000
---x"1528fffd" --        bne $t1, $t0, start
---x"08100008" --        j start
+--x"08100006", -- reset: j start
+--x"00004824", -- exception:	and $t1, $zero, $zero
+--x"3c091002", -- 		lui $t1, 0x1002
+--x"400a6800", -- 		mfc0 $t2, $13
+--x"ad2a0000", -- 		sw $t2, 0($t1)
+--x"08100005", -- die:	j die
+--x"3c087fff", -- start: lui $t0, 0x7fff
+--x"3c090000", --        lui $t1, 0x0000
+--x"1528fffd", --        bne $t1, $t0, start
+--x"08100006", --        j start
 
 -- Unknown Memory Address
---x"08100008"  -- reset: j start
---x"00004024"  -- exception:	and $t0, $zero, $zero
---x"00004824"  -- 		and $t1, $zero, $zero
---x"3c081001"  -- 		lui $t0, 0x1001
---x"3c091002"  -- 		lui $t1, 0x1002
---x"8d0a0000"  -- 		lw $t2, 0($t0)
---x"ad2a0000"  -- 		sw $t2, 0($t1)
---x"08100007"  -- die:	j die
---x"3c087fff"  -- start: lui $t0, 0x7fff
---x"8d090000"  --        lw $t1, 0($t0)
---x"08100008"  --        j start
+--x"08100007",  -- reset: j start
+--x"00004824",  -- exception:	and $t1, $zero, $zero
+--x"3c091002",  -- 		lui $t1, 0x1002
+--x"400a6800",  -- 		mfc0 $t2, $13
+--x"8d0a0000",  -- 		lw $t2, 0($t0)
+--x"ad2a0000",  -- 		sw $t2, 0($t1)
+--x"08100006",  -- die:	j die
+--x"3c087fff",  -- start: lui $t0, 0x7fff
+--x"8d090000",  --        lw $t1, 0($t0)
+--x"08100007",  --        j start

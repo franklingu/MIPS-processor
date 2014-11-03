@@ -84,7 +84,9 @@ component ControlUnit is
 				RegWrite		: out  STD_LOGIC;	
 				RegDst		: out  STD_LOGIC;
 				ZeroToAlu	: out	 STD_LOGIC;
-				DecodeExc	: out  STD_LOGIC);
+				DecodeExc	: out  STD_LOGIC;
+				ExcCauseRead : in STD_LOGIC;
+			   ExcPcRead    : in STD_LOGIC);
 end component;
 
 ----------------------------------------------------------------
@@ -108,11 +110,16 @@ end component;
 
 component ExceptionUnit is 
 	  Port ( 
-			 Overflow : in  STD_LOGIC;
-          DecodeExc : in  STD_LOGIC;
+			 CLK			  : in STD_LOGIC;
+			 ExcCauseRead : in STD_LOGIC;
+			 ExcPcRead    : in STD_LOGIC;
+			 Overflow 	: in  STD_LOGIC;
+          DecodeExc 	: in  STD_LOGIC;
 			 MemAddrExc : in STD_LOGIC;
-          Exception : out  STD_LOGIC;
-			 Cause		: out STD_LOGIC_VECTOR(2 downto 0));
+          Exception 	: out  STD_LOGIC;
+			 Cause		: out STD_LOGIC_VECTOR(2 downto 0);
+			 ExcPcIn		: in STD_LOGIC_VECTOR(31 downto 0);
+			 ExcPcOut	: out STD_LOGIC_VECTOR(31 downto 0));
 end component;
 
 ----------------------------------------------------------------
@@ -137,20 +144,22 @@ end component;
 ----------------------------------------------------------------
 -- Control Unit Signals
 ----------------------------------------------------------------				
-	signal	Branch 		:  STD_LOGIC;
-	signal	Jump	 		:  STD_LOGIC;
-	signal	JumpR	 		:  STD_LOGIC;	
-	signal	MemtoReg 	:  STD_LOGIC;
-	signal 	InstrtoReg	: 	STD_LOGIC;
-	signal 	PcToReg		:	STD_LOGIC;
-	signal	ALUSrc 		:  STD_LOGIC;	
-	signal	SignExtend 	: 	STD_LOGIC;
-	signal	RegWrite		: 	STD_LOGIC;	
-	signal	RegDst		:  STD_LOGIC;
-	signal	ZeroToAlu	:	STD_LOGIC;
-	signal	DecodeExc	:  STD_LOGIC;
-	signal	MemWriteControl: STD_LOGIC;
-	signal	RegWriteControl: STD_LOGIC;
+	signal	Branch 			:  STD_LOGIC;
+	signal	Jump	 			:  STD_LOGIC;
+	signal	JumpR	 			:  STD_LOGIC;	
+	signal	MemtoReg 		:  STD_LOGIC;
+	signal 	InstrtoReg		: 	STD_LOGIC;
+	signal 	PcToReg			:	STD_LOGIC;
+	signal	ALUSrc 			:  STD_LOGIC;	
+	signal	SignExtend 		: 	STD_LOGIC;
+	signal	RegWrite			: 	STD_LOGIC;	
+	signal	RegDst			:  STD_LOGIC;
+	signal	ZeroToAlu		:	STD_LOGIC;
+	signal	DecodeExc		:  STD_LOGIC;
+	signal	ExcPcRead		:  STD_LOGIC;
+	signal	ExcCauseRead	:	STD_LOGIC;
+	signal	MemWriteControl:	STD_LOGIC;
+	signal	RegWriteControl:	STD_LOGIC;
 
 ----------------------------------------------------------------
 -- Register File Signals
@@ -168,6 +177,8 @@ end component;
 	constant Exception_Handler : STD_LOGIC_VECTOR (31 downto 0):= x"00400004";
 	signal Exception : STD_LOGIC := '0';
 	signal Cause : STD_LOGIC_VECTOR(2 downto 0) := "000";
+	signal ExcPcIn : STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
+	signal ExcPcOut : STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
 
 ----------------------------------------------------------------	
 ----------------------------------------------------------------
@@ -222,7 +233,9 @@ ControlUnit1 	: ControlUnit port map
 						RegWrite 	=> RegWriteControl, 
 						RegDst 		=> RegDst,
 						ZeroToAlu	=> ZeroToAlu,
-						DecodeExc	=> DecodeExc
+						DecodeExc	=> DecodeExc,
+						ExcCauseRead	=> ExcCauseRead,
+						ExcPcRead		=> ExcPcRead
 						);
 						
 ----------------------------------------------------------------
@@ -245,11 +258,16 @@ RegFile1			: RegFile port map
 ----------------------------------------------------------------
 ExceptionUnit1	: ExceptionUnit port map
 						( 
+						 CLK 		=> CLK,
 						 Overflow => ALU_overflow,
 						 DecodeExc	=> DecodeExc,
 						 MemAddrExc => MemAddrExc,
 						 Exception => Exception,
-						 Cause => Cause
+						 Cause => Cause,
+						 ExcPcIn => ExcPcIn,
+						 ExcPcOut => ExcPcOut,
+						 ExcPcRead => ExcPcRead,
+						 ExcCauseRead => ExcCauseRead
 						);
 
 ----------------------------------------------------------------
@@ -265,7 +283,8 @@ WriteAddr_Reg <= "11111" when PcToReg = '1' else
 					  Instr(20 downto 16);
 
 -- multiplexer to choose data-in for reg write
-WriteData_Reg <=  (PC_out + 4) when PcToReg = '1' else
+WriteData_Reg <=  (2 => Cause(2), 1 => Cause(1), 0 => Cause(0), others => '0') when ExcPcRead = '1' else
+						(PC_out + 4) when PcToReg = '1' else
 						Data_In when MemtoReg = '1' else 
 						Instr(15 downto 0) & "0000000000000000" when InstrToReg = '1' else
 						ALU_Out;
@@ -283,11 +302,9 @@ ALU_InB(31 downto 16) <= (others => '0') when ZeroToAlu = '1' else
 								ReadData2_Reg(31 downto 16);
 
 -- for Mem
-MemWrite <= MemWriteControl or Exception;
-Addr_Data <= x"10010000" when Exception = '1' else
-				 ALU_out;
-Data_Out <= (2 => Cause(2), 1 => Cause(1), 0 => Cause(0), others => '0') when Exception = '1' else
-				ReadData2_Reg;
+MemWrite <= MemWriteControl;
+Addr_Data <= ALU_out;
+Data_Out <= ReadData2_Reg;
 
 -- for PC
 Addr_Instr <= PC_out;
@@ -297,11 +314,15 @@ pc_temp(31 downto 18) <= (others => (Instr(15) and SignExtend));
 pc_temp(1 downto 0) <= "00";
 
 PC_in <= Exception_Handler when Exception = '1' else
+			ExcPcOut when ExcPcRead = '1' else
 			PC_out when ALU_busy = '1' else
 			ReadData1_Reg when JumpR = '1' else
 			PC_increment(31 downto 28) & Instr(25 downto 0) & "00" when Jump = '1' else
 			PC_temp + PC_increment when Branch = '1' and ALU_Zero = '1' else
 			PC_increment;
+			
+-- for ExcUnit
+ExcPcIn <= PC_increment;
 
 end arch_MIPS;
 

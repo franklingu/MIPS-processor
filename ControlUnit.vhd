@@ -35,19 +35,23 @@ entity ControlUnit is
 				RegWrite		: out  STD_LOGIC;	
 				RegDst		: out  STD_LOGIC;
 				ZeroToAlu	: out	 STD_LOGIC;  -- 0 for Rt, 1 for Rd
-				DecodeExc	: out  STD_LOGIC);
+				DecodeExc	: out  STD_LOGIC;
+				ExcCauseRead: out	 STD_LOGIC;
+				ExcPcRead	: out  STD_LOGIC);
 end ControlUnit;
 
 
 architecture arch_ControlUnit of ControlUnit is
 signal ALUOp : STD_LOGIC_VECTOR (1 downto 0) := "00";
 signal funct : STD_LOGIC_VECTOR (5 downto 0) := "000000";
+signal excfunct : STD_LOGIC_VECTOR (4 downto 0) := "00000";
 signal opcode : STD_LOGIC_VECTOR (5 downto 0) := "000000";
 signal branchCode : STD_LOGIC_VECTOR (4 downto 0) := "00000";
 begin
 
 opcode <= instr(31 downto 26);
 funct <= instr(5 downto 0);
+excfunct <= instr(25 downto 21);
 branchCode <= instr(20 downto 16);
 ALU_Control <= ALUOp & funct when ALUOp = "10" else
 					ALUOp & opcode;
@@ -69,6 +73,8 @@ begin
 	RegDst <= '0';
 	ZeroToAlu <= '0';
 	DecodeExc <= '0';
+	ExcCauseRead <= '0';
+	ExcPcRead <= '0';
 	
 	case opcode is
 	when "101011" => -- sw
@@ -134,6 +140,20 @@ begin
 		Jump <= '1';
 		PcToReg <= '1';
 		RegWrite <= '1';
+	when "010000" => -- mfc0
+		if excfunct(4) = '1' then -- eret/rfe
+			ExcPcRead <= '1';
+		elsif excfunct = "00000" then -- mfc0
+			ExcCauseRead <= '1';
+		elsif excfunct = "00100" then -- mtc0
+			-- not supported
+		else
+			DecodeExc <= '1';
+		end if;
+		RegDst <= '1';
+		RegWrite <= '1';
+--	when "" => -- mtc0	
+--	when "" => -- eret
 	when others =>
 		DecodeExc <= '1';
 	end case;
