@@ -104,16 +104,17 @@ type MEM_256x32 is array (0 to 255) of std_logic_vector (31 downto 0); -- 256 wo
 -- Instruction Memory
 ----------------------------------------------------------------
 constant INSTR_MEM : MEM_256x32 := (
-			x"08100006",  -- reset: j start
+			x"08100007",  -- reset: j start
 			x"00004824",  -- exception:	and $t1, $zero, $zero
 			x"3c091002",  -- 		lui $t1, 0x1002
 			x"400a6800",  -- 		mfc0 $t2, $13
+			x"3c087fff",  -- 		lui $t0, 0x7fff
 			x"ad2a0000",  -- 		sw $t2, 0($t1)
-			x"08100005",  -- die:	j die
+			x"08100006",  -- die:	j die
 			x"3c087fff",  -- start: lui $t0, 0x7fff
-			x"01284820",  --        add $t1, $t1, $t0
-			x"08100006",  --        j start
-			others=> x"00000000");	
+			x"8d090000",  --        lw $t1, 0($t0)
+			x"08100007",  --        j start
+			others=> x"00000000");
 
 ----------------------------------------------------------------
 -- Data Memory
@@ -152,7 +153,7 @@ dec_DATA_MEM <= '1' 	when Addr_Data>=x"10010000" and Addr_Data<=x"100103FC" else
 dec_LED 		<= '1'	when Addr_Data=x"10020000" else '0';
 dec_DIP 		<= '1' 	when Addr_Data=x"10030000" else '0';
 
-MemAddrExc <= '0' when dec_DATA_MEM = '1' or (MemWrite = '0' and MemRead = '0') else '1'; --assuming 256 word memory
+MemAddrExc <= '0' when dec_DATA_MEM = '1' or dec_LED = '1' or dec_DIP = '1' or (MemWrite = '0' and MemRead = '0') else '1'; --assuming 256 word memory
 
 ----------------------------------------------------------------
 -- Data memory read
@@ -246,3 +247,14 @@ end arch_TOP;
 --x"3c087fff",  -- start: lui $t0, 0x7fff
 --x"8d090000",  --        lw $t1, 0($t0)
 --x"08100007",  --        j start
+
+-- Overflow
+--x"08100006",  -- reset: j start
+--x"00004824",  -- exception:	and $t1, $zero, $zero
+--x"3c091002",  -- 		lui $t1, 0x1002
+--x"400a6800",  -- 		mfc0 $t2, $13
+--x"ad2a0000",  -- 		sw $t2, 0($t1)
+--x"08100005",  -- die:	j die
+--x"3c087fff",  -- start: lui $t0, 0x7fff
+--x"01284820",  --        add $t1, $t1, $t0
+--x"08100006",  --        j start

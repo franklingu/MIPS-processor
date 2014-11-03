@@ -56,7 +56,7 @@ branchCode <= instr(20 downto 16);
 ALU_Control <= ALUOp & funct when ALUOp = "10" else
 					ALUOp & opcode;
 
-process(opcode, branchCode, funct)
+process(opcode, branchCode, funct, excfunct)
 begin
 	ALUOp <= "00";
 	Branch <= '0';

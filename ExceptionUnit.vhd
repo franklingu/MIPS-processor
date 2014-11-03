@@ -50,7 +50,7 @@ begin
 process(ExcCauseRead, ExcPcRead, PrevCause, PrevPC)
 begin
 	if ExcCauseRead = '1' then
-		Cause <= PrevCause when 
+		Cause <= PrevCause;
 	else
 		Cause <= "000";
 	end if;

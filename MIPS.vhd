@@ -85,8 +85,8 @@ component ControlUnit is
 				RegDst		: out  STD_LOGIC;
 				ZeroToAlu	: out	 STD_LOGIC;
 				DecodeExc	: out  STD_LOGIC;
-				ExcCauseRead : in STD_LOGIC;
-			   ExcPcRead    : in STD_LOGIC);
+				ExcCauseRead : out STD_LOGIC;
+			   ExcPcRead    : out STD_LOGIC);
 end component;
 
 ----------------------------------------------------------------
