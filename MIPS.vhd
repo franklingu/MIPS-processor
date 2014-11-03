@@ -41,33 +41,33 @@ architecture arch_MIPS of MIPS is
 -- PC
 ----------------------------------------------------------------
 component PC is
-	Port(	
-			PC_in 	: in STD_LOGIC_VECTOR (31 downto 0);
-			PC_out 	: out STD_LOGIC_VECTOR (31 downto 0);
-			RESET		: in STD_LOGIC;
-			CLK		: in STD_LOGIC);
+		Port(	
+				PC_in 	: in STD_LOGIC_VECTOR (31 downto 0);
+				PC_out 	: out STD_LOGIC_VECTOR (31 downto 0);
+				RESET		: in STD_LOGIC;
+				CLK		: in STD_LOGIC);
 end component;
 
 ----------------------------------------------------------------
 -- ALU
 ----------------------------------------------------------------
 component ALU is
-    Port (
-			CLK			: in  STD_LOGIC;
-			ALU_InA 		: in  STD_LOGIC_VECTOR (31 downto 0);				
-			ALU_InB 		: in  STD_LOGIC_VECTOR (31 downto 0);
-			ALU_Out 		: out STD_LOGIC_VECTOR (31 downto 0);
-			ALU_Control	: in  STD_LOGIC_VECTOR (7 downto 0);
-			ALU_zero		: out STD_LOGIC;
-			ALU_overflow: out STD_LOGIC;
-			ALU_busy		: out STD_LOGIC);
+		Port (
+				CLK			: in  STD_LOGIC;
+				ALU_InA 		: in  STD_LOGIC_VECTOR (31 downto 0);				
+				ALU_InB 		: in  STD_LOGIC_VECTOR (31 downto 0);
+				ALU_Out 		: out STD_LOGIC_VECTOR (31 downto 0);
+				ALU_Control	: in  STD_LOGIC_VECTOR (7 downto 0);
+				ALU_zero		: out STD_LOGIC;
+				ALU_overflow: out STD_LOGIC;
+				ALU_busy		: out STD_LOGIC);
 end component;
 
 ----------------------------------------------------------------
 -- Control Unit
 ----------------------------------------------------------------
 component ControlUnit is
-    Port ( 	
+		Port ( 	
 				Instr	 		: in   STD_LOGIC_VECTOR (31 downto 0);
 				ALU_Control : out  STD_LOGIC_VECTOR (7 downto 0);
 				Branch 		: out  STD_LOGIC;		
@@ -89,15 +89,15 @@ end component;
 -- Register File
 ----------------------------------------------------------------
 component RegFile is
-    Port ( 	
-			ReadAddr1_Reg 	: in  STD_LOGIC_VECTOR (4 downto 0);
-			ReadAddr2_Reg 	: in  STD_LOGIC_VECTOR (4 downto 0);
-			ReadData1_Reg 	: out STD_LOGIC_VECTOR (31 downto 0);
-			ReadData2_Reg 	: out STD_LOGIC_VECTOR (31 downto 0);				
-			WriteAddr_Reg	: in  STD_LOGIC_VECTOR (4 downto 0); 
-			WriteData_Reg 	: in  STD_LOGIC_VECTOR (31 downto 0);
-			RegWrite 		: in  STD_LOGIC; 
-			CLK 				: in  STD_LOGIC);
+		Port ( 	
+				ReadAddr1_Reg 	: in  STD_LOGIC_VECTOR (4 downto 0);
+				ReadAddr2_Reg 	: in  STD_LOGIC_VECTOR (4 downto 0);
+				ReadData1_Reg 	: out STD_LOGIC_VECTOR (31 downto 0);
+				ReadData2_Reg 	: out STD_LOGIC_VECTOR (31 downto 0);				
+				WriteAddr_Reg	: in  STD_LOGIC_VECTOR (4 downto 0); 
+				WriteData_Reg 	: in  STD_LOGIC_VECTOR (31 downto 0);
+				RegWrite 		: in  STD_LOGIC; 
+				CLK 				: in  STD_LOGIC);
 end component;
 
 ----------------------------------------------------------------
@@ -397,11 +397,11 @@ end component;
 ----------------------------------------------------------------
  
 
-----------------------------------------------------------------
 ----------------------------------------------------------------	
 ----------------------------------------------------------------
 ----------------------------------------------------------------
 -- <MIPS architecture>
+----------------------------------------------------------------
 ----------------------------------------------------------------
 ----------------------------------------------------------------
 begin
@@ -525,6 +525,80 @@ PipeIdEx1		: Pipe_Id_Ex port map
 						Out_PcPlus4 	   => IdEx_Out_PcPlus4 ,
 						Out_SignExtended  => IdEx_Out_SignExtended ,
 						CLK 			      => CLK
+						);
+
+----------------------------------------------------------------
+-- Ex/Mem pipe port map
+----------------------------------------------------------------
+PipeExMem1		: Pipe_Ex_Mem port map
+						(
+						Branch      		=>  ExMem_Branch,
+						ALUZero				=>  ExMem_ALUZero,
+						MemRead     		=>  ExMem_MemRead,
+						MemWrite    		=>  ExMem_MemWrite,
+						MemToReg    		=>  ExMem_MemToReg,
+						PcToReg     		=>  ExMem_PcToReg,
+						InstrToReg  		=>  ExMem_InstrToReg,
+						RegDst				=>  ExMem_RegDst,
+						RegWrite    		=>  ExMem_RegWrite,
+						InstrRs 				=>  ExMem_InstrRs,
+						InstrRt 				=>  ExMem_InstrRt,
+						InstrRd 				=>  ExMem_InstrRd,
+						InstrLower 			=>  ExMem_InstrLower,
+						PcPlus4 				=>  ExMem_PcPlus4,
+						BranchPcTgt 		=>  ExMem_BranchPcTgt,
+						Alu_out   			=>  ExMem_Alu_out,
+						ReadData2_Reg  	=>  ExMem_ReadData2_Reg,
+						Out_Branch      	=>  ExMem_Out_Branch,
+						Out_ALUZero			=>  ExMem_Out_ALUZero,
+						Out_MemRead     	=>  ExMem_Out_MemRead ,
+						Out_MemWrite    	=>  ExMem_Out_MemWrite,
+						Out_MemToReg    	=>  ExMem_Out_MemToReg,
+						Out_PcToReg     	=>  ExMem_Out_PcToReg,
+						Out_InstrToReg  	=>  ExMem_Out_InstrToReg,
+						Out_RegDst			=>  ExMem_Out_RegDst,
+						Out_RegWrite    	=>  ExMem_Out_RegWrite,
+						Out_InstrRs 		=>  ExMem_Out_InstrRs,
+						Out_InstrRt 		=>  ExMem_Out_InstrRt,
+						Out_InstrRd 		=>  ExMem_Out_InstrRd,
+						Out_InstrLower 	=>  ExMem_Out_InstrLower,
+						Out_PcPlus4			=>  ExMem_Out_PcPlus4,
+						Out_BranchPcTgt	=>  ExMem_Out_BranchPcTgt,
+						Out_Alu_out  		=>  ExMem_Out_Alu_out,
+						Out_ReadData2_Reg =>  ExMem_Out_ReadData2_Reg,
+						CLK 					=>  CLK
+						);
+
+----------------------------------------------------------------
+-- Ex/Mem pipe port map
+----------------------------------------------------------------
+PipeMemWb1      : Pipe_Mem_Wb port map
+						(
+						PcToReg     		=>  MemWb_PcToReg,
+						MemToReg    		=>  MemWb_MemToReg,
+						InstrToReg  		=>  MemWb_InstrToReg,
+						RegDst				=>  MemWb_RegDst,
+						RegWrite    		=>  MemWb_RegWrite,
+						InstrRs		 		=>  MemWb_InstrRs,
+						InstrRt		 		=>  MemWb_InstrRt,
+						InstrRd		 		=>  MemWb_InstrRd,
+						InstrLower			=>  MemWb_InstrLower,
+						PcPlus4				=>  MemWb_PcPlus4,
+						MemReadData 		=>  MemWb_MemReadData,
+						Alu_out				=>  MemWb_Alu_out,
+						Out_PcToReg 		=>  MemWb_Out_PcToReg,
+						Out_MemToReg		=>  MemWb_Out_MemToReg ,
+						Out_InstrToReg		=>  MemWb_Out_InstrToReg,
+						Out_RegDst			=>  MemWb_Out_RegDst,
+						Out_RegWrite		=>  MemWb_Out_RegWrite,
+						Out_InstrRs			=>  MemWb_Out_InstrRs,
+						Out_InstrRt			=>  MemWb_Out_InstrRt,
+						Out_InstrRd			=>  MemWb_Out_InstrRd,
+						Out_InstrLower		=>  MemWb_Out_InstrLower,
+						Out_PCPlus4 		=>  MemWb_Out_PCPlus4,
+						Out_MemReadData 	=>  MemWb_Out_MemReadData,
+						Out_Alu_out			=>  MemWb_Out_Alu_out,
+						CLK					=>  CLK
 						);
 
 ----------------------------------------------------------------
