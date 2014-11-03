@@ -39,7 +39,7 @@ entity pipe_ex_mem is
 			  InstrToReg  			: in  STD_LOGIC;
 			  RegDst					: in  STD_LOGIC;
            RegWrite    			: in  STD_LOGIC;
-			  InstrRs 				: in  STD_LOGIC_VECTOR(4 downto 0);
+			  InstrRs 				: in  STD_LOGIC_VECTOR(4 downto 0); -- does not seem to be useful either
 			  InstrRt 				: in  STD_LOGIC_VECTOR(4 downto 0);
 			  InstrRd 				: in  STD_LOGIC_VECTOR(4 downto 0);
 			  InstrLower 			: in  STD_LOGIC_VECTOR(15 downto 0);
