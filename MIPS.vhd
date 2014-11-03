@@ -237,8 +237,6 @@ end component;
 ----------------------------------------------------------------
 	signal	PC_in 		:  STD_LOGIC_VECTOR(31 downto 0);
 	signal	PC_out 		:  STD_LOGIC_VECTOR(31 downto 0);
-	signal 	PC_increment: 	STD_LOGIC_VECTOR(31 downto 0) := x"00000000";
-	signal   PC_temp		: 	STD_LOGIC_VECTOR(31 downto 0) := x"00000000";
 
 ----------------------------------------------------------------
 -- ALU Signals
@@ -395,7 +393,9 @@ end component;
 ----------------------------------------------------------------
 -- Other Signals
 ----------------------------------------------------------------
- 
+-- Jump target in Id stage
+	 signal	JumpPcTgt						:  STD_LOGIC_VECTOR(31 downto 0);
+	 signal	SignExtended					:  STD_LOGIC_VECTOR(31 downto 0);
 
 ----------------------------------------------------------------	
 ----------------------------------------------------------------
@@ -437,7 +437,7 @@ ALU1 				: ALU port map
 ----------------------------------------------------------------
 ControlUnit1 	: ControlUnit port map
 						(
-						Instr 		=> Instr, 
+						Instr 		=> IfId_Out_Instr,  -- take the instruction from prev stage
 						ALU_Control => ALU_Control,
 						Branch 		=> Branch, 
 						Jump 			=> Jump, 
@@ -500,7 +500,7 @@ PipeIdEx1		: Pipe_Id_Ex port map
 						InstrRt				=> IdEx_InstrRt,
 						InstrRd				=> IdEx_InstrRd,
 						ALU_Control 		=> IdEx_ALU_Control,
-						InstrLower 			=> IdEx_InstrLower,
+						InstrLower 			=> IdEx_InstrLower,  -- no need to send this for this pipe. sign-extended contains it and will be available for next stage
 						ReadData1_Reg		=> IdEx_ReadData1_Reg,
 						ReadData2_Reg		=> IdEx_ReadData2_Reg,
 						PcPlus4 		   	=> IdEx_PcPlus4,
@@ -607,47 +607,102 @@ PipeMemWb1      : Pipe_Mem_Wb port map
 ----------------------------------------------------------------
 ----------------------------------------------------------------
 
--- for Reg
-ReadAddr1_Reg <= Instr(25 downto 21);
-ReadAddr2_Reg <= Instr(20 downto 16);
-WriteAddr_Reg <= "11111" when PcToReg = '1' else
-					  Instr(15 downto 11) when RegDst = '1' else 
-					  Instr(20 downto 16);
-
--- multiplexer to choose data-in for reg write
-WriteData_Reg <=  (PC_out + 4) when PcToReg = '1' else
-						Data_In when MemtoReg = '1' else 
-						Instr(15 downto 0) & "0000000000000000" when InstrToReg = '1' else
-						ALU_Out;
-
--- for ALU
-ALU_InA <= ReadData1_Reg;
-
--- multiplexer for choice of input 2 into ALU
-ALU_InB(15 downto 0) <= (others => '0') when ZeroToAlu = '1' else
-								Instr(15 downto 0) when ALUSrc = '1' else 
-								ReadData2_Reg(15 downto 0);
-								
-ALU_InB(31 downto 16) <= (others => '0') when ZeroToAlu = '1' else
-								(others => (Instr(15) and SignExtend)) when ALUSrc = '1' else 
-								ReadData2_Reg(31 downto 16);
-
--- for Mem
-Addr_Data <= ALU_out;
-Data_Out <= ReadData2_Reg;
-
--- for PC
+----------------------------------------------------------------
+-- IF stage
+----------------------------------------------------------------
+-- for InstrMem
 Addr_Instr <= PC_out;
-pc_increment <= PC_out + 4;
-pc_temp(17 downto 2) <= Instr(15 downto 0);
-pc_temp(31 downto 18) <= (others => (Instr(15) and SignExtend));
-pc_temp(1 downto 0) <= "00";
+-- for pipe
+IfId_Instr <= Instr;
+IfId_PcPlus4 <= PC_out + 4;
+-- multiplexer
+PC_in <= JumpPcTgt when JumpR = '1' else
+			JumpPcTgt when Jump = '1' else
+			ExMem_Out_BranchPcTgt when ExMem_Out_Branch = '1' and ExMem_Out_ALUZero = '1' else
+			PC_out + 4;
 
-PC_in <= PC_out when ALU_busy = '1' else
-			ReadData1_Reg when JumpR = '1' else
-			PC_increment(31 downto 28) & Instr(25 downto 0) & "00" when Jump = '1' else
-			PC_temp + PC_increment when Branch = '1' and ALU_Zero = '1' else
-			PC_increment;
+----------------------------------------------------------------
+-- ID stage
+----------------------------------------------------------------
+-- sign-extended
+SignExtended(31 downto 16) <= (others => (SignExtend & IfId_Out_Instr(15)));
+SignExtended(15 downto 0) <= IfId_Out_Instr(15 downto 0);
+-- pipe
+IdEx_ALUSrc <= ALUSrc;
+IdEx_ZeroToAlu <= ZeroToAlu;
+IdEx_Branch <= Branch;
+IdEx_MemRead <= MemRead;
+IdEx_MemWrite <= MemWrite;
+IdEx_MemToReg <= MemToReg;
+IdEx_InstrToReg <= InstrToReg;
+IdEx_PcToReg <= PcToReg;
+IdEx_RegWrite <= RegWrite;
+IdEx_RegDst <= RegDst;
+IdEx_InstrRs <= IfId_Out_Instr(25 downto 21);
+IdEx_InstrRt <= IfId_Out_Instr(20 downto 16);
+IdEx_InstrRd <= "11111" when PcToReg = '1' else
+					 IfId_Out_Instr(15 downto 11) when ALUSrc = '1' else
+					 IfId_Out_Instr(20 downto 16);
+IdEx_ALU_Control <= ALU_Control;
+IdEx_InstrLower <= IfId_Out_Instr(15 downto 0);
+IdEx_ReadData1_Reg <= ReadData1_Reg;
+IdEx_ReadData2_Reg <= ReadData2_Reg;
+IdEx_PcPlus4 <= IfId_PcPlus4;
+IdEx_SignExtended <= SignExtended;
+
+----------------------------------------------------------------
+-- EX stage
+----------------------------------------------------------------
+
+----------------------------------------------------------------
+-- MEM stage
+----------------------------------------------------------------
+
+----------------------------------------------------------------
+-- WB stage
+----------------------------------------------------------------
+
+---- for Reg
+--ReadAddr1_Reg <= Instr(25 downto 21);
+--ReadAddr2_Reg <= Instr(20 downto 16);
+--WriteAddr_Reg <= "11111" when PcToReg = '1' else
+--					  Instr(15 downto 11) when RegDst = '1' else 
+--					  Instr(20 downto 16);
+--
+---- multiplexer to choose data-in for reg write
+--WriteData_Reg <=  (PC_out + 4) when PcToReg = '1' else
+--						Data_In when MemtoReg = '1' else 
+--						Instr(15 downto 0) & "0000000000000000" when InstrToReg = '1' else
+--						ALU_Out;
+--
+---- for ALU
+--ALU_InA <= ReadData1_Reg;
+--
+---- multiplexer for choice of input 2 into ALU
+--ALU_InB(15 downto 0) <= (others => '0') when ZeroToAlu = '1' else
+--								Instr(15 downto 0) when ALUSrc = '1' else 
+--								ReadData2_Reg(15 downto 0);
+--								
+--ALU_InB(31 downto 16) <= (others => '0') when ZeroToAlu = '1' else
+--								(others => (Instr(15) and SignExtend)) when ALUSrc = '1' else 
+--								ReadData2_Reg(31 downto 16);
+--
+---- for Mem
+--Addr_Data <= ALU_out;
+--Data_Out <= ReadData2_Reg;
+--
+---- for PC
+--Addr_Instr <= PC_out;
+--pc_increment <= PC_out + 4;
+--pc_temp(17 downto 2) <= Instr(15 downto 0);
+--pc_temp(31 downto 18) <= (others => (Instr(15) and SignExtend));
+--pc_temp(1 downto 0) <= "00";
+--
+--PC_in <= PC_out when ALU_busy = '1' else
+--			ReadData1_Reg when JumpR = '1' else
+--			PC_increment(31 downto 28) & Instr(25 downto 0) & "00" when Jump = '1' else
+--			PC_temp + PC_increment when Branch = '1' and ALU_Zero = '1' else
+--			PC_increment;
 
 end arch_MIPS;
 
