@@ -29,7 +29,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity pipe_id_exe is
+entity pipe_id_ex is
     Port ( ALUSrc      			: in  STD_LOGIC;
 			  ZeroToAlu   			: in  STD_LOGIC;
 			  Branch      			: in  STD_LOGIC;
@@ -70,9 +70,9 @@ entity pipe_id_exe is
 			  Out_PcPlus4 			: out STD_LOGIC_VECTOR(31 downto 0);
 			  Out_SignExtended  	: out STD_LOGIC_VECTOR(31 downto 0);
 			  CLK 					: in  STD_LOGIC);  
-end pipe_id_exe;
+end pipe_id_ex;
 
-architecture Behavioral of pipe_id_exe is
+architecture Behavioral of pipe_id_ex is
 begin
 process(CLK)
 begin
