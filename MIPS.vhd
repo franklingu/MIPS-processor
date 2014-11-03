@@ -38,7 +38,7 @@ end MIPS;
 architecture arch_MIPS of MIPS is
 
 ----------------------------------------------------------------
--- Program Counter
+-- PC
 ----------------------------------------------------------------
 component PC is
 	Port(	
@@ -101,20 +101,152 @@ component RegFile is
 end component;
 
 ----------------------------------------------------------------
+-- IF/ID Pipe
+----------------------------------------------------------------
+component Pipe_If_Id is
+		Port (
+			  Instr		 	: in  STD_LOGIC_VECTOR(31 downto 0);
+           PcPlus4 		: in  STD_LOGIC_VECTOR(31 downto 0);
+           Out_Instr 	: out  STD_LOGIC_VECTOR(31 downto 0);
+           Out_PcPlus4 	: out  STD_LOGIC_VECTOR(31 downto 0);
+           CLK 			: in  STD_LOGIC);
+end component;
+
+----------------------------------------------------------------
+-- ID/EX Pipe
+----------------------------------------------------------------
+component Pipe_Id_Ex is
+		Port (
+			  ALUSrc      			: in  STD_LOGIC;
+			  ZeroToAlu   			: in  STD_LOGIC;
+			  Branch      			: in  STD_LOGIC;
+			  MemRead     			: in  STD_LOGIC;
+			  MemWrite    			: in  STD_LOGIC;
+			  MemToReg    			: in  STD_LOGIC;
+			  InstrToReg  			: in  STD_LOGIC;
+			  PcToReg     			: in  STD_LOGIC;
+			  RegWrite    			: in  STD_LOGIC;
+			  RegDst      			: in  STD_LOGIC;
+			  InstrRs				: in  STD_LOGIC_VECTOR(4 downto 0);
+			  InstrRt				: in  STD_LOGIC_VECTOR(4 downto 0);
+			  InstrRd				: in  STD_LOGIC_VECTOR(4 downto 0);
+			  ALU_Control 			: in  STD_LOGIC_VECTOR(7 downto 0);
+			  InstrLower 			: in  STD_LOGIC_VECTOR(15 downto 0);
+			  ReadData1_Reg		: in  STD_LOGIC_VECTOR(31 downto 0);
+           ReadData2_Reg	   : in  STD_LOGIC_VECTOR(31 downto 0);
+			  PcPlus4 				: in  STD_LOGIC_VECTOR(31 downto 0);
+			  SignExtended  		: in  STD_LOGIC_VECTOR(31 downto 0);
+           Out_ALUSrc      	: out STD_LOGIC;
+           Out_ZeroToAlu   	: out STD_LOGIC;
+           Out_Branch      	: out STD_LOGIC;
+           Out_MemRead     	: out STD_LOGIC;
+           Out_MemWrite    	: out STD_LOGIC;
+           Out_MemToReg    	: out STD_LOGIC;
+           Out_InstrToReg  	: out STD_LOGIC;
+           Out_PcToReg     	: out STD_LOGIC;
+           Out_RegWrite    	: out STD_LOGIC;
+			  Out_RegDst      	: out STD_LOGIC;
+			  Out_InstrRs			: out STD_LOGIC_VECTOR(4 downto 0);
+			  Out_InstrRt			: out STD_LOGIC_VECTOR(4 downto 0);
+			  Out_InstrRd			: out STD_LOGIC_VECTOR(4 downto 0);
+			  Out_ALU_Control 	: out STD_LOGIC_VECTOR(7 downto 0);
+			  Out_InstrLower 		: out STD_LOGIC_VECTOR(15 downto 0);
+			  Out_ReadData1_Reg  : out STD_LOGIC_VECTOR(31 downto 0);
+           Out_ReadData2_Reg  : out STD_LOGIC_VECTOR(31 downto 0);
+			  Out_PcPlus4 			: out STD_LOGIC_VECTOR(31 downto 0);
+			  Out_SignExtended  	: out STD_LOGIC_VECTOR(31 downto 0);
+			  CLK 					: in  STD_LOGIC);
+end component;
+
+----------------------------------------------------------------
+-- EX/MEM Pipe
+----------------------------------------------------------------
+component Pipe_Ex_Mem is
+		Port (
+			  Branch      			: in  STD_LOGIC;
+			  ALUZero				: in  STD_LOGIC;
+           MemRead     			: in  STD_LOGIC;
+           MemWrite    			: in  STD_LOGIC;
+			  MemToReg    			: in  STD_LOGIC;
+           PcToReg     			: in  STD_LOGIC;
+			  InstrToReg  			: in  STD_LOGIC;
+			  RegDst					: in  STD_LOGIC;
+           RegWrite    			: in  STD_LOGIC;
+			  InstrRs 				: in  STD_LOGIC_VECTOR(4 downto 0);
+			  InstrRt 				: in  STD_LOGIC_VECTOR(4 downto 0);
+			  InstrRd 				: in  STD_LOGIC_VECTOR(4 downto 0);
+			  InstrLower 			: in  STD_LOGIC_VECTOR(15 downto 0);
+           PcPlus4 				: in  STD_LOGIC_VECTOR(31 downto 0);
+			  BranchPcTgt 			: in  STD_LOGIC_VECTOR(31 downto 0);
+           Alu_out   			: in  STD_LOGIC_VECTOR(31 downto 0);
+           ReadData2_Reg  		: in  STD_LOGIC_VECTOR(31 downto 0);
+           Out_Branch      	: out STD_LOGIC;
+			  Out_ALUZero			: out STD_LOGIC;
+           Out_MemRead     	: out STD_LOGIC;
+           Out_MemWrite    	: out STD_LOGIC;
+			  Out_MemToReg    	: out STD_LOGIC;
+           Out_PcToReg     	: out STD_LOGIC;
+			  Out_InstrToReg  	: out STD_LOGIC;
+			  Out_RegDst			: out STD_LOGIC;
+			  Out_RegWrite    	: out STD_LOGIC;
+			  Out_InstrRs 			: out STD_LOGIC_VECTOR(4 downto 0);
+			  Out_InstrRt 			: out STD_LOGIC_VECTOR(4 downto 0);
+			  Out_InstrRd 			: out STD_LOGIC_VECTOR(4 downto 0);
+			  Out_InstrLower 		: out STD_LOGIC_VECTOR(15 downto 0);
+           Out_PcPlus4			: out STD_LOGIC_VECTOR(31 downto 0);
+			  Out_BranchPcTgt		: out STD_LOGIC_VECTOR(31 downto 0);
+           Out_Alu_out  		: out STD_LOGIC_VECTOR(31 downto 0);
+           Out_ReadData2_Reg 	: out STD_LOGIC_VECTOR(31 downto 0);
+			  CLK 					: in  STD_LOGIC);
+end component;
+
+----------------------------------------------------------------
+-- MEM/WB Pipe
+----------------------------------------------------------------
+component Pipe_Mem_Wb is
+		Port (
+				PcToReg     		: in  STD_LOGIC;
+				MemToReg    		: in  STD_LOGIC;
+				InstrToReg  		: in  STD_LOGIC;
+				RegDst				: in  STD_LOGIC;
+				RegWrite    		: in  STD_LOGIC;
+				InstrRs		 		: in  STD_LOGIC_VECTOR(4 downto 0);
+				InstrRt		 		: in  STD_LOGIC_VECTOR(4 downto 0);
+				InstrRd		 		: in  STD_LOGIC_VECTOR(4 downto 0);
+				InstrLower			: in  STD_LOGIC_VECTOR(15 downto 0);
+				PcPlus4				: in  STD_LOGIC_VECTOR(31 downto 0);
+				MemReadData 		: in  STD_LOGIC_VECTOR(31 downto 0);
+				Alu_out				: in  STD_LOGIC_VECTOR(31 downto 0);
+				Out_PcToReg 		: out STD_LOGIC;
+				Out_MemToReg		: out STD_LOGIC;
+				Out_InstrToReg		: out STD_LOGIC;
+				Out_RegDst			: out STD_LOGIC;
+				Out_RegWrite		: out STD_LOGIC;
+				Out_InstrRs			: out STD_LOGIC_VECTOR(4 downto 0);
+				Out_InstrRt			: out STD_LOGIC_VECTOR(4 downto 0);
+				Out_InstrRd			: out STD_LOGIC_VECTOR(4 downto 0);
+				Out_InstrLower		: out STD_LOGIC_VECTOR(15 downto 0);
+				Out_PCPlus4 		: out STD_LOGIC_VECTOR(31 downto 0);
+				Out_MemReadData 	: out STD_LOGIC_VECTOR(31 downto 0);
+				Out_Alu_out			: out STD_LOGIC_VECTOR(31 downto 0);
+				CLK					: in  STD_LOGIC);
+end component;
+
+----------------------------------------------------------------
 -- PC Signals
 ----------------------------------------------------------------
-	signal	PC_in 		:  STD_LOGIC_VECTOR 	(31 downto 0);
-	signal	PC_out 		:  STD_LOGIC_VECTOR 	(31 downto 0);
-	signal 	PC_increment: 	STD_LOGIC_VECTOR	(31 downto 0) := x"00000000";
-	signal   PC_temp		: 	STD_LOGIC_VECTOR	(31 downto 0) := x"00000000";
+	signal	PC_in 		:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	PC_out 		:  STD_LOGIC_VECTOR(31 downto 0);
+	signal 	PC_increment: 	STD_LOGIC_VECTOR(31 downto 0) := x"00000000";
+	signal   PC_temp		: 	STD_LOGIC_VECTOR(31 downto 0) := x"00000000";
 
 ----------------------------------------------------------------
 -- ALU Signals
 ----------------------------------------------------------------
-	signal	ALU_InA 		:  STD_LOGIC_VECTOR (31 downto 0);
-	signal	ALU_InB 		:  STD_LOGIC_VECTOR (31 downto 0);
-	signal	ALU_Out 		:  STD_LOGIC_VECTOR (31 downto 0);
-	signal	ALU_Control	:  STD_LOGIC_VECTOR (7 downto 0);
+	signal	ALU_InA 		:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	ALU_InB 		:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	ALU_Out 		:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	ALU_Control	:  STD_LOGIC_VECTOR(7 downto 0);
 	signal	ALU_zero		:  STD_LOGIC;
 	signal   ALU_overflow:  STD_LOGIC;
 	signal   ALU_busy    :  STD_LOGIC;
@@ -137,20 +269,137 @@ end component;
 ----------------------------------------------------------------
 -- Register File Signals
 ----------------------------------------------------------------
- 	signal	ReadAddr1_Reg 	:  STD_LOGIC_VECTOR (4 downto 0);
-	signal	ReadAddr2_Reg 	:  STD_LOGIC_VECTOR (4 downto 0);
-	signal	ReadData1_Reg 	:  STD_LOGIC_VECTOR (31 downto 0);
-	signal	ReadData2_Reg 	:  STD_LOGIC_VECTOR (31 downto 0);
-	signal	WriteAddr_Reg	:  STD_LOGIC_VECTOR (4 downto 0); 
-	signal	WriteData_Reg 	:  STD_LOGIC_VECTOR (31 downto 0);
+ 	signal	ReadAddr1_Reg 	:  STD_LOGIC_VECTOR(4 downto 0);
+	signal	ReadAddr2_Reg 	:  STD_LOGIC_VECTOR(4 downto 0);
+	signal	ReadData1_Reg 	:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	ReadData2_Reg 	:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	WriteAddr_Reg	:  STD_LOGIC_VECTOR(4 downto 0); 
+	signal	WriteData_Reg 	:  STD_LOGIC_VECTOR(31 downto 0);
+
+----------------------------------------------------------------
+-- IF/ID Pipe Signals
+----------------------------------------------------------------
+	signal	IfId_Instr			:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	IfId_PcPlus4		:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	IfId_Out_Instr		:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	IfId_Out_PcPlus4	:  STD_LOGIC_VECTOR(31 downto 0);
+
+----------------------------------------------------------------
+-- ID/EX Pipe Signals
+----------------------------------------------------------------
+	signal	IdEx_ALUSrc      			:  STD_LOGIC;
+	signal	IdEx_ZeroToAlu   			:  STD_LOGIC;
+	signal	IdEx_Branch      			:  STD_LOGIC;
+	signal	IdEx_MemRead     			:  STD_LOGIC;
+	signal	IdEx_MemWrite    			:  STD_LOGIC;
+	signal	IdEx_MemToReg    			:  STD_LOGIC;
+	signal	IdEx_InstrToReg  			:  STD_LOGIC;
+	signal	IdEx_PcToReg     			:  STD_LOGIC;
+	signal	IdEx_RegWrite    			:  STD_LOGIC;
+	signal	IdEx_RegDst      			:  STD_LOGIC;
+	signal	IdEx_InstrRs				:  STD_LOGIC_VECTOR(4 downto 0);
+	signal	IdEx_InstrRt				:  STD_LOGIC_VECTOR(4 downto 0);
+	signal	IdEx_InstrRd				:  STD_LOGIC_VECTOR(4 downto 0);
+	signal	IdEx_ALU_Control 			:  STD_LOGIC_VECTOR(7 downto 0);
+	signal	IdEx_InstrLower 			:  STD_LOGIC_VECTOR(15 downto 0);
+	signal	IdEx_ReadData1_Reg		:  STD_LOGIC_VECTOR(31 downto 0);
+   signal	IdEx_ReadData2_Reg	   :  STD_LOGIC_VECTOR(31 downto 0);
+	signal	IdEx_PcPlus4 				:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	IdEx_SignExtended  		:  STD_LOGIC_VECTOR(31 downto 0);
+   signal	IdEx_Out_ALUSrc      	:  STD_LOGIC;
+   signal	IdEx_Out_ZeroToAlu   	:  STD_LOGIC;
+   signal	IdEx_Out_Branch      	:  STD_LOGIC;
+   signal	IdEx_Out_MemRead     	:  STD_LOGIC;
+   signal	IdEx_Out_MemWrite    	:  STD_LOGIC;
+   signal	IdEx_Out_MemToReg    	:  STD_LOGIC;
+   signal	IdEx_Out_InstrToReg  	:  STD_LOGIC;
+   signal	IdEx_Out_PcToReg     	:  STD_LOGIC;
+   signal	IdEx_Out_RegWrite    	:  STD_LOGIC;
+	signal	IdEx_Out_RegDst      	:  STD_LOGIC;
+	signal	IdEx_Out_InstrRs			:  STD_LOGIC_VECTOR(4 downto 0);
+	signal	IdEx_Out_InstrRt			:  STD_LOGIC_VECTOR(4 downto 0);
+	signal	IdEx_Out_InstrRd			:  STD_LOGIC_VECTOR(4 downto 0);
+	signal	IdEx_Out_ALU_Control 	:  STD_LOGIC_VECTOR(7 downto 0);
+	signal	IdEx_Out_InstrLower 		:  STD_LOGIC_VECTOR(15 downto 0);
+	signal	IdEx_Out_ReadData1_Reg  :  STD_LOGIC_VECTOR(31 downto 0);
+   signal	IdEx_Out_ReadData2_Reg  :  STD_LOGIC_VECTOR(31 downto 0);
+	signal	IdEx_Out_PcPlus4 			:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	IdEx_Out_SignExtended  	:  STD_LOGIC_VECTOR(31 downto 0);
+
+----------------------------------------------------------------
+-- EX/MEM Pipe Signals
+----------------------------------------------------------------
+	signal	ExMem_Branch      		: STD_LOGIC;
+	signal	ExMem_ALUZero				: STD_LOGIC;
+	signal   ExMem_MemRead     		: STD_LOGIC;
+	signal   ExMem_MemWrite    		: STD_LOGIC;
+	signal	ExMem_MemToReg    		: STD_LOGIC;
+	signal   ExMem_PcToReg     		: STD_LOGIC;
+	signal	ExMem_InstrToReg  		: STD_LOGIC;
+	signal	ExMem_RegDst				: STD_LOGIC;
+	signal   ExMem_RegWrite    		: STD_LOGIC;
+	signal	ExMem_InstrRs 				: STD_LOGIC_VECTOR(4 downto 0); -- does not seem to be useful either
+	signal	ExMem_InstrRt 				: STD_LOGIC_VECTOR(4 downto 0);
+	signal	ExMem_InstrRd 				: STD_LOGIC_VECTOR(4 downto 0);
+	signal	ExMem_InstrLower 			: STD_LOGIC_VECTOR(15 downto 0);
+	signal   ExMem_PcPlus4 				: STD_LOGIC_VECTOR(31 downto 0);
+	signal	ExMem_BranchPcTgt 		: STD_LOGIC_VECTOR(31 downto 0);
+	signal   ExMem_Alu_out   			: STD_LOGIC_VECTOR(31 downto 0);
+	signal   ExMem_ReadData2_Reg  	: STD_LOGIC_VECTOR(31 downto 0);		  
+	signal   ExMem_Out_Branch      	:  STD_LOGIC;
+	signal	ExMem_Out_ALUZero			:  STD_LOGIC;
+	signal   ExMem_Out_MemRead     	:  STD_LOGIC;
+	signal   ExMem_Out_MemWrite    	:  STD_LOGIC;
+	signal	ExMem_Out_MemToReg    	:  STD_LOGIC;
+	signal   ExMem_Out_PcToReg     	:  STD_LOGIC;
+	signal	ExMem_Out_InstrToReg  	:  STD_LOGIC;
+	signal	ExMem_Out_RegDst			:  STD_LOGIC;
+	signal	ExMem_Out_RegWrite    	:  STD_LOGIC;
+	signal	ExMem_Out_InstrRs 		:  STD_LOGIC_VECTOR(4 downto 0);
+	signal	ExMem_Out_InstrRt 		:  STD_LOGIC_VECTOR(4 downto 0);
+	signal	ExMem_Out_InstrRd 		:  STD_LOGIC_VECTOR(4 downto 0);
+	signal	ExMem_Out_InstrLower 	:  STD_LOGIC_VECTOR(15 downto 0);
+	signal   ExMem_Out_PcPlus4			:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	ExMem_Out_BranchPcTgt	:  STD_LOGIC_VECTOR(31 downto 0);
+	signal   ExMem_Out_Alu_out  		:  STD_LOGIC_VECTOR(31 downto 0);
+	signal   ExMem_Out_ReadData2_Reg :  STD_LOGIC_VECTOR(31 downto 0);
+
+----------------------------------------------------------------
+-- MEM/Wb Pipe Signals
+----------------------------------------------------------------
+    signal 	MemWb_PcToReg     		:  STD_LOGIC;
+    signal 	MemWb_MemToReg    		:  STD_LOGIC;
+    signal 	MemWb_InstrToReg  		:  STD_LOGIC;
+    signal 	MemWb_RegDst				:  STD_LOGIC;
+    signal 	MemWb_RegWrite    		:  STD_LOGIC;
+    signal 	MemWb_InstrRs		 		:  STD_LOGIC_VECTOR(4 downto 0); -- seems to be not really useful
+    signal 	MemWb_InstrRt		 		:  STD_LOGIC_VECTOR(4 downto 0);
+    signal 	MemWb_InstrRd		 		:  STD_LOGIC_VECTOR(4 downto 0);
+    signal 	MemWb_InstrLower			:  STD_LOGIC_VECTOR(15 downto 0);
+    signal 	MemWb_PcPlus4				:  STD_LOGIC_VECTOR(31 downto 0);
+    signal 	MemWb_MemReadData 		:  STD_LOGIC_VECTOR(31 downto 0);
+    signal 	MemWb_Alu_out				:  STD_LOGIC_VECTOR(31 downto 0);
+    signal 	MemWb_Out_PcToReg 		:  STD_LOGIC;
+    signal 	MemWb_Out_MemToReg		:  STD_LOGIC;
+    signal 	MemWb_Out_InstrToReg		:  STD_LOGIC;
+    signal 	MemWb_Out_RegDst			:  STD_LOGIC;
+    signal 	MemWb_Out_RegWrite		:  STD_LOGIC;
+    signal 	MemWb_Out_InstrRs			:  STD_LOGIC_VECTOR(4 downto 0);
+    signal 	MemWb_Out_InstrRt			:  STD_LOGIC_VECTOR(4 downto 0);
+    signal 	MemWb_Out_InstrRd			:  STD_LOGIC_VECTOR(4 downto 0);
+    signal 	MemWb_Out_InstrLower		:  STD_LOGIC_VECTOR(15 downto 0);
+    signal 	MemWb_Out_PCPlus4 		:  STD_LOGIC_VECTOR(31 downto 0);
+    signal 	MemWb_Out_MemReadData 	:  STD_LOGIC_VECTOR(31 downto 0);
+    signal 	MemWb_Out_Alu_out			:  STD_LOGIC_VECTOR(31 downto 0);
 
 ----------------------------------------------------------------
 -- Other Signals
 ----------------------------------------------------------------
-	--<any other signals used goes here>
  
 
+----------------------------------------------------------------
 ----------------------------------------------------------------	
+----------------------------------------------------------------
 ----------------------------------------------------------------
 -- <MIPS architecture>
 ----------------------------------------------------------------
@@ -221,7 +470,67 @@ RegFile1			: RegFile port map
 						);
 
 ----------------------------------------------------------------
+-- If/Id pipe port map
+----------------------------------------------------------------
+PipeIfId1		: Pipe_If_Id port map
+						(
+						Instr		 		=> IfId_Instr,
+						PcPlus4 			=> IfId_PcPlus4,
+						Out_Instr 		=> IfId_Out_Instr,
+						Out_PcPlus4 	=> IfId_Out_PcPlus4,
+						CLK 				=> CLK
+						);
+
+----------------------------------------------------------------
+-- Id/Ex pipe port map
+----------------------------------------------------------------
+PipeIdEx1		: Pipe_Id_Ex port map
+						(
+						ALUSrc				=> IdEx_ALUSrc,
+						ZeroToAlu   		=> IdEx_ZeroToAlu,
+						Branch      		=> IdEx_Branch,
+						MemRead     		=> IdEx_MemRead,
+						MemWrite    		=> IdEx_MemWrite,
+						MemToReg    		=> IdEx_MemToReg,
+						InstrToReg  		=> IdEx_InstrToReg,
+						PcToReg     		=> IdEx_PcToReg ,
+						RegWrite    		=> IdEx_RegWrite,
+						RegDst      		=> IdEx_RegDst,
+						InstrRs				=> IdEx_InstrRs,
+						InstrRt				=> IdEx_InstrRt,
+						InstrRd				=> IdEx_InstrRd,
+						ALU_Control 		=> IdEx_ALU_Control,
+						InstrLower 			=> IdEx_InstrLower,
+						ReadData1_Reg		=> IdEx_ReadData1_Reg,
+						ReadData2_Reg		=> IdEx_ReadData2_Reg,
+						PcPlus4 		   	=> IdEx_PcPlus4,
+						SignExtended  		=> IdEx_SignExtended,
+						Out_ALUSrc     	=> IdEx_Out_ALUSrc,
+						Out_ZeroToAlu  	=> IdEx_Out_ZeroToAlu,
+						Out_Branch     	=> IdEx_Out_Branch,
+						Out_MemRead    	=> IdEx_Out_MemRead ,
+						Out_MemWrite   	=> IdEx_Out_MemWrite,
+						Out_MemToReg   	=> IdEx_Out_MemToReg,
+						Out_InstrToReg 	=> IdEx_Out_InstrToReg,
+						Out_PcToReg    	=> IdEx_Out_PcToReg ,
+						Out_RegWrite   	=> IdEx_Out_RegWrite,
+						Out_RegDst     	=> IdEx_Out_RegDst,
+						Out_InstrRs			=> IdEx_Out_InstrRs,
+						Out_InstrRt			=> IdEx_Out_InstrRt ,
+						Out_InstrRd			=> IdEx_Out_InstrRd ,
+						Out_ALU_Control	=> IdEx_Out_ALU_Control,
+						Out_InstrLower 	=> IdEx_Out_InstrLower ,
+						Out_ReadData1_Reg => IdEx_Out_ReadData1_Reg,
+						Out_ReadData2_Reg => IdEx_Out_ReadData2_Reg,
+						Out_PcPlus4 	   => IdEx_Out_PcPlus4 ,
+						Out_SignExtended  => IdEx_Out_SignExtended ,
+						CLK 			      => CLK
+						);
+
+----------------------------------------------------------------
+----------------------------------------------------------------
 -- Processor logic
+----------------------------------------------------------------
 ----------------------------------------------------------------
 
 -- for Reg

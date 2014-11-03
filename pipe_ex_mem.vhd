@@ -65,7 +65,7 @@ entity pipe_ex_mem is
 			  Out_BranchPcTgt		: out STD_LOGIC_VECTOR(31 downto 0);
            Out_Alu_out  		: out STD_LOGIC_VECTOR(31 downto 0);
            Out_ReadData2_Reg 	: out STD_LOGIC_VECTOR(31 downto 0);
-			  CLK : in  STD_LOGIC);  
+			  CLK 					: in  STD_LOGIC);  
 end pipe_ex_mem;
 
 architecture Behavioral of pipe_ex_mem is
