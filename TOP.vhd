@@ -104,20 +104,17 @@ type MEM_256x32 is array (0 to 255) of std_logic_vector (31 downto 0); -- 256 wo
 -- Instruction Memory
 ----------------------------------------------------------------
 constant INSTR_MEM : MEM_256x32 := (
-			x"08100007",  -- reset: j start
-			x"3c081002",  -- exc_handler: lui $t0
-			x"35080000",  --    ori $t0, 0x0000
-			x"3c0b0000",  --    lui $t3, 0x0000
-			x"356baaaa",  --    ori $t3, 0xaaaa
-			x"ad0b0000",  --    sw  $t3, 0($t0)
-			x"08100006",  -- die:   j die
-			x"3c0a7fff",  -- start: lui $t2, 0x7
-			x"354affff",  --    ori $t2, 0xffff
-			x"3c097fff",  --    lui $t1, 0x7fff
-			x"3529ffff",  --    ori $t1, 0xffff
-			x"ad2a0000",  --    sw $t2, 0($t1)
-			x"3508ffff",  --    ori $t0, 0xffff
-			x"08100000",  --    j reset
+			x"08100008",  -- reset: j start
+			x"00004024",  -- exception:	and
+			x"00004824",  -- 		and $t1
+			x"3c081001",  -- 		lui $t0
+			x"3c091002",  -- 		lui $t1
+			x"8d0a0000",  -- 		lw $t2,
+			x"ad2a0000",  -- 		sw $t2,
+			x"08100007",  -- die:	j die
+			x"3c087fff",  -- start: lui $t0,
+			x"01284820",  --        add $t1,
+			x"08100008",  --        j start
 			others=> x"00000000");	
 
 ----------------------------------------------------------------

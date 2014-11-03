@@ -33,12 +33,14 @@ entity ExceptionUnit is
     Port ( Overflow	: in  STD_LOGIC;
            DecodeExc : in  STD_LOGIC;
 			  MemAddrExc: in  STD_LOGIC;
-           Exception : out  STD_LOGIC);
+           Exception : out  STD_LOGIC;
+			  Cause : out STD_LOGIC_VECTOR(2 downto 0));
 end ExceptionUnit;
 
 architecture exception_arch of ExceptionUnit is
 begin
 
+Cause <= Overflow & DecodeExc & MemAddrExc;
 Exception <= Overflow or DecodeExc or MemAddrExc;
 
 end exception_arch;
