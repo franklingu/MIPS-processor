@@ -37,10 +37,7 @@ entity pipe_ex_mem is
 			  MemToReg    			: in  STD_LOGIC;
            PcToReg     			: in  STD_LOGIC;
 			  InstrToReg  			: in  STD_LOGIC;
-			  RegDst					: in  STD_LOGIC;
            RegWrite    			: in  STD_LOGIC;
-			  InstrRs 				: in  STD_LOGIC_VECTOR(4 downto 0); -- does not seem to be useful either
-			  InstrRt 				: in  STD_LOGIC_VECTOR(4 downto 0);
 			  InstrRd 				: in  STD_LOGIC_VECTOR(4 downto 0);
 			  InstrLower 			: in  STD_LOGIC_VECTOR(15 downto 0);
            PcPlus4 				: in  STD_LOGIC_VECTOR(31 downto 0);
@@ -55,10 +52,7 @@ entity pipe_ex_mem is
 			  Out_MemToReg    	: out STD_LOGIC;
            Out_PcToReg     	: out STD_LOGIC;
 			  Out_InstrToReg  	: out STD_LOGIC;
-			  Out_RegDst			: out STD_LOGIC;
 			  Out_RegWrite    	: out STD_LOGIC;
-			  Out_InstrRs 			: out STD_LOGIC_VECTOR(4 downto 0);
-			  Out_InstrRt 			: out STD_LOGIC_VECTOR(4 downto 0);
 			  Out_InstrRd 			: out STD_LOGIC_VECTOR(4 downto 0);
 			  Out_InstrLower 		: out STD_LOGIC_VECTOR(15 downto 0);
            Out_PcPlus4			: out STD_LOGIC_VECTOR(31 downto 0);
@@ -72,24 +66,21 @@ architecture Behavioral of pipe_ex_mem is
 begin
 process(CLK)
 begin
-    if CLK'event and CLK = '1' then
-        Out_Branch <= Branch;
+	if CLK'event and CLK = '1' then
+		Out_Branch <= Branch;
 		Out_ALUZero <= ALUZero;
-        Out_MemRead <= MemRead;
-        Out_MemWrite <= MemWrite;
-        Out_MemToReg <= MemToReg;
-        Out_PcToReg <= PcToReg;
-        Out_InstrToReg <= InstrToReg;
-        Out_RegDst <= RegDst;
-        Out_RegWrite <= RegWrite;
-        Out_InstrRs <= InstrRs;
-        Out_InstrRt <= InstrRt;
-        Out_InstrRd <= InstrRd;
-        Out_InstrLower <= InstrLower;
-        Out_PcPlus4 <= PcPlus4;
-        Out_BranchPcTgt <= BranchPcTgt;
-        Out_Alu_out <= Alu_out;	
-        Out_ReadData2_Reg <= ReadData2_Reg;
-    end if;
+		Out_MemRead <= MemRead;
+		Out_MemWrite <= MemWrite;
+		Out_MemToReg <= MemToReg;
+		Out_PcToReg <= PcToReg;
+		Out_InstrToReg <= InstrToReg;
+		Out_RegWrite <= RegWrite;
+		Out_InstrRd <= InstrRd;
+		Out_InstrLower <= InstrLower;
+		Out_PcPlus4 <= PcPlus4;
+		Out_BranchPcTgt <= BranchPcTgt;
+		Out_Alu_out <= Alu_out;	
+		Out_ReadData2_Reg <= ReadData2_Reg;
+	end if;
 end process;
 end Behavioral;

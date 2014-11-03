@@ -87,6 +87,9 @@ begin
 		Out_PcToReg <= PCToReg;
 		Out_RegWrite <= RegWrite;
 		Out_RegDst <= RegDst;
+		Out_InstrRs <= InstrRs;
+		Out_InstrRt <= InstrRt;
+		Out_InstrRd <= InstrRd;
 		Out_ALU_Control <= ALU_Control;
 		Out_ReadData1_Reg <= ReadData1_Reg;
 		Out_ReadData2_Reg <= ReadData2_Reg;
