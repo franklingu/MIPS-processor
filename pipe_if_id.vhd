@@ -34,7 +34,7 @@ entity pipe_if_id is
            PcPlus4 		: in  STD_LOGIC_VECTOR(31 downto 0);
 			  
            Out_Instr 	: out  STD_LOGIC_VECTOR(31 downto 0);
-           Out_PcPlus4 	: out  STD_LOGIC_VECTOR(31 downto 0);
+           Out_PcPlus4 	: out  STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
            CLK 			: in  STD_LOGIC);
 end pipe_if_id;
 

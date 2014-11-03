@@ -413,7 +413,7 @@ ALU1 				: ALU port map
 ----------------------------------------------------------------
 ControlUnit1 	: ControlUnit port map
 						(
-						Instr 		=> IfId_Out_Instr,  -- take the instruction from prev stage
+						Instr 		=> IfId_Out_Instr,
 						ALU_Control => IdEx_ALU_Control,
 						Branch 		=> IdEx_Branch, 
 						Jump 			=> Jump, 
@@ -605,7 +605,7 @@ IdEx_RegDst <= RegDst; -- this signal is most likely to be consumed in stage alr
 IdEx_InstrRs <= IfId_Out_Instr(25 downto 21);
 IdEx_InstrRt <= IfId_Out_Instr(20 downto 16);
 IdEx_InstrRd <= "11111" when PcToReg = '1' else
-					 IfId_Out_Instr(15 downto 11) when ALUSrc = '1' else
+					 IfId_Out_Instr(15 downto 11) when RegDst = '1' else
 					 IfId_Out_Instr(20 downto 16);
 IdEx_InstrLower <= IfId_Out_Instr(15 downto 0);
 IdEx_ReadData1_Reg <= ReadData1_Reg;
