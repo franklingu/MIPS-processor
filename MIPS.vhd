@@ -365,11 +365,13 @@ end component;
 ----------------------------------------------------------------
 -- Other Signals
 ----------------------------------------------------------------
--- Jump target in Id stage
+-- Id stage
 	 signal	JumpPcTgt						:  STD_LOGIC_VECTOR(31 downto 0);
 	 signal	SignExtended					:  STD_LOGIC_VECTOR(31 downto 0);
--- ALU_InB candidate in ex stage
+-- ex stage
 	 signal	ALU_InBCand						:  STD_LOGIC_VECTOR(31 downto 0);
+	 signal	ResultFromMem					:  STD_LOGIC_VECTOR(31 downto 0);
+	 signal	ResultFromWb					:  STD_LOGIC_VECTOR(31 downto 0);
 -- temp--will be changed later
 	 signal	TempALUZero						:  STD_LOGIC;
 
@@ -441,7 +443,7 @@ RegFile1			: RegFile port map
 						ReadData2_Reg 	=>  ReadData2_Reg,
 						WriteAddr_Reg 	=>  WriteAddr_Reg,
 						WriteData_Reg 	=>  WriteData_Reg,
-						RegWrite 		=>  RegWrite,
+						RegWrite 		=>  MemWb_Out_RegWrite,
 						CLK 				=>  CLK				
 						);
 
@@ -619,18 +621,25 @@ IdEx_SignExtended <= SignExtended;
 -- control signals
 ALU_Control <= IdEx_Out_ALU_Control;
 -- forward unit
-ALU_InA <= ExMem_Out_ALU_out when ExMem_Out_RegWrite = '1' 
+ResultFromMem <= ExMem_Out_PCPlus4 when ExMem_Out_PcToReg = '1' else
+					  ExMem_Out_InstrLower & "0000000000000000" when ExMem_Out_InstrToReg = '1' else
+					  ExMem_Out_Alu_out;
+ResultFromWb <= MemWb_Out_PCPlus4 when MemWb_Out_PcToReg = '1' else
+					 MemWb_Out_MemReadData when MemWb_Out_MemToReg = '1' else
+					 MemWb_Out_InstrLower & "0000000000000000" when MemWb_Out_InstrToReg = '1' else
+					 MemWb_Out_Alu_out;
+ALU_InA <= ResultFromMem when ExMem_Out_RegWrite = '1' 
 										and not(ExMem_Out_InstrRd = "00000") 
 										and ExMem_Out_InstrRd = IdEx_Out_InstrRs else
-			  MemWb_Out_ALU_out when MemWb_Out_RegWrite = '1' 
+			  ResultFromWb when MemWb_Out_RegWrite = '1' 
 										and not(MemWb_Out_InstrRd = "00000") 
 										and not(ExMem_Out_InstrRd = MemWb_Out_InstrRd) 
 										and MemWb_Out_InstrRd = IdEx_Out_InstrRs else
 			  IdEx_Out_ReadData1_Reg;
-ALU_InBCand <= ExMem_Out_ALU_out when ExMem_Out_RegWrite = '1' 
+ALU_InBCand <= ResultFromWb when ExMem_Out_RegWrite = '1' 
 										and not(ExMem_Out_InstrRd = "00000") 
 										and ExMem_Out_InstrRd = IdEx_Out_InstrRt else
-			  MemWb_Out_ALU_out when MemWb_Out_RegWrite = '1' 
+					ResultFromWb when MemWb_Out_RegWrite = '1' 
 										and not(MemWb_Out_InstrRd = "00000") 
 										and not(ExMem_Out_InstrRd = MemWb_Out_InstrRd) 
 										and MemWb_Out_InstrRd = IdEx_Out_InstrRt else
@@ -667,7 +676,7 @@ Data_Out <= ExMem_Out_ReadData2_Reg;
 -- pipe
 MemWb_PcToReg <= ExMem_Out_PcToReg;
 MemWb_MemToReg <= ExMem_Out_MemToReg;
-MemWb_InstrToReg <= ExMem_Out_MemToReg;
+MemWb_InstrToReg <= ExMem_Out_InstrToReg;
 MemWb_RegWrite <= ExMem_Out_RegWrite;
 MemWb_InstrRd <= ExMem_Out_InstrRd;
 MemWb_InstrLower <= ExMem_Out_InstrLower;
@@ -678,7 +687,6 @@ MemWb_Alu_out <= ExMem_Out_ALU_out;
 ----------------------------------------------------------------
 -- WB stage
 ----------------------------------------------------------------
-RegWrite <= MemWb_Out_RegWrite;
 WriteAddr_Reg <= MemWb_Out_InstrRd;
 WriteData_Reg <= MemWb_Out_PCPlus4 when MemWb_Out_PcToReg = '1' else
 					  MemWb_Out_MemReadData when MemWb_Out_MemToReg = '1' else

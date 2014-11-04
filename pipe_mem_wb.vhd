@@ -40,15 +40,15 @@ entity pipe_mem_wb is
 				MemReadData 		: in  STD_LOGIC_VECTOR(31 downto 0);
 				ALU_out				: in  STD_LOGIC_VECTOR(31 downto 0);
 				
-				Out_PcToReg 		: out STD_LOGIC;
-				Out_MemToReg		: out STD_LOGIC;
-				Out_InstrToReg		: out STD_LOGIC;
-				Out_RegWrite		: out STD_LOGIC;
-				Out_InstrRd			: out STD_LOGIC_VECTOR(4 downto 0);
-				Out_InstrLower		: out STD_LOGIC_VECTOR(15 downto 0);
-				Out_PCPlus4 		: out STD_LOGIC_VECTOR(31 downto 0);
-				Out_MemReadData 	: out STD_LOGIC_VECTOR(31 downto 0);
-				Out_ALU_out			: out STD_LOGIC_VECTOR(31 downto 0);
+				Out_PcToReg 		: out STD_LOGIC := '0';
+				Out_MemToReg		: out STD_LOGIC := '0';
+				Out_InstrToReg		: out STD_LOGIC := '0';
+				Out_RegWrite		: out STD_LOGIC := '0';
+				Out_InstrRd			: out STD_LOGIC_VECTOR(4 downto 0) := (others => '0');
+				Out_InstrLower		: out STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+				Out_PCPlus4 		: out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
+				Out_MemReadData 	: out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
+				Out_ALU_out			: out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
 				CLK					: in  STD_LOGIC);
 end pipe_mem_wb;
 

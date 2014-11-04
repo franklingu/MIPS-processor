@@ -45,20 +45,20 @@ entity pipe_ex_mem is
            Alu_out   			: in  STD_LOGIC_VECTOR(31 downto 0);
            ReadData2_Reg  		: in  STD_LOGIC_VECTOR(31 downto 0);
 			  
-           Out_Branch      	: out STD_LOGIC;
-			  Out_ALUZero			: out STD_LOGIC;
-           Out_MemRead     	: out STD_LOGIC;
-           Out_MemWrite    	: out STD_LOGIC;
-			  Out_MemToReg    	: out STD_LOGIC;
-           Out_PcToReg     	: out STD_LOGIC;
-			  Out_InstrToReg  	: out STD_LOGIC;
-			  Out_RegWrite    	: out STD_LOGIC;
-			  Out_InstrRd 			: out STD_LOGIC_VECTOR(4 downto 0);
-			  Out_InstrLower 		: out STD_LOGIC_VECTOR(15 downto 0);
-           Out_PcPlus4			: out STD_LOGIC_VECTOR(31 downto 0);
-			  Out_BranchPcTgt		: out STD_LOGIC_VECTOR(31 downto 0);
-           Out_Alu_out  		: out STD_LOGIC_VECTOR(31 downto 0);
-           Out_ReadData2_Reg 	: out STD_LOGIC_VECTOR(31 downto 0);
+           Out_Branch      	: out STD_LOGIC := '0';
+			  Out_ALUZero			: out STD_LOGIC := '0';
+           Out_MemRead     	: out STD_LOGIC := '0';
+           Out_MemWrite    	: out STD_LOGIC := '0';
+			  Out_MemToReg    	: out STD_LOGIC := '0';
+           Out_PcToReg     	: out STD_LOGIC := '0';
+			  Out_InstrToReg  	: out STD_LOGIC := '0';
+			  Out_RegWrite    	: out STD_LOGIC := '0';
+			  Out_InstrRd 			: out STD_LOGIC_VECTOR(4 downto 0) := (others => '0');
+			  Out_InstrLower 		: out STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+           Out_PcPlus4			: out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
+			  Out_BranchPcTgt		: out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
+           Out_Alu_out  		: out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
+           Out_ReadData2_Reg 	: out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
 			  CLK 					: in  STD_LOGIC);  
 end pipe_ex_mem;
 
