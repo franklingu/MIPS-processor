@@ -128,7 +128,6 @@ component Pipe_Id_Ex is
 			  InstrToReg  			: in  STD_LOGIC;
 			  PcToReg     			: in  STD_LOGIC;
 			  RegWrite    			: in  STD_LOGIC;
-			  RegDst      			: in  STD_LOGIC;
 			  InstrRs				: in  STD_LOGIC_VECTOR(4 downto 0);
 			  InstrRt				: in  STD_LOGIC_VECTOR(4 downto 0);
 			  InstrRd				: in  STD_LOGIC_VECTOR(4 downto 0);
@@ -147,7 +146,6 @@ component Pipe_Id_Ex is
            Out_InstrToReg  	: out STD_LOGIC;
            Out_PcToReg     	: out STD_LOGIC;
            Out_RegWrite    	: out STD_LOGIC;
-			  Out_RegDst      	: out STD_LOGIC;
 			  Out_InstrRs			: out STD_LOGIC_VECTOR(4 downto 0);
 			  Out_InstrRt			: out STD_LOGIC_VECTOR(4 downto 0);
 			  Out_InstrRd			: out STD_LOGIC_VECTOR(4 downto 0);
@@ -246,12 +244,19 @@ end component;
 ----------------------------------------------------------------
 -- Control Unit Signals
 ----------------------------------------------------------------
-	signal	Jump	 		:  STD_LOGIC;
-	signal	JumpR	 		:  STD_LOGIC;
-	signal	PcToReg		:  STD_LOGIC;
-	signal	ALUSrc		:  STD_LOGIC;
-	signal	SignExtend 	: 	STD_LOGIC;
-	signal	RegDst		:  STD_LOGIC;
+	signal	Contr_Branch 		:  STD_LOGIC;
+	signal	Contr_Jump	 		:  STD_LOGIC;
+	signal	Contr_JumpR	 		:  STD_LOGIC;
+	signal	Contr_MemRead 		:  STD_LOGIC;
+	signal	Contr_MemWrite		:  STD_LOGIC;
+	signal	Contr_MemToReg		:  STD_LOGIC;
+	signal	Contr_InstrToReg	:  STD_LOGIC;
+	signal	Contr_PcToReg		:  STD_LOGIC;
+	signal	Contr_ALUSrc		:  STD_LOGIC;
+	signal	Contr_SignExtend 	: 	STD_LOGIC;
+	signal	Contr_RegWrite	 	:  STD_LOGIC;
+	signal	Contr_RegDst		:  STD_LOGIC;
+	signal	Contr_ZeroToALU	:  STD_LOGIC;
 
 ----------------------------------------------------------------
 -- Register File Signals
@@ -285,7 +290,6 @@ end component;
 	signal	IdEx_InstrToReg  			:  STD_LOGIC;
 	signal	IdEx_PcToReg     			:  STD_LOGIC;
 	signal	IdEx_RegWrite    			:  STD_LOGIC;
-	signal	IdEx_RegDst      			:  STD_LOGIC;
 	signal	IdEx_InstrRs				:  STD_LOGIC_VECTOR(4 downto 0);
 	signal	IdEx_InstrRt				:  STD_LOGIC_VECTOR(4 downto 0);
 	signal	IdEx_InstrRd				:  STD_LOGIC_VECTOR(4 downto 0);
@@ -319,20 +323,20 @@ end component;
 ----------------------------------------------------------------
 -- EX/MEM Pipe Signals
 ----------------------------------------------------------------
-	signal	ExMem_Branch      		: STD_LOGIC;
-	signal	ExMem_ALUZero				: STD_LOGIC;
-	signal   ExMem_MemRead     		: STD_LOGIC;
-	signal   ExMem_MemWrite    		: STD_LOGIC;
-	signal	ExMem_MemToReg    		: STD_LOGIC;
-	signal   ExMem_PcToReg     		: STD_LOGIC;
-	signal	ExMem_InstrToReg  		: STD_LOGIC;
-	signal   ExMem_RegWrite    		: STD_LOGIC;
-	signal	ExMem_InstrRd 				: STD_LOGIC_VECTOR(4 downto 0);
-	signal	ExMem_InstrLower 			: STD_LOGIC_VECTOR(15 downto 0);
-	signal   ExMem_PcPlus4 				: STD_LOGIC_VECTOR(31 downto 0);
-	signal	ExMem_BranchPcTgt 		: STD_LOGIC_VECTOR(31 downto 0);
-	signal   ExMem_Alu_out   			: STD_LOGIC_VECTOR(31 downto 0);
-	signal   ExMem_ReadData2_Reg  	: STD_LOGIC_VECTOR(31 downto 0);		  
+	signal	ExMem_Branch      		:  STD_LOGIC;
+	signal	ExMem_ALUZero				:  STD_LOGIC;
+	signal   ExMem_MemRead     		:  STD_LOGIC;
+	signal   ExMem_MemWrite    		:  STD_LOGIC;
+	signal	ExMem_MemToReg    		:  STD_LOGIC;
+	signal   ExMem_PcToReg     		:  STD_LOGIC;
+	signal	ExMem_InstrToReg  		:  STD_LOGIC;
+	signal   ExMem_RegWrite    		:  STD_LOGIC;
+	signal	ExMem_InstrRd 				:  STD_LOGIC_VECTOR(4 downto 0);
+	signal	ExMem_InstrLower 			:  STD_LOGIC_VECTOR(15 downto 0);
+	signal   ExMem_PcPlus4 				:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	ExMem_BranchPcTgt 		:  STD_LOGIC_VECTOR(31 downto 0);
+	signal   ExMem_ALU_out   			:  STD_LOGIC_VECTOR(31 downto 0);
+	signal   ExMem_ReadData2_Reg  	:  STD_LOGIC_VECTOR(31 downto 0);		  
 	signal   ExMem_Out_Branch      	:  STD_LOGIC;
 	signal	ExMem_Out_ALUZero			:  STD_LOGIC;
 	signal   ExMem_Out_MemRead     	:  STD_LOGIC;
@@ -360,7 +364,7 @@ end component;
     signal 	MemWb_InstrLower			:  STD_LOGIC_VECTOR(15 downto 0);
     signal 	MemWb_PcPlus4				:  STD_LOGIC_VECTOR(31 downto 0);
     signal 	MemWb_MemReadData 		:  STD_LOGIC_VECTOR(31 downto 0);
-    signal 	MemWb_Alu_out				:  STD_LOGIC_VECTOR(31 downto 0);
+    signal 	MemWb_ALu_out				:  STD_LOGIC_VECTOR(31 downto 0);
     signal 	MemWb_Out_PcToReg 		:  STD_LOGIC;
     signal 	MemWb_Out_MemToReg		:  STD_LOGIC;
     signal 	MemWb_Out_InstrToReg		:  STD_LOGIC;
@@ -376,14 +380,17 @@ end component;
 -- Other Signals
 ----------------------------------------------------------------
 -- Id stage
-	 signal	JumpPcTgt						:  STD_LOGIC_VECTOR(31 downto 0);
-	 signal	SignExtended					:  STD_LOGIC_VECTOR(31 downto 0);
+	 signal	JumpPcTgt					:  STD_LOGIC_VECTOR(31 downto 0);
+	 signal	SignExtended				:  STD_LOGIC_VECTOR(31 downto 0);
 -- ex stage
-	 signal	ALU_InBCand						:  STD_LOGIC_VECTOR(31 downto 0);
-	 signal	ResultFromMem					:  STD_LOGIC_VECTOR(31 downto 0);
-	 signal	ResultFromWb					:  STD_LOGIC_VECTOR(31 downto 0);  -- also used for mem stage
+	 signal	ALU_InBCand					:  STD_LOGIC_VECTOR(31 downto 0);
+	 signal	ResultFromMem				:  STD_LOGIC_VECTOR(31 downto 0);
+	 signal	ResultFromWb				:  STD_LOGIC_VECTOR(31 downto 0);  -- also used for mem stage
 -- temp--will be changed later
-	 signal	TempALUZero						:  STD_LOGIC;
+	 signal	TempALUZero					:  STD_LOGIC;
+-- Hazard control
+	 signal	LoadUseHazard				:  STD_LOGIC;
+	 signal	ALUBusyHazard				:  STD_LOGIC;
 
 ----------------------------------------------------------------	
 ----------------------------------------------------------------
@@ -428,19 +435,19 @@ ControlUnit1 	: ControlUnit port map
 						(
 						Instr 		=> IfId_Out_Instr,
 						ALU_Control => IdEx_ALU_Control,
-						Branch 		=> IdEx_Branch, 
-						Jump 			=> Jump, 
-						JumpR 		=> JumpR, 
-						MemRead 		=> IdEx_MemRead, 
-						MemtoReg 	=> IdEx_MemToReg, 
-						InstrtoReg 	=> IdEx_InstrToReg, 
-						PcToReg		=> PcToReg,
-						MemWrite 	=> IdEx_MemWrite, 
-						ALUSrc 		=> ALUSrc, 
-						SignExtend 	=> SignExtend, 
-						RegWrite 	=> IdEx_RegWrite, 
-						RegDst 		=> RegDst,
-						ZeroToAlu	=> IdEx_ZeroToAlu
+						Branch 		=> Contr_Branch, 
+						Jump 			=> Contr_Jump, 
+						JumpR 		=> Contr_JumpR, 
+						MemRead 		=> Contr_MemRead, 
+						MemtoReg 	=> Contr_MemToReg, 
+						InstrtoReg 	=> Contr_InstrToReg, 
+						PcToReg		=> Contr_PcToReg,
+						MemWrite 	=> Contr_MemWrite, 
+						ALUSrc 		=> Contr_ALUSrc, 
+						SignExtend 	=> Contr_SignExtend, 
+						RegWrite 	=> Contr_RegWrite, 
+						RegDst 		=> Contr_RegDst,
+						ZeroToAlu	=> Contr_ZeroToAlu
 						);
 						
 ----------------------------------------------------------------
@@ -483,9 +490,8 @@ PipeIdEx1		: Pipe_Id_Ex port map
 						MemWrite    		=> IdEx_MemWrite,
 						MemToReg    		=> IdEx_MemToReg,
 						InstrToReg  		=> IdEx_InstrToReg,
-						PcToReg     		=> IdEx_PcToReg ,
+						PcToReg     		=> IdEx_PcToReg,
 						RegWrite    		=> IdEx_RegWrite,
-						RegDst      		=> IdEx_RegDst,
 						InstrRs				=> IdEx_InstrRs,
 						InstrRt				=> IdEx_InstrRt,
 						InstrRd				=> IdEx_InstrRd,
@@ -504,7 +510,6 @@ PipeIdEx1		: Pipe_Id_Ex port map
 						Out_InstrToReg 	=> IdEx_Out_InstrToReg,
 						Out_PcToReg    	=> IdEx_Out_PcToReg,
 						Out_RegWrite   	=> IdEx_Out_RegWrite,
-						Out_RegDst     	=> IdEx_Out_RegDst,
 						Out_InstrRs			=> IdEx_Out_InstrRs,
 						Out_InstrRt			=> IdEx_Out_InstrRt,
 						Out_InstrRd			=> IdEx_Out_InstrRd,
@@ -535,7 +540,7 @@ PipeExMem1		: Pipe_Ex_Mem port map
 						InstrLower 			=>  ExMem_InstrLower,
 						PcPlus4 				=>  ExMem_PcPlus4,
 						BranchPcTgt 		=>  ExMem_BranchPcTgt,
-						Alu_out   			=>  ExMem_Alu_out,
+						ALU_out   			=>  ExMem_ALU_out,
 						ReadData2_Reg  	=>  ExMem_ReadData2_Reg,
 						Out_Branch      	=>  ExMem_Out_Branch,
 						Out_ALUZero			=>  ExMem_Out_ALUZero,
@@ -591,16 +596,18 @@ PipeMemWb1      : Pipe_Mem_Wb port map
 -- IF stage
 ----------------------------------------------------------------
 -- stall
-PcStall <= ALU_busy;
-IfId_Stall <= ALU_busy;
+PcStall <= LoadUseHazard when LoadUseHazard = '1' else
+			  ALUBusyHazard;
+IfId_Stall <= LoadUseHazard when LoadUseHazard = '1' else
+				  ALUBusyHazard;
 -- for InstrMem
 Addr_Instr <= PC_out;
 -- for pipe
 IfId_Instr <= Instr;
 IfId_PcPlus4 <= PC_out + 4;
 -- multiplexer
-PC_in <= JumpPcTgt when JumpR = '1' else
-			JumpPcTgt when Jump = '1' else
+PC_in <= JumpPcTgt when Contr_JumpR = '1' else
+			JumpPcTgt when Contr_Jump = '1' else
 			ExMem_Out_BranchPcTgt when ExMem_Out_Branch = '1' and ExMem_Out_ALUZero = '1' else
 			IfId_PcPlus4;
 
@@ -608,31 +615,55 @@ PC_in <= JumpPcTgt when JumpR = '1' else
 -- ID stage
 ----------------------------------------------------------------
 -- stall
-IdEx_Stall <= ALU_busy;
+IdEx_Stall <= LoadUseHazard when LoadUseHazard = '1' else
+				  ALUBusyHazard;
 -- read addr
 ReadAddr1_Reg <= IfId_Out_Instr(25 downto 21);
 ReadAddr2_Reg <= IfId_Out_Instr(20 downto 16);
 -- jump
-JumpPcTgt <= ReadData1_Reg when JumpR = '1' else
-				 IfId_Out_PcPlus4(31 downto 28) & IfId_Out_Instr(25 downto 0) & "00" when Jump = '1' else
+JumpPcTgt <= ReadData1_Reg when Contr_JumpR = '1' else
+				 IfId_Out_PcPlus4(31 downto 28) & IfId_Out_Instr(25 downto 0) & "00" when Contr_Jump = '1' else
 				 IfId_Out_Instr;
 -- sign-extended
-SignExtended(31 downto 16) <= (others => (SignExtend and IfId_Out_Instr(15)));
+SignExtended(31 downto 16) <= (others => (Contr_SignExtend and IfId_Out_Instr(15)));
 SignExtended(15 downto 0) <= IfId_Out_Instr(15 downto 0);
 -- pipe
-IdEx_PcToReg <= PcToReg;
-IdEx_ALUSrc <= ALUSrc;
-IdEx_RegDst <= RegDst; -- this signal is most likely to be consumed in stage already
+IdEx_ALUSrc <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' else
+					Contr_ALUSrc;
+IdEx_ZeroToALU <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' else
+						Contr_ZeroToALU;
+IdEx_MemRead <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' else
+					 Contr_MemRead;
+IdEx_MemWrite <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' else
+					  Contr_MemWrite;
+IdEx_MemToReg <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' else
+					  Contr_MemToReg;
+IdEx_InstrToReg <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' else
+						 Contr_InstrToReg;
+IdEx_PcToReg <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' else
+					 Contr_PcToReg;
+IdEx_RegWrite <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' else
+					  Contr_RegWrite;
+
 IdEx_InstrRs <= IfId_Out_Instr(25 downto 21);
 IdEx_InstrRt <= IfId_Out_Instr(20 downto 16);
-IdEx_InstrRd <= "11111" when PcToReg = '1' else
-					 IfId_Out_Instr(15 downto 11) when RegDst = '1' else
+IdEx_InstrRd <= "11111" when Contr_PcToReg = '1' else
+					 IfId_Out_Instr(15 downto 11) when Contr_RegDst = '1' else
 					 IfId_Out_Instr(20 downto 16);
 IdEx_InstrLower <= IfId_Out_Instr(15 downto 0);
 IdEx_ReadData1_Reg <= ReadData1_Reg;
 IdEx_ReadData2_Reg <= ReadData2_Reg;
 IdEx_PcPlus4 <= IfId_PcPlus4;
 IdEx_SignExtended <= SignExtended;
+
+----------------------------------------------------------------
+-- Hazard control
+----------------------------------------------------------------
+LoadUseHazard <= '1' when IdEx_Out_MemRead = '1' 
+								and (IdEx_Out_InstrRt = IfId_Out_Instr(25 downto 21)
+									or IdEx_Out_InstrRt = IfId_Out_Instr(25 downto 21)) else
+						'0';
+ALUBusyHazard <= ALU_busy;
 
 ----------------------------------------------------------------
 -- EX stage

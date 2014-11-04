@@ -39,7 +39,6 @@ entity pipe_id_ex is
 			  InstrToReg  			: in  STD_LOGIC;
 			  PcToReg     			: in  STD_LOGIC;
 			  RegWrite    			: in  STD_LOGIC;
-			  RegDst      			: in  STD_LOGIC;
 			  InstrRs				: in  STD_LOGIC_VECTOR(4 downto 0);
 			  InstrRt				: in  STD_LOGIC_VECTOR(4 downto 0);
 			  InstrRd				: in  STD_LOGIC_VECTOR(4 downto 0);
@@ -59,7 +58,6 @@ entity pipe_id_ex is
            Out_InstrToReg  	: out STD_LOGIC := '0';
            Out_PcToReg     	: out STD_LOGIC := '0';
            Out_RegWrite    	: out STD_LOGIC := '0';
-			  Out_RegDst      	: out STD_LOGIC := '0';
 			  Out_InstrRs			: out STD_LOGIC_VECTOR(4 downto 0) := (others => '0');
 			  Out_InstrRt			: out STD_LOGIC_VECTOR(4 downto 0) := (others => '0');
 			  Out_InstrRd			: out STD_LOGIC_VECTOR(4 downto 0) := (others => '0');
@@ -88,7 +86,6 @@ begin
 			Out_InstrToReg <= InstrtoReg;
 			Out_PcToReg <= PCToReg;
 			Out_RegWrite <= RegWrite;
-			Out_RegDst <= RegDst;
 			Out_InstrRs <= InstrRs;
 			Out_InstrRt <= InstrRt;
 			Out_InstrRd <= InstrRd;
