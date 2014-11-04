@@ -636,14 +636,14 @@ ALU_InA <= ResultFromMem when ExMem_Out_RegWrite = '1'
 										and not(ExMem_Out_InstrRd = MemWb_Out_InstrRd) 
 										and MemWb_Out_InstrRd = IdEx_Out_InstrRs else
 			  IdEx_Out_ReadData1_Reg;
-ALU_InBCand <= ResultFromWb when ExMem_Out_RegWrite = '1' 
+ALU_InBCand <= ResultFromMem when ExMem_Out_RegWrite = '1' 
 										and not(ExMem_Out_InstrRd = "00000") 
 										and ExMem_Out_InstrRd = IdEx_Out_InstrRt else
 					ResultFromWb when MemWb_Out_RegWrite = '1' 
 										and not(MemWb_Out_InstrRd = "00000") 
 										and not(ExMem_Out_InstrRd = MemWb_Out_InstrRd) 
 										and MemWb_Out_InstrRd = IdEx_Out_InstrRt else
-			  IdEx_Out_ReadData2_Reg;
+					IdEx_Out_ReadData2_Reg;
 -- other multiplexers
 ALU_InB <= (others => '0') when IdEx_Out_ZeroToAlu = '1' else
 			  IdEx_Out_SignExtended when IdEx_Out_ALUSrc = '1' else
@@ -669,10 +669,14 @@ ExMem_ReadData2_Reg <= IdEx_Out_ReadData2_Reg;
 ----------------------------------------------------------------
 -- MEM stage
 ----------------------------------------------------------------
+-- send to memory
 MemRead <= ExMem_Out_MemRead;
 MemWrite <= ExMem_Out_MemWrite;
 Addr_Data <= ExMem_Out_ALU_out;
-Data_Out <= ExMem_Out_ReadData2_Reg;
+Data_Out <= ResultFromWb when MemWb_Out_RegWrite = '1' 
+										and not(MemWb_Out_InstrRd = "00000") 
+										and MemWb_Out_InstrRd = ExMem_Out_InstrRd else
+				ExMem_Out_ReadData2_Reg;  -- fwd from mem to mem
 -- pipe
 MemWb_PcToReg <= ExMem_Out_PcToReg;
 MemWb_MemToReg <= ExMem_Out_MemToReg;
