@@ -613,7 +613,9 @@ IfId_Stall <= LoadUseHazard when LoadUseHazard = '1' else
 				  UpdateBranchHazard when UpdateBranchHazard = '1' else
 				  UpdateJumpRHazard when UpdateJumpRHazard = '1' else
 				  ALUBusyHazard;
-IfId_Flush <= ControlHazard;
+IfId_Flush <= ControlHazard when ControlHazard = '1' else
+				  UpdateBranchHazard when UpdateBranchHazard = '1' else
+				  UpdateJumpRHazard;
 -- for InstrMem
 Addr_Instr <= PC_out;
 -- for pipe
@@ -685,7 +687,7 @@ IdEx_InstrRd <= "11111" when Contr_PcToReg = '1' else
 IdEx_InstrLower <= IfId_Out_Instr(15 downto 0);
 IdEx_ReadData1_Reg <= ReadData1_Reg;
 IdEx_ReadData2_Reg <= ReadData2_Reg;
-IdEx_PcPlus4 <= IfId_PcPlus4;
+IdEx_PcPlus4 <= IfId_Out_PcPlus4;
 IdEx_SignExtended <= SignExtended;
 
 ----------------------------------------------------------------
@@ -707,7 +709,8 @@ UpdateBranchHazard <= '1' when Contr_Branch = '1'
 							 '0';
 UpdateJumpRHazard <= '1' when Contr_JumpR = '1'
 										and not(IdEx_Out_InstrRd = "00000")
-										and IdEx_Out_InstrRd = IfId_Out_Instr(25 downto 21);
+										and IdEx_Out_InstrRd = IfId_Out_Instr(25 downto 21) else
+							'0';
 ALUBusyHazard <= ALU_busy;
 
 ----------------------------------------------------------------
