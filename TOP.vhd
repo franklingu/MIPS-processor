@@ -195,7 +195,7 @@ end process;
 ----------------------------------------------------------------
 write_DATA_MEM: process (CLK)
 begin
-    if (CLK'event and CLK = '1') then
+    if (CLK'event and CLK = '0') then
         if (MemWrite = '1' and dec_DATA_MEM = '1') then
             DATA_MEM(conv_integer(Addr_Data(9 downto 2))) <= Data_Out;
         end if;
