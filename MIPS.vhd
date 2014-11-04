@@ -615,8 +615,7 @@ PC_in <= JumpPcTgt when Contr_JumpR = '1' else
 -- ID stage
 ----------------------------------------------------------------
 -- stall
-IdEx_Stall <= LoadUseHazard when LoadUseHazard = '1' else
-				  ALUBusyHazard;
+IdEx_Stall <= ALUBusyHazard;
 -- read addr
 ReadAddr1_Reg <= IfId_Out_Instr(25 downto 21);
 ReadAddr2_Reg <= IfId_Out_Instr(20 downto 16);
@@ -662,7 +661,7 @@ IdEx_SignExtended <= SignExtended;
 LoadUseHazard <= '1' when IdEx_Out_MemRead = '1' 
 								and (IdEx_Out_InstrRt = IfId_Out_Instr(25 downto 21)
 									or IdEx_Out_InstrRt = IfId_Out_Instr(25 downto 21)) else
-						'0';
+					  '0';
 ALUBusyHazard <= ALU_busy;
 
 ----------------------------------------------------------------

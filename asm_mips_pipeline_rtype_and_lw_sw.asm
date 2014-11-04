@@ -1,6 +1,6 @@
 start:  lui $t0, 0x1001
-        ori $t0, 0x0004  # t0 = 0x10010004
-        addi $t6, $t0, 0x0001  # t6 = 0x10010005
+        ori $t0, 0x0000  # t0 = 0x10010000
+        addi $t6, $t0, 0x0001  # t6 = 0x10010001
         sw  $t6, 0($t0)
         lui $t1, 0x0000
         ori $t1, 0x0001  # t1 = 1
@@ -21,7 +21,8 @@ start:  lui $t0, 0x1001
         lui $t6, 0x0006
         lw  $t6, 0($t0)
         sw  $t6, 4($t0)
-        lw  $t6, 4($t0)
+        lw  $t7, 4($t0)
+        sub $s0, $t7, $t3
         lui $t6, 0x0001  # dummy commands
         lui $t6, 0x0002
         lui $t6, 0x0003
