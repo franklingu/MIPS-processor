@@ -7,9 +7,12 @@ start:  lui $t0, 0x1001
         lui $t2, 0x0000
         ori $t2, 0x0002  # t2 = 2
         lui $t3, 0x0000
-        ori $t3, 0x0001  # t3 = 3
+        ori $t3, 0x0003  # t3 = 3
         add $t4, $t1, $t2  # t4 = 3
         sub $t5, $t4, $t2  # t5 = 1
+        mult $t2, $t3
+        mfhi $t2
+        mflo $t3
         lui $t6, 0x0001  # dummy commands
         lui $t6, 0x0002
         lui $t6, 0x0003

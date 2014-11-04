@@ -42,10 +42,11 @@ architecture arch_MIPS of MIPS is
 ----------------------------------------------------------------
 component PC is
 		Port(	
-				PC_in 	: in STD_LOGIC_VECTOR (31 downto 0);
+				PC_in 	: in  STD_LOGIC_VECTOR (31 downto 0);
 				PC_out 	: out STD_LOGIC_VECTOR (31 downto 0);
-				RESET		: in STD_LOGIC;
-				CLK		: in STD_LOGIC);
+				RESET		: in  STD_LOGIC;
+				Stall		: in  STD_LOGIC;
+				CLK		: in  STD_LOGIC);
 end component;
 
 ----------------------------------------------------------------
@@ -107,8 +108,9 @@ component Pipe_If_Id is
 		Port (
 			  Instr		 	: in  STD_LOGIC_VECTOR(31 downto 0);
            PcPlus4 		: in  STD_LOGIC_VECTOR(31 downto 0);
-           Out_Instr 	: out  STD_LOGIC_VECTOR(31 downto 0);
-           Out_PcPlus4 	: out  STD_LOGIC_VECTOR(31 downto 0);
+           Out_Instr 	: out STD_LOGIC_VECTOR(31 downto 0);
+           Out_PcPlus4 	: out STD_LOGIC_VECTOR(31 downto 0);
+			  Stall			: in  STD_LOGIC;
            CLK 			: in  STD_LOGIC);
 end component;
 
@@ -155,6 +157,7 @@ component Pipe_Id_Ex is
            Out_ReadData2_Reg  : out STD_LOGIC_VECTOR(31 downto 0);
 			  Out_PcPlus4 			: out STD_LOGIC_VECTOR(31 downto 0);
 			  Out_SignExtended  	: out STD_LOGIC_VECTOR(31 downto 0);
+			  Stall					: in  STD_LOGIC;
 			  CLK 					: in  STD_LOGIC);
 end component;
 
@@ -191,6 +194,7 @@ component Pipe_Ex_Mem is
 			  Out_BranchPcTgt		: out STD_LOGIC_VECTOR(31 downto 0);
            Out_Alu_out  		: out STD_LOGIC_VECTOR(31 downto 0);
            Out_ReadData2_Reg 	: out STD_LOGIC_VECTOR(31 downto 0);
+			  Stall					: in  STD_LOGIC;
 			  CLK 					: in  STD_LOGIC);
 end component;
 
@@ -217,6 +221,7 @@ component Pipe_Mem_Wb is
 				Out_PCPlus4 		: out STD_LOGIC_VECTOR(31 downto 0);
 				Out_MemReadData 	: out STD_LOGIC_VECTOR(31 downto 0);
 				Out_Alu_out			: out STD_LOGIC_VECTOR(31 downto 0);
+				Stall					: in  STD_LOGIC;
 				CLK					: in  STD_LOGIC);
 end component;
 
@@ -225,6 +230,7 @@ end component;
 ----------------------------------------------------------------
 	signal	PC_in 		:  STD_LOGIC_VECTOR(31 downto 0);
 	signal	PC_out 		:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	PcStall		:  STD_LOGIC;
 
 ----------------------------------------------------------------
 -- ALU Signals
@@ -265,6 +271,7 @@ end component;
 	signal	IfId_PcPlus4		:  STD_LOGIC_VECTOR(31 downto 0);
 	signal	IfId_Out_Instr		:  STD_LOGIC_VECTOR(31 downto 0);
 	signal	IfId_Out_PcPlus4	:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	IfId_Stall			:  STD_LOGIC;
 
 ----------------------------------------------------------------
 -- ID/EX Pipe Signals
@@ -307,6 +314,7 @@ end component;
    signal	IdEx_Out_ReadData2_Reg  :  STD_LOGIC_VECTOR(31 downto 0);
 	signal	IdEx_Out_PcPlus4 			:  STD_LOGIC_VECTOR(31 downto 0);
 	signal	IdEx_Out_SignExtended  	:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	IdEx_Stall					:  STD_LOGIC;
 
 ----------------------------------------------------------------
 -- EX/MEM Pipe Signals
@@ -339,6 +347,7 @@ end component;
 	signal	ExMem_Out_BranchPcTgt	:  STD_LOGIC_VECTOR(31 downto 0);
 	signal   ExMem_Out_Alu_out  		:  STD_LOGIC_VECTOR(31 downto 0);
 	signal   ExMem_Out_ReadData2_Reg :  STD_LOGIC_VECTOR(31 downto 0);
+	signal	ExMem_Stall					:  STD_LOGIC;
 
 ----------------------------------------------------------------
 -- MEM/Wb Pipe Signals
@@ -361,6 +370,7 @@ end component;
     signal 	MemWb_Out_PCPlus4 		:  STD_LOGIC_VECTOR(31 downto 0);
     signal 	MemWb_Out_MemReadData 	:  STD_LOGIC_VECTOR(31 downto 0);
     signal 	MemWb_Out_Alu_out			:  STD_LOGIC_VECTOR(31 downto 0);
+	 signal	MemWb_Stall					:  STD_LOGIC;
 
 ----------------------------------------------------------------
 -- Other Signals
@@ -371,7 +381,7 @@ end component;
 -- ex stage
 	 signal	ALU_InBCand						:  STD_LOGIC_VECTOR(31 downto 0);
 	 signal	ResultFromMem					:  STD_LOGIC_VECTOR(31 downto 0);
-	 signal	ResultFromWb					:  STD_LOGIC_VECTOR(31 downto 0);
+	 signal	ResultFromWb					:  STD_LOGIC_VECTOR(31 downto 0);  -- also used for mem stage
 -- temp--will be changed later
 	 signal	TempALUZero						:  STD_LOGIC;
 
@@ -392,6 +402,7 @@ PC1				: PC port map
 						PC_in 	=> PC_in, 
 						PC_out 	=> PC_out, 
 						RESET 	=> RESET,
+						Stall		=> PcStall,
 						CLK 		=> CLK
 						);
 						
@@ -456,6 +467,7 @@ PipeIfId1		: Pipe_If_Id port map
 						PcPlus4 			=> IfId_PcPlus4,
 						Out_Instr 		=> IfId_Out_Instr,
 						Out_PcPlus4 	=> IfId_Out_PcPlus4,
+						Stall				=> IfId_Stall,
 						CLK 				=> CLK
 						);
 
@@ -502,6 +514,7 @@ PipeIdEx1		: Pipe_Id_Ex port map
 						Out_ReadData2_Reg => IdEx_Out_ReadData2_Reg,
 						Out_PcPlus4 	   => IdEx_Out_PcPlus4,
 						Out_SignExtended  => IdEx_Out_SignExtended,
+						Stall					=> IdEx_Stall,
 						CLK 			      => CLK
 						);
 
@@ -538,6 +551,7 @@ PipeExMem1		: Pipe_Ex_Mem port map
 						Out_BranchPcTgt	=>  ExMem_Out_BranchPcTgt,
 						Out_ALU_out  		=>  ExMem_Out_ALU_out,
 						Out_ReadData2_Reg =>  ExMem_Out_ReadData2_Reg,
+						Stall					=>  ExMem_Stall,
 						CLK 					=>  CLK
 						);
 
@@ -564,6 +578,7 @@ PipeMemWb1      : Pipe_Mem_Wb port map
 						Out_PCPlus4 		=>  MemWb_Out_PCPlus4,
 						Out_MemReadData 	=>  MemWb_Out_MemReadData,
 						Out_Alu_out			=>  MemWb_Out_Alu_out,
+						Stall					=>  MemWb_Stall,
 						CLK					=>  CLK
 						);
 
@@ -572,10 +587,12 @@ PipeMemWb1      : Pipe_Mem_Wb port map
 -- Processor logic
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-
 ----------------------------------------------------------------
 -- IF stage
 ----------------------------------------------------------------
+-- stall
+PcStall <= ALU_busy;
+IfId_Stall <= ALU_busy;
 -- for InstrMem
 Addr_Instr <= PC_out;
 -- for pipe
@@ -585,11 +602,13 @@ IfId_PcPlus4 <= PC_out + 4;
 PC_in <= JumpPcTgt when JumpR = '1' else
 			JumpPcTgt when Jump = '1' else
 			ExMem_Out_BranchPcTgt when ExMem_Out_Branch = '1' and ExMem_Out_ALUZero = '1' else
-			PC_out + 4;
+			IfId_PcPlus4;
 
 ----------------------------------------------------------------
 -- ID stage
 ----------------------------------------------------------------
+-- stall
+IdEx_Stall <= ALU_busy;
 -- read addr
 ReadAddr1_Reg <= IfId_Out_Instr(25 downto 21);
 ReadAddr2_Reg <= IfId_Out_Instr(20 downto 16);
@@ -618,6 +637,8 @@ IdEx_SignExtended <= SignExtended;
 ----------------------------------------------------------------
 -- EX stage
 ----------------------------------------------------------------
+-- stall
+ExMem_Stall <= '0';  -- most likely will be deleted afterwards
 -- control signals
 ALU_Control <= IdEx_Out_ALU_Control;
 -- forward unit
@@ -669,6 +690,8 @@ ExMem_ReadData2_Reg <= IdEx_Out_ReadData2_Reg;
 ----------------------------------------------------------------
 -- MEM stage
 ----------------------------------------------------------------
+-- stall
+MemWb_Stall <= '0';  -- most likely will be deleted afterwards
 -- send to memory
 MemRead <= ExMem_Out_MemRead;
 MemWrite <= ExMem_Out_MemWrite;

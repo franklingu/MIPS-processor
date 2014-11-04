@@ -69,6 +69,7 @@ entity pipe_id_ex is
            Out_ReadData2_Reg  : out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
 			  Out_PcPlus4 			: out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
 			  Out_SignExtended  	: out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
+			  Stall					: in  STD_LOGIC := '0';
 			  CLK 					: in  STD_LOGIC);  
 end pipe_id_ex;
 
@@ -77,25 +78,27 @@ begin
 process(CLK)
 begin
 	if CLK'event and CLK = '1' then
-		Out_ALUSrc <= ALUSrc;
-		Out_ZeroToAlu <= ZeroToAlu;
-		Out_Branch <= Branch;
-		Out_MemRead <= MemRead;
-		Out_MemWrite <= MemWrite;
-		Out_MemToReg <= MemtoReg;
-		Out_InstrToReg <= InstrtoReg;
-		Out_PcToReg <= PCToReg;
-		Out_RegWrite <= RegWrite;
-		Out_RegDst <= RegDst;
-		Out_InstrRs <= InstrRs;
-		Out_InstrRt <= InstrRt;
-		Out_InstrRd <= InstrRd;
-		Out_ALU_Control <= ALU_Control;
-		Out_ReadData1_Reg <= ReadData1_Reg;
-		Out_ReadData2_Reg <= ReadData2_Reg;
-		Out_PcPlus4 <= PcPlus4;
-		Out_SignExtended <= SignExtended;
-		Out_InstrLower <= InstrLower;
+		if Stall = '0' then
+			Out_ALUSrc <= ALUSrc;
+			Out_ZeroToAlu <= ZeroToAlu;
+			Out_Branch <= Branch;
+			Out_MemRead <= MemRead;
+			Out_MemWrite <= MemWrite;
+			Out_MemToReg <= MemtoReg;
+			Out_InstrToReg <= InstrtoReg;
+			Out_PcToReg <= PCToReg;
+			Out_RegWrite <= RegWrite;
+			Out_RegDst <= RegDst;
+			Out_InstrRs <= InstrRs;
+			Out_InstrRt <= InstrRt;
+			Out_InstrRd <= InstrRd;
+			Out_ALU_Control <= ALU_Control;
+			Out_ReadData1_Reg <= ReadData1_Reg;
+			Out_ReadData2_Reg <= ReadData2_Reg;
+			Out_PcPlus4 <= PcPlus4;
+			Out_SignExtended <= SignExtended;
+			Out_InstrLower <= InstrLower;
+		end if;
 	end if;
 end process;
 end Behavioral;

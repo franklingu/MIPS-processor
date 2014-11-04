@@ -20,24 +20,26 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 entity PC is
-	Port(	PC_in 	: in STD_LOGIC_VECTOR (31 downto 0);
+	Port(	PC_in 	: in  STD_LOGIC_VECTOR (31 downto 0);
 			PC_out 	: out STD_LOGIC_VECTOR (31 downto 0) := x"00400000";
-			RESET		: in STD_LOGIC;
-			CLK		: in STD_LOGIC);
+			RESET		: in  STD_LOGIC;
+			Stall		: in  STD_LOGIC;
+			CLK		: in  STD_LOGIC);
 end PC;
 
 
 architecture arch_PC of PC is
 begin
 
---<implement PC here>
 process(CLK)
 begin
 	if CLK'event and CLK = '1' then
 		if RESET = '1' then
 			PC_out <= x"00400000";
 		else
-			PC_out <= PC_in;
+			if Stall = '0' then
+				PC_out <= PC_in;
+			end if;
 		end if;
 	end if;
 end process;

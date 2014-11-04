@@ -49,6 +49,7 @@ entity pipe_mem_wb is
 				Out_PCPlus4 		: out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
 				Out_MemReadData 	: out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
 				Out_ALU_out			: out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
+				Stall					: in  STD_LOGIC := '0';
 				CLK					: in  STD_LOGIC);
 end pipe_mem_wb;
 
@@ -57,15 +58,17 @@ begin
 process(CLK)
 begin
 	if CLK'event and CLK = '1' then
-		Out_PcToReg <= PcToReg;
-		Out_MemToReg <= MemToReg;
-		Out_InstrToReg <= InstrToReg;
-		Out_RegWrite <= RegWrite;
-		Out_PCPlus4 <= PCPlus4;
-		Out_MemReadData <= MemReadData;
-		Out_InstrLower <= InstrLower;
-		Out_ALU_out <= ALU_out;
-		Out_InstrRd <= InstrRd;
+		if Stall = '0' then
+			Out_PcToReg <= PcToReg;
+			Out_MemToReg <= MemToReg;
+			Out_InstrToReg <= InstrToReg;
+			Out_RegWrite <= RegWrite;
+			Out_PCPlus4 <= PCPlus4;
+			Out_MemReadData <= MemReadData;
+			Out_InstrLower <= InstrLower;
+			Out_ALU_out <= ALU_out;
+			Out_InstrRd <= InstrRd;
+		end if;
 	end if;
 end process;
 end Behavioral;
