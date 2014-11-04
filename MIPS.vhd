@@ -111,6 +111,7 @@ component Pipe_If_Id is
            Out_Instr 	: out STD_LOGIC_VECTOR(31 downto 0);
            Out_PcPlus4 	: out STD_LOGIC_VECTOR(31 downto 0);
 			  Stall			: in  STD_LOGIC;
+			  Flush			: in  STD_LOGIC;
            CLK 			: in  STD_LOGIC);
 end component;
 
@@ -226,20 +227,20 @@ end component;
 ----------------------------------------------------------------
 -- PC Signals
 ----------------------------------------------------------------
-	signal	PC_in 		:  STD_LOGIC_VECTOR(31 downto 0);
-	signal	PC_out 		:  STD_LOGIC_VECTOR(31 downto 0);
-	signal	PcStall		:  STD_LOGIC;
+	signal	PC_in 				:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	PC_out 				:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	PcStall				:  STD_LOGIC;
 
 ----------------------------------------------------------------
 -- ALU Signals
 ----------------------------------------------------------------
-	signal	ALU_InA 		:  STD_LOGIC_VECTOR(31 downto 0);
-	signal	ALU_InB 		:  STD_LOGIC_VECTOR(31 downto 0);
-	signal	ALU_Out 		:  STD_LOGIC_VECTOR(31 downto 0);
-	signal	ALU_Control	:  STD_LOGIC_VECTOR(7 downto 0);
-	signal	ALU_zero		:  STD_LOGIC;
-	signal   ALU_overflow:  STD_LOGIC;
-	signal   ALU_busy    :  STD_LOGIC;
+	signal	ALU_InA 				:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	ALU_InB 				:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	ALU_Out 				:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	ALU_Control			:  STD_LOGIC_VECTOR(7 downto 0);
+	signal	ALU_zero				:  STD_LOGIC;
+	signal   ALU_overflow		:  STD_LOGIC;
+	signal   ALU_busy    		:  STD_LOGIC;
 
 ----------------------------------------------------------------
 -- Control Unit Signals
@@ -261,13 +262,13 @@ end component;
 ----------------------------------------------------------------
 -- Register File Signals
 ----------------------------------------------------------------
- 	signal	ReadAddr1_Reg 	:  STD_LOGIC_VECTOR(4 downto 0);
-	signal	ReadAddr2_Reg 	:  STD_LOGIC_VECTOR(4 downto 0);
-	signal	ReadData1_Reg 	:  STD_LOGIC_VECTOR(31 downto 0);
-	signal	ReadData2_Reg 	:  STD_LOGIC_VECTOR(31 downto 0);
-	signal	WriteAddr_Reg	:  STD_LOGIC_VECTOR(4 downto 0); 
-	signal	WriteData_Reg 	:  STD_LOGIC_VECTOR(31 downto 0);
-	signal	RegWrite			:  STD_LOGIC;
+ 	signal	ReadAddr1_Reg 		:  STD_LOGIC_VECTOR(4 downto 0);
+	signal	ReadAddr2_Reg 		:  STD_LOGIC_VECTOR(4 downto 0);
+	signal	ReadData1_Reg 		:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	ReadData2_Reg 		:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	WriteAddr_Reg		:  STD_LOGIC_VECTOR(4 downto 0); 
+	signal	WriteData_Reg 		:  STD_LOGIC_VECTOR(31 downto 0);
+	signal	RegWrite				:  STD_LOGIC;
 
 ----------------------------------------------------------------
 -- IF/ID Pipe Signals
@@ -277,6 +278,7 @@ end component;
 	signal	IfId_Out_Instr		:  STD_LOGIC_VECTOR(31 downto 0);
 	signal	IfId_Out_PcPlus4	:  STD_LOGIC_VECTOR(31 downto 0);
 	signal	IfId_Stall			:  STD_LOGIC;
+	signal	IfId_Flush			:	STD_LOGIC;
 
 ----------------------------------------------------------------
 -- ID/EX Pipe Signals
@@ -381,15 +383,21 @@ end component;
 ----------------------------------------------------------------
 -- Id stage
 	 signal	JumpPcTgt					:  STD_LOGIC_VECTOR(31 downto 0);
+	 signal	BranchPcTgt					:  STD_LOGIC_VECTOR(31 downto 0);
+	 signal	BranchCmp1					:  STD_LOGIC_VECTOR(31 downto 0);
+	 signal	BranchCmp2					:  STD_LOGIC_VECTOR(31 downto 0);
 	 signal	SignExtended				:  STD_LOGIC_VECTOR(31 downto 0);
 -- ex stage
 	 signal	ALU_InBCand					:  STD_LOGIC_VECTOR(31 downto 0);
-	 signal	ResultFromMem				:  STD_LOGIC_VECTOR(31 downto 0);
+	 signal	ResultFromMem				:  STD_LOGIC_VECTOR(31 downto 0);  -- also used for id stage
 	 signal	ResultFromWb				:  STD_LOGIC_VECTOR(31 downto 0);  -- also used for mem stage
 -- temp--will be changed later
 	 signal	TempALUZero					:  STD_LOGIC;
 -- Hazard control
 	 signal	LoadUseHazard				:  STD_LOGIC;
+	 signal	UpdateBranchHazard		:  STD_LOGIC;
+	 signal	UpdateJumpRHazard			:  STD_LOGIC;
+	 signal	ControlHazard				:  STD_LOGIC;
 	 signal	ALUBusyHazard				:  STD_LOGIC;
 
 ----------------------------------------------------------------	
@@ -475,6 +483,7 @@ PipeIfId1		: Pipe_If_Id port map
 						Out_Instr 		=> IfId_Out_Instr,
 						Out_PcPlus4 	=> IfId_Out_PcPlus4,
 						Stall				=> IfId_Stall,
+						Flush				=> IfId_Flush,
 						CLK 				=> CLK
 						);
 
@@ -597,9 +606,14 @@ PipeMemWb1      : Pipe_Mem_Wb port map
 ----------------------------------------------------------------
 -- stall
 PcStall <= LoadUseHazard when LoadUseHazard = '1' else
+			  UpdateBranchHazard when UpdateBranchHazard = '1' else
+			  UpdateJumpRHazard when UpdateJumpRHazard = '1' else
 			  ALUBusyHazard;
 IfId_Stall <= LoadUseHazard when LoadUseHazard = '1' else
+				  UpdateBranchHazard when UpdateBranchHazard = '1' else
+				  UpdateJumpRHazard when UpdateJumpRHazard = '1' else
 				  ALUBusyHazard;
+IfId_Flush <= ControlHazard;
 -- for InstrMem
 Addr_Instr <= PC_out;
 -- for pipe
@@ -608,7 +622,7 @@ IfId_PcPlus4 <= PC_out + 4;
 -- multiplexer
 PC_in <= JumpPcTgt when Contr_JumpR = '1' else
 			JumpPcTgt when Contr_Jump = '1' else
-			ExMem_Out_BranchPcTgt when ExMem_Out_Branch = '1' and ExMem_Out_ALUZero = '1' else
+			BranchPcTgt when ExMem_Out_Branch = '1' and ExMem_Out_ALUZero = '1' else
 			IfId_PcPlus4;
 
 ----------------------------------------------------------------
@@ -619,13 +633,32 @@ IdEx_Stall <= ALUBusyHazard;
 -- read addr
 ReadAddr1_Reg <= IfId_Out_Instr(25 downto 21);
 ReadAddr2_Reg <= IfId_Out_Instr(20 downto 16);
--- jump
-JumpPcTgt <= ReadData1_Reg when Contr_JumpR = '1' else
-				 IfId_Out_PcPlus4(31 downto 28) & IfId_Out_Instr(25 downto 0) & "00" when Contr_Jump = '1' else
-				 IfId_Out_Instr;
 -- sign-extended
 SignExtended(31 downto 16) <= (others => (Contr_SignExtend and IfId_Out_Instr(15)));
 SignExtended(15 downto 0) <= IfId_Out_Instr(15 downto 0);
+-- jump
+JumpPcTgt <= ResultFromMem when Contr_JumpR = '1' 
+										and not(ExMem_Out_InstrRd = "00000")
+										and ExMem_Out_InstrRd = IfId_Out_Instr(25 downto 21) else
+				 ReadData1_Reg when Contr_JumpR = '1' else
+				 IfId_Out_PcPlus4(31 downto 28) & IfId_Out_Instr(25 downto 0) & "00" when Contr_Jump = '1' else
+				 IfId_Out_Instr;
+-- branch (beq, bgez, bgezal)
+BranchCmp1 <= ResultFromMem when Contr_Branch = '1' 
+										and not(ExMem_Out_InstrRd = "00000")
+										and ExMem_Out_InstrRd = IfId_Out_Instr(25 downto 21) else
+				  ReadData1_Reg;
+BranchCmp2 <= ResultFromMem when Contr_Branch = '1' 
+										and not(ExMem_Out_InstrRd = "00000")
+										and ExMem_Out_InstrRd = IfId_Out_Instr(20 downto 16) else
+				  ReadData2_Reg;
+BranchPcTgt <= IdEx_Out_PcPlus4 + (SignExtended(29 downto 0) & "00") when Contr_Branch = '1' 
+																								and Contr_ZeroToALU = '0'
+																								and BranchCmp1 = BranchCmp2 else
+					IdEx_Out_PcPlus4 + (SignExtended(29 downto 0) & "00") when Contr_Branch = '1' 
+																								and Contr_ZeroToALU = '0'
+																								and (not(BranchCmp1(31) = '1')) else
+					IfId_Out_Instr;
 -- pipe
 IdEx_ALUSrc <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' else
 					Contr_ALUSrc;
@@ -662,6 +695,19 @@ LoadUseHazard <= '1' when IdEx_Out_MemRead = '1'
 								and (IdEx_Out_InstrRt = IfId_Out_Instr(25 downto 21)
 									or IdEx_Out_InstrRt = IfId_Out_Instr(25 downto 21)) else
 					  '0';
+ControlHazard <= '1' when Contr_Branch = '1' or Contr_Jump = '1' or Contr_JumpR = '1' else
+					  '0';
+UpdateBranchHazard <= '1' when Contr_Branch = '1' 
+										and not(IdEx_Out_InstrRd = "00000")
+										and IdEx_Out_InstrRd = IfId_Out_Instr(25 downto 21) else
+							 '1' when Contr_Branch = '1'  -- only beq has rt
+										and Contr_ZeroToALU = '0'
+										and not(IdEx_Out_InstrRd = "00000")
+										and IdEx_Out_InstrRd = IfId_Out_Instr(20 downto 16) else
+							 '0';
+UpdateJumpRHazard <= '1' when Contr_JumpR = '1'
+										and not(IdEx_Out_InstrRd = "00000")
+										and IdEx_Out_InstrRd = IfId_Out_Instr(25 downto 21);
 ALUBusyHazard <= ALU_busy;
 
 ----------------------------------------------------------------
@@ -749,48 +795,6 @@ WriteData_Reg <= MemWb_Out_PCPlus4 when MemWb_Out_PcToReg = '1' else
 					  MemWb_Out_MemReadData when MemWb_Out_MemToReg = '1' else
 					  MemWb_Out_InstrLower & "0000000000000000" when MemWb_Out_InstrToReg = '1' else
 					  MemWb_Out_Alu_out;
-
----- for Reg
---ReadAddr1_Reg <= Instr(25 downto 21);
---ReadAddr2_Reg <= Instr(20 downto 16);
---WriteAddr_Reg <= "11111" when PcToReg = '1' else
---					  Instr(15 downto 11) when RegDst = '1' else 
---					  Instr(20 downto 16);
---
----- multiplexer to choose data-in for reg write
---WriteData_Reg <=  (PC_out + 4) when PcToReg = '1' else
---						Data_In when MemtoReg = '1' else 
---						Instr(15 downto 0) & "0000000000000000" when InstrToReg = '1' else
---						ALU_Out;
---
----- for ALU
---ALU_InA <= ReadData1_Reg;
---
----- multiplexer for choice of input 2 into ALU
---ALU_InB(15 downto 0) <= (others => '0') when ZeroToAlu = '1' else
---								Instr(15 downto 0) when ALUSrc = '1' else 
---								ReadData2_Reg(15 downto 0);
---								
---ALU_InB(31 downto 16) <= (others => '0') when ZeroToAlu = '1' else
---								(others => (Instr(15) and SignExtend)) when ALUSrc = '1' else 
---								ReadData2_Reg(31 downto 16);
---
----- for Mem
---Addr_Data <= ALU_out;
---Data_Out <= ReadData2_Reg;
---
----- for PC
---Addr_Instr <= PC_out;
---pc_increment <= PC_out + 4;
---pc_temp(17 downto 2) <= Instr(15 downto 0);
---pc_temp(31 downto 18) <= (others => (Instr(15) and SignExtend));
---pc_temp(1 downto 0) <= "00";
---
---PC_in <= PC_out when ALU_busy = '1' else
---			ReadData1_Reg when JumpR = '1' else
---			PC_increment(31 downto 28) & Instr(25 downto 0) & "00" when Jump = '1' else
---			PC_temp + PC_increment when Branch = '1' and ALU_Zero = '1' else
---			PC_increment;
 
 end arch_MIPS;
 

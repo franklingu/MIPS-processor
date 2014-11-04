@@ -36,6 +36,7 @@ entity pipe_if_id is
            Out_Instr 	: out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
            Out_PcPlus4 	: out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
 			  Stall			: in  STD_LOGIC := '0';
+			  Flush			: in  STD_LOGIC := '0';
            CLK 			: in  STD_LOGIC);
 end pipe_if_id;
 
@@ -45,9 +46,13 @@ begin
 process(CLK)
 begin
 	if CLK'event and CLK = '1' then
-		if Stall = '0' then
-			Out_Instr <= Instr;
-			Out_PcPlus4 <= PcPlus4;
+		if Flush = '1' then
+			Out_Instr <= (26 => '1', others => '0');  -- a trick to send in noop instr
+		else
+			if Stall = '0' then
+				Out_Instr <= Instr;
+				Out_PcPlus4 <= PcPlus4;
+			end if;
 		end if;
 	end if;
 end process;
