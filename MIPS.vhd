@@ -595,9 +595,8 @@ IfId_Stall <= LoadUseHazard when LoadUseHazard = '1' else
 				  UpdateBranchHazard when UpdateBranchHazard = '1' else
 				  UpdateJumpRHazard when UpdateJumpRHazard = '1' else
 				  ALUBusyHazard;
-IfId_Flush <= ControlHazard when ControlHazard = '1' else
-				  UpdateBranchHazard when UpdateBranchHazard = '1' else
-				  UpdateJumpRHazard;
+IfId_Flush <= '1' when ControlHazard = '1' and UpdateBranchHazard = '0' and UpdateJumpRHazard = '0' else
+				  '0';
 -- for InstrMem
 Addr_Instr <= PC_out;
 -- for pipe
@@ -640,7 +639,7 @@ BranchPcTgt <= IdEx_Out_PcPlus4 + (SignExtended(29 downto 0) & "00") when Contr_
 																								and Contr_ZeroToALU = '0'
 																								and BranchCmp1 = BranchCmp2 else
 					IdEx_Out_PcPlus4 + (SignExtended(29 downto 0) & "00") when Contr_Branch = '1' 
-																								and Contr_ZeroToALU = '0'
+																								and Contr_ZeroToALU = '1'
 																								and (not(BranchCmp1(31) = '1')) else
 					IfId_PcPlus4;
 -- pipe
