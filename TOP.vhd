@@ -51,7 +51,7 @@ architecture arch_TOP of TOP is
 ----------------------------------------------------------------
 -- Constants
 ----------------------------------------------------------------
-constant CLK_DIV_BITS	: integer := 25; --25 for a clock of the order of 1Hz
+constant CLK_DIV_BITS	: integer := 0; --25 for a clock of the order of 1Hz
 constant N_LEDs			: integer := 12;
 constant N_DIPs			: integer := 16;
 

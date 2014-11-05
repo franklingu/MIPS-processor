@@ -625,7 +625,7 @@ JumpPcTgt <= ResultFromMem when Contr_JumpR = '1'
 										and ExMem_Out_InstrRd = IfId_Out_Instr(25 downto 21) else
 				 ReadData1_Reg when Contr_JumpR = '1' else
 				 IfId_Out_PcPlus4(31 downto 28) & IfId_Out_Instr(25 downto 0) & "00" when Contr_Jump = '1' else
-				 IfId_PcPlus4;
+				 IfId_Out_PcPlus4;
 -- branch (beq, bgez, bgezal)
 BranchCmp1 <= ResultFromMem when Contr_Branch = '1' 
 										and not(ExMem_Out_InstrRd = "00000")
@@ -641,7 +641,7 @@ BranchPcTgt <= IdEx_Out_PcPlus4 + (SignExtended(29 downto 0) & "00") when Contr_
 					IdEx_Out_PcPlus4 + (SignExtended(29 downto 0) & "00") when Contr_Branch = '1' 
 																								and Contr_ZeroToALU = '1'
 																								and (not(BranchCmp1(31) = '1')) else
-					IfId_PcPlus4;
+					IfId_Out_PcPlus4;
 -- pipe
 IdEx_ALUSrc <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' else
 					Contr_ALUSrc;
