@@ -2,6 +2,7 @@ start:  lui $t0, 0x1001
         ori $t0, 0x0000  # t0 = 0x10010000
         addi $t6, $t0, 0x0001  # t6 = 0x10010001
         sw  $t6, 0($t0)
+        lw  $t1, 0($t0)
         lui $t1, 0x0000
         ori $t1, 0x0001  # t1 = 1
         lui $t2, 0x0000
