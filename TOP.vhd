@@ -41,9 +41,6 @@ entity TOP is
 		Port (
 			DIP 				: in  STD_LOGIC_VECTOR (15 downto 0);  -- DIP switch inputs. Not debounced.
 			LED 				: out  STD_LOGIC_VECTOR (15 downto 0); -- LEDs
-			-- <15> showing the divided clock, 
-			-- <14> downto <8> showing Addr_Instr(22) & Addr_Instr(7 downto 2), 
-			-- <7> downto <0> mapped to the address 0x10020000.
 			RESET				: in  STD_LOGIC; 	-- Reset -> BTNC (Centre push button)
 			CLK_undiv		: in  STD_LOGIC); -- 100MHz clock. Converted to a lower frequency using CLK_DIV_PROCESS before use.
 end TOP;
@@ -120,7 +117,7 @@ constant INSTR_MEM : MEM_256x32 := (
 			x"3c110000",  --    lui $s1, 0x0000
 			x"36310001",  --    ori $s1, 0x0001
 			x"0c10001a",  -- loop:  jal fib
-			x"218c0001",  --    addi $t4, $t4, 0x0001
+			x"218c0001",  --    add $t4, $t4, 0x0001
 			x"018e0018",  --    mult $t4, $t6
 			x"00006012",  --    mflo $t4
 			x"01916022",  -- delay: sub $t4, $t4, $s1

@@ -775,7 +775,7 @@ WriteAddr_Reg <= MemWb_Out_InstrRd;
 WriteData_Reg <= MemWb_Out_PCPlus4 when MemWb_Out_PcToReg = '1' else
 					  MemWb_Out_MemReadData when MemWb_Out_MemToReg = '1' else
 					  MemWb_Out_InstrLower & "0000000000000000" when MemWb_Out_InstrToReg = '1' else
-					  MemWb_Out_Alu_out;
+					  MemWb_Out_ALU_out;
 
 end arch_MIPS;
 
