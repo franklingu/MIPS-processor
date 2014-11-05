@@ -32,7 +32,6 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity pipe_id_ex is
     Port ( ALUSrc      			: in  STD_LOGIC;
 			  ZeroToAlu   			: in  STD_LOGIC;
-			  Branch      			: in  STD_LOGIC;
 			  MemRead     			: in  STD_LOGIC;
 			  MemWrite    			: in  STD_LOGIC;
 			  MemToReg    			: in  STD_LOGIC;
@@ -51,7 +50,6 @@ entity pipe_id_ex is
 			  
            Out_ALUSrc      	: out STD_LOGIC := '0';
            Out_ZeroToAlu   	: out STD_LOGIC := '0';
-           Out_Branch      	: out STD_LOGIC := '0';
            Out_MemRead     	: out STD_LOGIC := '0';
            Out_MemWrite    	: out STD_LOGIC := '0';
            Out_MemToReg    	: out STD_LOGIC := '0';
@@ -79,7 +77,6 @@ begin
 		if Stall = '0' then
 			Out_ALUSrc <= ALUSrc;
 			Out_ZeroToAlu <= ZeroToAlu;
-			Out_Branch <= Branch;
 			Out_MemRead <= MemRead;
 			Out_MemWrite <= MemWrite;
 			Out_MemToReg <= MemtoReg;

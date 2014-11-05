@@ -30,8 +30,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity pipe_ex_mem is
-    Port ( Branch      			: in  STD_LOGIC;
-			  ALUZero				: in  STD_LOGIC;
+    Port ( ALUZero				: in  STD_LOGIC;
            MemRead     			: in  STD_LOGIC;
            MemWrite    			: in  STD_LOGIC;
 			  MemToReg    			: in  STD_LOGIC;
@@ -41,12 +40,10 @@ entity pipe_ex_mem is
 			  InstrRd 				: in  STD_LOGIC_VECTOR(4 downto 0);
 			  InstrLower 			: in  STD_LOGIC_VECTOR(15 downto 0);
            PcPlus4 				: in  STD_LOGIC_VECTOR(31 downto 0);
-			  BranchPcTgt 			: in  STD_LOGIC_VECTOR(31 downto 0);
            Alu_out   			: in  STD_LOGIC_VECTOR(31 downto 0);
            ReadData2_Reg  		: in  STD_LOGIC_VECTOR(31 downto 0);
 			  
-           Out_Branch      	: out STD_LOGIC := '0';
-			  Out_ALUZero			: out STD_LOGIC := '0';
+           Out_ALUZero			: out STD_LOGIC := '0';
            Out_MemRead     	: out STD_LOGIC := '0';
            Out_MemWrite    	: out STD_LOGIC := '0';
 			  Out_MemToReg    	: out STD_LOGIC := '0';
@@ -56,7 +53,6 @@ entity pipe_ex_mem is
 			  Out_InstrRd 			: out STD_LOGIC_VECTOR(4 downto 0) := (others => '0');
 			  Out_InstrLower 		: out STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
            Out_PcPlus4			: out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
-			  Out_BranchPcTgt		: out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
            Out_Alu_out  		: out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
            Out_ReadData2_Reg 	: out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
 			  Stall					: in  STD_LOGIC := '0';
@@ -69,7 +65,6 @@ process(CLK)
 begin
 	if CLK'event and CLK = '1' then
 		if Stall = '0' then
-			Out_Branch <= Branch;
 			Out_ALUZero <= ALUZero;
 			Out_MemRead <= MemRead;
 			Out_MemWrite <= MemWrite;
@@ -80,7 +75,6 @@ begin
 			Out_InstrRd <= InstrRd;
 			Out_InstrLower <= InstrLower;
 			Out_PcPlus4 <= PcPlus4;
-			Out_BranchPcTgt <= BranchPcTgt;
 			Out_Alu_out <= Alu_out;	
 			Out_ReadData2_Reg <= ReadData2_Reg;
 		end if;

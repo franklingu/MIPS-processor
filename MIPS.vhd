@@ -122,7 +122,6 @@ component Pipe_Id_Ex is
 		Port (
 			  ALUSrc      			: in  STD_LOGIC;
 			  ZeroToAlu   			: in  STD_LOGIC;
-			  Branch      			: in  STD_LOGIC;
 			  MemRead     			: in  STD_LOGIC;
 			  MemWrite    			: in  STD_LOGIC;
 			  MemToReg    			: in  STD_LOGIC;
@@ -140,7 +139,6 @@ component Pipe_Id_Ex is
 			  SignExtended  		: in  STD_LOGIC_VECTOR(31 downto 0);
            Out_ALUSrc      	: out STD_LOGIC;
            Out_ZeroToAlu   	: out STD_LOGIC;
-           Out_Branch      	: out STD_LOGIC;
            Out_MemRead     	: out STD_LOGIC;
            Out_MemWrite    	: out STD_LOGIC;
            Out_MemToReg    	: out STD_LOGIC;
@@ -165,7 +163,6 @@ end component;
 ----------------------------------------------------------------
 component Pipe_Ex_Mem is
 		Port (
-			  Branch      			: in  STD_LOGIC;
 			  ALUZero				: in  STD_LOGIC;
            MemRead     			: in  STD_LOGIC;
            MemWrite    			: in  STD_LOGIC;
@@ -176,10 +173,8 @@ component Pipe_Ex_Mem is
 			  InstrRd 				: in  STD_LOGIC_VECTOR(4 downto 0);
 			  InstrLower 			: in  STD_LOGIC_VECTOR(15 downto 0);
            PcPlus4 				: in  STD_LOGIC_VECTOR(31 downto 0);
-			  BranchPcTgt 			: in  STD_LOGIC_VECTOR(31 downto 0);
            Alu_out   			: in  STD_LOGIC_VECTOR(31 downto 0);
            ReadData2_Reg  		: in  STD_LOGIC_VECTOR(31 downto 0);
-           Out_Branch      	: out STD_LOGIC;
 			  Out_ALUZero			: out STD_LOGIC;
            Out_MemRead     	: out STD_LOGIC;
            Out_MemWrite    	: out STD_LOGIC;
@@ -190,8 +185,7 @@ component Pipe_Ex_Mem is
 			  Out_InstrRd 			: out STD_LOGIC_VECTOR(4 downto 0);
 			  Out_InstrLower 		: out STD_LOGIC_VECTOR(15 downto 0);
            Out_PcPlus4			: out STD_LOGIC_VECTOR(31 downto 0);
-			  Out_BranchPcTgt		: out STD_LOGIC_VECTOR(31 downto 0);
-           Out_Alu_out  		: out STD_LOGIC_VECTOR(31 downto 0);
+           Out_ALU_out  		: out STD_LOGIC_VECTOR(31 downto 0);
            Out_ReadData2_Reg 	: out STD_LOGIC_VECTOR(31 downto 0);
 			  Stall					: in  STD_LOGIC;
 			  CLK 					: in  STD_LOGIC);
@@ -210,7 +204,7 @@ component Pipe_Mem_Wb is
 				InstrLower			: in  STD_LOGIC_VECTOR(15 downto 0);
 				PcPlus4				: in  STD_LOGIC_VECTOR(31 downto 0);
 				MemReadData 		: in  STD_LOGIC_VECTOR(31 downto 0);
-				Alu_out				: in  STD_LOGIC_VECTOR(31 downto 0);
+				ALU_out				: in  STD_LOGIC_VECTOR(31 downto 0);
 				Out_PcToReg 		: out STD_LOGIC;
 				Out_MemToReg		: out STD_LOGIC;
 				Out_InstrToReg		: out STD_LOGIC;
@@ -219,7 +213,7 @@ component Pipe_Mem_Wb is
 				Out_InstrLower		: out STD_LOGIC_VECTOR(15 downto 0);
 				Out_PCPlus4 		: out STD_LOGIC_VECTOR(31 downto 0);
 				Out_MemReadData 	: out STD_LOGIC_VECTOR(31 downto 0);
-				Out_Alu_out			: out STD_LOGIC_VECTOR(31 downto 0);
+				Out_ALU_out			: out STD_LOGIC_VECTOR(31 downto 0);
 				Stall					: in  STD_LOGIC;
 				CLK					: in  STD_LOGIC);
 end component;
@@ -285,7 +279,6 @@ end component;
 ----------------------------------------------------------------
 	signal	IdEx_ALUSrc      			:  STD_LOGIC;
 	signal	IdEx_ZeroToAlu   			:  STD_LOGIC;
-	signal	IdEx_Branch      			:  STD_LOGIC;
 	signal	IdEx_MemRead     			:  STD_LOGIC;
 	signal	IdEx_MemWrite    			:  STD_LOGIC;
 	signal	IdEx_MemToReg    			:  STD_LOGIC;
@@ -303,7 +296,6 @@ end component;
 	signal	IdEx_SignExtended  		:  STD_LOGIC_VECTOR(31 downto 0);
    signal	IdEx_Out_ALUSrc      	:  STD_LOGIC;
    signal	IdEx_Out_ZeroToAlu   	:  STD_LOGIC;
-   signal	IdEx_Out_Branch      	:  STD_LOGIC;
    signal	IdEx_Out_MemRead     	:  STD_LOGIC;
    signal	IdEx_Out_MemWrite    	:  STD_LOGIC;
    signal	IdEx_Out_MemToReg    	:  STD_LOGIC;
@@ -325,7 +317,6 @@ end component;
 ----------------------------------------------------------------
 -- EX/MEM Pipe Signals
 ----------------------------------------------------------------
-	signal	ExMem_Branch      		:  STD_LOGIC;
 	signal	ExMem_ALUZero				:  STD_LOGIC;
 	signal   ExMem_MemRead     		:  STD_LOGIC;
 	signal   ExMem_MemWrite    		:  STD_LOGIC;
@@ -335,11 +326,9 @@ end component;
 	signal   ExMem_RegWrite    		:  STD_LOGIC;
 	signal	ExMem_InstrRd 				:  STD_LOGIC_VECTOR(4 downto 0);
 	signal	ExMem_InstrLower 			:  STD_LOGIC_VECTOR(15 downto 0);
-	signal   ExMem_PcPlus4 				:  STD_LOGIC_VECTOR(31 downto 0);
-	signal	ExMem_BranchPcTgt 		:  STD_LOGIC_VECTOR(31 downto 0);
+	signal   ExMem_PcPlus4				:  STD_LOGIC_VECTOR(31 downto 0);
 	signal   ExMem_ALU_out   			:  STD_LOGIC_VECTOR(31 downto 0);
-	signal   ExMem_ReadData2_Reg  	:  STD_LOGIC_VECTOR(31 downto 0);		  
-	signal   ExMem_Out_Branch      	:  STD_LOGIC;
+	signal   ExMem_ReadData2_Reg  	:  STD_LOGIC_VECTOR(31 downto 0);
 	signal	ExMem_Out_ALUZero			:  STD_LOGIC;
 	signal   ExMem_Out_MemRead     	:  STD_LOGIC;
 	signal   ExMem_Out_MemWrite    	:  STD_LOGIC;
@@ -350,7 +339,6 @@ end component;
 	signal	ExMem_Out_InstrRd 		:  STD_LOGIC_VECTOR(4 downto 0);
 	signal	ExMem_Out_InstrLower 	:  STD_LOGIC_VECTOR(15 downto 0);
 	signal   ExMem_Out_PcPlus4			:  STD_LOGIC_VECTOR(31 downto 0);
-	signal	ExMem_Out_BranchPcTgt	:  STD_LOGIC_VECTOR(31 downto 0);
 	signal   ExMem_Out_Alu_out  		:  STD_LOGIC_VECTOR(31 downto 0);
 	signal   ExMem_Out_ReadData2_Reg :  STD_LOGIC_VECTOR(31 downto 0);
 	signal	ExMem_Stall					:  STD_LOGIC;
@@ -494,7 +482,6 @@ PipeIdEx1		: Pipe_Id_Ex port map
 						(
 						ALUSrc				=> IdEx_ALUSrc,
 						ZeroToAlu   		=> IdEx_ZeroToAlu,
-						Branch      		=> IdEx_Branch,
 						MemRead     		=> IdEx_MemRead,
 						MemWrite    		=> IdEx_MemWrite,
 						MemToReg    		=> IdEx_MemToReg,
@@ -512,7 +499,6 @@ PipeIdEx1		: Pipe_Id_Ex port map
 						SignExtended  		=> IdEx_SignExtended,
 						Out_ALUSrc     	=> IdEx_Out_ALUSrc,
 						Out_ZeroToAlu  	=> IdEx_Out_ZeroToAlu,
-						Out_Branch     	=> IdEx_Out_Branch,
 						Out_MemRead    	=> IdEx_Out_MemRead,
 						Out_MemWrite   	=> IdEx_Out_MemWrite,
 						Out_MemToReg   	=> IdEx_Out_MemToReg,
@@ -537,7 +523,6 @@ PipeIdEx1		: Pipe_Id_Ex port map
 ----------------------------------------------------------------
 PipeExMem1		: Pipe_Ex_Mem port map
 						(
-						Branch      		=>  ExMem_Branch,
 						ALUZero				=>  ExMem_ALUZero,
 						MemRead     		=>  ExMem_MemRead,
 						MemWrite    		=>  ExMem_MemWrite,
@@ -548,10 +533,8 @@ PipeExMem1		: Pipe_Ex_Mem port map
 						InstrRd 				=>  ExMem_InstrRd,
 						InstrLower 			=>  ExMem_InstrLower,
 						PcPlus4 				=>  ExMem_PcPlus4,
-						BranchPcTgt 		=>  ExMem_BranchPcTgt,
 						ALU_out   			=>  ExMem_ALU_out,
 						ReadData2_Reg  	=>  ExMem_ReadData2_Reg,
-						Out_Branch      	=>  ExMem_Out_Branch,
 						Out_ALUZero			=>  ExMem_Out_ALUZero,
 						Out_MemRead     	=>  ExMem_Out_MemRead ,
 						Out_MemWrite    	=>  ExMem_Out_MemWrite,
@@ -562,7 +545,6 @@ PipeExMem1		: Pipe_Ex_Mem port map
 						Out_InstrRd 		=>  ExMem_Out_InstrRd,
 						Out_InstrLower 	=>  ExMem_Out_InstrLower,
 						Out_PcPlus4			=>  ExMem_Out_PcPlus4,
-						Out_BranchPcTgt	=>  ExMem_Out_BranchPcTgt,
 						Out_ALU_out  		=>  ExMem_Out_ALU_out,
 						Out_ReadData2_Reg =>  ExMem_Out_ReadData2_Reg,
 						Stall					=>  ExMem_Stall,
@@ -624,7 +606,7 @@ IfId_PcPlus4 <= PC_out + 4;
 -- multiplexer
 PC_in <= JumpPcTgt when Contr_JumpR = '1' else
 			JumpPcTgt when Contr_Jump = '1' else
-			BranchPcTgt when ExMem_Out_Branch = '1' and ExMem_Out_ALUZero = '1' else
+			BranchPcTgt when Contr_Branch = '1' else  -- temp only
 			IfId_PcPlus4;
 
 ----------------------------------------------------------------
@@ -748,10 +730,7 @@ ALU_InBCand <= ResultFromMem when ExMem_Out_RegWrite = '1'
 ALU_InB <= (others => '0') when IdEx_Out_ZeroToAlu = '1' else
 			  IdEx_Out_SignExtended when IdEx_Out_ALUSrc = '1' else
 			  ALU_InBCand;
--- branch target
-ExMem_BranchPcTgt <= IdEx_Out_PcPlus4 + (IdEx_Out_SignExtended(29 downto 0) & "00");
 -- pipe
-ExMem_Branch <= IdEx_Out_Branch;
 TempALUZero <= ALU_zero;
 ExMem_ALUZero <= TempALUZero;
 ExMem_MemRead <= IdEx_Out_MemRead;
