@@ -583,6 +583,7 @@ PipeMemWb1      : Pipe_Mem_Wb port map
 -- Processor logic
 ----------------------------------------------------------------
 ----------------------------------------------------------------
+
 ----------------------------------------------------------------
 -- IF stage
 ----------------------------------------------------------------
@@ -632,12 +633,12 @@ BranchCmp1 <= ResultFromMem when Contr_Branch = '1'
 										and ExMem_Out_RegWrite = '1'
 										and not(ExMem_Out_InstrRd = "00000")
 										and ExMem_Out_InstrRd = IfId_Out_Instr(25 downto 21) else
-				  ReadData1_Reg;
+				  IdEx_ReadData1_Reg;
 BranchCmp2 <= ResultFromMem when Contr_Branch = '1'
 										and ExMem_Out_RegWrite = '1'
 										and not(ExMem_Out_InstrRd = "00000")
 										and ExMem_Out_InstrRd = IfId_Out_Instr(20 downto 16) else
-				  ReadData2_Reg;
+				  IdEx_ReadData2_Reg;
 BranchPcTgt <= IdEx_Out_PcPlus4 + (SignExtended(29 downto 0) & "00") when Contr_Branch = '1' 
 																								and Contr_ZeroToALU = '0'
 																								and BranchCmp1 = BranchCmp2 else
@@ -646,32 +647,41 @@ BranchPcTgt <= IdEx_Out_PcPlus4 + (SignExtended(29 downto 0) & "00") when Contr_
 																								and (not(BranchCmp1(31) = '1')) else
 					IfId_Out_PcPlus4;
 -- pipe
-IdEx_ALUSrc <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
+IdEx_ALUSrc <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1'
+							or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
 					Contr_ALUSrc;
-IdEx_ZeroToALU <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
+IdEx_ZeroToALU <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1'
+							or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
 						Contr_ZeroToALU;
-IdEx_MemRead <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
+IdEx_MemRead <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1'
+							or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
 					 Contr_MemRead;
-IdEx_MemWrite <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
+IdEx_MemWrite <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1'
+							or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
 					  Contr_MemWrite;
-IdEx_MemToReg <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
+IdEx_MemToReg <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1'
+							or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
 					  Contr_MemToReg;
-IdEx_InstrToReg <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
+IdEx_InstrToReg <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1'
+							or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
 						 Contr_InstrToReg;
-IdEx_PcToReg <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
+IdEx_PcToReg <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1'
+							or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
 					 Contr_PcToReg;
-IdEx_RegWrite <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
+IdEx_RegWrite <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1'
+							or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
 					  Contr_RegWrite;
 
 IdEx_InstrRs <= IfId_Out_Instr(25 downto 21);
 IdEx_InstrRt <= IfId_Out_Instr(20 downto 16);
-IdEx_InstrRd <= "00000" when LoadUseHazard = '1' or ALUBusyHazard = '1' or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
+IdEx_InstrRd <= "00000" when LoadUseHazard = '1' or ALUBusyHazard = '1'  -- during stall, Rd should be some value that does not affect later stage
+									or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
 					 "11111" when Contr_PcToReg = '1' else
 					 IfId_Out_Instr(15 downto 11) when Contr_RegDst = '1' else
 					 IfId_Out_Instr(20 downto 16);
 IdEx_InstrLower <= IfId_Out_Instr(15 downto 0);
 IdEx_ReadData1_Reg <= WriteData_Reg when IfId_Out_Instr(25 downto 21) = WriteAddr_Reg else
-							 ReadData1_Reg;
+							 ReadData1_Reg;  -- special forwarding for wb stage, reg write does not happen until next clock cycle
 IdEx_ReadData2_Reg <= WriteData_Reg when IfId_Out_Instr(20 downto 16) = WriteAddr_Reg else
 							 ReadData2_Reg;
 IdEx_PcPlus4 <= IfId_Out_PcPlus4;
