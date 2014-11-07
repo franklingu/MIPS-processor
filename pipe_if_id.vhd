@@ -47,7 +47,7 @@ process(CLK)
 begin
 	if CLK'event and CLK = '1' then
 		if Flush = '1' then
-			Out_Instr <= (26 => '1', others => '0');  -- a trick to send in noop instr
+			Out_Instr <= (others => '0');  -- noop instr
 		else
 			if Stall = '0' then
 				Out_Instr <= Instr;

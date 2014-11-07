@@ -86,7 +86,9 @@ ALU_busy <= ALU_lab2_status(2);
 process(CLK)
 begin
 	if CLK'event and CLK = '1' then
-		if (ALU_Control(5 downto 0) = "011000" or ALU_Control(5 downto 0) = "011001") and ALU_lab2_status(2) = '0' then
+		if (ALU_Control(5 downto 0) = "011000" or ALU_Control(5 downto 0) = "011001"
+			 or ALU_Control(5 downto 0) = "011010" or ALU_Control(5 downto 0) = "011011")
+			and ALU_lab2_status(2) = '0' then
 			high_result <= ALU_lab2_result2;
 			low_result <= ALU_lab2_result1;
 		end if;
@@ -121,6 +123,9 @@ when "10" =>
 		ALU_Out <= ALU_lab2_result1;
 	when "100111" => --nor
 		ALU_lab2_control <= "001100";
+		ALU_Out <= ALU_lab2_result1;
+	when "100110" => --xor
+		ALU_lab2_control <= "000100";
 		ALU_Out <= ALU_lab2_result1;
 	when "100000" => --add
 		ALU_lab2_control <= "000010";
@@ -158,6 +163,12 @@ when "10" =>
 	when "010010" => -- mflo
 		ALU_lab2_control <= "100000";
 		ALU_Out <= low_result;
+	when "011010" => -- div
+		ALU_lab2_control <= "010010";
+		ALU_Out <= ALU_lab2_result1;
+	when "011011" => -- divu
+		ALU_lab2_control <= "010011";
+		ALU_Out <= ALU_lab2_result1;
 	when others =>	
 		ALU_lab2_control <= "100000";
 		ALU_Out <= (others => '0');
@@ -169,6 +180,12 @@ when "11" => -- immediate
 			ALU_Out <= ALU_lab2_result1;
 		when "001101" => -- ori
 			ALU_lab2_control <= "000001";
+			ALU_Out <= ALU_lab2_result1;
+		when "001100" => -- andi
+			ALU_lab2_control <= "000000";
+			ALU_Out <= ALU_lab2_result1;
+		when "001110" => -- xori
+			ALU_lab2_control <= "000100";
 			ALU_Out <= ALU_lab2_result1;
 		when others =>
 			ALU_lab2_control <= "100000";

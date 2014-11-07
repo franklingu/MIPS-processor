@@ -700,7 +700,7 @@ ALUBusyHazard <= ALU_busy;
 -- EX stage
 ----------------------------------------------------------------
 -- stall
-ExMem_Stall <= '0';  -- most likely will be deleted afterwards
+ExMem_Stall <= ALUBusyHazard;
 -- control signals
 ALU_Control <= IdEx_Out_ALU_Control;
 -- forward unit
@@ -750,7 +750,7 @@ ExMem_ReadData2_Reg <= IdEx_Out_ReadData2_Reg;
 -- MEM stage
 ----------------------------------------------------------------
 -- stall
-MemWb_Stall <= '0';  -- most likely will be deleted afterwards
+MemWb_Stall <= ALUBusyHazard;
 -- send to memory
 MemRead <= ExMem_Out_MemRead;
 MemWrite <= ExMem_Out_MemWrite;

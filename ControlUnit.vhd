@@ -81,7 +81,15 @@ begin
 		ALUSrc <= '1';
 		SignExtend <= '1';
 		RegWrite <= '1';
+	when "001100" => -- andi
+		ALUOp <= "11";
+		ALUSrc <= '1';
+		RegWrite <= '1';
 	when "001101" => -- ori
+		ALUOp <= "11";
+		ALUSrc <= '1';
+		RegWrite <= '1';
+	when "001110" => -- xori
 		ALUOp <= "11";
 		ALUSrc <= '1';
 		RegWrite <= '1';
@@ -94,6 +102,8 @@ begin
 		if funct = "001000" then -- jr
 			ALUOp <= "00";
 			JumpR <= '1';
+		elsif funct = "000000" then -- noop
+			ALUOp <= "00";
 		else -- r-type
 			ALUOp <= "10";
 			RegWrite <= '1';

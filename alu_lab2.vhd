@@ -296,55 +296,55 @@ begin
 						operand2_val := "00" & operand2_val(width-1 downto 2); -- srl 2 for op2
 					end if;
 				end if;
---			-- div, divu
---			when "10010" | "10011" =>  -- takes 34 cycles to execute, returns Operand1/Operand2
---				if state = COMBINATIONAL then  -- n_state = MULTI_CYCLE and state = COMBINATIONAL implies we are just transitioning into MULTI_CYCLE
---					-- handle div by zero
---					if Operand2 = x"00000000" then  -- divisor is 0
---						Result1_multi <= (others => 'X');
---						Result2_multi <= (others => 'X');
---						done <= '1';
---					else
---						count := (others => '0');
---						sign_quotient <= (Operand1(31) xor Operand2(31)) and (not(Control(0)));
---						sign_remainder <= Operand1(31) and (not(Control(0)));
---						
---						-- get abs value of the operands
---						extended_result1sign := (others => (Operand1(31) and (not(Control(0)))));
---						extended_result2sign := (others => (Operand2(31) and (not(Control(0)))));
---						abs_result1 := (Operand1 xor extended_result1sign) + (Operand1(31) and (not(Control(0))));
---						abs_result2 := (Operand2 xor extended_result2sign) + (Operand2(31) and (not(Control(0))));
---						
---						-- pass them to the unsigned div hardware
---						Result1_multi <= abs_result1(width-2 downto 0) & '0';
---						Result2_multi <= (0 => abs_result1(width - 1), others => '0');
---						Divisor <= abs_result2;
---					end if;
---				else
---					count := count + 1;
---					if count=x"20" then
---						if CARRY_OUT_MULTI = '1' then  -- Result2_multi is not less than the divisor
---							extended_result2sign := (others => sign_remainder);
---							Result2_multi <= (MULTI_SUM xor extended_result2sign);
---						else
---						   extended_result2sign := (others => sign_remainder);
---							Result2_multi <= (Result2_multi xor extended_result2sign);
---						end if;
---						extended_result1sign := (others => sign_quotient);
---						Result1_multi <= ((Result1_multi(31 downto 1) & CARRY_OUT_MULTI) xor extended_result1sign);
---					elsif count=x"21" then
---						done <= '1';
---						Result2_multi <= Result2_multi + sign_remainder;
---						Result1_multi <= Result1_multi + sign_quotient;
---					else
---						if CARRY_OUT_MULTI = '1' then  -- Result2_multi is not less than the divisor
---							Result2_multi <= MULTI_SUM(30 downto 0) & Result1_multi(31);
---						else
---							Result2_multi <= Result2_multi(30 downto 0) & Result1_multi(31);
---						end if;
---						Result1_multi <= Result1_multi(30 downto 1) & CARRY_OUT_MULTI & '0';
---					end if;
---				end if;
+			-- div, divu
+			when "10010" | "10011" =>  -- takes 34 cycles to execute, returns Operand1/Operand2
+				if state = COMBINATIONAL then  -- n_state = MULTI_CYCLE and state = COMBINATIONAL implies we are just transitioning into MULTI_CYCLE
+					-- handle div by zero
+					if Operand2 = x"00000000" then  -- divisor is 0
+						Result1_multi <= (others => 'X');
+						Result2_multi <= (others => 'X');
+						done <= '1';
+					else
+						count := (others => '0');
+						sign_quotient <= (Operand1(31) xor Operand2(31)) and (not(Control(0)));
+						sign_remainder <= Operand1(31) and (not(Control(0)));
+						
+						-- get abs value of the operands
+						extended_result1sign := (others => (Operand1(31) and (not(Control(0)))));
+						extended_result2sign := (others => (Operand2(31) and (not(Control(0)))));
+						abs_result1 := (Operand1 xor extended_result1sign) + (Operand1(31) and (not(Control(0))));
+						abs_result2 := (Operand2 xor extended_result2sign) + (Operand2(31) and (not(Control(0))));
+						
+						-- pass them to the unsigned div hardware
+						Result1_multi <= abs_result1(width-2 downto 0) & '0';
+						Result2_multi <= (0 => abs_result1(width - 1), others => '0');
+						Divisor <= abs_result2;
+					end if;
+				else
+					count := count + 1;
+					if count=x"20" then
+						if CARRY_OUT_MULTI = '1' then  -- Result2_multi is not less than the divisor
+							extended_result2sign := (others => sign_remainder);
+							Result2_multi <= (MULTI_SUM xor extended_result2sign);
+						else
+						   extended_result2sign := (others => sign_remainder);
+							Result2_multi <= (Result2_multi xor extended_result2sign);
+						end if;
+						extended_result1sign := (others => sign_quotient);
+						Result1_multi <= ((Result1_multi(31 downto 1) & CARRY_OUT_MULTI) xor extended_result1sign);
+					elsif count=x"21" then
+						done <= '1';
+						Result2_multi <= Result2_multi + sign_remainder;
+						Result1_multi <= Result1_multi + sign_quotient;
+					else
+						if CARRY_OUT_MULTI = '1' then  -- Result2_multi is not less than the divisor
+							Result2_multi <= MULTI_SUM(30 downto 0) & Result1_multi(31);
+						else
+							Result2_multi <= Result2_multi(30 downto 0) & Result1_multi(31);
+						end if;
+						Result1_multi <= Result1_multi(30 downto 1) & CARRY_OUT_MULTI & '0';
+					end if;
+				end if;
 			when "11110" => -- takes 2 cycles to execute, just returns the operands
 				if state = COMBINATIONAL then
 					Result1_multi <= Operand1;
