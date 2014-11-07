@@ -595,7 +595,7 @@ IfId_Stall <= LoadUseHazard when LoadUseHazard = '1' else
 				  UpdateBranchHazard when UpdateBranchHazard = '1' else
 				  UpdateJumpRHazard when UpdateJumpRHazard = '1' else
 				  ALUBusyHazard;
-IfId_Flush <= '1' when ControlHazard = '1' and UpdateBranchHazard = '0' and UpdateJumpRHazard = '0' else
+IfId_Flush <= '1' when ControlHazard = '1' and LoadUseHazard = '0' and UpdateBranchHazard = '0' and UpdateJumpRHazard = '0' else
 				  '0';
 -- for InstrMem
 Addr_Instr <= PC_out;
@@ -620,18 +620,21 @@ ReadAddr2_Reg <= IfId_Out_Instr(20 downto 16);
 SignExtended(31 downto 16) <= (others => (Contr_SignExtend and IfId_Out_Instr(15)));
 SignExtended(15 downto 0) <= IfId_Out_Instr(15 downto 0);
 -- jump
-JumpPcTgt <= ResultFromMem when Contr_JumpR = '1' 
+JumpPcTgt <= ResultFromMem when Contr_JumpR = '1'
+										and ExMem_Out_RegWrite = '1'
 										and not(ExMem_Out_InstrRd = "00000")
 										and ExMem_Out_InstrRd = IfId_Out_Instr(25 downto 21) else
 				 ReadData1_Reg when Contr_JumpR = '1' else
 				 IfId_Out_PcPlus4(31 downto 28) & IfId_Out_Instr(25 downto 0) & "00" when Contr_Jump = '1' else
 				 IfId_Out_PcPlus4;
 -- branch (beq, bgez, bgezal)
-BranchCmp1 <= ResultFromMem when Contr_Branch = '1' 
+BranchCmp1 <= ResultFromMem when Contr_Branch = '1'
+										and ExMem_Out_RegWrite = '1'
 										and not(ExMem_Out_InstrRd = "00000")
 										and ExMem_Out_InstrRd = IfId_Out_Instr(25 downto 21) else
 				  ReadData1_Reg;
-BranchCmp2 <= ResultFromMem when Contr_Branch = '1' 
+BranchCmp2 <= ResultFromMem when Contr_Branch = '1'
+										and ExMem_Out_RegWrite = '1'
 										and not(ExMem_Out_InstrRd = "00000")
 										and ExMem_Out_InstrRd = IfId_Out_Instr(20 downto 16) else
 				  ReadData2_Reg;
@@ -643,26 +646,27 @@ BranchPcTgt <= IdEx_Out_PcPlus4 + (SignExtended(29 downto 0) & "00") when Contr_
 																								and (not(BranchCmp1(31) = '1')) else
 					IfId_Out_PcPlus4;
 -- pipe
-IdEx_ALUSrc <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' else
+IdEx_ALUSrc <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
 					Contr_ALUSrc;
-IdEx_ZeroToALU <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' else
+IdEx_ZeroToALU <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
 						Contr_ZeroToALU;
-IdEx_MemRead <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' else
+IdEx_MemRead <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
 					 Contr_MemRead;
-IdEx_MemWrite <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' else
+IdEx_MemWrite <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
 					  Contr_MemWrite;
-IdEx_MemToReg <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' else
+IdEx_MemToReg <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
 					  Contr_MemToReg;
-IdEx_InstrToReg <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' else
+IdEx_InstrToReg <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
 						 Contr_InstrToReg;
-IdEx_PcToReg <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' else
+IdEx_PcToReg <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
 					 Contr_PcToReg;
-IdEx_RegWrite <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' else
+IdEx_RegWrite <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1' or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
 					  Contr_RegWrite;
 
 IdEx_InstrRs <= IfId_Out_Instr(25 downto 21);
 IdEx_InstrRt <= IfId_Out_Instr(20 downto 16);
-IdEx_InstrRd <= "11111" when Contr_PcToReg = '1' else
+IdEx_InstrRd <= "00000" when LoadUseHazard = '1' or ALUBusyHazard = '1' or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
+					 "11111" when Contr_PcToReg = '1' else
 					 IfId_Out_Instr(15 downto 11) when Contr_RegDst = '1' else
 					 IfId_Out_Instr(20 downto 16);
 IdEx_InstrLower <= IfId_Out_Instr(15 downto 0);
@@ -677,20 +681,23 @@ IdEx_SignExtended <= SignExtended;
 -- Hazard control
 ----------------------------------------------------------------
 LoadUseHazard <= '1' when IdEx_Out_MemRead = '1' 
-								and (IdEx_Out_InstrRt = IfId_Out_Instr(25 downto 21)
-									or IdEx_Out_InstrRt = IfId_Out_Instr(25 downto 21)) else
+								and (IdEx_Out_InstrRd = IfId_Out_Instr(25 downto 21)
+									or IdEx_Out_InstrRd = IfId_Out_Instr(20 downto 16)) else
 					  '0';
 ControlHazard <= '1' when Contr_Branch = '1' or Contr_Jump = '1' or Contr_JumpR = '1' else
 					  '0';
 UpdateBranchHazard <= '1' when Contr_Branch = '1' 
+										and IdEx_Out_RegWrite = '1'
 										and not(IdEx_Out_InstrRd = "00000")
 										and IdEx_Out_InstrRd = IfId_Out_Instr(25 downto 21) else
 							 '1' when Contr_Branch = '1'  -- only beq has rt
 										and Contr_ZeroToALU = '0'
+										and IdEx_Out_RegWrite = '1'
 										and not(IdEx_Out_InstrRd = "00000")
 										and IdEx_Out_InstrRd = IfId_Out_Instr(20 downto 16) else
 							 '0';
 UpdateJumpRHazard <= '1' when Contr_JumpR = '1'
+										and IdEx_Out_RegWrite = '1'
 										and not(IdEx_Out_InstrRd = "00000")
 										and IdEx_Out_InstrRd = IfId_Out_Instr(25 downto 21) else
 							'0';
@@ -705,6 +712,7 @@ ExMem_Stall <= ALUBusyHazard;
 ALU_Control <= IdEx_Out_ALU_Control;
 -- forward unit
 ResultFromMem <= ExMem_Out_PCPlus4 when ExMem_Out_PcToReg = '1' else
+					  Data_In when ExMem_Out_MemRead = '1' else
 					  ExMem_Out_InstrLower & "0000000000000000" when ExMem_Out_InstrToReg = '1' else
 					  ExMem_Out_Alu_out;
 ResultFromWb <= MemWb_Out_PCPlus4 when MemWb_Out_PcToReg = '1' else
@@ -716,7 +724,7 @@ ALU_InA <= ResultFromMem when ExMem_Out_RegWrite = '1'
 										and ExMem_Out_InstrRd = IdEx_Out_InstrRs else
 			  ResultFromWb when MemWb_Out_RegWrite = '1' 
 										and not(MemWb_Out_InstrRd = "00000") 
-										and not(ExMem_Out_InstrRd = MemWb_Out_InstrRd) 
+										and (not(ExMem_Out_InstrRd = MemWb_Out_InstrRd) or  ExMem_Out_MemWrite = '1')
 										and MemWb_Out_InstrRd = IdEx_Out_InstrRs else
 			  IdEx_Out_ReadData1_Reg;
 ALU_InBCand <= ResultFromMem when ExMem_Out_RegWrite = '1' 
@@ -724,7 +732,7 @@ ALU_InBCand <= ResultFromMem when ExMem_Out_RegWrite = '1'
 										and ExMem_Out_InstrRd = IdEx_Out_InstrRt else
 					ResultFromWb when MemWb_Out_RegWrite = '1' 
 										and not(MemWb_Out_InstrRd = "00000") 
-										and not(ExMem_Out_InstrRd = MemWb_Out_InstrRd) 
+										and (not(ExMem_Out_InstrRd = MemWb_Out_InstrRd) or  ExMem_Out_MemWrite = '1')
 										and MemWb_Out_InstrRd = IdEx_Out_InstrRt else
 					IdEx_Out_ReadData2_Reg;
 -- other multiplexers
@@ -757,8 +765,8 @@ MemWrite <= ExMem_Out_MemWrite;
 Addr_Data <= ExMem_Out_ALU_out;
 Data_Out <= ResultFromWb when MemWb_Out_RegWrite = '1' 
 										and not(MemWb_Out_InstrRd = "00000") 
-										and MemWb_Out_InstrRd = ExMem_Out_InstrRd else
-				ExMem_Out_ReadData2_Reg;  -- fwd from mem to mem
+										and MemWb_Out_InstrRd = ExMem_Out_InstrRd else -- fwd from mem to mem
+				ExMem_Out_ReadData2_Reg;
 -- pipe
 MemWb_PcToReg <= ExMem_Out_PcToReg;
 MemWb_MemToReg <= ExMem_Out_MemToReg;
