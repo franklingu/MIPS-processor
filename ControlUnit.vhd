@@ -150,7 +150,6 @@ begin
 		else
 			DecodeExc <= '1';
 		end if;
-		RegDst <= '1';
 		RegWrite <= '1';
 --	when "" => -- mtc0	
 --	when "" => -- eret

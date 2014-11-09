@@ -283,7 +283,7 @@ WriteAddr_Reg <= "11111" when PcToReg = '1' else
 					  Instr(20 downto 16);
 
 -- multiplexer to choose data-in for reg write
-WriteData_Reg <=  (2 => Cause(2), 1 => Cause(1), 0 => Cause(0), others => '0') when ExcPcRead = '1' else
+WriteData_Reg <=  (2 => Cause(2), 1 => Cause(1), 0 => Cause(0), others => '0') when ExcCauseRead = '1' else
 						(PC_out + 4) when PcToReg = '1' else
 						Data_In when MemtoReg = '1' else 
 						Instr(15 downto 0) & "0000000000000000" when InstrToReg = '1' else

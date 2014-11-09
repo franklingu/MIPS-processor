@@ -182,12 +182,12 @@ case state is
 					Status(0) <= not(SUM(31));
 				end if;
 				Result2 <= (others => 'X');
-				Status(1) <= 'X';
+				Status(1) <= '0';
 			-- sltu
 			when "01110" =>
 				Result1 <= (0 => not(CARRY_OUT), others => '0');
 				Result2 <= (others => 'X');
-				Status (1 downto 0) <= "XX";
+				Status (1 downto 0) <= "0X";
 			-- shifter (sll, srl, sra)
 			when "00101" | "01101" | "01001" =>
 				Result1 <= SHIFTER_RESULT;
