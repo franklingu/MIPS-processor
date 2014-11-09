@@ -51,7 +51,7 @@ architecture arch_TOP of TOP is
 ----------------------------------------------------------------
 -- Constants
 ----------------------------------------------------------------
-constant CLK_DIV_BITS	: integer := 0; --25 for a clock of the order of 1Hz
+constant CLK_DIV_BITS	: integer := 23; --25 for a clock of the order of 1Hz
 constant N_LEDs			: integer := 12;
 constant N_DIPs			: integer := 16;
 
@@ -315,3 +315,21 @@ end arch_TOP;
 --x"03e00008",  --        jr $31
 --x"03e00008",  -- return: jr $31
 -- end of fib_with_sll_.asm
+
+-- test jr --
+--x"0c100001",  -- start: jal ra1
+--x"0c100002",  -- ra1:   jal ra2 
+--x"0c100003",  -- ra2:   jal ra3
+--x"0c100004",  -- ra3:   jal ra4
+--x"0c100005",  -- ra4:   jal ra5
+--x"0c100006",  -- ra5:   jal mod
+--x"35290001",  -- mod:   ori $t1, 0x0001
+--x"354a0004",  --    ori $t2, 0x0004
+--x"012a0018",  --    mult $t1, $t2
+--x"00005012",  --    mflo $t2
+--x"03eaf822",  --    sub $31, $31, $t2
+--x"03eaf822",  --    sub $31, $31, $t2
+--x"03eaf822",  --    sub $31, $31, $t2
+--x"23ff0004",  --    addi $31, $31, 0x0004
+--x"03e00008",  --    jr $31
+-- end of test jr
