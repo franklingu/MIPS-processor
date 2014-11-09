@@ -84,6 +84,8 @@ component ControlUnit is
 				RegWrite		: out  STD_LOGIC;	
 				RegDst		: out  STD_LOGIC;
 				ZeroToAlu	: out	 STD_LOGIC;
+				Shift			: out  STD_LOGIC;
+				ShiftAmtV	: out  STD_LOGIC;
 				DecodeExc	: out  STD_LOGIC;
 				ExcCauseRead : out STD_LOGIC;
 			   ExcPcRead    : out STD_LOGIC);
@@ -155,6 +157,8 @@ end component;
 	signal	RegWrite			: 	STD_LOGIC;	
 	signal	RegDst			:  STD_LOGIC;
 	signal	ZeroToAlu		:	STD_LOGIC;
+	signal	Shift				:  STD_LOGIC;
+	signal	ShiftAmtV		:  STD_LOGIC;
 	signal	DecodeExc		:  STD_LOGIC;
 	signal	ExcPcRead		:  STD_LOGIC;
 	signal	ExcCauseRead	:	STD_LOGIC;
@@ -233,6 +237,8 @@ ControlUnit1 	: ControlUnit port map
 						RegWrite 	=> RegWriteControl, 
 						RegDst 		=> RegDst,
 						ZeroToAlu	=> ZeroToAlu,
+						Shift			=> Shift,
+						ShiftAmtV	=> ShiftAmtV,
 						DecodeExc	=> DecodeExc,
 						ExcCauseRead	=> ExcCauseRead,
 						ExcPcRead		=> ExcPcRead
@@ -276,8 +282,10 @@ ExceptionUnit1	: ExceptionUnit port map
 
 -- for Reg
 RegWrite <= RegWriteControl and (not Exception);
-ReadAddr1_Reg <= Instr(25 downto 21);
-ReadAddr2_Reg <= Instr(20 downto 16);
+ReadAddr1_Reg <= Instr(20 downto 16) when Shift = '1' else
+					  Instr(25 downto 21);
+ReadAddr2_Reg <= Instr(25 downto 21) when Shift = '1' and ShiftAmtV = '1' else
+					  Instr(20 downto 16);
 WriteAddr_Reg <= "11111" when PcToReg = '1' else
 					  Instr(15 downto 11) when RegDst = '1' else 
 					  Instr(20 downto 16);
@@ -294,10 +302,12 @@ ALU_InA <= ReadData1_Reg;
 
 -- multiplexer for choice of input 2 into ALU
 ALU_InB(15 downto 0) <= (others => '0') when ZeroToAlu = '1' else
+								"00000000000" & Instr(10 downto 6) when Shift = '1' and ShiftAmtV = '0' else
 								Instr(15 downto 0) when ALUSrc = '1' else 
 								ReadData2_Reg(15 downto 0);
 								
 ALU_InB(31 downto 16) <= (others => '0') when ZeroToAlu = '1' else
+								(others => '0') when Shift = '1' and ShiftAmtV = '0' else
 								(others => (Instr(15) and SignExtend)) when ALUSrc = '1' else 
 								ReadData2_Reg(31 downto 16);
 
