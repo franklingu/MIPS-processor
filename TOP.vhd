@@ -104,16 +104,44 @@ type MEM_256x32 is array (0 to 255) of std_logic_vector (31 downto 0); -- 256 wo
 -- Instruction Memory
 ----------------------------------------------------------------
 constant INSTR_MEM : MEM_256x32 := (
-			x"08100007",  -- reset: j start
-			x"00004824",  -- exception:	and $t1, $zero, $zero
-			x"3c091002",  -- 		lui $t1, 0x1002
-			x"400a6800",  -- 		mfc0 $t2, $13
-			x"3c087fff",  -- 		lui $t0, 0x7fff
-			x"ad2a0000",  -- 		sw $t2, 0($t1)
-			x"08100006",  -- die:	j die
-			x"3c087fff",  -- start: lui $t0, 0x7fff
-			x"8d090000",  --        lw $t1, 0($t0)
-			x"08100007",  --        j start
+			x"0810000b",  -- reset: j start
+			x"40096800",  -- exception:	mfc0 $t1, $13
+			x"ad090000",  -- 		sw $t1, 0($t0)
+			x"00005024",  -- 		and $t2, $zero, $zero
+			x"354a0003",  -- 		ori $t2, 0x0003
+			x"01515022",  -- 	exc_delay:	sub $t2, $t2, $s1
+			x"0541fffe",  -- 		bgez $t2, exc_delay
+			x"00004824",  -- 		and $t1, $zero, $zero  # reset t1
+			x"3c0a0000",  -- 		lui $t2, 0x0000
+			x"354a0001",  -- 		ori $t2, 0x0001  # reset t2
+			x"42000018",  -- 		eret # continue the loop
+			x"3c081002",  -- start: 	lui $t0, 0x1002
+			x"35080000",  -- 	ori $t0, 0x0000  #address for data memory
+			x"00004824",  -- 	and $t1, $zero, $zero  # t1 = 0
+			x"3c0a0000",  -- 	lui $t2, 0x0000
+			x"354a0001",  -- 	ori $t2, 0x0001  # t2 = 1
+			x"00005824",  -- 	and $t3, $zero, $zero  # t3 = 0
+			x"00006024",  -- 	and $t4, $zero, $zero
+			x"3c0d7fff",  -- 	lui $t5, 0x7fff
+			x"35adfe00",  -- 	ori $t5, 0xfe00  # t5 restricts max fib to 0x01ff
+			x"3c0e0000",  -- 	lui $t6, 0x0000
+			x"35ce0000",  -- 	ori $t6, 0x0000
+			x"21ce0003",  -- 	addi $t6, $t6, 0x0003  # t6 = 3
+			x"3c110000",  -- 	lui $s1, 0x0000
+			x"36310001",  -- 	ori $s1, 0x0001
+			x"0c100021",  -- 	loop:	jal fib
+			x"218c0001",  -- 		addi $t4, $t4, 0x0001
+			x"018e0018",  -- 		mult $t4, $t6
+			x"00006012",  -- 		mflo $t4
+			x"01916022",  -- 		delay:	sub $t4, $t4, $s1
+			x"0581fffe",  -- 			bgez $t4, delay
+			x"01a97820",  -- 			add $t7, $t5, $t1
+			x"08100019",  -- 			j loop
+			x"ad090000",  -- fib: 	sw  $t1, 0($t0)
+			x"01405820",  -- 	add $t3, $t2, $zero
+			x"01495020",  -- 	add $t2, $t2, $t1
+			x"01604820",  -- 	add $t1, $t3, $zero
+			x"03e00008",  --     jr $31
 			others=> x"00000000");
 
 ----------------------------------------------------------------
@@ -258,3 +286,43 @@ end arch_TOP;
 --x"3c087fff",  -- start: lui $t0, 0x7fff
 --x"01284820",  --        add $t1, $t1, $t0
 --x"08100006",  --        j start
+
+-- Fib counter
+-- x"0810000b",  -- reset: j start
+-- x"40096800",  -- exception:	mfc0 $t1, $13
+-- x"ad090000",  -- 		sw $t1, 0($t0)
+-- x"00005024",  -- 		and $t2, $zero, $zero
+-- x"354a0003",  -- 		ori $t2, 0x0003
+-- x"01515022",  -- 	exc_delay:	sub $t2, $t2, $s1
+-- x"0541fffe",  -- 		bgez $t2, exc_delay
+-- x"00004824",  -- 		and $t1, $zero, $zero  # reset t1
+-- x"3c0a0000",  -- 		lui $t2, 0x0000
+-- x"354a0001",  -- 		ori $t2, 0x0001  # reset t2
+-- x"42000018",  -- 		eret # continue the loop
+-- x"3c081002",  -- start: 	lui $t0, 0x1002
+-- x"35080000",  -- 	ori $t0, 0x0000  #address for data memory
+-- x"00004824",  -- 	and $t1, $zero, $zero  # t1 = 0
+-- x"3c0a0000",  -- 	lui $t2, 0x0000
+-- x"354a0001",  -- 	ori $t2, 0x0001  # t2 = 1
+-- x"00005824",  -- 	and $t3, $zero, $zero  # t3 = 0
+-- x"00006024",  -- 	and $t4, $zero, $zero
+-- x"3c0d7fff",  -- 	lui $t5, 0x7fff
+-- x"35adfe00",  -- 	ori $t5, 0xfe00  # t5 restricts max fib to 0x01ff
+-- x"3c0e0000",  -- 	lui $t6, 0x0000
+-- x"35ce0000",  -- 	ori $t6, 0x0000
+-- x"21ce0003",  -- 	addi $t6, $t6, 0x0003  # t6 = 3
+-- x"3c110000",  -- 	lui $s1, 0x0000
+-- x"36310001",  -- 	ori $s1, 0x0001
+-- x"0c100021",  -- 	loop:	jal fib
+-- x"218c0001",  -- 		addi $t4, $t4, 0x0001
+-- x"018e0018",  -- 		mult $t4, $t6
+-- x"00006012",  -- 		mflo $t4
+-- x"01916022",  -- 		delay:	sub $t4, $t4, $s1
+-- x"0581fffe",  -- 			bgez $t4, delay
+-- x"01a97820",  -- 			add $t7, $t5, $t1
+-- x"08100019",  -- 			j loop
+-- x"ad090000",  -- fib: 	sw  $t1, 0($t0)
+-- x"01405820",  -- 	add $t3, $t2, $zero
+-- x"01495020",  -- 	add $t2, $t2, $t1
+-- x"01604820",  -- 	add $t1, $t3, $zero
+-- x"03e00008"   --     jr $31
