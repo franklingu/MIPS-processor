@@ -99,37 +99,43 @@ type MEM_256x32 is array (0 to 255) of std_logic_vector (31 downto 0); -- 256 wo
 -- Instruction Memory
 ----------------------------------------------------------------
 constant INSTR_MEM : MEM_256x32 := (
-			x"3c081002",  -- start:     lui $t0, 0x1002
-			x"35080000",  --    ori $t0, 0x0000  #address for data memory
+			x"3c081001",  -- start:     lui $t0, 0x1001
+			x"35080000",  --    ori $t0, 0x0000     #address for data memory
 			x"3c090000",  --    lui $t1, 0x0000
-			x"35290000",  --    ori $t1, 0x0000  # t1 = 0
-			x"3c0a0000",  --    lui $t2, 0x0000
-			x"354a0001",  --    ori $t2, 0x0001  # t2 = 1
-			x"3c0b0000",  --    lui $t3, 0x0000
-			x"356b0000",  --    ori $t3, 0x0000  # t3 = 0
+			x"35290001",  --    ori $t1, 0x0001     # t1 = 1
+			x"00094940",  --    sll $t1, $t1, 5
+			x"00094942",  --    srl $t1, $t1, 5
+			x"ad090000",  --    sw  $t1, 0($t0)
+			x"31290000",  --    andi $t1, 0x0000    # forwarding to ex stage, not from mem stage
+			x"8d0a0000",  --    lw  $t2, 0($t0)     # t2 = 1
+			x"ad0a0000",  --    sw  $t2, 0($t0)
+			x"8d0b0000",  --    lw  $t3, 0($t0)     # t3 = 1
+			x"016a5822",  --    sub $t3, $t3, $t2   # t3 = 0, load use hazard
 			x"3c0c0000",  --    lui $t4, 0x0000
-			x"358c0000",  --    ori $t4, 0x0000
 			x"3c0d0000",  --    lui $t5, 0x0000
-			x"35ad01ff",  --    ori $t5, 0x01ff  # at most "111111111"
+			x"35ad01ff",  --    ori $t5, 0x01ff     # at most "111111111"
 			x"3c0e0000",  --    lui $t6, 0x0000
-			x"35ce0000",  --    ori $t6, 0x0000
 			x"21ce0003",  --    addi $t6, $t6, 0x0003  # t6 = 3
 			x"3c110000",  --    lui $s1, 0x0000
 			x"36310001",  --    ori $s1, 0x0001
-			x"0c10001a",  -- loop:  jal fib
-			x"218c0001",  --    add $t4, $t4, 0x0001
+			x"3c081002",  --    lui $t0, 0x1002
+			x"0511000f",  --    bgezal $t0, return
+			x"0c10001f",  -- loop:  jal fib
+			x"218c0001",  --    addi $t4, $t4, 0x0001
 			x"018e0018",  --    mult $t4, $t6
 			x"00006012",  --    mflo $t4
 			x"01916022",  -- delay: sub $t4, $t4, $s1
-			x"0581fffe",  --    bgez $t4, delay
+			x"0581fffe",  --    bgez $t4, delay    # control stall, control hazard
+			x"218c0001",  --    addi $t4, $t4, 0x0001
 			x"01a9782a",  --    slt $t7, $t5, $t1
-			x"11e0fff8",  --    beq $t7, $zero, loop
+			x"11e0fff7",  --    beq $t7, $zero, loop
 			x"08100000",  --    j start
 			x"ad090000",  -- fib:   sw  $t1, 0($t0)
 			x"01405820",  --    add $t3, $t2, $zero
 			x"01495020",  --    add $t2, $t2, $t1
 			x"01604820",  --    add $t1, $t3, $zero
 			x"03e00008",  --        jr $31
+			x"03e00008",  -- return: jr $31
 			others=> x"00000000");	
 
 ----------------------------------------------------------------
@@ -231,3 +237,81 @@ end arch_TOP;
 -- </Wrapper architecture>
 ----------------------------------------------------------------
 ----------------------------------------------------------------	
+
+-- fib.hex --
+--x"3c081001",  -- start:     lui $t0, 0x1001
+--x"35080000",  --    ori $t0, 0x0000     #address for data memory
+--x"3c090000",  --    lui $t1, 0x0000
+--x"35290001",  --    ori $t1, 0x0001     # t1 = 1
+--x"ad090000",  --    sw  $t1, 0($t0)
+--x"31290000",  --    andi $t1, 0x0000    # forwarding to ex stage, not from mem stage
+--x"8d0a0000",  --    lw  $t2, 0($t0)     # t2 = 1
+--x"ad0a0000",  --    sw  $t2, 0($t0)
+--x"8d0b0000",  --    lw  $t3, 0($t0)     # t3 = 1
+--x"016a5822",  --    sub $t3, $t3, $t2   # t3 = 0, load use hazard
+--x"3c0c0000",  --    lui $t4, 0x0000
+--x"3c0d0000",  --    lui $t5, 0x0000
+--x"35ad01ff",  --    ori $t5, 0x01ff     # at most "111111111"
+--x"3c0e0000",  --    lui $t6, 0x0000
+--x"21ce0003",  --    addi $t6, $t6, 0x0003  # t6 = 3
+--x"3c110000",  --    lui $s1, 0x0000
+--x"36310001",  --    ori $s1, 0x0001
+--x"3c081002",  --    lui $t0, 0x1002
+--x"0511000f",  --    bgezal $t0, return
+--x"0c10001d",  -- loop:  jal fib
+--x"218c0001",  --    addi $t4, $t4, 0x0001
+--x"018e0018",  --    mult $t4, $t6
+--x"00006012",  --    mflo $t4
+--x"01916022",  -- delay: sub $t4, $t4, $s1
+--x"0581fffe",  --    bgez $t4, delay    # control stall, control hazard
+--x"218c0001",  --    addi $t4, $t4, 0x0001
+--x"01a9782a",  --    slt $t7, $t5, $t1
+--x"11e0fff7",  --    beq $t7, $zero, loop
+--x"08100000",  --    j start
+--x"ad090000",  -- fib:   sw  $t1, 0($t0)
+--x"01405820",  --    add $t3, $t2, $zero
+--x"01495020",  --    add $t2, $t2, $t1
+--x"01604820",  --    add $t1, $t3, $zero
+--x"03e00008",  --        jr $31
+--x"03e00008",  -- return: jr $31
+-- end of fib.asm--
+
+-- fib with sll --
+--x"3c081001",  -- start:     lui $t0, 0x1001
+--x"35080000",  --    ori $t0, 0x0000     #address for data memory
+--x"3c090000",  --    lui $t1, 0x0000
+--x"35290001",  --    ori $t1, 0x0001     # t1 = 1
+--x"00094940",  --    sll $t1, $t1, 5
+--x"00094942",  --    srl $t1, $t1, 5
+--x"ad090000",  --    sw  $t1, 0($t0)
+--x"31290000",  --    andi $t1, 0x0000    # forwarding to ex stage, not from mem stage
+--x"8d0a0000",  --    lw  $t2, 0($t0)     # t2 = 1
+--x"ad0a0000",  --    sw  $t2, 0($t0)
+--x"8d0b0000",  --    lw  $t3, 0($t0)     # t3 = 1
+--x"016a5822",  --    sub $t3, $t3, $t2   # t3 = 0, load use hazard
+--x"3c0c0000",  --    lui $t4, 0x0000
+--x"3c0d0000",  --    lui $t5, 0x0000
+--x"35ad01ff",  --    ori $t5, 0x01ff     # at most "111111111"
+--x"3c0e0000",  --    lui $t6, 0x0000
+--x"21ce0003",  --    addi $t6, $t6, 0x0003  # t6 = 3
+--x"3c110000",  --    lui $s1, 0x0000
+--x"36310001",  --    ori $s1, 0x0001
+--x"3c081002",  --    lui $t0, 0x1002
+--x"0511000f",  --    bgezal $t0, return
+--x"0c10001f",  -- loop:  jal fib
+--x"218c0001",  --    addi $t4, $t4, 0x0001
+--x"018e0018",  --    mult $t4, $t6
+--x"00006012",  --    mflo $t4
+--x"01916022",  -- delay: sub $t4, $t4, $s1
+--x"0581fffe",  --    bgez $t4, delay    # control stall, control hazard
+--x"218c0001",  --    addi $t4, $t4, 0x0001
+--x"01a9782a",  --    slt $t7, $t5, $t1
+--x"11e0fff7",  --    beq $t7, $zero, loop
+--x"08100000",  --    j start
+--x"ad090000",  -- fib:   sw  $t1, 0($t0)
+--x"01405820",  --    add $t3, $t2, $zero
+--x"01495020",  --    add $t2, $t2, $t1
+--x"01604820",  --    add $t1, $t3, $zero
+--x"03e00008",  --        jr $31
+--x"03e00008",  -- return: jr $31
+-- end of fib_with_sll_.asm

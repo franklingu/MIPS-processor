@@ -34,7 +34,9 @@ entity ControlUnit is
 				SignExtend 	: out  STD_LOGIC;
 				RegWrite		: out  STD_LOGIC;	
 				RegDst		: out  STD_LOGIC;
-				ZeroToAlu	: out	 STD_LOGIC);  -- 0 for Rt, 1 for Rd
+				ZeroToAlu	: out	 STD_LOGIC;
+				Shift			: out  STD_LOGIC;
+				ShiftAmtV	: out  STD_LOGIC);
 end ControlUnit;
 
 
@@ -67,6 +69,8 @@ begin
 	RegWrite <= '0';
 	RegDst <= '0';
 	ZeroToAlu <= '0';
+	Shift <= '0';
+	ShiftAmtV <= '0';
 	
 	case opcode is
 	when "101011" => -- sw
@@ -102,8 +106,27 @@ begin
 		if funct = "001000" then -- jr
 			ALUOp <= "00";
 			JumpR <= '1';
-		elsif funct = "000000" then -- noop
-			ALUOp <= "00";
+		elsif funct = "000000" then -- sll
+			ALUOp <= "10";
+			RegWrite <= '1';
+			RegDst <= '1';
+			Shift <= '1';
+		elsif funct = "000100" then -- sllv
+			ALUOp <= "10";
+			RegWrite <= '1';
+			RegDst <= '1';
+			Shift <= '1';
+			ShiftAmtV <= '1';
+		elsif funct = "000011" then -- sra
+			ALUOp <= "10";
+			RegWrite <= '1';
+			RegDst <= '1';
+			Shift <= '1';
+		elsif funct = "000010" then -- srl
+			ALUOp <= "10";
+			RegWrite <= '1';
+			RegDst <= '1';
+			Shift <= '1';
 		else -- r-type
 			ALUOp <= "10";
 			RegWrite <= '1';

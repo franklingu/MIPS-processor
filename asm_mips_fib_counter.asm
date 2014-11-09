@@ -1,9 +1,11 @@
 start: 	lui $t0, 0x1001
 	ori $t0, 0x0000     #address for data memory
-	lui $t1, 0x0001
+	lui $t1, 0x0000
 	ori $t1, 0x0001     # t1 = 1
-	andi $t1, 0x0000    # forwarding to ex stage, not from mem stage
+	sll $t1, $t1, 5
+	srl $t1, $t1, 5
 	sw  $t1, 0($t0)
+	andi $t1, 0x0000    # forwarding to ex stage, not from mem stage
 	lw  $t2, 0($t0)     # t2 = 1
 	sw  $t2, 0($t0)
 	lw  $t3, 0($t0)     # t3 = 1
@@ -32,5 +34,4 @@ fib: 	sw  $t1, 0($t0)
 	add $t2, $t2, $t1
 	add $t1, $t3, $zero
      	jr $31
-
 return: jr $31

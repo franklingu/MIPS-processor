@@ -83,7 +83,9 @@ component ControlUnit is
 				SignExtend 	: out  STD_LOGIC;
 				RegWrite		: out  STD_LOGIC;	
 				RegDst		: out  STD_LOGIC;
-				ZeroToAlu	: out	 STD_LOGIC);
+				ZeroToAlu	: out	 STD_LOGIC;
+				Shift			: out  STD_LOGIC;
+				ShiftAmtV	: out  STD_LOGIC);
 end component;
 
 ----------------------------------------------------------------
@@ -128,6 +130,8 @@ component Pipe_Id_Ex is
 			  InstrToReg  			: in  STD_LOGIC;
 			  PcToReg     			: in  STD_LOGIC;
 			  RegWrite    			: in  STD_LOGIC;
+			  Shift					: in  STD_LOGIC;
+			  ShiftAmtV				: in  STD_LOGIC;
 			  InstrRs				: in  STD_LOGIC_VECTOR(4 downto 0);
 			  InstrRt				: in  STD_LOGIC_VECTOR(4 downto 0);
 			  InstrRd				: in  STD_LOGIC_VECTOR(4 downto 0);
@@ -145,6 +149,8 @@ component Pipe_Id_Ex is
            Out_InstrToReg  	: out STD_LOGIC;
            Out_PcToReg     	: out STD_LOGIC;
            Out_RegWrite    	: out STD_LOGIC;
+			  Out_Shift				: out STD_LOGIC;
+			  Out_ShiftAmtV		: out STD_LOGIC;
 			  Out_InstrRs			: out STD_LOGIC_VECTOR(4 downto 0);
 			  Out_InstrRt			: out STD_LOGIC_VECTOR(4 downto 0);
 			  Out_InstrRd			: out STD_LOGIC_VECTOR(4 downto 0);
@@ -252,6 +258,8 @@ end component;
 	signal	Contr_RegWrite	 	:  STD_LOGIC;
 	signal	Contr_RegDst		:  STD_LOGIC;
 	signal	Contr_ZeroToALU	:  STD_LOGIC;
+	signal	Contr_Shift			:  STD_LOGIC;
+	signal	Contr_ShiftAmtV	:  STD_LOGIC;
 
 ----------------------------------------------------------------
 -- Register File Signals
@@ -285,6 +293,8 @@ end component;
 	signal	IdEx_InstrToReg  			:  STD_LOGIC;
 	signal	IdEx_PcToReg     			:  STD_LOGIC;
 	signal	IdEx_RegWrite    			:  STD_LOGIC;
+	signal	IdEx_Shift					:  STD_LOGIC;
+	signal	IdEx_ShiftAmtV				:  STD_LOGIC;
 	signal	IdEx_InstrRs				:  STD_LOGIC_VECTOR(4 downto 0);
 	signal	IdEx_InstrRt				:  STD_LOGIC_VECTOR(4 downto 0);
 	signal	IdEx_InstrRd				:  STD_LOGIC_VECTOR(4 downto 0);
@@ -303,6 +313,8 @@ end component;
    signal	IdEx_Out_PcToReg     	:  STD_LOGIC;
    signal	IdEx_Out_RegWrite    	:  STD_LOGIC;
 	signal	IdEx_Out_RegDst      	:  STD_LOGIC;
+	signal	IdEx_Out_Shift				:  STD_LOGIC;
+	signal	IdEx_Out_ShiftAmtV		:  STD_LOGIC;
 	signal	IdEx_Out_InstrRs			:  STD_LOGIC_VECTOR(4 downto 0);
 	signal	IdEx_Out_InstrRt			:  STD_LOGIC_VECTOR(4 downto 0);
 	signal	IdEx_Out_InstrRd			:  STD_LOGIC_VECTOR(4 downto 0);
@@ -443,7 +455,9 @@ ControlUnit1 	: ControlUnit port map
 						SignExtend 	=> Contr_SignExtend, 
 						RegWrite 	=> Contr_RegWrite, 
 						RegDst 		=> Contr_RegDst,
-						ZeroToAlu	=> Contr_ZeroToAlu
+						ZeroToAlu	=> Contr_ZeroToAlu,
+						Shift			=> Contr_Shift,
+						ShiftAmtV	=> Contr_ShiftAmtV
 						);
 						
 ----------------------------------------------------------------
@@ -488,6 +502,8 @@ PipeIdEx1		: Pipe_Id_Ex port map
 						InstrToReg  		=> IdEx_InstrToReg,
 						PcToReg     		=> IdEx_PcToReg,
 						RegWrite    		=> IdEx_RegWrite,
+						Shift					=> IdEx_Shift,
+						ShiftAmtV			=> IdEx_ShiftAmtV,
 						InstrRs				=> IdEx_InstrRs,
 						InstrRt				=> IdEx_InstrRt,
 						InstrRd				=> IdEx_InstrRd,
@@ -505,6 +521,8 @@ PipeIdEx1		: Pipe_Id_Ex port map
 						Out_InstrToReg 	=> IdEx_Out_InstrToReg,
 						Out_PcToReg    	=> IdEx_Out_PcToReg,
 						Out_RegWrite   	=> IdEx_Out_RegWrite,
+						Out_Shift			=> IdEx_Out_Shift,
+						Out_ShiftAmtV		=> IdEx_Out_ShiftAmtV,
 						Out_InstrRs			=> IdEx_Out_InstrRs,
 						Out_InstrRt			=> IdEx_Out_InstrRt,
 						Out_InstrRd			=> IdEx_Out_InstrRd,
@@ -671,9 +689,18 @@ IdEx_PcToReg <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1'
 IdEx_RegWrite <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1'
 							or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
 					  Contr_RegWrite;
+IdEx_Shift <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1'
+							or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
+					  Contr_Shift;
+IdEx_ShiftAmtV <= '0' when LoadUseHazard = '1' or ALUBusyHazard = '1'
+							or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
+					  Contr_ShiftAmtV;
 
-IdEx_InstrRs <= IfId_Out_Instr(25 downto 21);
-IdEx_InstrRt <= IfId_Out_Instr(20 downto 16);
+IdEx_InstrRs <= IfId_Out_Instr(20 downto 16) when Contr_Shift = '1' else
+					 IfId_Out_Instr(25 downto 21);
+IdEx_InstrRt <= IfId_Out_Instr(10 downto 6) when Contr_Shift = '1' and Contr_ShiftAmtV = '0' else
+					 IfId_Out_Instr(25 downto 21) when Contr_Shift = '1' and Contr_ShiftAmtV = '1' else
+					 IfId_Out_Instr(20 downto 16);
 IdEx_InstrRd <= "00000" when LoadUseHazard = '1' or ALUBusyHazard = '1'  -- during stall, Rd should be some value that does not affect later stage
 									or UpdateBranchHazard = '1' or UpdateJumpRHazard = '1' else
 					 "11111" when Contr_PcToReg = '1' else
@@ -748,6 +775,7 @@ ALU_InBCand <= ResultFromMem when ExMem_Out_RegWrite = '1'
 -- other multiplexers
 ALU_InB <= (others => '0') when IdEx_Out_ZeroToAlu = '1' else
 			  IdEx_Out_SignExtended when IdEx_Out_ALUSrc = '1' else
+			  "000000000000000000000000000" & IdEx_Out_InstrRt when IdEx_Out_Shift = '1' and IdEx_Out_ShiftAmtV = '0' else
 			  ALU_InBCand;
 -- pipe
 TempALUZero <= ALU_zero;
