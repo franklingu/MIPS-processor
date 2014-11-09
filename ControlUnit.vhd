@@ -98,7 +98,7 @@ begin
 		InstrtoReg <= '1';
 		ALUSrc <= '1';
 		RegWrite <= '1';
-	when "000000" => -- add, sub, and, or ,nor, xor, slt, jr and etc.
+	when "000000" => -- add, sub, and, or ,nor, xor, slt, jr, etc.
 		if funct = "001000" then -- jr
 			ALUOp <= "00";
 			JumpR <= '1';
