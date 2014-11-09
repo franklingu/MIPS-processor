@@ -3,8 +3,8 @@ start: 	lui $t0, 0x1001
 	lui $t1, 0x0001
 	ori $t1, 0x0001     # t1 = 1
 	andi $t1, 0x0000    # forwarding to ex stage, not from mem stage
-	lui $t2, 0x0000
-	ori $t2, 0x0001     # t2 = 1
+	sw  $t1, 0($t0)
+	lw  $t2, 0($t0)     # t2 = 1
 	sw  $t2, 0($t0)
 	lw  $t3, 0($t0)     # t3 = 1
 	sub $t3, $t3, $t2   # t3 = 0, load use hazard
@@ -16,6 +16,7 @@ start: 	lui $t0, 0x1001
 	lui $s1, 0x0000
 	ori $s1, 0x0001
 	lui $t0, 0x1002
+	bgezal $t0, return
 loop:	jal fib
 	addi $t4, $t4, 0x0001
 	mult $t4, $t6
@@ -31,3 +32,5 @@ fib: 	sw  $t1, 0($t0)
 	add $t2, $t2, $t1
 	add $t1, $t3, $zero
      	jr $31
+
+return: jr $31
