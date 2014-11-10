@@ -122,11 +122,23 @@ begin
 			RegWrite <= '1';
 			RegDst <= '1';
 			Shift <= '1';
+		elsif funct = "000111" then -- srav
+			ALUOp <= "10";
+			RegWrite <= '1';
+			RegDst <= '1';
+			Shift <= '1';
+			ShiftAmtV <= '1';
 		elsif funct = "000010" then -- srl
 			ALUOp <= "10";
 			RegWrite <= '1';
 			RegDst <= '1';
 			Shift <= '1';
+		elsif funct = "000110" then -- srlv
+			ALUOp <= "10";
+			RegWrite <= '1';
+			RegDst <= '1';
+			Shift <= '1';
+			ShiftAmtV <= '1';
 		else -- r-type
 			ALUOp <= "10";
 			RegWrite <= '1';

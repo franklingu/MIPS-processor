@@ -707,9 +707,9 @@ IdEx_InstrRd <= "00000" when LoadUseHazard = '1' or ALUBusyHazard = '1'  -- duri
 					 IfId_Out_Instr(15 downto 11) when Contr_RegDst = '1' else
 					 IfId_Out_Instr(20 downto 16);
 IdEx_InstrLower <= IfId_Out_Instr(15 downto 0);
-IdEx_ReadData1_Reg <= WriteData_Reg when IfId_Out_Instr(25 downto 21) = WriteAddr_Reg else
+IdEx_ReadData1_Reg <= WriteData_Reg when IfId_Out_Instr(25 downto 21) = WriteAddr_Reg and MemWb_Out_RegWrite = '1' else
 							 ReadData1_Reg;  -- special forwarding for wb stage, reg write does not happen until next clock cycle
-IdEx_ReadData2_Reg <= WriteData_Reg when IfId_Out_Instr(20 downto 16) = WriteAddr_Reg else
+IdEx_ReadData2_Reg <= WriteData_Reg when IfId_Out_Instr(20 downto 16) = WriteAddr_Reg and MemWb_Out_RegWrite = '1' else
 							 ReadData2_Reg;
 IdEx_PcPlus4 <= IfId_Out_PcPlus4;
 IdEx_SignExtended <= SignExtended;
