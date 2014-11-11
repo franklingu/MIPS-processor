@@ -51,7 +51,7 @@ architecture arch_TOP of TOP is
 ----------------------------------------------------------------
 -- Constants
 ----------------------------------------------------------------
-constant CLK_DIV_BITS	: integer := 0; --25 for a clock of the order of 1Hz
+constant CLK_DIV_BITS	: integer := 23; --25 for a clock of the order of 1Hz
 constant N_LEDs			: integer := 12;
 constant N_DIPs			: integer := 16;
 
@@ -99,7 +99,23 @@ type MEM_256x32 is array (0 to 255) of std_logic_vector (31 downto 0); -- 256 wo
 -- Instruction Memory
 ----------------------------------------------------------------
 constant INSTR_MEM : MEM_256x32 := (
-
+			x"3c101002",  -- start:  lui $s0, 0x1002  # address to LED
+			x"3c111003",  --         lui $s1, 0x1003  # address of DIP switch
+			x"3c140000",  --         lui $s4, 0x0000
+			x"36940001",  --         ori $s4, 0x0001  # s4 is 1
+			x"3c080000",  --         lui $t0, 0x0000
+			x"8e290000",  -- loop:   lw  $t1, 0($s1)  # read the value of DIP switch
+			x"ae080000",  --         sw  $t0, 0($s0)
+			x"3c080000",  --         lui $t0, 0x0000
+			x"3c0a0000",  --         lui $t2, 0x0000
+			x"3c130000",  --         lui $s3, 0x0000
+			x"3673000f",  --         ori $s3, 0x000f  # s3 is 15
+			x"01345024",  -- count:  and $t2, $t1, $s4
+			x"00094842",  --         srl $t1, $t1, 0x0001
+			x"01484020",  --         add $t0, $t2, $t0
+			x"02749822",  --         sub $s3, $s3, $s4
+			x"0661fffb",  --         bgez $s3, count
+			x"08100005",  --         j   loop
 			others=> x"00000000");	
 
 ----------------------------------------------------------------
@@ -364,3 +380,23 @@ end arch_TOP;
 --x"8d2a0004",  --    lw  $t2, 4($t1)
 --x"112afffc",  --    beq $t1, $t2, start
 -- end of rtype
+
+-- parity checking --
+--x"3c101002",  -- start:  lui $s0, 0x1002  # address to LED
+--x"3c111003",  --         lui $s1, 0x1003  # address of DIP switch
+--x"3c140000",  --         lui $s4, 0x0000
+--x"36940001",  --         ori $s4, 0x0001  # s4 is 1
+--x"3c080000",  --         lui $t0, 0x0000
+--x"8e290000",  -- loop:   lw  $t1, 0($s1)  # read the value of DIP switch
+--x"ae080000",  --         sw  $t0, 0($s0)
+--x"3c080000",  --         lui $t0, 0x0000
+--x"3c0a0000",  --         lui $t2, 0x0000
+--x"3c130000",  --         lui $s3, 0x0000
+--x"3673000f",  --         ori $s3, 0x000f  # s3 is 15
+--x"01345024",  -- count:  and $t2, $t1, $s4
+--x"00094842",  --         srl $t1, $t1, 0x0001
+--x"01484020",  --         add $t0, $t2, $t0
+--x"02749822",  --         sub $s3, $s3, $s4
+--x"0661fffb",  --         bgez $s3, count
+--x"08100005",  --         j   loop
+-- end of parity checking --

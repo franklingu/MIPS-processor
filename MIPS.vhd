@@ -633,8 +633,11 @@ PC_in <= JumpPcTgt when Contr_JumpR = '1' else
 -- stall
 IdEx_Stall <= ALUBusyHazard;
 -- read addr
-ReadAddr1_Reg <= IfId_Out_Instr(25 downto 21);
-ReadAddr2_Reg <= IfId_Out_Instr(20 downto 16);
+ReadAddr1_Reg <= IfId_Out_Instr(20 downto 16) when Contr_Shift = '1' else
+					  IfId_Out_Instr(25 downto 21);
+ReadAddr2_Reg <= IfId_Out_Instr(10 downto 6) when Contr_Shift = '1' and Contr_ShiftAmtV = '0' else
+					  IfId_Out_Instr(25 downto 21) when Contr_Shift = '1' and Contr_ShiftAmtV = '1' else
+					  IfId_Out_Instr(20 downto 16);
 -- sign-extended
 SignExtended(31 downto 16) <= (others => (Contr_SignExtend and IfId_Out_Instr(15)));
 SignExtended(15 downto 0) <= IfId_Out_Instr(15 downto 0);
@@ -707,9 +710,9 @@ IdEx_InstrRd <= "00000" when LoadUseHazard = '1' or ALUBusyHazard = '1'  -- duri
 					 IfId_Out_Instr(15 downto 11) when Contr_RegDst = '1' else
 					 IfId_Out_Instr(20 downto 16);
 IdEx_InstrLower <= IfId_Out_Instr(15 downto 0);
-IdEx_ReadData1_Reg <= WriteData_Reg when IfId_Out_Instr(25 downto 21) = WriteAddr_Reg and MemWb_Out_RegWrite = '1' else
+IdEx_ReadData1_Reg <= WriteData_Reg when ReadAddr1_Reg = WriteAddr_Reg and MemWb_Out_RegWrite = '1' else
 							 ReadData1_Reg;  -- special forwarding for wb stage, reg write does not happen until next clock cycle
-IdEx_ReadData2_Reg <= WriteData_Reg when IfId_Out_Instr(20 downto 16) = WriteAddr_Reg and MemWb_Out_RegWrite = '1' else
+IdEx_ReadData2_Reg <= WriteData_Reg when ReadAddr2_Reg = WriteAddr_Reg and MemWb_Out_RegWrite = '1' else
 							 ReadData2_Reg;
 IdEx_PcPlus4 <= IfId_Out_PcPlus4;
 IdEx_SignExtended <= SignExtended;

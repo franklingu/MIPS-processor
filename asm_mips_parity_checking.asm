@@ -14,5 +14,4 @@ count:  and $t2, $t1, $s4
         srl $t1, $t1, 0x0001
         sub $s3, $s3, $s4
         bgez $s3, count
-        j   loop
-        
+        j   loop  
