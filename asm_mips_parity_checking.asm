@@ -9,9 +9,9 @@ loop:   lw  $t1, 0($s1)  # read the value of DIP switch
         lui $t0, 0x0000
         lui $s3, 0x0000
         ori $s3, 0x000f  # s3 is 15
-count:  srl $t1, $t1, 0x0001
-        and $t2, $t1, $s4
+count:  and $t2, $t1, $s4
         add $t0, $t2, $t0
+        srl $t1, $t1, 0x0001
         sub $s3, $s3, $s4
         bgez $s3, count
         j   loop
